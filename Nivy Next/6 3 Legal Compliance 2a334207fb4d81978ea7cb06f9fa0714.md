@@ -1,0 +1,7 @@
+# 6.3 Legal Compliance
+
+[6.3.1 IP Protection](6%203%201%20IP%20Protection%202a334207fb4d815c990fddcf7072627b.md)
+
+[6.3.2 Tax & GDPR](6%203%202%20Tax%20&%20GDPR%202a334207fb4d8180b04cf06531d14c50.md)
+
+[6.3.3 NDAs](6%203%203%20NDAs%202a334207fb4d81e5b8a7c52413b069eb.md)

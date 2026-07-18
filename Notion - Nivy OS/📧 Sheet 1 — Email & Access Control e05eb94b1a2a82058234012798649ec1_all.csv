@@ -1,0 +1,22 @@
+﻿Email ID,2FA Enabled,Current Status,Department,Display Name / Brand,Email Type,Linked Accounts,Notes,Password Stored In,Primary Owner,Purpose,Recovery Email,Security Status
+mailto:abhishekne@gmail.com,Unknown,Active,Nivy Core,Abhishek Alternate,Backup,,,,Abhi,Backup,,Needs Review
+mailto:billiondreamsunited@gmail.com,Unknown,Active,Nivy Core,BDU / Billion Dreams United,Primary,,,,Abhi,Master Admin,,Needs Review
+mailto:prf.abhishek@gmail.com,Unknown,Active,Nivy Core,Abhishek Personal,Primary,,Director / Founder,,Abhi,Master Admin,,Safe
+mailto:hr@thenivy.com,Unknown,Active,Hiring,HR,Primary,,Professional domain email,,Abhi,Hiring,,Safe
+mailto:partners@thenivy.com,Unknown,Active,Nivy Core,Partnerships,Primary,,Professional domain email,,Abhi,Outreach,,Safe
+mailto:nivy.email@gmail.com,Unknown,Active,Nivy Core,Nivy Mail,Backup,,,,Abhi,Backup,,Needs Review
+mailto:nivyindia@gmail.com,Unknown,Active,Nivy Core,Nivy India,Primary,Most accounts,Master recovery for most accounts,,Abhi,Master Admin,,Needs Review
+mailto:nivycorporation@gmail.com,Unknown,Active,Nivy Core,Nivy Corporate,Departmental,,,,Abhi,Client Communication,,Needs Review
+mailto:shadestops@gmail.com,Unknown,Active,Nivy Core,BDU / Shade Stops,Backup,,,,Abhi,Backup,,Needs Review
+mailto:official.abhishekne@gmail.com,Unknown,Active,Nivy Core,Abhishek Official,Primary,,,,Abhi,Master Admin,,Needs Review
+mailto:official.marketing.bdu@gmail.com,Unknown,Active,Digital Marketing,BDU Marketing,Departmental,,,,Abhi,Outreach,,Needs Review
+mailto:workmail.abhishek@gmail.com,Unknown,Active,Nivy Core,Abhishek Work,Departmental,,,,Abhi,Master Admin,,Safe
+mailto:alliance@thenivy.com,Unknown,Active,Nivy Core,Nivy Alliance,Primary,,Professional domain email,,Abhi,Client Communication,,Safe
+mailto:nivyacademy@gmail.com,Unknown,Active,Nivy Core,Nivy Academy,Departmental,,,,Abhi,Client Communication,nivyindia@gmail.com,Needs Review
+mailto:jobsnivy@gmail.com,Unknown,Active,Hiring,Nivy Jobs,Departmental,,,,Abhi,Hiring,nivyindia@gmail.com,Needs Review
+mailto:social.nivy@gmail.com,Unknown,Active,Digital Marketing,Nivy Social / Autopost,Departmental,,,,Abhi,Automation,nivyindia@gmail.com,Needs Review
+mailto:digitalnivy@gmail.com,Unknown,Active,Digital Marketing,Nivy Digital,Departmental,,,,Abhi,Social Media Control,nivyindia@gmail.com,Needs Review
+mailto:contact@thenivy.com,Unknown,Active,Nivy Core,General Contact,Primary,,Professional domain email,,Abhi,Client Communication,,Safe
+mailto:nivyusa@gmail.com,Unknown,Dormant,Nivy Core,Nivy Tech US,Departmental,,,,Abhi,Client Communication,,Needs Review
+mailto:customercare@thenivy.com,Unknown,Active,Support,Customer Care,Primary,,Professional domain email,,Abhi,Client Communication,,Safe
+mailto:referrals@thenivy.com,Unknown,Active,Nivy Core,Referral Programme,Primary,,Professional domain email,,Abhi,Outreach,,Safe

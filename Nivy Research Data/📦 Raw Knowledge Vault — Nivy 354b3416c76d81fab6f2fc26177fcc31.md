@@ -1,0 +1,119 @@
+# 📦 Raw Knowledge Vault — Nivy
+
+<aside>
+📦
+
+**What is this page?** The Raw Knowledge Vault stores ALL unstructured, unpolished, or preliminary knowledge content. Nothing here is deleted. Everything is tagged and searchable. When raw content matures into a proper SOP or document, it gets moved to the appropriate database — but the original stays here.
+
+</aside>
+
+> **Last Updated:** May 2026 | **Owner:** Workspace Admin | **Version:** 1.0 | **Status:** Active
+> 
+
+---
+
+## 🧭 How This Works
+
+```
+Raw/unstructured input
+    ↓
+Land in Raw Knowledge Vault (tagged)
+    ↓
+Reviewed & structured
+    ↓
+Moved to knowledge_database OR sop_database
+    ↓
+Linked from division home
+```
+
+**Rule:** Never delete anything from this vault. If something is irrelevant, mark it as `[LOW PRIORITY]` in the title. If it's been promoted to a proper document, mark it `[PROMOTED]`.
+
+---
+
+## 📂 Section 1 — Research Notes
+
+Raw research, market studies, competitor notes, and external references collected during business planning.
+
+> *Add research pages as sub-pages under this section, or paste content directly with a tag header.*
+> 
+
+**Tag format for entries:**
+
+`[Brand: Nivy Next] [Type: Research] [Date: Apr 2026] [Status: Raw]`
+
+---
+
+## 📂 Section 2 — Historical Drafts & Planning
+
+All previous planning documents, draft versions, and superseded strategies. Kept for historical reference.
+
+**Includes:**
+
+- [📂 [Archive] KB Restructuring Plan — Session 1-2 Draft (v1)]([📂 [Archive] KB Restructuring Plan — Session 1–2 Draft (v1)](%F0%9F%93%82%20%5BArchive%5D%20KB%20Restructuring%20Plan%20%E2%80%94%20Session%201%E2%80%932%20Dr%2033fb3416c76d8138ab77cdaee7483c8f.md))
+- [🗺️ Nivy Workspace — Master Restructuring Plan (Sessions 1-6)](https://www.notion.so/340b3416c76d81719399dd70499a2eb9)
+- [👋 Start Here — Welcome to Nivy (Legacy v1)](https://www.notion.so/340b3416c76d81138a79edfc6f6282aa)
+- [🗂️ Workspace Reorganisation — Private, Growth Engine & Home Dashboard](https://www.notion.so/34db3416c76d811284e4c2887e390cb1)
+
+---
+
+## 📂 Section 3 — Competitor & Market Intelligence
+
+Competitor analysis, market research, and industry intelligence.
+
+**Includes:**
+
+- Competitor analysis content from Home Dashboard teamspace
+- Market overview documents from Nivy Global
+- Industry benchmarks and pricing research
+
+> *Link competitor analysis pages from their original location here. Do not move originals.*
+> 
+
+---
+
+## 📂 Section 4 — External References & Tools
+
+External links, tool lists, SaaS references, and third-party resources.
+
+**Tagging rule:** Always note the source and date retrieved.
+
+---
+
+## 📂 Section 5 — Meeting Notes & Discussion Logs
+
+Raw meeting notes, decision logs, and brainstorm outputs.
+
+**Includes:**
+
+- [✅ Discussed Topics & Decisions](https://www.notion.so/340b3416c76d81719399dd70499a2eb9) (Growth Engine)
+- Research & Discussion Notes (Growth Engine)
+
+---
+
+## 📂 Section 6 — Archive Overflow
+
+Content from the Archive page that's been categorized here for easier retrieval.
+
+Full archive: [🖤 Archive — Research Dump & Historical Reference](https://www.notion.so/289b3416c76d8194840febba3d212fd4)
+
+---
+
+## 🏷️ Tagging System for This Vault
+
+| Tag Type | Options | Example | Brand | Nivy / Nivy Next / Nivy Advisory / Nivy Jobs / Nivy Academy / Nivy Nexus / Nivy Global / All | [Brand: Nivy Next] |
+| --- | --- | --- | --- | --- | --- |
+| Type | Research / Draft / Meeting Notes / Competitor / External / Financial / Legal / Marketing | [Type: Research] | Date | Month Year | [Date: Apr 2026] |
+| Status | Raw / Under Review / Promoted / Low Priority / Archived | [Status: Raw] | Promoted To | Link to destination if promoted | [Promoted To: sop_database] |
+
+---
+
+## 📋 Metadata
+
+| Field | Value | 📄 Page Title | 📦 Raw Knowledge Vault — Nivy |
+| --- | --- | --- | --- |
+| 📝 Description | Central storage for all unstructured, raw, and preliminary knowledge content. Nothing deleted. Tag-based retrieval system. | 🏢 Brand | All |
+| 🏪 Department | All | 📁 Content Type | Archive / Knowledge Vault |
+| 🏷️ Tags | vault, raw, research, archive, unstructured, knowledge | 🔍 Keywords | raw knowledge, research dump, drafts, historical, meeting notes, competitor analysis, unstructured content |
+| 📅 Created Date | May 2026 | 🔄 Last Updated | May 2026 |
+| 🔢 Version | v1.0 | 👤 Owner | Abhi (Workspace Admin) |
+| 🚦 Status | Active | 🔗 Related Pages | 🖤 Archive | knowledge_database | 🗂️ True Master Index |

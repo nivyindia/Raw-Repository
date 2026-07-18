@@ -1,0 +1,10 @@
+﻿Change Title,Brand,Category,Date,Impact,Made By,Notes,Phase
+Phase 3 — Research Lab (Teamspace 4) built: 5-page pipeline,All Brands,Database,"May 17, 2026",High,Claude,"Pages: Research Inbox, Claude Draft Zone, Review Queue, Migration Queue, Sandbox Archive",Phase 3
+"Phase 3 — 3 new databases created: kpi_database, tools_database, experiments_database",All Brands,Database,"May 17, 2026",High,Claude,,Phase 3
+Phase 2 — Zone 1 + Zone 2 + Zone 4 unified into single OS with one front door,All Brands,Workspace Structure,"May 17, 2026",High,Claude,Nivy HQ is the single entry point. Zone 1 databases kept as master layer. Zone 2 operational structure adopted. Zone 4 Nivy Next standalone flagged for merge in Phase 6.,Phase 2
+Phase 3 — tasks_database schema upgraded (+6 fields),All Brands,Database,"May 17, 2026",Medium,Claude,"Added: Department, Output Link, QC Status, Time Taken, Blocker, Week",Phase 3
+Phase 3 — sop_database schema upgraded (+4 fields),All Brands,Database,"May 17, 2026",Medium,Claude,"Added: Function, Performance Score, Review Cycle, Time Benchmark",Phase 3
+Phase 4 — global_change_log created and seeded with Phase 0–4 history,All Brands,Database,"May 17, 2026",Medium,Claude,,Phase 4
+Phase 1 — 22 confirmed duplicate page sets archived,All Brands,Workspace Structure,"May 17, 2026",High,Claude,"All older duplicates tagged [ARCHIVED — May 17, 2026] and moved to Archive. No pages deleted.",Phase 1
+Phase 4 — brand_registry created with all 10 brands seeded,All Brands,Database,"May 17, 2026",High,Claude,,Phase 4
+Phase 0 — All 5 decisions confirmed by founder,All Brands,Workspace Structure,"May 17, 2026",High,Founder,,Phase 0

@@ -1,0 +1,152 @@
+# NA-AC-07 | VA + AI Integration Module
+
+**Doc ID:** NA-AC-07 | **Department:** Academic | **Status:** 🟡 In Progress | **Audience:** Students | **Phase:** Phase 1
+
+---
+
+# NA-AC-07 | VA + AI Integration Module
+
+---
+
+## Module Purpose
+
+This module teaches students how to use AI tools and Virtual Assistant systems to multiply their output, reduce their workload, and deliver higher quality work to clients — faster.
+
+This module can be taken as a **standalone add-on** or integrated into the Foundation Track at any point after Module 2.
+
+---
+
+## Duration: 1 Week (Intensive) or spread over 2 weeks
+
+---
+
+## Section 1: AI Writing & Communication
+
+### Tools: ChatGPT, Claude
+
+**What You'll Learn:**
+
+- Prompting basics: how to get professional output on the first try
+- Writing cold emails, follow-ups, and proposals using AI
+- Generating content calendars, captions, and ad copy in minutes
+- Using AI to research prospects and personalise outreach at scale
+- AI for client reporting: turning raw data into readable summaries
+
+**Prompt Templates Provided:**
+
+- Cold email generator prompt
+- Follow-up sequence builder prompt
+- LinkedIn bio rewriter prompt
+- Proposal writer prompt
+- Weekly client update email prompt
+
+---
+
+## Section 2: Design with Canva AI
+
+**What You'll Learn:**
+
+- Creating a professional media kit in under 30 minutes
+- Designing social media graphics using Canva Magic tools
+- Building a simple presentation/pitch deck
+- Creating a personal brand template set (colours, fonts, logo)
+
+---
+
+## Section 3: [Apollo.io](http://Apollo.io) Automation
+
+**What You'll Learn:**
+
+- Setting up automated multi-step email sequences
+- Using Apollo's AI to personalise outreach at scale
+- Setting up triggers: if no reply in 3 days → send follow-up automatically
+- Filtering and segmenting your lead list for smarter targeting
+
+---
+
+## Section 4: Virtual Assistant Workflows
+
+**What You'll Learn:**
+
+- What tasks to delegate to a VA (and what to keep yourself)
+- Where to find VAs: [OnlineJobs.ph](http://OnlineJobs.ph), Fiverr, LinkedIn
+- How to train a VA using Loom videos and SOPs
+- Building a simple task management system in Notion for your VA
+- Paying international VAs: Wise, PayPal, Deel
+
+---
+
+## Task
+
+- Create 5 AI-generated outreach messages personalised to 5 different prospects *(Section 1)*
+- Design your media kit in Canva *(Section 2)*
+- Set up one Apollo sequence with at least 3 steps *(Section 3)*
+- Write a 1-page VA Job Description for a hypothetical VA hire *(Section 4)*
+
+*Each task is tied to its corresponding section above — complete the section's lesson content before attempting its task. Submit all four tasks together as one Notion page or shared folder link to your mentor by the end of the module.*
+
+---
+
+## 📝 Module Assessment
+
+**Format:** 10 MCQs (knowledge check) + 1 Practical (prompt library + automation)
+
+**Pass mark:** 8/10 on the MCQ section, plus a passing grade on the Practical
+
+**Time allowed:** 30 minutes for the MCQ section
+
+### Part A — Multiple Choice Questions (10)
+
+1. What is the main risk of using an AI-generated email without personalising it?
+    
+    A) It takes too long to generate B) It can sound generic and be ignored by the prospect C) ChatGPT will refuse to write it D) It costs extra credits
+    
+2. In the Cold Email Generator prompt, what information should you ALWAYS provide to get a usable first draft?
+    
+    A) Only the prospect's name B) The prospect's name, company, role, and a specific observation about their business C) Nothing — AI can guess D) Your own resume
+    
+3. Which Canva AI feature is best suited for quickly resizing one design into multiple social media formats?
+    
+    A) Magic Write B) Magic Switch / Resize C) Background Remover D) Brand Voice
+    
+4. In Apollo, what does a "sequence step trigger" do?
+    
+    A) Deletes a contact B) Automatically sends the next message based on a condition (e.g. no reply in 3 days) C) Changes the lead's job title D) Exports the lead list
+    
+5. When segmenting a lead list in Apollo, which of the following is the LEAST useful segmentation criteria for cold outreach?
+    
+    A) Industry B) Company size C) Favourite color (not collected) D) Job title
+    
+6. What is the recommended first step before delegating a task to a VA?
+    
+    A) Pay the VA in advance B) Document the task as a clear SOP (step-by-step with screenshots or a Loom video) C) Assume the VA already knows how D) Skip training entirely
+    
+7. Which platforms are recommended in this module for finding VAs?
+    
+    A) Instagram and Pinterest B) [OnlineJobs.ph](http://OnlineJobs.ph), Fiverr, and LinkedIn C) Only referrals from friends D) Random cold calling
+    
+8. Which payment methods are recommended for paying international VAs?
+    
+    A) Cash only B) Cheque by post C) Wise, PayPal, or Deel D) Cryptocurrency only
+    
+9. What should a weekly client update generated by AI always be checked for before sending?
+    
+    A) Word count only B) Accuracy of data/numbers and tone appropriate for the client C) Font size D) Nothing — send as-is
+    
+10. What is the primary purpose of this module within the overall programme?
+    
+    A) To replace the Foundation Track entirely B) To teach students to use AI and VA systems to increase output quality and speed C) To teach graphic design as a standalone career D) To prepare students for a coding exam
+    
+
+**Answer Key:** 1-B, 2-B, 3-B, 4-B, 5-C, 6-B, 7-B, 8-C, 9-B, 10-B
+
+### Part B — Practical Submission
+
+Submit the following as a single Notion page or shared folder:
+
+1. **Prompt Library:** Your 5 personalised outreach messages (Section 1 task) plus the 5 prompts used to generate them
+2. **One Working Automation:** Screenshot or short Loom recording of your live 3-step Apollo sequence (Section 3 task), showing the trigger conditions configured
+
+**Grading:** Mentor reviews both deliverables against a simple pass/fail checklist — personalisation present (not generic), automation correctly configured with at least 3 steps and one trigger condition. A student who fails the Practical gets one resubmission window of 3 days before escalation to a mentor support call.
+
+**Consequence of failing the MCQ section (below 8/10):** Student reviews the relevant section content again and retakes a reshuffled version of the quiz within 48 hours.

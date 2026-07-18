@@ -1,0 +1,64 @@
+[
+  {
+    "announcements": {
+      "oai/apps/hasDismissedCanvasContextualOnboarding": "2025-03-02T10:16:12.840007+00:00",
+      "oai/apps/hasSeenAdvancedVoice/2024-09-24": "2025-07-20T19:17:51.005367+00:00",
+      "oai/apps/hasSeenAdvancedVoiceRealWebNuxTooltip": "2024-12-23T06:50:59.627791+00:00",
+      "oai/apps/hasSeenArtifactsLearnMoreModal": "2026-06-16T20:36:26.679588+00:00",
+      "oai/apps/hasSeenAutoSwitchNux": "2025-12-10T16:22:52.613972+00:00",
+      "oai/apps/hasSeenBurritoNux": "2025-08-11T16:11:13.549253+00:00",
+      "oai/apps/hasSeenCanvasCodeExecutionNux": "2025-03-02T10:15:02.003145+00:00",
+      "oai/apps/hasSeenCanvasDropdownNux": "2024-12-17T11:03:20.827037+00:00",
+      "oai/apps/hasSeenCanvasShareButtonNux": "2025-03-09T09:47:33.600421+00:00",
+      "oai/apps/hasSeenCodexAppHomeBanner": "2026-04-27T07:51:38.209940+00:00",
+      "oai/apps/hasSeenComposerSearchButtonTooltip": "2024-12-22T18:35:09.180477+00:00",
+      "oai/apps/hasSeenComposerSystemHintButtonTooltip": "2024-12-12T16:14:50.914034+00:00",
+      "oai/apps/hasSeenDesktopBrowserExtensionAnnouncement": "2025-02-11T10:39:19.109294+00:00",
+      "oai/apps/hasSeenExistingUserPersonalityOnboarding": "2025-12-10T09:13:25.398990+00:00",
+      "oai/apps/hasSeenGoTwelveMonthFreeTrial": "2025-11-04T16:45:42.000380+00:00",
+      "oai/apps/hasSeenImage2026RevampNux": "2026-04-22T10:57:15.939327+00:00",
+      "oai/apps/hasSeenMemoryOnboarding": "2024-07-22T11:05:14.420011",
+      "oai/apps/hasSeenMemoryUpdatedTooltip": "2025-11-24T13:24:28.809738+00:00",
+      "oai/apps/hasSeenMoonshineNuxV2": "2025-06-08T17:05:16.654918+00:00",
+      "oai/apps/hasSeenNewCoTExpNUX": "2025-02-09T11:27:40.203148+00:00",
+      "oai/apps/hasSeenOnboarding": "2024-01-02T04:43:37.867130",
+      "oai/apps/hasSeenPhoenixFreeNux": "2025-04-25T18:35:07.153411+00:00",
+      "oai/apps/hasSeenPlusOrBusinessFreeTrial": "2026-01-08T13:56:02.184084+00:00",
+      "oai/apps/hasSeenProjectsToFree": "2025-09-05T17:26:09.382242+00:00",
+      "oai/apps/hasSeenPurpleRainNux": "2025-12-16T05:22:26.873509+00:00",
+      "oai/apps/hasSeenSharedProjectsTooltip": "2025-10-24T08:29:39.539300+00:00",
+      "oai/apps/hasSeenTemporaryChatOnboarding": "2025-09-05T17:25:55.350974+00:00",
+      "oai/apps/hasSeenThinkInComposer": "2025-02-06T16:24:13.667163+00:00",
+      "oai/apps/hasSeenWebComposerStraw": "2024-12-17T11:04:04.364596+00:00",
+      "oai/apps/hasSeenWhamCodexAppAnnouncement": "2026-04-27T07:51:38.260103+00:00",
+      "oai/apps/hasSeenWhamCodexAppFirstHero": 1,
+      "oai/apps/hasSeenWindowsAppOnboarding": "2026-02-14T13:38:34.009931+00:00",
+      "oai/apps/hasSeenWritingInlineEditCaretNux": "2025-11-24T11:43:37.236863+00:00",
+      "oai/apps/hasSeenWritingInlineEditNux": "2025-11-24T11:47:08.429505+00:00",
+      "oai/apps/hasSeenl1239dk1LaunchNux": "2026-02-03T16:34:27.812064+00:00"
+    },
+    "beta_settings": {},
+    "habitat_object_version": 34384519,
+    "settings": {
+      "first_party_project_pins_unmigrated": true,
+      "moonshine": true,
+      "precise_location_device_settings": {
+        "devices": {
+          "f5cbdfbf-1b84-4ee8-adff-3906c65fb45b": {
+            "last_updated": "2026-01-13T17:57:10.503722Z",
+            "status": "denied"
+          }
+        }
+      },
+      "project_pins_backfilled": true,
+      "show_expanded_code_view": false,
+      "study_mode_project_pins_unmigrated": true,
+      "sunshine": true,
+      "training_allowed": true,
+      "voice_background_enabled": true,
+      "voice_name": "sky",
+      "voice_training_allowed": false
+    },
+    "user_id": "user-MFaRdnjH3tDuN7NVqlVxzJkI"
+  }
+]
