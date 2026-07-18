@@ -1,0 +1,26 @@
+# Automation — 09 Data Cleaning
+
+> Part of Stage 09 (Data Cleaning). See [README.md](README.md) for the full stage overview.
+> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+
+---
+
+## Automation Workflows
+
+For every method in [methods.md](methods.md), define:
+
+- Manual workflow
+- Semi-automated workflow
+- Fully automated workflow
+- AI-assisted workflow
+- Required tools / APIs / browser automation (Playwright, Selenium) / Python scripts / n8n workflows / Apify Actors / MCPs
+- Expected output
+- Common errors and recovery methods
+
+---
+
+## Cross-References
+
+- Stage README: [README.md](README.md)
+- Previous stage: [08 Lead Enrichment](../08 Lead Enrichment/README.md)
+- Next stage: [10 Lead Verification](../10 Lead Verification/README.md)
