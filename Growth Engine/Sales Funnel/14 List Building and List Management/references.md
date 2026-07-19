@@ -1,18 +1,26 @@
-# References — 14 List Building and List Management
+# 14 List Building and List Management — References
 
-> Part of Stage 14 (List Building and List Management). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
-
----
-
-## References
-
-Only reliable, official sources should be listed here (official docs, vendor sites, government registries). Mark unverifiable pricing/data as "verify current" rather than fabricating numbers.
+[⬅ Back to README](README.md)
 
 ---
 
-## Cross-References
+## Internal Sources
 
-- Stage README: [README.md](README.md)
-- Previous stage: [13 CRM Setup and Data Structuring](../13 CRM Setup and Data Structuring/README.md)
-- Next stage: [15 Outreach Channel Strategy](../15 Outreach Channel Strategy/README.md)
+- Stage 12 Lead Segmentation (this repo)
+- Stage 13 CRM Setup and Data Structuring (this repo)
+- No dedicated internal "list management SOP" existed in source material at time of writing — this stage was built from general CRM list-management best practice generalized to this funnel's structure
+
+## External / Official Documentation
+
+- HubSpot: Lists (active vs. static) product documentation
+- CAN-SPAM Act compliance guidance (US) — relevant to suppression obligations, see Stage 23
+- GDPR guidance (EU/UK) — relevant where applicable to UK-market lists
+
+## Cross-Stage References
+
+- [Stage 12 Lead Segmentation](../12 Lead Segmentation/README.md)
+- [Stage 15 Outreach Channel Strategy](../15 Outreach Channel Strategy/README.md)
+- [Stage 23 Deliverability and Domain Health](../23 Deliverability and Domain Health/README.md)
+- [Stage 24 Follow Up Systems](../24 Follow Up Systems/README.md) — source of new suppression entries (unsubscribes)
+
+[⬅ Back to README](README.md)

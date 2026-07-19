@@ -1,23 +1,14 @@
-# Resources — 12 Lead Segmentation
+# 12 Lead Segmentation — Resources
 
-> Part of Stage 12 (Lead Segmentation). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+[⬅ Back to README](README.md)
 
----
+> No external website library applies to this stage — segmentation runs on internal CRM data using definitions produced in Stage 02 (ICP) and Stage 03 (Buyer Persona).
 
-## Resources
+| Resource | Type | What It Covers |
+|---|---|---|
+| Stage 02 ICP Definition | Internal (this repo) | Industry, geography, company-size criteria used in the tagging rule table |
+| Stage 03 Buyer Persona | Internal (this repo) | Persona definitions used for persona-tag matching |
+| HubSpot Lists documentation | Vendor docs | Static vs. active list mechanics |
+| Salesforce Campaigns/List Views documentation | Vendor docs | Native dynamic segmentation |
 
-- Official documentation: _to be added_
-- Official APIs: _to be added_
-- Learning resources: _to be added_
-- GitHub repositories: _to be added_
-- Communities: _to be added_
-- Videos / Blogs: _to be added_
-
----
-
-## Cross-References
-
-- Stage README: [README.md](README.md)
-- Previous stage: [11 Lead Scoring and Prioritization](../11 Lead Scoring and Prioritization/README.md)
-- Next stage: [13 CRM Setup and Data Structuring](../13 CRM Setup and Data Structuring/README.md)
+[⬅ Back to README](README.md) · [Next: faq.md](faq.md)

@@ -1,22 +1,15 @@
-# Tools — 14 List Building and List Management
+# 14 List Building and List Management — Tools
 
-> Part of Stage 14 (List Building and List Management). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+[⬅ Back to README](README.md)
 
----
+> Pricing approximate — verify current before committing budget.
 
-## Tool Library
+| Tool | Purpose | Pricing (approx.) | OSS/Free Alt | API/Automation Support |
+|---|---|---|---|---|
+| HubSpot Lists | Static and dynamic (active) list building | Free tier available | — | REST API |
+| n8n | Suppression-check automation, cross-list dedup workflows | Free (self-hosted) / ~$20/mo cloud | Self-hosted free | Native |
+| Google Sheets | Manual list tracking/export log for pre-CRM teams | Free | N/A | Sheets API |
+| Clearout / ZeroBounce (suppression cross-check for email lists) | Email suppression/bounce list management, often bundled with verification tools already used in Stage 10 | Usage-based, verify current | — | API |
+| Claude / GPT-4-class LLM | Near-duplicate detection, list composition summaries | Usage-based | N/A | API |
 
-| Tool | Purpose | Pricing | Free/OSS Alternative | API | Automation Support | Learning Curve | Docs |
-|---|---|---|---|---|---|---|---|
-| _to be added_ | | | | | | | |
-
-For each tool, document: Purpose, Features, Pricing, Open-source alternative, Free alternative, Advantages, Limitations, API support, Automation support, Learning curve, Documentation link, GitHub repo (if any).
-
----
-
-## Cross-References
-
-- Stage README: [README.md](README.md)
-- Previous stage: [13 CRM Setup and Data Structuring](../13 CRM Setup and Data Structuring/README.md)
-- Next stage: [15 Outreach Channel Strategy](../15 Outreach Channel Strategy/README.md)
+[⬅ Back to README](README.md) · [Next: automation.md](automation.md)

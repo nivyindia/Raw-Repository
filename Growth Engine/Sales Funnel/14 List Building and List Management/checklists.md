@@ -1,23 +1,26 @@
-# Checklists — 14 List Building and List Management
+# 14 List Building and List Management — Checklists
 
-> Part of Stage 14 (List Building and List Management). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
-
----
-
-## Quality Control Checklists
-
-- [ ] Validation checklist
-- [ ] QA checklist
-- [ ] Duplicate detection
-- [ ] Data accuracy check
-- [ ] Completeness score
-- [ ] Risk checks
+[⬅ Back to README](README.md)
 
 ---
 
-## Cross-References
+## Before a List Goes Active
 
-- Stage README: [README.md](README.md)
-- Previous stage: [13 CRM Setup and Data Structuring](../13 CRM Setup and Data Structuring/README.md)
-- Next stage: [15 Outreach Channel Strategy](../15 Outreach Channel Strategy/README.md)
+- [ ] Suppression check completed and logged (unsubscribes, bounces, opt-outs, existing customers removed)
+- [ ] Cross-list deduplication check completed against other currently Active lists
+- [ ] List metadata fully filled (name, source segment, build date, owner, count, expiry)
+- [ ] List size matches the intended campaign volume — not padded with off-segment leads to hit a number
+- [ ] Naming convention followed exactly (see [templates.md](templates.md))
+
+## Weekly Audit
+
+- [ ] No expired static lists still marked Active
+- [ ] No lead present on two simultaneously Active lists without a logged, deliberate exception
+- [ ] Suppression list itself is current (recent unsubscribes/bounces from Stage 24/25 have been added)
+
+## Post-Campaign
+
+- [ ] List status updated to Archived once the campaign concludes
+- [ ] Campaign outcome (replies, bookings) tied back to the specific list for segment performance tracking (feeds Stage 12's monthly segment review)
+
+[⬅ Back to README](README.md) · [Next: templates.md](templates.md)

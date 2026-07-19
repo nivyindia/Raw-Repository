@@ -1,31 +1,29 @@
-# Methods — 15 Outreach Channel Strategy
+# 15 Outreach Channel Strategy — Methods
 
-> Part of Stage 15 (Outreach Channel Strategy). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
-
----
-
-## Method Coverage Checklist
-
-- [ ] Traditional methods
-- [ ] Modern methods
-- [ ] AI methods
-- [ ] Manual methods
-- [ ] Automated methods
-- [ ] API methods
-- [ ] Browser automation
-- [ ] Scraping
-- [ ] Public databases
-- [ ] Government sources
-- [ ] Community sources
-- [ ] Referral methods
-
-Each checked method should be expanded into its own subsection with: description, when to use, skill level, and a link to the relevant tool(s) in [tools.md](tools.md).
+[⬅ Back to README](README.md)
 
 ---
 
-## Cross-References
+## Manual
 
-- Stage README: [README.md](README.md)
-- Previous stage: [14 List Building and List Management](../14 List Building and List Management/README.md)
-- Next stage: [16 Email Outreach](../16 Email Outreach/README.md)
+**Persona-driven manual selection** — campaign owner reviews the Buyer Persona (Stage 03) and market compliance notes, selects primary/secondary channel using judgment and the fit table in [templates.md](templates.md), and logs the decision.
+
+## Data-Driven
+
+**Historical performance-based selection** — once enough campaigns have run, channel choice for a segment/market is driven by logged past performance (reply rate, booking rate per channel) rather than judgment alone. Requires the KPI tracking described in [automation.md](automation.md) to have accumulated data.
+
+## AI-Assisted
+
+**Recommendation drafting** — an LLM reviews the persona profile, market, and any available historical performance data and drafts a recommended channel mix with reasoning, which the campaign owner approves or overrides (see prompt examples in [README.md](README.md)).
+
+**Compliance summary drafting** — before entering a new market, an LLM drafts a starting compliance-constraint summary (cold-calling rules, messaging-app business policies, email opt-in norms) for human legal/compliance review — never used unverified as final guidance.
+
+## Method Selection Guide
+
+| Situation | Recommended method |
+|---|---|
+| New segment/market, no historical data yet | Persona-driven manual selection, AI-assisted draft |
+| Established segment with campaign history | Data-driven, historical performance-based |
+| Entering a new country for the first time | AI-assisted compliance draft + manual legal review before any send |
+
+[⬅ Back to README](README.md) · [Next: tools.md](tools.md)

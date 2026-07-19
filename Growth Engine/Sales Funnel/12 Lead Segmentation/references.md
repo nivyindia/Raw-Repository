@@ -1,18 +1,25 @@
-# References — 12 Lead Segmentation
+# 12 Lead Segmentation — References
 
-> Part of Stage 12 (Lead Segmentation). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
-
----
-
-## References
-
-Only reliable, official sources should be listed here (official docs, vendor sites, government registries). Mark unverifiable pricing/data as "verify current" rather than fabricating numbers.
+[⬅ Back to README](README.md)
 
 ---
 
-## Cross-References
+## Internal Sources
 
-- Stage README: [README.md](README.md)
-- Previous stage: [11 Lead Scoring and Prioritization](../11 Lead Scoring and Prioritization/README.md)
-- Next stage: [13 CRM Setup and Data Structuring](../13 CRM Setup and Data Structuring/README.md)
+- Stage 02 ICP Definition (this repo)
+- Stage 03 Buyer Persona (this repo)
+- General Nivy Digital sales/marketing planning docs (Growth & Demand Generation Strategy, Sales and Marketing Master Plan) — used as background context; no dedicated segmentation SOP existed in source material
+
+## External / Official Documentation
+
+- HubSpot: Lists (active vs. static) product documentation
+- Salesforce: Campaigns and List Views documentation
+
+## Cross-Stage References
+
+- [Stage 11 Lead Scoring and Prioritization](../11 Lead Scoring and Prioritization/README.md)
+- [Stage 15 Outreach Channel Strategy](../15 Outreach Channel Strategy/README.md)
+- [Stage 21 Multi Channel Sequencing](../21 Multi Channel Sequencing/README.md)
+- [Stage 22 Personalization and Copywriting](../22 Personalization and Copywriting/README.md)
+
+[⬅ Back to README](README.md)

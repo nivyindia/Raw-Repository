@@ -1,22 +1,14 @@
-# Tools — 15 Outreach Channel Strategy
+# 15 Outreach Channel Strategy — Tools
 
-> Part of Stage 15 (Outreach Channel Strategy). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+[⬅ Back to README](README.md)
 
----
+> Pricing approximate — verify current before committing budget.
 
-## Tool Library
+| Tool | Purpose | Pricing (approx.) | OSS/Free Alt | API/Automation Support |
+|---|---|---|---|---|
+| CRM reporting (HubSpot/Salesforce/Pipedrive) | Tracking channel-level performance (reply rate, booking rate) | Depends on tier — see Stage 13 | — | Native reporting + API |
+| Google Sheets | Channel-mix decision log, compliance notes tracker | Free | N/A | Sheets API |
+| Claude / GPT-4-class LLM | Channel-mix recommendation drafting, compliance summary drafting | Usage-based | N/A | API |
+| n8n | Feeding campaign outcome data back into the channel-performance log automatically | Free (self-hosted) / ~$20/mo cloud | Self-hosted free | Native |
 
-| Tool | Purpose | Pricing | Free/OSS Alternative | API | Automation Support | Learning Curve | Docs |
-|---|---|---|---|---|---|---|---|
-| _to be added_ | | | | | | | |
-
-For each tool, document: Purpose, Features, Pricing, Open-source alternative, Free alternative, Advantages, Limitations, API support, Automation support, Learning curve, Documentation link, GitHub repo (if any).
-
----
-
-## Cross-References
-
-- Stage README: [README.md](README.md)
-- Previous stage: [14 List Building and List Management](../14 List Building and List Management/README.md)
-- Next stage: [16 Email Outreach](../16 Email Outreach/README.md)
+[⬅ Back to README](README.md) · [Next: automation.md](automation.md)

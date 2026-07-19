@@ -1,23 +1,16 @@
-# Resources — 15 Outreach Channel Strategy
+# 15 Outreach Channel Strategy — Resources
 
-> Part of Stage 15 (Outreach Channel Strategy). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+[⬅ Back to README](README.md)
 
----
+> No external website library — this stage is a decision framework, not a sourcing task.
 
-## Resources
+| Resource | Type | What It Covers |
+|---|---|---|
+| Stage 03 Buyer Persona | Internal (this repo) | Persona channel-preference input |
+| Stage 16-20 (Email/LinkedIn/Cold Call/WhatsApp/SMS Outreach) | Internal (this repo) | Execution detail for each channel once selected here |
+| CAN-SPAM Act (US) | Compliance reference | Email opt-in/opt-out requirements |
+| GDPR (EU/UK) | Compliance reference | Email/data handling requirements for UK-market outreach |
+| WhatsApp Business Policy | Vendor policy docs | Terms for business messaging use, relevant to India/UAE channel choice |
+| National Do-Not-Call registry references (per country) | Compliance reference | Relevant before including cold calling in any channel plan |
 
-- Official documentation: _to be added_
-- Official APIs: _to be added_
-- Learning resources: _to be added_
-- GitHub repositories: _to be added_
-- Communities: _to be added_
-- Videos / Blogs: _to be added_
-
----
-
-## Cross-References
-
-- Stage README: [README.md](README.md)
-- Previous stage: [14 List Building and List Management](../14 List Building and List Management/README.md)
-- Next stage: [16 Email Outreach](../16 Email Outreach/README.md)
+[⬅ Back to README](README.md) · [Next: faq.md](faq.md)

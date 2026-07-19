@@ -1,19 +1,22 @@
-# FAQ — 13 CRM Setup and Data Structuring
+# 13 CRM Setup and Data Structuring — FAQ
 
-> Part of Stage 13 (CRM Setup and Data Structuring). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
-
----
-
-## Frequently Asked Questions
-
-**Q: _placeholder question_**
-A: _placeholder answer_
+[⬅ Back to README](README.md)
 
 ---
 
-## Cross-References
+**Q: Which CRM should we start with?**
+HubSpot Free is the documented default for this funnel at early stage — it's free, has the core contact/deal structure needed, and every gap (like native scoring) can be filled with n8n until an upgrade is justified. See [tools.md](tools.md) for alternatives.
 
-- Stage README: [README.md](README.md)
-- Previous stage: [12 Lead Segmentation](../12 Lead Segmentation/README.md)
-- Next stage: [14 List Building and List Management](../14 List Building and List Management/README.md)
+**Q: When should we upgrade to a paid tier?**
+When native automation/scoring becomes cheaper than maintaining n8n workflows, or when API rate limits on the free tier start blocking legitimate volume — not on a fixed schedule.
+
+**Q: Who is allowed to create new CRM fields?**
+One designated owner, via the New Field Request process in [templates.md](templates.md). Unmanaged field creation is the single biggest cause of CRM schema drift and broken automations.
+
+**Q: What happens if a downstream stage needs a field this stage didn't anticipate?**
+It goes through the same New Field Request process — this stage's field dictionary is a living document, updated whenever a legitimate new requirement surfaces, not a one-time artifact.
+
+**Q: How does this stage relate to Stage 09 (Data Cleaning)?**
+Stage 09 cleans data *within* leads (deduping, normalizing values). Stage 13 defines the *structure* those values live in. A clean dataset poured into a badly structured CRM is still unusable; a well-structured CRM with dirty data still needs Stage 09.
+
+[⬅ Back to README](README.md) · [Next: references.md](references.md)

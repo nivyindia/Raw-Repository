@@ -1,23 +1,14 @@
-# Resources — 14 List Building and List Management
+# 14 List Building and List Management — Resources
 
-> Part of Stage 14 (List Building and List Management). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+[⬅ Back to README](README.md)
 
----
+> No external website library applies — this stage operates entirely on internal CRM/list data built from Stages 12-13.
 
-## Resources
+| Resource | Type | What It Covers |
+|---|---|---|
+| HubSpot Lists documentation | Vendor docs | Static vs. active (dynamic) list mechanics |
+| Stage 12 Lead Segmentation | Internal (this repo) | Source of the segments lists are built from |
+| Stage 13 CRM Setup and Data Structuring | Internal (this repo) | CRM schema/fields lists depend on |
+| CAN-SPAM / GDPR / PDPA suppression-obligation references | Compliance | Relevant when suppression rules intersect with legal opt-out requirements per market — see Stage 23 (Deliverability) for detail |
 
-- Official documentation: _to be added_
-- Official APIs: _to be added_
-- Learning resources: _to be added_
-- GitHub repositories: _to be added_
-- Communities: _to be added_
-- Videos / Blogs: _to be added_
-
----
-
-## Cross-References
-
-- Stage README: [README.md](README.md)
-- Previous stage: [13 CRM Setup and Data Structuring](../13 CRM Setup and Data Structuring/README.md)
-- Next stage: [15 Outreach Channel Strategy](../15 Outreach Channel Strategy/README.md)
+[⬅ Back to README](README.md) · [Next: faq.md](faq.md)

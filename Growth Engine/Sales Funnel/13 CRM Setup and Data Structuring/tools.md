@@ -1,22 +1,24 @@
-# Tools — 13 CRM Setup and Data Structuring
+# 13 CRM Setup and Data Structuring — Tools
 
-> Part of Stage 13 (CRM Setup and Data Structuring). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+[⬅ Back to README](README.md)
 
----
+> Pricing approximate as of source docs' last update (May 2026) — verify current pricing before committing budget.
 
-## Tool Library
+| Tool | Purpose | Pricing (approx.) | OSS/Free Alt | API/Automation Support |
+|---|---|---|---|---|
+| HubSpot CRM (Free) | Full contact/deal/pipeline CRM, entry point for this funnel | Free | — | REST API (rate-limited on Free) |
+| HubSpot Starter/Professional | Adds native scoring, automation workflows, more custom fields | ~$20-90/mo+ | — | Full API |
+| Salesforce | Enterprise-grade CRM, highly configurable | Enterprise pricing, verify current | — | Extensive API |
+| Pipedrive | Sales-pipeline-focused CRM | ~$14-49/mo+ | — | REST API |
+| Bitrix24 | CRM + collaboration suite, generous free tier | Free tier available | — | REST API |
+| Google Sheets (bridge/pre-CRM) | Manual CRM substitute for very early-stage teams | Free | N/A | Sheets API |
+| Cal.com | Booking tool integration feeding pipeline stage changes | Free tier available | Self-hosted OSS option | API + webhooks |
+| n8n | Integration/automation glue between CRM and other tools | Free (self-hosted) / ~$20/mo cloud | Self-hosted free | Native |
 
-| Tool | Purpose | Pricing | Free/OSS Alternative | API | Automation Support | Learning Curve | Docs |
-|---|---|---|---|---|---|---|---|
-| _to be added_ | | | | | | | |
+## Platform Selection Notes
 
-For each tool, document: Purpose, Features, Pricing, Open-source alternative, Free alternative, Advantages, Limitations, API support, Automation support, Learning curve, Documentation link, GitHub repo (if any).
+- HubSpot Free is the documented default for this funnel's early stage (Nivy Digital's own production setup) — sufficient for contact/deal management with n8n filling automation gaps
+- Upgrade triggers: need for native lead scoring (Stage 11), more than a handful of custom automation workflows, or API rate limits becoming a bottleneck
+- Bitrix24 is a viable low-cost alternative for teams wanting an all-in-one suite (CRM + tasks + chat) rather than best-of-breed tools connected via n8n
 
----
-
-## Cross-References
-
-- Stage README: [README.md](README.md)
-- Previous stage: [12 Lead Segmentation](../12 Lead Segmentation/README.md)
-- Next stage: [14 List Building and List Management](../14 List Building and List Management/README.md)
+[⬅ Back to README](README.md) · [Next: automation.md](automation.md)

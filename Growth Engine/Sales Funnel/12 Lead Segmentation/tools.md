@@ -1,22 +1,16 @@
-# Tools — 12 Lead Segmentation
+# 12 Lead Segmentation — Tools
 
-> Part of Stage 12 (Lead Segmentation). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+[⬅ Back to README](README.md)
 
----
+> Pricing approximate — verify current before committing budget.
 
-## Tool Library
+| Tool | Purpose | Pricing (approx.) | OSS/Free Alt | API/Automation Support |
+|---|---|---|---|---|
+| HubSpot Lists (Free/Starter) | Static and active (dynamic) list segmentation | Free tier available | — | REST API for list membership |
+| n8n | Rule-based auto-tagging on lead create/update | Free (self-hosted) / ~$20/mo cloud | Self-hosted is free | Native — automation layer |
+| Google Sheets + filters/pivot tables | Manual segmentation for pre-CRM teams | Free | N/A | Sheets API |
+| Salesforce List Views / Campaigns | Native dynamic segmentation | Enterprise pricing, verify current | — | Full API |
+| Pipedrive Filters | Native segmentation via saved filters | ~$14-49/mo+ | — | REST API |
+| Claude / GPT-4-class LLM | Persona classification, cluster discovery | Usage-based | N/A | API |
 
-| Tool | Purpose | Pricing | Free/OSS Alternative | API | Automation Support | Learning Curve | Docs |
-|---|---|---|---|---|---|---|---|
-| _to be added_ | | | | | | | |
-
-For each tool, document: Purpose, Features, Pricing, Open-source alternative, Free alternative, Advantages, Limitations, API support, Automation support, Learning curve, Documentation link, GitHub repo (if any).
-
----
-
-## Cross-References
-
-- Stage README: [README.md](README.md)
-- Previous stage: [11 Lead Scoring and Prioritization](../11 Lead Scoring and Prioritization/README.md)
-- Next stage: [13 CRM Setup and Data Structuring](../13 CRM Setup and Data Structuring/README.md)
+[⬅ Back to README](README.md) · [Next: automation.md](automation.md)
