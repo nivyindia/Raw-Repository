@@ -1,23 +1,19 @@
 # Resources — 10 Lead Verification
 
 > Part of Stage 10 (Lead Verification). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
-## Resources
+This stage is primarily tool/API-based rather than website-browsing based. See [tools.md](tools.md) for the relevant verification services.
 
-- Official documentation: _to be added_
-- Official APIs: _to be added_
-- Learning resources: _to be added_
-- GitHub repositories: _to be added_
-- Communities: _to be added_
-- Videos / Blogs: _to be added_
+| Source | Category | Notes |
+|---|---|---|
+| Domain MX record lookup (e.g. via mxtoolbox.com) | Manual domain health spot-check | Free, useful for a quick sanity check outside bulk tooling |
+| LinkedIn profile | Role currency check | Free, manual — confirms contact still holds the recorded title |
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [09 Data Cleaning](../09 Data Cleaning/README.md)
-- Next stage: [11 Lead Scoring and Prioritization](../11 Lead Scoring and Prioritization/README.md)
+- Tools file: [tools.md](tools.md)

@@ -1,18 +1,17 @@
 # References — 08 Lead Enrichment
 
 > Part of Stage 08 (Lead Enrichment). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
-## References
+## Internal Sources Used
 
-Only reliable, official sources should be listed here (official docs, vendor sites, government registries). Mark unverifiable pricing/data as "verify current" rather than fabricating numbers.
+- Nivy internal "Data Infrastructure OS — Scraping, Enrichment & CRM" document (Layer 3 — Lead Enrichment field/source table, Layer 4 — Segmentation System tag taxonomy, and the documented Clay/n8n enrichment automation flow with HubSpot CRM write-back)
+
+> **Note:** Enrichment API pricing, free-tier limits, and field coverage change frequently — verify current terms before operational use.
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [07 Contact Discovery](../07 Contact Discovery/README.md)
-- Next stage: [09 Data Cleaning](../09 Data Cleaning/README.md)

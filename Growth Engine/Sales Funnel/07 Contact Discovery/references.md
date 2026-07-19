@@ -1,18 +1,17 @@
 # References — 07 Contact Discovery
 
 > Part of Stage 07 (Contact Discovery). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
-## References
+## Internal Sources Used
 
-Only reliable, official sources should be listed here (official docs, vendor sites, government registries). Mark unverifiable pricing/data as "verify current" rather than fabricating numbers.
+- Nivy internal "Data Infrastructure OS — Scraping, Enrichment & CRM" document (Layer 1 — Lead Scraping Systems, and the Apollo/PhantomBuster/Clay-based discovery patterns), last updated within the repo's active documentation set
+
+> **Note:** Tool pricing, free-tier limits, and API availability change frequently — verify current terms before operational use.
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [06 Lead Extraction](../06 Lead Extraction/README.md)
-- Next stage: [08 Lead Enrichment](../08 Lead Enrichment/README.md)

@@ -53,8 +53,8 @@ Stages are grouped into 8 batches of ~5–8, sequenced to front-load stages wher
 |---|---|---|---|---|
 | Pilot | 06 Lead Extraction | ✅ Done | 10/10 | Quality bar for all other stages |
 | Skeleton | 01–54 (all, structural only) | ✅ Done | 486/486 (stub-level) | Correctly named, cross-referenced, awaiting content |
-| 1 | 01–05 | ⬜ Not started | 0/45 | |
-| 2 | 07–10 | ⬜ Not started | 0/36 | |
+| 1 | 01–05 | ✅ Done | 45/45 | All 5 stages (Market Research, ICP Definition, Buyer Persona, Competitor Research, Lead Source Selection) at pilot depth |
+| 2 | 07–10 | ✅ Done | 36/36 | All 4 stages (Contact Discovery, Lead Enrichment, Data Cleaning, Lead Verification) at pilot depth |
 | 3 | 11–15 | ⬜ Not started | 0/45 | |
 | 4 | 16–21 | ⬜ Not started | 0/54 | |
 | 5 | 22–27 | ⬜ Not started | 0/54 | |
@@ -64,7 +64,7 @@ Stages are grouped into 8 batches of ~5–8, sequenced to front-load stages wher
 
 **Legend:** ⬜ Not started · 🟡 In progress · ✅ Done
 
-**Overall completion:** 10 / 496 files at full pilot depth (skeleton-level structure exists for all 486 non-pilot files).
+**Overall completion:** 91 / 496 files at full pilot depth (10 pilot + 45 Batch 1 + 36 Batch 2; skeleton-level structure exists for all remaining non-pilot files).
 
 ---
 
@@ -73,6 +73,9 @@ Stages are grouped into 8 batches of ~5–8, sequenced to front-load stages wher
 | Date | Session | What was done |
 |---|---|---|
 | 2026-07-18 | 1 | Audited repo (confirmed no prior structured KB existed despite earlier transcript). Built full 54-folder skeleton (486 files). Built Stage 06 Lead Extraction to full pilot depth (10 files) using existing Nivy SOPs as source material. Created this implementation plan. |
+| 2026-07-19 | 2 | Built Batch 1 stages 01 (Market Research) and 02 (ICP Definition) to full pilot depth (18 files total), mining existing Nivy Digital raw material (Market Research — India, Market Research — International US/UK/UAE/AU, Nivy Empires Market Research brief with TAM/SAM/SOM and Porter's Five Forces, and the ICP — Full Document with 4 defined ICPs + Negative ICP table). Stages 03–05 of Batch 1 remain — next session continues with Buyer Persona (03), which has strong existing raw material to draw on. |
+| 2026-07-19 | 3 | Completed Batch 1: built stages 03 (Buyer Persona), 04 (Competitor Research), and 05 (Lead Source Selection) to full pilot depth (27 files), mining the ICP document's embedded demographic/psychographic detail for personas, the "Competitor Categories You Must Track" system + "Competitor Positioning" playbook for competitor research, and the "Data Sources & Databases Guide" + "International Lead Sources" guide for source selection. Batch 1 (Stages 01-05, 45/45 files) is now fully at pilot depth. Next session starts Batch 2 (Stages 07-10: Contact Discovery, Lead Enrichment, Data Cleaning, Lead Verification), which has strong existing raw material and reuses the Stage 06 pilot's tool stack (Apollo, Hunter, Snov, ZeroBounce). |
+| 2026-07-19 | 4 | Completed Batch 2: built stages 07 (Contact Discovery), 08 (Lead Enrichment), 09 (Data Cleaning), and 10 (Lead Verification) to full pilot depth (36 files), mining the "Data Infrastructure OS — Scraping, Enrichment & CRM" document (Layers 1-4: scraping/discovery, email validation, enrichment, segmentation) for Stages 07-08, "SOP-VA-012 — Data Cleaning SOP" directly for Stage 09, and the Data Infrastructure OS's email validation layer plus the Section H Verification & Due Diligence Framework (adapted from trade-partner verification to lead-contact verification) for Stage 10. Batch 2 (Stages 07-10, 36/36 files) is now fully at pilot depth. Overall: 91/496 files at pilot depth. Next session starts Batch 3 (Stages 11-15: Lead Scoring, Segmentation, CRM Setup, List Management, Outreach Channel Strategy), which has some existing material (HubSpot CRM Setup Guide, Lead Scoring Rules Document, Lead Qualification Framework) to draw on. |
 
 ---
 

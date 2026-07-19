@@ -1,18 +1,18 @@
 # References — 03 Buyer Persona
 
 > Part of Stage 03 (Buyer Persona). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
-## References
+## Internal Sources Used
 
-Only reliable, official sources should be listed here (official docs, vendor sites, government registries). Mark unverifiable pricing/data as "verify current" rather than fabricating numbers.
+- Nivy internal "Ideal Client Profile (ICP) — Full Document" (SD-02, demographic/psychographic detail per ICP — age ranges, tools used, podcasts/media habits, communication preferences)
+- Stage 02 ICP Definition (this knowledge base)
+
+> **Note:** Any specific named publication, podcast, or community carried over from the source ICP document should be re-verified as still active before use in external-facing content — media landscapes shift and a reference that was accurate in May 2026 may not be current.
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [02 ICP Definition](../02 ICP Definition/README.md)
-- Next stage: [04 Competitor Research](../04 Competitor Research/README.md)

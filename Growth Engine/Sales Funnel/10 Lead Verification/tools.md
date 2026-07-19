@@ -1,22 +1,22 @@
 # Tools — 10 Lead Verification
 
 > Part of Stage 10 (Lead Verification). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+> Pricing is approximate — verify current pricing before purchase.
 
 ---
 
-## Tool Library
-
-| Tool | Purpose | Pricing | Free/OSS Alternative | API | Automation Support | Learning Curve | Docs |
-|---|---|---|---|---|---|---|---|
-| _to be added_ | | | | | | | |
-
-For each tool, document: Purpose, Features, Pricing, Open-source alternative, Free alternative, Advantages, Limitations, API support, Automation support, Learning curve, Documentation link, GitHub repo (if any).
+| Tool | Use Case | Accuracy (approx., verify) | Cost (approx., verify) |
+|---|---|---|---|
+| Reoon | Bulk email validation before sending | 99%+ | ~$10/mo |
+| NeverBounce | Alternative bulk email validation | 99%+ | Pay per credit |
+| Hunter.io (built-in verifier) | Find + verify from domain | 95% | Free (25/mo) or paid |
+| Apollo (built-in verification) | Verify Apollo-sourced exports | 95% | Included with Apollo plan |
+| ZeroBounce | Bulk email validation, alternative to Reoon/NeverBounce | High (verify current) | Pay per credit (verify) |
+| Phone verification APIs (e.g. Twilio Lookup) | Carrier/line-status check for cold-calling lists | High (verify current) | Pay per lookup (verify) |
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [09 Data Cleaning](../09 Data Cleaning/README.md)
-- Next stage: [11 Lead Scoring and Prioritization](../11 Lead Scoring and Prioritization/README.md)
+- Methods file: [methods.md](methods.md)

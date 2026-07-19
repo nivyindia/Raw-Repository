@@ -1,21 +1,40 @@
 # Automation — 04 Competitor Research
 
 > Part of Stage 04 (Competitor Research). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
+## Monitoring Cadence
+
+### Weekly (~20 minutes)
+- Check competitor social media top posts
+- Monitor live ads in Meta Ads Library / Google Ads Transparency Center
+- Track new blog posts / YouTube videos
+- Check follower growth trend (Social Blade)
+
+### Monthly (~40 minutes)
+- Full SEO check (Ubersuggest / Ahrefs free tools)
+- Website/pricing/offer change check
+- Review new testimonials on Google/Trustpilot/Clutch/G2
+- Check landing page changes
+- Broader industry trend scan (Google Trends)
+
 ## Automation Workflows
 
-For every method in [methods.md](methods.md), define:
+### 1. Pricing/Positioning Change Detection
+- **Manual:** Analyst re-visits competitor pricing pages monthly
+- **Semi-automated:** Visualping/Distill.io page-change monitor on pricing/service pages
+- **Fully automated:** Scheduled screenshot-diff pipeline logging changes to a tracking sheet, alerting on detected changes
+- **AI-assisted:** LLM summarizes what changed and whether Nivy's positioning response needs updating
+- **Required tools:** Page-change monitor, LLM API, tracking sheet
+- **Common errors:** Cosmetic page changes trigger false positives — target the diff logic at price/plan text blocks specifically
 
-- Manual workflow
-- Semi-automated workflow
-- Fully automated workflow
-- AI-assisted workflow
-- Required tools / APIs / browser automation (Playwright, Selenium) / Python scripts / n8n workflows / Apify Actors / MCPs
-- Expected output
-- Common errors and recovery methods
+### 2. Review Sentiment Monitoring
+- **Manual:** Analyst reads new reviews monthly
+- **Semi-automated:** Manual export of new reviews + LLM-assisted theme summary
+- **Required tools:** LLM API
+- **Expected output:** Updated "what clients praise/complain about" summary per competitor
+- **Common errors:** Most review platforms' ToS prohibit automated scraping — default to manual reading or official export, not unauthorized scraping
 
 ---
 

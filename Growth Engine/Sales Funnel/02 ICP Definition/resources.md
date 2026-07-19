@@ -1,23 +1,20 @@
 # Resources — 02 ICP Definition
 
 > Part of Stage 02 (ICP Definition). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
-## Resources
+This stage draws primarily on internal data (CRM, client history) rather than external websites. External resources are limited to validation and firmographic-lookup sources:
 
-- Official documentation: _to be added_
-- Official APIs: _to be added_
-- Learning resources: _to be added_
-- GitHub repositories: _to be added_
-- Communities: _to be added_
-- Videos / Blogs: _to be added_
+| Source | Category | Cost | Notes |
+|---|---|---|---|
+| LinkedIn Sales Navigator | Validate ICP reachability / market size at the persona level | Paid (verify) | Search filter counts give a rough "how many of this ICP exist reachable on LinkedIn" sanity check |
+| Crunchbase | Firmographic validation, competitor client patterns | Paid (verify) | Useful for company-size/funding-stage cross-checks |
+| G2/Capterra competitor reviewer profiles | Signal of who buys competitor products | Free to browse | Reviewer job titles/company size are a proxy for competitor ICP |
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [01 Market Research](../01 Market Research/README.md)
-- Next stage: [03 Buyer Persona](../03 Buyer Persona/README.md)
+- Tools file: [tools.md](tools.md)

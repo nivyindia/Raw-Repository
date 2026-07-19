@@ -1,23 +1,23 @@
 # Resources — 04 Competitor Research
 
 > Part of Stage 04 (Competitor Research). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
-## Resources
+## Competitor-Analysis Tool Categories
 
-- Official documentation: _to be added_
-- Official APIs: _to be added_
-- Learning resources: _to be added_
-- GitHub repositories: _to be added_
-- Communities: _to be added_
-- Videos / Blogs: _to be added_
+| Category | Example Sources | Notes |
+|---|---|---|
+| Social media competitor tracking | Social Blade, Meta Business Suite Insights, Not Just Analytics, Twemex, Popsters | Free/freemium bundle covers most needs |
+| SEO & website | SimilarWeb, Ubersuggest, Ahrefs (free tools), BuiltWith, Google Keyword Planner | Free tiers sufficient for directional insight |
+| Ads & funnel | Meta Ads Library, Google Ads Transparency Center, TikTok Creative Center | All free, official transparency tools |
+| Content & trends | BuzzSumo, Feedly, Google Trends, AnswerThePublic | Mix of free and freemium |
+| Design & branding | Dribbble, Behance, Mobbin, BrandPeek | Useful for website/UI benchmarking |
+| Reputation | Google Reviews, Trustpilot, Clutch, G2 | Free to browse; respect platform ToS — no scraping |
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [03 Buyer Persona](../03 Buyer Persona/README.md)
-- Next stage: [05 Lead Source Selection](../05 Lead Source Selection/README.md)
+- Tools file: [tools.md](tools.md)

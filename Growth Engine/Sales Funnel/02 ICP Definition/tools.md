@@ -1,22 +1,22 @@
 # Tools — 02 ICP Definition
 
 > Part of Stage 02 (ICP Definition). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+> Pricing figures are approximate — verify current pricing before use.
 
 ---
 
-## Tool Library
-
-| Tool | Purpose | Pricing | Free/OSS Alternative | API | Automation Support | Learning Curve | Docs |
-|---|---|---|---|---|---|---|---|
-| _to be added_ | | | | | | | |
-
-For each tool, document: Purpose, Features, Pricing, Open-source alternative, Free alternative, Advantages, Limitations, API support, Automation support, Learning curve, Documentation link, GitHub repo (if any).
+| Tool | Purpose | Pricing (approx., verify) | OSS/Free Alt | API/Automation Support | Learning Curve |
+|---|---|---|---|---|---|
+| CRM (HubSpot / Pipedrive / Zoho) | Client/deal data source for ICP evidence | Free tier + paid tiers | Zoho CRM free tier | Yes, API on most | Low-Medium |
+| Google Sheets / Notion | ICP card drafting & storage | Free | — | Notion API for automation | Low |
+| SurveyMonkey / Typeform | Buyer interview follow-up surveys | Free tier + paid | Google Forms | API on paid tiers | Low |
+| Claude / ChatGPT (web-enabled) | AI-assisted ICP synthesis and stress-testing | Subscription, ~$20/mo | — | API available | Low |
+| Crunchbase | Firmographic lookup for competitor client patterns | Paid, ~$29-99/mo tiers | LinkedIn company pages (manual) | API on paid tiers | Low |
+| LinkedIn Sales Navigator | Validate ICP reachability (how many matching profiles exist) | ~$99+/mo (verify) | LinkedIn free search (limited) | No public API | Medium |
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [01 Market Research](../01 Market Research/README.md)
-- Next stage: [03 Buyer Persona](../03 Buyer Persona/README.md)
+- Methods file: [methods.md](methods.md)

@@ -1,23 +1,32 @@
 # Templates — 10 Lead Verification
 
 > Part of Stage 10 (Lead Verification). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
-## Templates
+## Verification Batch Report Template
 
-- Email templates: _to be added_
-- Scripts: _to be added_
-- Prompt templates: _to be added_
-- Excel/CSV templates: _to be added_
-- CRM templates: _to be added_
-- Checklists: see [checklists.md](checklists.md)
+```markdown
+**Batch:** _____
+**Date:** _____
+**Total leads verified:** _____
+**Valid:** _____ (___%)
+**Risky:** _____ (___%) — routed to manual review
+**Invalid:** _____ (___%) — discarded
+**Disposable:** _____ (___%) — discarded, domain flagged
+**Phone verification (if applicable):** In-service ___ / Disconnected ___
+```
+
+## Risky-Lead Review Decision Template
+
+```markdown
+| Lead ID | Risky Signal | Supplementary Check | Decision (Include/Exclude) | Reasoning |
+|---|---|---|---|---|
+```
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [09 Data Cleaning](../09 Data Cleaning/README.md)
-- Next stage: [11 Lead Scoring and Prioritization](../11 Lead Scoring and Prioritization/README.md)
+- Checklists: [checklists.md](checklists.md)

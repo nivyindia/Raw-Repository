@@ -1,23 +1,21 @@
 # Resources — 08 Lead Enrichment
 
 > Part of Stage 08 (Lead Enrichment). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
 
 ---
 
-## Resources
+This stage relies primarily on API-based tools (see [tools.md](tools.md)) rather than manual website browsing. Where manual cross-checking is useful:
 
-- Official documentation: _to be added_
-- Official APIs: _to be added_
-- Learning resources: _to be added_
-- GitHub repositories: _to be added_
-- Communities: _to be added_
-- Videos / Blogs: _to be added_
+| Source | Category | Cost | Notes |
+|---|---|---|---|
+| Company "About" pages | Founding year, mission, size cross-check | Free | Useful when tool-based enrichment is incomplete |
+| LinkedIn company pages | Employee count estimate, industry, recent posts | Free | Good sanity check against tool-reported company size |
+| Crunchbase | Funding history for startups | Freemium | Primary source for `Recent Signal` field on funded companies |
+| Google News | Recent funding/leadership/hiring news | Free | Manual fallback when AI-search synthesis is unavailable |
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [07 Contact Discovery](../07 Contact Discovery/README.md)
-- Next stage: [09 Data Cleaning](../09 Data Cleaning/README.md)
+- Tools file: [tools.md](tools.md)

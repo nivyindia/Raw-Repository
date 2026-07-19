@@ -1,23 +1,39 @@
 # Resources — 05 Lead Source Selection
 
 > Part of Stage 05 (Lead Source Selection). See [README.md](README.md) for the full stage overview.
-> Status: 🟡 Skeleton — awaiting full population (see Stage 06 Lead Extraction for the completed pilot).
+> Pricing/access marked "verify current" where applicable.
 
 ---
 
-## Resources
+## Per-Market Source Library
 
-- Official documentation: _to be added_
-- Official APIs: _to be added_
-- Learning resources: _to be added_
-- GitHub repositories: _to be added_
-- Communities: _to be added_
-- Videos / Blogs: _to be added_
+### India
+- JustDial — search by category and city, free
+- IndiaMART — SME buyer/seller directory, free
+- Google Maps / Google Business Profile — business type + city search, free
+- Local business WhatsApp groups — informal but effective, requires existing network access
+
+### UAE
+- Dubai Chamber of Commerce directory — free
+- Abu Dhabi business directory — free
+- LinkedIn groups for UAE entrepreneurs — free, community-based
+
+### UK
+- Companies House (companieshouse.gov.uk) — searchable by SIC code and company size, free
+- LinkedIn — high professional usage, strong coverage
+
+### US
+- Crunchbase — funded startup data, freemium/paid
+- Product Hunt — tech/SaaS company discovery, free
+- Apollo — most comprehensive paid option for US SMEs
+
+### Australia
+- ABR (Australian Business Register) — free, official business data
+- LinkedIn — good professional coverage
 
 ---
 
 ## Cross-References
 
 - Stage README: [README.md](README.md)
-- Previous stage: [04 Competitor Research](../04 Competitor Research/README.md)
-- Next stage: [06 Lead Extraction](../06 Lead Extraction/README.md)
+- Tools file: [tools.md](tools.md)
