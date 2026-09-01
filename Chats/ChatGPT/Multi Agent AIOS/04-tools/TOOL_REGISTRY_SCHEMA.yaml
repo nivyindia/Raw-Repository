@@ -1,0 +1,59 @@
+version: "1.0"
+status: baseline
+purpose: Schema and validation contract for AIOS tool registry entries.
+
+required_fields:
+  - tool_id
+  - name
+  - category
+  - permissions
+  - status
+  - owner
+
+field_rules:
+  tool_id:
+    type: string
+    pattern: "^TOOL-[A-Z0-9-]+$"
+    unique: true
+  name:
+    type: string
+    min_length: 1
+  category:
+    type: string
+  permissions:
+    type: array
+    allowed_values: [read, write, execute, export, admin]
+    min_items: 1
+  status:
+    type: string
+    allowed_values: [planned, active, deprecated, suspended]
+  owner:
+    type: string
+    min_length: 1
+  system_of_record:
+    type: boolean
+    default: false
+  version:
+    type: string
+    required_for_active: true
+  healthcheck:
+    type: object
+    required_for_active: true
+  notes:
+    type: string
+
+validation:
+  - reject_unknown_permission
+  - reject_duplicate_tool_id
+  - reject_active_tool_without_version
+  - reject_active_tool_without_healthcheck
+  - reject_write_or_admin_tool_without_audit_policy
+  - reject_system_of_record_tool_without_governance_owner
+  - reject_tool_without_owner
+
+activation_gate:
+  all_required_fields_valid: true
+  permission_policy_valid: true
+  healthcheck_passed: true
+  security_review_complete: true
+  governance_review_complete_when_required: true
