@@ -1,0 +1,15 @@
+event_type: payment.received
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Payment, id: string}
+  actor: {type: string, id: string}
+  payment_id: string
+  invoice_id: string
+  account_id: string
+  amount: number
+  currency: string
+  payment_date: date
+  reference: string
