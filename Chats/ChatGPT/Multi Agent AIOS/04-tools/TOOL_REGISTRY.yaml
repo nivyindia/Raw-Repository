@@ -1,0 +1,66 @@
+version: "1.0"
+status: baseline
+purpose: Canonical registry for tools exposed to AIOS agents.
+
+rules:
+  authorization_chain: "agent -> skill -> tool -> action"
+  default_access: deny
+  least_privilege: true
+  secrets_in_repository: false
+  every_tool_requires_owner: true
+  every_tool_requires_version: true
+  every_tool_requires_healthcheck: true
+  every_write_action_requires_audit: true
+
+permission_classes:
+  - read
+  - write
+  - execute
+  - export
+  - admin
+
+entries:
+  - tool_id: TOOL-ODOO-CRM
+    name: Odoo CRM
+    category: business_operations
+    system_of_record: true
+    permissions: [read, write]
+    status: planned
+    owner: platform_operations
+    notes: Canonical CRM interface for governed customer and opportunity operations.
+
+  - tool_id: TOOL-ODOO-SALES
+    name: Odoo Sales
+    category: business_operations
+    system_of_record: true
+    permissions: [read, write]
+    status: planned
+    owner: finance_operations
+    notes: Sales-order and commercial transaction operations subject to approval policy.
+
+  - tool_id: TOOL-ODOO-ACCOUNTING
+    name: Odoo Accounting
+    category: finance
+    system_of_record: true
+    permissions: [read, write]
+    status: planned
+    owner: finance_operations
+    notes: Financial records are authoritative in Odoo; material financial actions require policy-controlled approval.
+
+runtime_requirements:
+  - validate_tool_is_registered
+  - validate_agent_skill_mapping
+  - validate_permission
+  - validate_tenant_scope
+  - validate_input_schema
+  - enforce_approval_policy
+  - enforce_idempotency_for_writes
+  - emit_audit_record
+  - verify_postcondition
+  - record_execution_result
+
+change_control:
+  breaking_changes: require_version_bump_and_compatibility_review
+  permission_changes: require_security_review
+  system_of_record_changes: require_data_governance_review
+  production_activation: require_healthcheck_and_evaluation
