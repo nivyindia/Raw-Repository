@@ -1,0 +1,14 @@
+event_type: client.onboarded
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Client, id: string}
+  actor: {type: string, id: string}
+  client_id: string
+  account_id: string
+  primary_contact_id: string
+  onboarding_date: date
+  project_ids: [string]
+  onboarding_checklist_ref: string
