@@ -1,0 +1,103 @@
+# BILLION DREAMS UNITED OS — CANONICAL ENTITY LIST
+# Stage B.1 | Version 1.0 | 2026-09-01
+# Source: Master Implementation Plan v2; 30 entities already specified in the plan.
+
+version: "1.0"
+status: "canonical-list"
+entity_count: 30
+entities:
+  - id: lead
+    name: Lead
+    domain: sales
+  - id: account
+    name: Account
+    domain: sales
+  - id: opportunity
+    name: Opportunity
+    domain: sales
+  - id: contact
+    name: Contact
+    domain: sales
+  - id: project
+    name: Project
+    domain: delivery
+  - id: invoice
+    name: Invoice
+    domain: finance
+  - id: company
+    name: Company
+    domain: organization
+  - id: brand
+    name: Brand
+    domain: organization
+  - id: client
+    name: Client
+    domain: customer
+  - id: campaign
+    name: Campaign
+    domain: marketing
+  - id: meeting
+    name: Meeting
+    domain: sales
+  - id: proposal
+    name: Proposal
+    domain: sales
+  - id: contract
+    name: Contract
+    domain: legal
+  - id: payment
+    name: Payment
+    domain: finance
+  - id: task
+    name: Task
+    domain: operations
+  - id: ticket
+    name: Ticket
+    domain: support
+  - id: agent
+    name: Agent
+    domain: ai
+  - id: agent_run
+    name: AgentRun
+    domain: ai
+  - id: skill
+    name: Skill
+    domain: ai
+  - id: tool
+    name: Tool
+    domain: platform
+  - id: workflow
+    name: Workflow
+    domain: automation
+  - id: workflow_run
+    name: WorkflowRun
+    domain: automation
+  - id: event
+    name: Event
+    domain: platform
+  - id: evaluation
+    name: Evaluation
+    domain: governance
+  - id: approval
+    name: Approval
+    domain: governance
+  - id: incident
+    name: Incident
+    domain: governance
+  - id: department
+    name: Department
+    domain: organization
+  - id: user
+    name: User
+    domain: identity
+  - id: employee
+    name: Employee
+    domain: people
+  - id: partner
+    name: Partner
+    domain: ecosystem
+
+# Governance
+# - This file defines the canonical 30-entity scope for Stage B.
+# - Field-level schemas are intentionally deferred to B.2-B.5.
+# - Do not add/remove/rename entities without the repository change-management process.
