@@ -1,0 +1,96 @@
+# BILLION DREAMS UNITED OS — AGENT REGISTRY
+# Stage C.1 | Version 0.1 | 2026-09-01
+# Skeleton only: id + name + status, as required by the implementation plan.
+
+version: "0.1"
+status: "skeleton"
+source: "id-master-list.yaml"
+
+agents:
+  - {id: A001, name: "Market Research Agent", status: 0}
+  - {id: A002, name: "ICP Strategist", status: 0}
+  - {id: A003, name: "Buyer Persona Agent", status: 0}
+  - {id: A004, name: "Competitor Intelligence Agent", status: 0}
+  - {id: A005, name: "Channel Strategy Agent", status: 0}
+  - {id: A006, name: "Offer Strategy Agent", status: 0}
+  - {id: A007, name: "Brand Strategist", status: 0}
+  - {id: A008, name: "Messaging Agent", status: 0}
+  - {id: A009, name: "Content Strategist", status: 0}
+  - {id: A010, name: "Editorial Planner", status: 0}
+  - {id: A011, name: "SEO Keyword Agent", status: 0}
+  - {id: A012, name: "On-Page SEO Agent", status: 0}
+  - {id: A013, name: "Technical SEO Agent", status: 0}
+  - {id: A014, name: "Authority Building Agent", status: 0}
+  - {id: A015, name: "SEO Content Gap Agent", status: 0}
+  - {id: A016, name: "Long-Form Writer", status: 0}
+  - {id: A017, name: "Content Research Agent", status: 0}
+  - {id: A018, name: "Content Editor", status: 0}
+  - {id: A019, name: "Fact/Source Checker", status: 0}
+  - {id: A020, name: "Content Repurposing Agent", status: 0}
+  - {id: A021, name: "Video Script Agent", status: 0}
+  - {id: A022, name: "YouTube SEO Agent", status: 0}
+  - {id: A023, name: "Social Content Agent", status: 0}
+  - {id: A024, name: "Content Analytics Agent", status: 0}
+  - {id: A025, name: "Email Nurture Agent", status: 0}
+  - {id: A026, name: "Email Optimization Agent", status: 0}
+  - {id: A027, name: "Growth Experiment Agent", status: 0}
+  - {id: A028, name: "Community Growth Agent", status: 0}
+  - {id: A029, name: "Partner Discovery Agent", status: 0}
+  - {id: A030, name: "Partnership Agent", status: 0}
+  - {id: A031, name: "PR Research Agent", status: 0}
+  - {id: A032, name: "Marketing Analytics Agent", status: 0}
+  - {id: A033, name: "Attribution Agent", status: 0}
+  - {id: A034, name: "Lead Discovery Agent", status: 0}
+  - {id: A035, name: "Contact Discovery Agent", status: 0}
+  - {id: A036, name: "Lead Enrichment Agent", status: 0}
+  - {id: A037, name: "Data Quality Agent", status: 0}
+  - {id: A038, name: "Verification Agent", status: 0}
+  - {id: A039, name: "Lead Scoring Agent", status: 0}
+  - {id: A040, name: "Segmentation Agent", status: 0}
+  - {id: A041, name: "Account Research Agent", status: 0}
+  - {id: A042, name: "Signal Detection Agent", status: 0}
+  - {id: A043, name: "Outreach Strategy Agent", status: 0}
+  - {id: A044, name: "Email Outreach Agent", status: 0}
+  - {id: A045, name: "LinkedIn Outreach Assistant", status: 0}
+  - {id: A046, name: "Call Prep Agent", status: 0}
+  - {id: A047, name: "WhatsApp Outreach Agent", status: 0}
+  - {id: A048, name: "SMS Outreach Agent", status: 0}
+  - {id: A049, name: "Personalization Agent", status: 0}
+  - {id: A050, name: "Follow-Up Agent", status: 0}
+  - {id: A051, name: "Deliverability Agent", status: 0}
+  - {id: A052, name: "Reply Triage Agent", status: 0}
+  - {id: A053, name: "Objection Handling Agent", status: 0}
+  - {id: A054, name: "Qualification Agent", status: 0}
+  - {id: A055, name: "Meeting Prep Agent", status: 0}
+  - {id: A056, name: "Sales Copilot", status: 0}
+  - {id: A057, name: "Needs Analysis Agent", status: 0}
+  - {id: A058, name: "Solution Mapping Agent", status: 0}
+  - {id: A059, name: "Demo Preparation Agent", status: 0}
+  - {id: A060, name: "Proposal Agent", status: 0}
+  - {id: A061, name: "Pricing Agent", status: 0}
+  - {id: A062, name: "Negotiation Copilot", status: 0}
+  - {id: A063, name: "Contract Agent", status: 0}
+  - {id: A064, name: "Deal Desk Agent", status: 0}
+  - {id: A065, name: "Onboarding Agent", status: 0}
+  - {id: A066, name: "Requirement Agent", status: 0}
+  - {id: A067, name: "Customer Success Agent", status: 0}
+  - {id: A068, name: "Account Intelligence Agent", status: 0}
+  - {id: A069, name: "Support Triage Agent", status: 0}
+  - {id: A070, name: "Customer Health Agent", status: 0}
+  - {id: A071, name: "Adoption Agent", status: 0}
+  - {id: A072, name: "Upsell Agent", status: 0}
+  - {id: A073, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A074, name: "Renewal Agent", status: 0}
+  - {id: A075, name: "Churn Prevention Agent", status: 0}
+  - {id: A076, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A077, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A078, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A079, name: "Advocacy Agent", status: 0}
+  - {id: A080, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A081, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A082, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A083, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A084, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A085, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A086, name: "NAME_NOT_VERIFIED", status: 0}
+  - {id: A087, name: "NAME_NOT_VERIFIED", status: 0}
