@@ -1,0 +1,87 @@
+# BILLION DREAMS UNITED OS — EVENT REGISTRATION
+# Stage B.14 | Version 1.0 | 2026-09-01
+
+version: "1.0"
+status: "canonical-registration"
+
+required_metadata:
+  - event_type
+  - event_version
+  - producer
+  - owning_domain
+  - entity_type
+  - payload_schema
+  - consumers
+  - compatibility_policy
+  - test_evidence
+
+registered_events:
+  lead.created:
+    version: "1.0"
+    producer: lead_intake
+    owning_domain: sales
+    entity_type: Lead
+    consumers: [lead_enrichment, lead_scoring, sales_pipeline]
+  lead.enriched:
+    version: "1.0"
+    producer: lead_enrichment
+    owning_domain: sales
+    entity_type: Lead
+    consumers: [lead_scoring, qualification]
+  lead.qualified:
+    version: "1.0"
+    producer: qualification
+    owning_domain: sales
+    entity_type: Lead
+    consumers: [outreach, opportunity_creation]
+  outreach.sent:
+    version: "1.0"
+    producer: outreach
+    owning_domain: sales
+    entity_type: Lead
+    consumers: [engagement_tracking, follow_up]
+  reply.received:
+    version: "1.0"
+    producer: inbound_channel
+    owning_domain: sales
+    entity_type: Contact
+    consumers: [reply_classification, sales_follow_up]
+  meeting.booked:
+    version: "1.0"
+    producer: calendar_or_scheduler
+    owning_domain: sales
+    entity_type: Meeting
+    consumers: [meeting_preparation, opportunity_pipeline]
+  proposal.sent:
+    version: "1.0"
+    producer: proposal_workflow
+    owning_domain: sales
+    entity_type: Proposal
+    consumers: [proposal_tracking, follow_up]
+  contract.signed:
+    version: "1.0"
+    producer: contract_workflow
+    owning_domain: legal
+    entity_type: Contract
+    consumers: [project_onboarding, invoicing]
+  payment.received:
+    version: "1.0"
+    producer: finance_system
+    owning_domain: finance
+    entity_type: Payment
+    consumers: [invoice_reconciliation, client_status]
+  client.onboarded:
+    version: "1.0"
+    producer: onboarding_workflow
+    owning_domain: customer_success
+    entity_type: Client
+    consumers: [project_start, client_success]
+
+rules:
+  unique_event_types: true
+  immutable_published_events: true
+  idempotent_consumers_required: true
+  schema_validation_required: true
+  breaking_changes_require_major_version: true
+  secrets_prohibited_in_payloads: true
+  test_evidence_required_before_production: true
