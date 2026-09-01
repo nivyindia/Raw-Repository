@@ -1,0 +1,63 @@
+# BILLION DREAMS UNITED OS — SKILL REGISTRY
+# Stage C.2 | Version 1.0 | 2026-09-01
+# Registry skeleton: canonical skill IDs/names are expanded from the available AIOS plan/catalog.
+
+version: "1.0"
+status: "registry-skeleton"
+
+skills:
+  - {id: SK001, name: "Market Research", status: planned}
+  - {id: SK002, name: "ICP Definition", status: planned}
+  - {id: SK003, name: "Buyer Persona Development", status: planned}
+  - {id: SK004, name: "Competitor Intelligence", status: planned}
+  - {id: SK005, name: "Channel Strategy", status: planned}
+  - {id: SK006, name: "Offer Design", status: planned}
+  - {id: SK007, name: "Brand Strategy", status: planned}
+  - {id: SK008, name: "Messaging", status: planned}
+  - {id: SK009, name: "Content Strategy", status: planned}
+  - {id: SK010, name: "Editorial Planning", status: planned}
+  - {id: SK011, name: "Keyword Research", status: planned}
+  - {id: SK012, name: "On-Page SEO", status: planned}
+  - {id: SK013, name: "Technical SEO", status: planned}
+  - {id: SK014, name: "Authority Building", status: planned}
+  - {id: SK015, name: "Content Gap Analysis", status: planned}
+  - {id: SK016, name: "Long-Form Writing", status: planned}
+  - {id: SK017, name: "Content Research", status: planned}
+  - {id: SK018, name: "Content Editing", status: planned}
+  - {id: SK019, name: "Fact Checking", status: planned}
+  - {id: SK020, name: "Content Repurposing", status: planned}
+  - {id: SK021, name: "Video Scriptwriting", status: planned}
+  - {id: SK022, name: "YouTube SEO", status: planned}
+  - {id: SK023, name: "Social Content Creation", status: planned}
+  - {id: SK024, name: "Content Analytics", status: planned}
+  - {id: SK025, name: "Email Nurturing", status: planned}
+  - {id: SK026, name: "Email Optimization", status: planned}
+  - {id: SK027, name: "Growth Experimentation", status: planned}
+  - {id: SK028, name: "Community Growth", status: planned}
+  - {id: SK029, name: "Partner Discovery", status: planned}
+  - {id: SK030, name: "Partnership Management", status: planned}
+  - {id: SK031, name: "PR Research", status: planned}
+  - {id: SK032, name: "Marketing Analytics", status: planned}
+  - {id: SK033, name: "Attribution Analysis", status: planned}
+  - {id: SK034, name: "Lead Discovery", status: planned}
+  - {id: SK035, name: "Contact Discovery", status: planned}
+  - {id: SK036, name: "Lead Enrichment", status: planned}
+  - {id: SK037, name: "Data Quality", status: planned}
+  - {id: SK038, name: "Data Verification", status: planned}
+  - {id: SK039, name: "Lead Scoring", status: planned}
+  - {id: SK040, name: "Lead Segmentation", status: planned}
+  - {id: SK041, name: "Account Research", status: planned}
+  - {id: SK042, name: "Signal Detection", status: planned}
+  - {id: SK043, name: "Outreach Strategy", status: planned}
+  - {id: SK044, name: "Email Outreach", status: planned}
+  - {id: SK045, name: "LinkedIn Outreach", status: planned}
+  - {id: SK046, name: "Call Preparation", status: planned}
+  - {id: SK047, name: "WhatsApp Outreach", status: planned}
+  - {id: SK048, name: "SMS Outreach", status: planned}
+  - {id: SK049, name: "Personalization", status: planned}
+  - {id: SK050, name: "Follow-Up", status: planned}
+
+notes:
+  - "This is the C.2 registry skeleton; implementation-specific skill definitions belong in subsequent stages."
+  - "IDs are stable canonical references and must not be silently reused."
+  - "Additional skills identified by the implementation plan should be appended only after source verification."
