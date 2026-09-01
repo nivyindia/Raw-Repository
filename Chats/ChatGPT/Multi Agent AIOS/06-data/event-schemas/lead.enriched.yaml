@@ -1,0 +1,12 @@
+event_type: lead.enriched
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Lead, id: string}
+  actor: {type: string, id: string}
+  lead_id: string
+  enrichment_version: string
+  fields_enriched: [string]
+  enrichment_source_refs: [string]
