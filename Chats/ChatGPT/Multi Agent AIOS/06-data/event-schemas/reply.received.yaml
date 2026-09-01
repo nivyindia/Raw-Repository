@@ -1,0 +1,14 @@
+event_type: reply.received
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Lead, id: string}
+  actor: {type: string, id: string}
+  lead_id: string
+  channel: string
+  message_ref: string
+  thread_ref: string
+  reply_text_ref: string
+  sentiment: string
