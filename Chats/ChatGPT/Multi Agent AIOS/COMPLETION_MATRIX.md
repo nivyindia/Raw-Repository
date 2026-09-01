@@ -1,15 +1,13 @@
 # BILLION DREAMS UNITED OS — COMPLETION MATRIX
 
-**Stage:** A.9 — Governance Foundation  
-**Version:** 0.3  
+**Stage:** A.11 — Governance Foundation  
+**Version:** 0.4  
 **Updated:** 2026-09-01  
 **Source:** `id-master-list.yaml` (Stage A.2)
 
 ## Purpose
 
 Canonical completion-tracking matrix for the 176 registered AIOS components.
-
-**A.9 rule:** The Owner field must remain `unassigned` unless an owner has been explicitly assigned. No owner is inferred from role, authorship, repository access, or context.
 
 ## Status scale
 
@@ -24,40 +22,49 @@ Canonical completion-tracking matrix for the 176 registered AIOS components.
 | 95 | Production with human review |
 | 100 | Production/autonomous operation within policy + monitoring; for A.8, reserved only for explicitly locked items |
 
-## Current real completion
+## A.11 — Real completion snapshot
 
-**Completed items:** 0 / 176  
-**Real completion:** `SUM(status) / (176 × 100) = 0.00%`
+The canonical registry contains **176 registered component IDs**. Repository evidence reviewed through A.10 does not establish any registered component as fully implemented and production-ready at status 100.
 
-## Owner assignment policy
+**Completed items:** `0 / 176`  
+**Completion score:** `0.00%`
 
-| Field | Current rule |
+### Calculation
+
+`SUM(all 176 component statuses) / (176 × 100) × 100 = 0.00%`
+
+Because the current verified baseline has all component statuses at `0`, the result is exactly **0.00%**.
+
+## Integrity constraints
+
+- Do not increase completion because a file, blueprint, prompt, or placeholder exists.
+- Do not convert category-level architecture decisions into component completion without an unambiguous registry mapping.
+- Do not invent missing IDs, names, owners, tests, or evidence.
+- Recalculate the percentage whenever a component status changes.
+- The completion percentage is a measurement of verified implementation, not planning/documentation volume.
+
+## Historical A-stage results
+
+| Stage | Result |
 |---|---|
-| Owner | `unassigned` until explicitly assigned |
-| Assignment source | Explicit owner assignment only |
-| Inference | Prohibited |
-| Change control | Owner changes follow `CHANGE_MANAGEMENT.md` |
+| A.7 | Change-management rule created |
+| A.8 | 0 IDs marked 100 under evidence-first review |
+| A.9 | Owner assignment preserved as `unassigned` |
+| A.10 | Weekly governance review cadence added to `BUILD_RULES.md` |
+| **A.11** | **Real completion recalculated: 0.00%** |
 
-The canonical 176-ID registry remains governed by `id-master-list.yaml`. All 176 entries retain their existing owner value of `unassigned`; no ownership has been fabricated or implicitly assigned during A.9.
+## Current baseline
 
-## A.8 locked-item review retained
+**Verified implementation:** 0 / 176 components  
+**Verified completion:** **0.00%**  
+**Owner assignment:** `unassigned` unless explicitly assigned  
+**Evidence requirement:** mandatory  
+**Next governance stage:** A.12
 
-The implementation plan's A.8 review identified company structure, technology stack, revenue/sales funnel, and department template as categories requiring evidence-based locked status. No registry IDs were marked 100 because the repository did not provide an unambiguous ID-to-category mapping.
+## Related Artifacts
 
-## Governance rules
-
-1. **No invented components:** `NAME_NOT_VERIFIED` is never treated as a real component name.
-2. **Evidence-first:** status may increase only when the corresponding artifact or test evidence exists.
-3. **A.8 locked-item rule:** never mark an ID `100` merely because a related business decision exists; the decision must map unambiguously to that registered ID.
-4. **Owner:** all entries remain `unassigned` until explicitly assigned.
-5. **Canonical IDs:** IDs must not be silently renumbered or reused.
-6. **Change control:** registry changes follow `CHANGE_MANAGEMENT.md` — PR + owner sign-off + version bump.
-
-## A.9 completion
-
-**A.9 result:** Owner column reviewed and preserved as `unassigned` for all 176 IDs. No owner was inferred or fabricated.
-
-## Next Stage A actions
-
-- **A.10:** Add weekly review cadence to `BUILD_RULES.md`.
-- **A.11:** Recompute and save the real completion percentage.
+- `id-master-list.yaml`
+- `BUILD_RULES.md`
+- `SYSTEM_MASTER_INDEX.md`
+- `ARCHITECTURE_DECISIONS.md`
+- `CHANGE_MANAGEMENT.md`
