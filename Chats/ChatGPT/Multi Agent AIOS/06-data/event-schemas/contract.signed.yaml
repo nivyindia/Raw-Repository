@@ -1,0 +1,15 @@
+event_type: contract.signed
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Contract, id: string}
+  actor: {type: string, id: string}
+  contract_id: string
+  contract_number: string
+  account_id: string
+  opportunity_id: string
+  signed_at: datetime
+  effective_date: date
+  signature_ref: string
