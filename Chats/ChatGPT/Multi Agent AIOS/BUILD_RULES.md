@@ -1,8 +1,8 @@
 # BILLION DREAMS UNITED OS — BUILD RULES
 
-**Version:** 1.0  
-**Stage:** A.6  
-**Status:** Baseline implementation rules
+**Version:** 1.1  
+**Stage:** A.10  
+**Status:** Baseline implementation rules + weekly governance cadence
 
 ## 1. Source of Truth
 
@@ -160,6 +160,43 @@ When requirements conflict, use this order unless a higher-level ADR overrides i
 4. Reliability/observability.
 5. Operational efficiency.
 6. Convenience/optimization.
+
+## 16. Weekly Governance Review — A.10
+
+A weekly AIOS review is mandatory for implementation governance.
+
+### Review cadence
+
+- **Frequency:** Weekly.
+- **Review artifact:** `COMPLETION_MATRIX.md`.
+- **Scope:** Status, owners, evidence, blockers, changes, incidents, and next-stage readiness.
+- **Rule:** No completion status is increased without corresponding evidence.
+
+### Weekly review checklist
+
+1. Review every changed/in-progress component.
+2. Verify implementation evidence against its status.
+3. Identify blocked, stale, failed, or ownerless items.
+4. Review registry/architecture changes against change-management rules.
+5. Review revenue-critical work before convenience work.
+6. Record material decisions as ADR/change records.
+7. Update the completion matrix only after evidence review.
+8. Define the next week's highest-priority actions.
+
+### Review outputs
+
+Each weekly review must produce:
+
+- Completion percentage snapshot.
+- Status changes with evidence.
+- Owner/blocker list.
+- Material decisions and changes.
+- Risks/incidents requiring escalation.
+- Next-week priority list.
+
+### Anti-gaming rule
+
+The weekly review exists to measure **real implementation progress**, not documentation volume. Creating files, placeholders, or speculative mappings does not increase completion.
 
 ## Related Artifacts
 
