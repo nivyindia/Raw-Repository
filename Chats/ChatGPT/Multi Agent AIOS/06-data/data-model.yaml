@@ -1,0 +1,127 @@
+# BILLION DREAMS UNITED OS — CANONICAL DATA MODEL
+# Stage B.2 | Version 0.1 | 2026-09-01
+# Six critical entities: Lead, Account, Opportunity, Contact, Project, Invoice.
+# Common fields are standardized in B.5; fields below are the B.2 entity-specific baseline.
+
+version: "0.1"
+status: "baseline-field-schema"
+entities:
+  Lead:
+    description: "Prospective customer or business contact entering the sales funnel."
+    fields:
+      id: {type: string, required: true, description: "Stable unique identifier"}
+      company_id: {type: string, required: true, description: "Owning company identifier"}
+      brand_id: {type: string, required: true, description: "Owning brand identifier"}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      source: {type: string, required: true}
+      source_url: {type: string, required: false}
+      first_name: {type: string, required: false}
+      last_name: {type: string, required: false}
+      email: {type: string, required: false}
+      phone: {type: string, required: false}
+      company_name: {type: string, required: false}
+      job_title: {type: string, required: false}
+      country: {type: string, required: false}
+      status: {type: string, required: true}
+      score: {type: number, required: false}
+      assigned_to: {type: string, required: false}
+
+  Account:
+    description: "Business/customer organization associated with contacts and commercial activity."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      name: {type: string, required: true}
+      legal_name: {type: string, required: false}
+      website: {type: string, required: false}
+      industry: {type: string, required: false}
+      country: {type: string, required: false}
+      status: {type: string, required: true}
+      owner_id: {type: string, required: false}
+
+  Opportunity:
+    description: "Qualified commercial opportunity being progressed toward revenue."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: true}
+      contact_id: {type: string, required: false}
+      name: {type: string, required: true}
+      stage: {type: string, required: true}
+      amount: {type: number, required: false}
+      currency: {type: string, required: false}
+      probability: {type: number, required: false}
+      expected_close_date: {type: date, required: false}
+      owner_id: {type: string, required: false}
+      source: {type: string, required: false}
+
+  Contact:
+    description: "Individual person associated with an account or lead."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: false}
+      first_name: {type: string, required: true}
+      last_name: {type: string, required: false}
+      email: {type: string, required: false}
+      phone: {type: string, required: false}
+      job_title: {type: string, required: false}
+      country: {type: string, required: false}
+      status: {type: string, required: true}
+
+  Project:
+    description: "Client delivery engagement managed after commercial handoff."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: true}
+      opportunity_id: {type: string, required: false}
+      name: {type: string, required: true}
+      status: {type: string, required: true}
+      start_date: {type: date, required: false}
+      target_end_date: {type: date, required: false}
+      project_manager_id: {type: string, required: false}
+      budget: {type: number, required: false}
+      currency: {type: string, required: false}
+
+  Invoice:
+    description: "Commercial invoice issued for products or services."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: true}
+      project_id: {type: string, required: false}
+      invoice_number: {type: string, required: true}
+      issue_date: {type: date, required: true}
+      due_date: {type: date, required: true}
+      status: {type: string, required: true}
+      subtotal: {type: number, required: true}
+      tax_amount: {type: number, required: false}
+      total_amount: {type: number, required: true}
+      currency: {type: string, required: true}
+      paid_at: {type: datetime, required: false}
+
+relationships:
+  - {from: Lead, to: Account, type: "may_convert_to"}
+  - {from: Account, to: Contact, type: "has_many"}
+  - {from: Account, to: Opportunity, type: "has_many"}
+  - {from: Opportunity, to: Project, type: "may_create"}
+  - {from: Account, to: Project, type: "has_many"}
+  - {from: Project, to: Invoice, type: "may_generate"}
+  - {from: Account, to: Invoice, type: "has_many"}
