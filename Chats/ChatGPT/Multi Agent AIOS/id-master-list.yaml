@@ -1,0 +1,209 @@
+# BILLION DREAMS UNITED OS — ID MASTER LIST
+# Stage A.2 deliverable
+# Generated: 2026-09-01
+# Scope: 87 Agents + 48 Workflows + 26 Marketing Workflows + 15 Cross-functional Workflows = 176 IDs
+# Rule: Only names directly recoverable from the current canonical download directory / agent list are populated.
+# Unresolved names are explicitly marked rather than invented.
+
+version: "0.1"
+source_documents:
+  - "Billion-Dreams-United-AI-Agent-Workflow-Download-Directory-v1.md"
+  - "Agent List.txt"
+  - "Billion-Dreams-United-Implementation-Plan-v2-Granular-Steps.md"
+
+agents:
+  - {id: A001, name: "Market Research Agent"}
+  - {id: A002, name: "ICP Strategist"}
+  - {id: A003, name: "Buyer Persona Agent"}
+  - {id: A004, name: "Competitor Intelligence Agent"}
+  - {id: A005, name: "Channel Strategy Agent"}
+  - {id: A006, name: "Offer Strategy Agent"}
+  - {id: A007, name: "Brand Strategist"}
+  - {id: A008, name: "Messaging Agent"}
+  - {id: A009, name: "Content Strategist"}
+  - {id: A010, name: "Editorial Planner"}
+  - {id: A011, name: "SEO Keyword Agent"}
+  - {id: A012, name: "On-Page SEO Agent"}
+  - {id: A013, name: "Technical SEO Agent"}
+  - {id: A014, name: "Authority Building Agent"}
+  - {id: A015, name: "SEO Content Gap Agent"}
+  - {id: A016, name: "Long-Form Writer"}
+  - {id: A017, name: "Content Research Agent"}
+  - {id: A018, name: "Content Editor"}
+  - {id: A019, name: "Fact/Source Checker"}
+  - {id: A020, name: "Content Repurposing Agent"}
+  - {id: A021, name: "Video Script Agent"}
+  - {id: A022, name: "YouTube SEO Agent"}
+  - {id: A023, name: "Social Content Agent"}
+  - {id: A024, name: "Content Analytics Agent"}
+  - {id: A025, name: "Email Nurture Agent"}
+  - {id: A026, name: "Email Optimization Agent"}
+  - {id: A027, name: "Growth Experiment Agent"}
+  - {id: A028, name: "Community Growth Agent"}
+  - {id: A029, name: "Partner Discovery Agent"}
+  - {id: A030, name: "Partnership Agent"}
+  - {id: A031, name: "PR Research Agent"}
+  - {id: A032, name: "Marketing Analytics Agent"}
+  - {id: A033, name: "Attribution Agent"}
+  - {id: A034, name: "Lead Discovery Agent"}
+  - {id: A035, name: "Contact Discovery Agent"}
+  - {id: A036, name: "Lead Enrichment Agent"}
+  - {id: A037, name: "Data Quality Agent"}
+  - {id: A038, name: "Verification Agent"}
+  - {id: A039, name: "Lead Scoring Agent"}
+  - {id: A040, name: "Segmentation Agent"}
+  - {id: A041, name: "Account Research Agent"}
+  - {id: A042, name: "Signal Detection Agent"}
+  - {id: A043, name: "Outreach Strategy Agent"}
+  - {id: A044, name: "Email Outreach Agent"}
+  - {id: A045, name: "LinkedIn Outreach Assistant"}
+  - {id: A046, name: "Call Prep Agent"}
+  - {id: A047, name: "WhatsApp Outreach Agent"}
+  - {id: A048, name: "SMS Outreach Agent"}
+  - {id: A049, name: "Personalization Agent"}
+  - {id: A050, name: "Follow-Up Agent"}
+  - {id: A051, name: "Deliverability Agent"}
+  - {id: A052, name: "Reply Triage Agent"}
+  - {id: A053, name: "Objection Handling Agent"}
+  - {id: A054, name: "Qualification Agent"}
+  - {id: A055, name: "Meeting Prep Agent"}
+  - {id: A056, name: "Sales Copilot"}
+  - {id: A057, name: "Needs Analysis Agent"}
+  - {id: A058, name: "Solution Mapping Agent"}
+  - {id: A059, name: "Demo Preparation Agent"}
+  - {id: A060, name: "Proposal Agent"}
+  - {id: A061, name: "Pricing Agent"}
+  - {id: A062, name: "Negotiation Copilot"}
+  - {id: A063, name: "Contract Agent"}
+  - {id: A064, name: "Deal Desk Agent"}
+  - {id: A065, name: "Onboarding Agent"}
+  - {id: A066, name: "Requirement Agent"}
+  - {id: A067, name: "Customer Success Agent"}
+  - {id: A068, name: "Account Intelligence Agent"}
+  - {id: A069, name: "Support Triage Agent"}
+  - {id: A070, name: "Customer Health Agent"}
+  - {id: A071, name: "Adoption Agent"}
+  - {id: A072, name: "Upsell Agent"}
+  - {id: A073, name: "NAME_NOT_VERIFIED"}
+  - {id: A074, name: "Renewal Agent"}
+  - {id: A075, name: "Churn Prevention Agent"}
+  - {id: A076, name: "NAME_NOT_VERIFIED"}
+  - {id: A077, name: "NAME_NOT_VERIFIED"}
+  - {id: A078, name: "NAME_NOT_VERIFIED"}
+  - {id: A079, name: "Advocacy Agent"}
+  - {id: A080, name: "NAME_NOT_VERIFIED"}
+  - {id: A081, name: "NAME_NOT_VERIFIED"}
+  - {id: A082, name: "NAME_NOT_VERIFIED"}
+  - {id: A083, name: "NAME_NOT_VERIFIED"}
+  - {id: A084, name: "NAME_NOT_VERIFIED"}
+  - {id: A085, name: "NAME_NOT_VERIFIED"}
+  - {id: A086, name: "NAME_NOT_VERIFIED"}
+  - {id: A087, name: "NAME_NOT_VERIFIED"}
+
+workflows:
+  - {id: WF001, name: "NAME_NOT_VERIFIED"}
+  - {id: WF002, name: "NAME_NOT_VERIFIED"}
+  - {id: WF003, name: "NAME_NOT_VERIFIED"}
+  - {id: WF004, name: "NAME_NOT_VERIFIED"}
+  - {id: WF005, name: "NAME_NOT_VERIFIED"}
+  - {id: WF006, name: "NAME_NOT_VERIFIED"}
+  - {id: WF007, name: "NAME_NOT_VERIFIED"}
+  - {id: WF008, name: "NAME_NOT_VERIFIED"}
+  - {id: WF009, name: "NAME_NOT_VERIFIED"}
+  - {id: WF010, name: "NAME_NOT_VERIFIED"}
+  - {id: WF011, name: "NAME_NOT_VERIFIED"}
+  - {id: WF012, name: "NAME_NOT_VERIFIED"}
+  - {id: WF013, name: "NAME_NOT_VERIFIED"}
+  - {id: WF014, name: "NAME_NOT_VERIFIED"}
+  - {id: WF015, name: "NAME_NOT_VERIFIED"}
+  - {id: WF016, name: "NAME_NOT_VERIFIED"}
+  - {id: WF017, name: "NAME_NOT_VERIFIED"}
+  - {id: WF018, name: "NAME_NOT_VERIFIED"}
+  - {id: WF019, name: "NAME_NOT_VERIFIED"}
+  - {id: WF020, name: "NAME_NOT_VERIFIED"}
+  - {id: WF021, name: "NAME_NOT_VERIFIED"}
+  - {id: WF022, name: "NAME_NOT_VERIFIED"}
+  - {id: WF023, name: "NAME_NOT_VERIFIED"}
+  - {id: WF024, name: "NAME_NOT_VERIFIED"}
+  - {id: WF025, name: "NAME_NOT_VERIFIED"}
+  - {id: WF026, name: "NAME_NOT_VERIFIED"}
+  - {id: WF027, name: "NAME_NOT_VERIFIED"}
+  - {id: WF028, name: "NAME_NOT_VERIFIED"}
+  - {id: WF029, name: "NAME_NOT_VERIFIED"}
+  - {id: WF030, name: "NAME_NOT_VERIFIED"}
+  - {id: WF031, name: "NAME_NOT_VERIFIED"}
+  - {id: WF032, name: "NAME_NOT_VERIFIED"}
+  - {id: WF033, name: "NAME_NOT_VERIFIED"}
+  - {id: WF034, name: "NAME_NOT_VERIFIED"}
+  - {id: WF035, name: "NAME_NOT_VERIFIED"}
+  - {id: WF036, name: "NAME_NOT_VERIFIED"}
+  - {id: WF037, name: "NAME_NOT_VERIFIED"}
+  - {id: WF038, name: "NAME_NOT_VERIFIED"}
+  - {id: WF039, name: "NAME_NOT_VERIFIED"}
+  - {id: WF040, name: "NAME_NOT_VERIFIED"}
+  - {id: WF041, name: "NAME_NOT_VERIFIED"}
+  - {id: WF042, name: "NAME_NOT_VERIFIED"}
+  - {id: WF043, name: "NAME_NOT_VERIFIED"}
+  - {id: WF044, name: "NAME_NOT_VERIFIED"}
+  - {id: WF045, name: "NAME_NOT_VERIFIED"}
+  - {id: WF046, name: "NAME_NOT_VERIFIED"}
+  - {id: WF047, name: "NAME_NOT_VERIFIED"}
+  - {id: WF048, name: "NAME_NOT_VERIFIED"}
+
+marketing_workflows:
+  - {id: MW001, name: "NAME_NOT_VERIFIED"}
+  - {id: MW002, name: "NAME_NOT_VERIFIED"}
+  - {id: MW003, name: "NAME_NOT_VERIFIED"}
+  - {id: MW004, name: "NAME_NOT_VERIFIED"}
+  - {id: MW005, name: "NAME_NOT_VERIFIED"}
+  - {id: MW006, name: "NAME_NOT_VERIFIED"}
+  - {id: MW007, name: "NAME_NOT_VERIFIED"}
+  - {id: MW008, name: "NAME_NOT_VERIFIED"}
+  - {id: MW009, name: "NAME_NOT_VERIFIED"}
+  - {id: MW010, name: "NAME_NOT_VERIFIED"}
+  - {id: MW011, name: "NAME_NOT_VERIFIED"}
+  - {id: MW012, name: "NAME_NOT_VERIFIED"}
+  - {id: MW013, name: "NAME_NOT_VERIFIED"}
+  - {id: MW014, name: "NAME_NOT_VERIFIED"}
+  - {id: MW015, name: "NAME_NOT_VERIFIED"}
+  - {id: MW016, name: "NAME_NOT_VERIFIED"}
+  - {id: MW017, name: "NAME_NOT_VERIFIED"}
+  - {id: MW018, name: "NAME_NOT_VERIFIED"}
+  - {id: MW019, name: "NAME_NOT_VERIFIED"}
+  - {id: MW020, name: "NAME_NOT_VERIFIED"}
+  - {id: MW021, name: "NAME_NOT_VERIFIED"}
+  - {id: MW022, name: "NAME_NOT_VERIFIED"}
+  - {id: MW023, name: "NAME_NOT_VERIFIED"}
+  - {id: MW024, name: "NAME_NOT_VERIFIED"}
+  - {id: MW025, name: "NAME_NOT_VERIFIED"}
+  - {id: MW026, name: "NAME_NOT_VERIFIED"}
+
+cross_functional_workflows:
+  - {id: XW001, name: "NAME_NOT_VERIFIED"}
+  - {id: XW002, name: "NAME_NOT_VERIFIED"}
+  - {id: XW003, name: "NAME_NOT_VERIFIED"}
+  - {id: XW004, name: "NAME_NOT_VERIFIED"}
+  - {id: XW005, name: "NAME_NOT_VERIFIED"}
+  - {id: XW006, name: "NAME_NOT_VERIFIED"}
+  - {id: XW007, name: "NAME_NOT_VERIFIED"}
+  - {id: XW008, name: "NAME_NOT_VERIFIED"}
+  - {id: XW009, name: "NAME_NOT_VERIFIED"}
+  - {id: XW010, name: "NAME_NOT_VERIFIED"}
+  - {id: XW011, name: "NAME_NOT_VERIFIED"}
+  - {id: XW012, name: "NAME_NOT_VERIFIED"}
+  - {id: XW013, name: "NAME_NOT_VERIFIED"}
+  - {id: XW014, name: "NAME_NOT_VERIFIED"}
+  - {id: XW015, name: "NAME_NOT_VERIFIED"}
+
+summary:
+  agents: 87
+  workflows: 48
+  marketing_workflows: 26
+  cross_functional_workflows: 15
+  total: 176
+  verified_names: 75
+  unresolved_names: 101
+
+next_action:
+  - "Use the canonical Download Directory to recover the remaining workflow names and A073-A087 names before A.3."
+  - "Do not treat NAME_NOT_VERIFIED as a real component name."
