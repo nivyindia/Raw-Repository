@@ -1,40 +1,57 @@
 # BILLION DREAMS UNITED OS — CANONICAL DATA MODEL
-# Stage B.4 | Version 1.0 | 2026-09-01
-# All 30 canonical entities. B.5 will standardize common fields explicitly.
+# Stage B.5 | Version 1.1 | 2026-09-01
+# Common identity/audit fields standardized across all 30 entities.
 
-version: "1.0"
-status: "complete-entity-schema"
-entities:
-  Lead: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, source, source_url, first_name, last_name, email, phone, company_name, job_title, country, status, score, assigned_to]}
-  Account: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, name, legal_name, website, industry, country, status, owner_id]}
-  Opportunity: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, account_id, contact_id, name, stage, amount, currency, probability, expected_close_date, owner_id, source]}
-  Contact: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, account_id, first_name, last_name, email, phone, job_title, country, status]}
-  Project: {domain: delivery, fields: [id, company_id, brand_id, created_at, updated_at, account_id, opportunity_id, name, status, start_date, target_end_date, project_manager_id, budget, currency]}
-  Invoice: {domain: finance, fields: [id, company_id, brand_id, created_at, updated_at, account_id, project_id, invoice_number, issue_date, due_date, status, subtotal, tax_amount, total_amount, currency, paid_at]}
-  Company: {domain: organization, fields: [id, company_id, brand_id, created_at, updated_at, name, legal_name, registration_number, country, status]}
-  Brand: {domain: organization, fields: [id, company_id, brand_id, created_at, updated_at, name, website, market, status]}
-  Client: {domain: customer, fields: [id, company_id, brand_id, created_at, updated_at, account_id, primary_contact_id, onboarding_date, status, success_owner_id]}
-  Campaign: {domain: marketing, fields: [id, company_id, brand_id, created_at, updated_at, name, channel, objective, status, start_date, end_date, budget]}
-  Meeting: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, account_id, opportunity_id, contact_id, scheduled_at, duration_minutes, meeting_type, status, owner_id]}
-  Proposal: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, opportunity_id, version, title, amount, currency, status, sent_at, expires_at]}
-  Contract: {domain: legal, fields: [id, company_id, brand_id, created_at, updated_at, account_id, opportunity_id, contract_number, status, effective_date, expiry_date, value, currency]}
-  Payment: {domain: finance, fields: [id, company_id, brand_id, created_at, updated_at, account_id, invoice_id, amount, currency, payment_date, method, status, reference]}
-  Task: {domain: operations, fields: [id, company_id, brand_id, created_at, updated_at, title, description, status, priority, assignee_id, due_date, related_entity_type, related_entity_id]}
-  Ticket: {domain: support, fields: [id, company_id, brand_id, created_at, updated_at, account_id, client_id, subject, description, priority, status, assignee_id, resolved_at]}
-  Agent: {domain: ai, fields: [id, company_id, brand_id, created_at, updated_at, name, purpose, status, version, owner_id, policy_id]}
-  AgentRun: {domain: ai, fields: [id, company_id, brand_id, created_at, updated_at, agent_id, workflow_run_id, input_ref, output_ref, status, started_at, completed_at, error_code]}
-  Skill: {domain: ai, fields: [id, company_id, brand_id, created_at, updated_at, name, description, version, status, agent_id]}
-  Tool: {domain: platform, fields: [id, company_id, brand_id, created_at, updated_at, name, provider, endpoint, auth_type, status, permission_scope]}
-  Workflow: {domain: automation, fields: [id, company_id, brand_id, created_at, updated_at, name, trigger_type, status, version, owner_id, definition_ref]}
-  WorkflowRun: {domain: automation, fields: [id, company_id, brand_id, created_at, updated_at, workflow_id, status, started_at, completed_at, error_code, execution_ref]}
-  Event: {domain: platform, fields: [id, company_id, brand_id, created_at, updated_at, event_type, source, entity_type, entity_id, payload_ref, occurred_at]}
-  Evaluation: {domain: governance, fields: [id, company_id, brand_id, created_at, updated_at, subject_type, subject_id, evaluator, criteria_version, score, status, evidence_ref]}
-  Approval: {domain: governance, fields: [id, company_id, brand_id, created_at, updated_at, subject_type, subject_id, requested_by, approver_id, status, requested_at, decided_at, decision_ref]}
-  Incident: {domain: governance, fields: [id, company_id, brand_id, created_at, updated_at, severity, category, title, description, status, owner_id, resolved_at]}
-  Department: {domain: organization, fields: [id, company_id, brand_id, created_at, updated_at, name, purpose, parent_department_id, owner_id, status]}
-  User: {domain: identity, fields: [id, company_id, brand_id, created_at, updated_at, email, display_name, role, status, external_ref]}
-  Employee: {domain: people, fields: [id, company_id, brand_id, created_at, updated_at, user_id, employee_number, job_title, department_id, status, manager_id]}
-  Partner: {domain: ecosystem, fields: [id, company_id, brand_id, created_at, updated_at, name, partner_type, website, country, status, owner_id]}
+version: "1.1"
+status: "common-fields-standardized"
+
+common_fields:
+  id: {type: string, required: true, immutable: true, description: "Stable canonical entity identifier"}
+  company_id: {type: string, required: true, indexed: true, description: "Owning company/tenant scope"}
+  brand_id: {type: string, required: false, indexed: true, description: "Brand scope where applicable"}
+  created_at: {type: datetime, required: true, immutable: true}
+  updated_at: {type: datetime, required: true}
+
+field_conventions:
+  ids: "Opaque stable strings; never silently reused"
+  timestamps: "ISO-8601 UTC"
+  dates: "ISO-8601 date"
+  currency: "ISO 4217 code"
+  emails: "Normalized lowercase representation where technically appropriate"
+  status: "Controlled vocabulary defined by each entity's lifecycle"
+  references: "Store canonical ID, not display name"
+
+entity_field_overrides:
+  Lead: {required_additional: [source, status], sensitive: [email, phone]}
+  Account: {required_additional: [name, status]}
+  Opportunity: {required_additional: [account_id, name, stage]}
+  Contact: {required_additional: [first_name, status], sensitive: [email, phone]}
+  Project: {required_additional: [account_id, name, status]}
+  Invoice: {required_additional: [account_id, invoice_number, issue_date, due_date, status, subtotal, total_amount, currency]}
+  Company: {required_additional: [name, country, status]}
+  Brand: {required_additional: [company_id, name, status]}
+  Client: {required_additional: [account_id, status]}
+  Campaign: {required_additional: [name, channel, objective, status]}
+  Meeting: {required_additional: [scheduled_at, meeting_type, status]}
+  Proposal: {required_additional: [opportunity_id, version, title, status]}
+  Contract: {required_additional: [account_id, contract_number, status]}
+  Payment: {required_additional: [account_id, amount, currency, payment_date, status]}
+  Task: {required_additional: [title, status]}
+  Ticket: {required_additional: [subject, description, priority, status]}
+  Agent: {required_additional: [name, purpose, status, version]}
+  AgentRun: {required_additional: [agent_id, status, started_at]}
+  Skill: {required_additional: [name, version, status]}
+  Tool: {required_additional: [name, provider, status]}
+  Workflow: {required_additional: [name, trigger_type, status, version]}
+  WorkflowRun: {required_additional: [workflow_id, status, started_at]}
+  Event: {required_additional: [event_type, source, entity_type, entity_id, occurred_at]}
+  Evaluation: {required_additional: [subject_type, subject_id, evaluator, criteria_version, status]}
+  Approval: {required_additional: [subject_type, subject_id, requested_by, status, requested_at]}
+  Incident: {required_additional: [severity, category, title, status]}
+  Department: {required_additional: [name, purpose, status]}
+  User: {required_additional: [email, display_name, role, status]}
+  Employee: {required_additional: [user_id, employee_number, job_title, department_id, status]}
+  Partner: {required_additional: [name, partner_type, status]}
 
 relationships:
   - {from: Lead, to: Account, type: may_convert_to}
@@ -65,3 +82,8 @@ relationships:
   - {from: Department, to: Employee, type: has_many}
   - {from: User, to: Employee, type: may_map_to}
   - {from: Company, to: Partner, type: has_many}
+
+notes:
+  - "Entity-specific fields from B.4 remain part of the canonical schema; common_fields are inherited unless explicitly overridden."
+  - "No secrets or credentials are data-model fields."
+  - "Sensitive personal/contact fields require appropriate access controls and retention policies."
