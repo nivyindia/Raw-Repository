@@ -1,0 +1,16 @@
+event_type: proposal.sent
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Proposal, id: string}
+  actor: {type: string, id: string}
+  proposal_id: string
+  opportunity_id: string
+  account_id: string
+  version: string
+  amount: number
+  currency: string
+  recipient_ref: string
+  sent_at: datetime
