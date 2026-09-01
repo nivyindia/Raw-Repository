@@ -1,0 +1,50 @@
+# BILLION DREAMS UNITED OS — PROJECT STATE MACHINE
+# Stage B.9 | Version 1.0 | 2026-09-01
+
+id: project
+entity: Project
+version: "1.0"
+initial_state: planned
+terminal_states: [completed, cancelled]
+
+states:
+  planned:
+    description: "Project approved for delivery but execution has not started."
+  ready:
+    description: "Required commercial/onboarding inputs are available and delivery can begin."
+  active:
+    description: "Delivery work is actively in progress."
+  blocked:
+    description: "Execution cannot continue because a dependency or decision is unresolved."
+  review:
+    description: "Work is ready for internal/client review or acceptance."
+  completed:
+    description: "Scope has been delivered and accepted/closed according to project policy."
+  cancelled:
+    description: "Project has been intentionally terminated and retained for audit/history."
+
+transitions:
+  - {from: planned, to: ready, trigger: "onboarding.completed", workflow: WF_PROJECT_READINESS, agent: A065}
+  - {from: ready, to: active, trigger: "delivery.started", workflow: WF_PROJECT_START, agent: A066}
+  - {from: active, to: blocked, trigger: "dependency.blocked", workflow: WF_PROJECT_BLOCKER, agent: A067}
+  - {from: blocked, to: active, trigger: "dependency.resolved", workflow: WF_PROJECT_RESUME, agent: A067}
+  - {from: active, to: review, trigger: "deliverable.ready_for_review", workflow: WF_PROJECT_REVIEW, agent: A068}
+  - {from: review, to: active, trigger: "review.changes_requested", workflow: WF_PROJECT_REVISION, agent: A068}
+  - {from: review, to: completed, trigger: "deliverable.accepted", workflow: WF_PROJECT_CLOSE, agent: A069}
+  - {from: planned, to: cancelled, trigger: "project.cancelled", workflow: WF_PROJECT_CANCEL, agent: A067}
+  - {from: ready, to: cancelled, trigger: "project.cancelled", workflow: WF_PROJECT_CANCEL, agent: A067}
+  - {from: active, to: cancelled, trigger: "project.cancelled", workflow: WF_PROJECT_CANCEL, agent: A067}
+  - {from: blocked, to: cancelled, trigger: "project.cancelled", workflow: WF_PROJECT_CANCEL, agent: A067}
+  - {from: review, to: cancelled, trigger: "project.cancelled", workflow: WF_PROJECT_CANCEL, agent: A067}
+
+invariants:
+  - "Every project must reference a valid Account."
+  - "A project cannot enter active until required onboarding/readiness conditions are satisfied."
+  - "Blocked projects must have an observable blocker/dependency record."
+  - "Completion requires documented acceptance/closure evidence."
+  - "Cancelled projects are retained according to data-retention policy."
+  - "Material scope, budget, or contractual changes require the applicable approval gate."
+
+notes:
+  - "Workflow and agent IDs are logical references and must be validated against their canonical registries before production wiring."
+  - "This state machine defines lifecycle contract only; implementation evidence is required before completion status is raised."
