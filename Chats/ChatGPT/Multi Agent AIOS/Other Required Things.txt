@@ -1,0 +1,410 @@
+हाँ भाई। अब हमें सिर्फ Agents + n8n workflows नहीं चाहिए। एक proper AI Company OS बनाने के लिए Skills + Prompts + MCP Tools + Knowledge Packs + Evaluation/Security Skills + reusable templates भी चाहिए।
+
+मैंने current public repositories/directories देखकर नीचे एक practical procurement list बनाई है। खास तौर पर Agent Skills अब एक reusable standard बन रहा है—एक skill में instructions, examples, scripts और references रखे जा सकते हैं; MCP दूसरी तरफ agent को tools/data access देता है। यानी दोनों को साथ इस्तेमाल करना हमारे OS के लिए ज्यादा सही रहेगा।
+
+1. सबसे पहले — Agent Skills
+ID	Skill / Resource	क्या मिलेगा	हमारे OS में उपयोग	Priority	Link
+SK01	Awesome Agent Skills	हजारों skills, MCP, tools, rules की curated directory	सभी agents	🔴 Very High	GitHub – Awesome Agent Skills
+SK02	Open Agent Skills Directory	Research, writing, browser, evaluation, security आदि skills	सभी departments	🔴 Very High	GitHub – Open Agent Skills
+SK03	LangChain Skills	LangChain/LangGraph/Deep Agents के reusable skills	Agent orchestration	🔴 Very High	LangChain Skills
+SK04	n8n Official Skills	n8n AI Agent development skills	n8n workflows	🔴 Very High	n8n Official Skills
+SK05	n8n Agent Workflow Patterns	Agent → tools → memory → output → HITL patterns	सभी n8n agents	🔴 Very High	n8n Agent Workflow Patterns
+SK06	FindSkills	94,000+ indexed open-source skills	Missing skill खोजने के लिए	🟠 High	FindSkills Directory
+SK07	Awesome Agent Tools	Skills + MCP servers + tools + plugins	Tool layer	🟠 High	Awesome Agent Tools
+
+SK04 बहुत important है। n8n की official skills repository specifically AI Agent, tools, memory, structured output, RAG, embeddings, classifiers आदि के लिए instructions देती है।
+
+2. Marketing Skills
+
+इनको हमारे Marketing Agent Family में डालना चाहिए।
+
+Skill	काम	हमारे Agents
+Market Research	Market/company/industry research	A001
+Competitor Research	Competitor analysis	A004
+ICP Research	ICP creation	A002
+Buyer Persona	Persona development	A003
+Keyword Research	Keyword discovery	A011
+Keyword Clustering	Search-intent clustering	A011
+SEO Audit	Website audit	A012–A013
+Technical SEO	Crawl/index/site issues	A013
+Content Gap Analysis	Competitor/content gap	A015
+Content Brief	Article/content brief	A009
+Long-form Writing	Articles/reports	A016
+Editing	Content quality	A018
+Fact Checking	Claims/source validation	A019
+Content Repurposing	Blog → LinkedIn → X → video etc.	A020
+Social Media Strategy	Channel-specific strategy	A023
+LinkedIn Content	LinkedIn posts	A023
+Instagram Content	Instagram posts/reels	A023
+YouTube Content	Script/title/description	A021/A022
+Email Marketing	Newsletter/nurture	A025
+Community	Engagement/moderation	A028
+PR Research	Publications/opportunities	A031
+Marketing Analytics	Campaign analysis	A032/A033
+
+इनके लिए starting point के रूप में Open Agent Skills directory काफी useful है क्योंकि उसमें Research & Search, Writing & Content, Data Analysis, Browser Automation, Design/Media जैसी categories already हैं।
+
+3. Sales Skills
+Skill	काम	Agent
+Lead Discovery	Companies ढूँढना	A034
+Contact Discovery	Decision makers ढूँढना	A035
+Lead Enrichment	Company/person data	A036
+Data Cleaning	Duplicate/format cleanup	A037
+Email Verification	Contact verification	A038
+Lead Scoring	ICP + intent score	A039
+Segmentation	Lead groups	A040
+Account Research	Account intelligence	A041
+Buying Signal Research	Intent signals	A042
+Outreach Strategy	Channel/sequence selection	A043
+Email Personalization	Personalized email	A044/A049
+LinkedIn Research	LinkedIn account research	A045
+Cold Call Preparation	Call brief	A046
+Follow-up	Follow-up logic	A050
+Reply Classification	Interested/not interested/etc.	A052
+Objection Handling	Sales objections	A053
+Qualification	BANT/MEDDICC/custom	A054
+Meeting Preparation	Meeting brief	A055
+Needs Analysis	Customer problem extraction	A057
+Solution Mapping	Need → service	A058
+Proposal Writing	Proposal	A060
+Pricing	Pricing recommendation	A061
+Negotiation	Negotiation assistance	A062
+Contract Review	Contract analysis	A063
+Deal Desk	Approval/risk	A064
+4. Browser Automation Skills
+
+ये हमारे लिए बहुत important होंगे क्योंकि Sales/Marketing में काफी काम web पर होता है।
+
+Resource	उपयोग	Link
+Browser Use	AI browser automation	Browser Use GitHub
+Playwright MCP	Browser control through MCP	Playwright MCP / Agent Skills reference
+Firecrawl	Web crawling/research/extraction	Firecrawl GitHub
+n8n Browser/HTTP skills	Browser/API automation	n8n Skills
+
+Use cases:
+
+Website research
+      ↓
+Competitor research
+      ↓
+Company research
+      ↓
+Lead discovery
+      ↓
+Decision-maker research
+      ↓
+Buying-signal detection
+      ↓
+SEO research
+5. MCP Servers — ये भी हमें चाहिए
+
+MCP को आप Agent के हाथ-पैर समझो।
+
+Skill बताती है:
+
+"काम कैसे करना है"
+
+MCP/tool देता है:
+
+"काम करने के लिए कौन सा system इस्तेमाल करना है"
+
+यह distinction हमारे OS में बहुत important है।
+
+MCP / Tool	Agent को क्या मिलेगा	उपयोग
+GitHub MCP	Repository/files/issues/PRs	CTO/Development
+PostgreSQL MCP	Database access	Analytics/CRM
+Filesystem MCP	Files	Knowledge/Operations
+Browser/Playwright MCP	Browser	Research/Sales
+Search MCP	Web search	Research
+Fetch MCP	Web pages	Research
+Slack/Chat MCP	Communication	Internal OS
+Google Workspace MCP	Gmail/Drive/Calendar	Optional
+Notion MCP	Knowledge	Optional
+Odoo custom MCP	Odoo CRM/ERP	Critical
+Qdrant connector/MCP	Vector memory	Critical
+n8n tools	Workflow execution	Critical
+
+एक curated MCP directory भी उपलब्ध है और current Agent Skills directories MCP servers को अलग category में track करती हैं।
+
+6. Prompt Libraries
+
+अब prompts भी zero से लिखने की जरूरत नहीं है।
+
+Resource	क्या मिलेगा	उपयोग	Link
+Awesome Prompts	Curated ChatGPT/GPT prompts	General agents	Awesome Prompts GitHub
+Open Agent Skills	Prompt/instruction patterns	Agent design	Open Agent Skills
+LangChain Skills	Agent instructions/patterns	LangGraph agents	LangChain Skills
+n8n Official Skills	System prompts + tool-use patterns	n8n agents	n8n Skills
+OpenAI Cookbook	Structured outputs, tool calling, agent patterns	General AI layer	OpenAI Cookbook reference
+7. हमें कौन-कौन से Prompts वास्तव में बनाने/modify करने पड़ेंगे?
+
+Ready-made prompt को blindly use नहीं करना है। हमें एक Nivy Company Prompt Library बनानी चाहिए।
+
+Core prompts
+Prompt ID	Prompt
+PR001	Company Master System Prompt
+PR002	Brand Voice Prompt
+PR003	Company Knowledge Usage Prompt
+PR004	Customer Data Privacy Prompt
+PR005	Tool Usage Policy
+PR006	Human Approval Policy
+PR007	Confidence/Escalation Prompt
+PR008	Output JSON Schema Prompt
+PR009	Error Handling Prompt
+PR010	Agent Handoff Prompt
+Marketing
+Prompt	काम
+PR-M01	Market Research
+PR-M02	ICP
+PR-M03	Buyer Persona
+PR-M04	Competitor Analysis
+PR-M05	Keyword Research
+PR-M06	SEO Audit
+PR-M07	Content Brief
+PR-M08	Long-form Content
+PR-M09	LinkedIn Post
+PR-M10	Instagram
+PR-M11	YouTube
+PR-M12	X
+PR-M13	Email Newsletter
+PR-M14	Content Repurposing
+PR-M15	Campaign Analysis
+Sales
+Prompt	काम
+PR-S01	Lead Research
+PR-S02	Decision Maker Research
+PR-S03	Lead Qualification
+PR-S04	Lead Scoring
+PR-S05	Account Research
+PR-S06	Buying Signal
+PR-S07	Cold Email
+PR-S08	LinkedIn Outreach
+PR-S09	WhatsApp
+PR-S10	Follow-up
+PR-S11	Reply Classification
+PR-S12	Objection Handling
+PR-S13	Meeting Preparation
+PR-S14	Needs Analysis
+PR-S15	Solution Mapping
+PR-S16	Proposal
+PR-S17	Pricing
+PR-S18	Negotiation
+PR-S19	Contract Review
+PR-S20	Closing
+8. n8n के लिए एक बहुत जरूरी Skill
+
+मैं इसे mandatory रखूंगा:
+
+n8n Agent Development Skill
+
+n8n की official skills repository में AI Agent node के लिए system prompt, tools, memory, structured output, RAG, embeddings आदि के लिए dedicated guidance है।
+
+इसके अलावा यह community skill भी useful है:
+
+n8n AI Agent Workflow Pattern
+
+इसमें standard architecture:
+
+Trigger
+   ↓
+AI Agent
+   ├── Model
+   ├── Tools
+   ├── Memory
+   └── Output Parser
+   ↓
+Process
+   ↓
+Output
+
+के साथ tool selection, $fromAI, structured output, memory/session ID, HITL और RAG जैसे patterns cover होते हैं।
+
+9. Evaluation Skills — इसे मत छोड़ना
+
+AI agents को सिर्फ बना देना काफी नहीं है।
+
+हमें यह भी पता होना चाहिए:
+
+Agent सही काम कर रहा है या hallucinate कर रहा है?
+
+इसके लिए:
+
+Tool / Skill	काम	Link
+Promptfoo	Prompt/agent testing, regression, red-team	Promptfoo / Agent Skills reference
+OpenAI Evals	Evaluation framework	OpenAI Evals reference
+Giskard	LLM security/testing	Giskard reference
+Inspect Evals	Agent evaluation	Inspect Evals reference
+Guardrails AI	Output validation	Guardrails reference
+
+Open Agent Skills directory में evaluation और security के लिए Promptfoo, Giskard, Guardrails, Inspect Evals आदि को specifically catalog किया गया है।
+
+10. Security Skills
+
+हमारे Sales agents के पास eventually:
+
+CRM data
+customer data
+email
+WhatsApp
+contracts
+financial information
+internal company knowledge
+
+हो सकता है।
+
+इसलिए:
+
+Security Component	काम
+Prompt Injection Defense	malicious web/email instructions रोकना
+Permission Matrix	कौन agent क्या कर सकता है
+Secret Management	API keys/passwords
+PII Redaction	sensitive data protection
+Human Approval	high-risk action रोकना
+Audit Logging	हर agent action record
+Tool Allowlist	agent सिर्फ approved tools use करे
+Output Validation	गलत JSON/data रोकना
+
+Useful resources में OWASP Top 10 for LLM Applications, Microsoft Presidio, Guardrails AI और security/evaluation skills शामिल हैं।
+
+11. Knowledge Packs भी चाहिए
+
+यह थोड़ा अलग है।
+
+Agent को केवल prompt देने से वह Nivy को नहीं समझेगा।
+
+हमें:
+
+knowledge/
+│
+├── company/
+│
+├── brand/
+│
+├── services/
+│
+├── pricing/
+│
+├── ICP/
+│
+├── personas/
+│
+├── competitors/
+│
+├── sales/
+│
+├── marketing/
+│
+├── SOPs/
+│
+├── legal/
+│
+└── policies/
+
+बनाना चाहिए।
+
+और Qdrant में इसका vectorized version जाएगा।
+
+12. सबसे जरूरी — हमें क्या Ready-Made लेना है और क्या Modify करना है?
+
+मैं इसे तीन levels में रखूँगा:
+
+🟢 LEVEL 1 — Directly Reuse
+
+इनको ज्यादा modification नहीं चाहिए:
+
+n8n agent workflow patterns
+generic research skills
+browser automation skills
+SEO research skills
+content-repurposing skills
+generic prompt patterns
+evaluation skills
+security skills
+🟡 LEVEL 2 — Modify
+
+इनको Nivy के हिसाब से modify करना पड़ेगा:
+
+AI SDR
+Lead Generation
+Lead Scoring
+Cold Email
+LinkedIn outreach
+Social media factory
+SEO agent
+Content agent
+Proposal agent
+Customer-success agent
+
+क्योंकि इनमें:
+
+Generic Business Logic
+        ↓
+Nivy Business Logic
+
+करना होगा।
+
+🔴 LEVEL 3 — Build Ourselves
+
+इनको generic internet agent से लेने की बजाय हमारा own IP होना चाहिए:
+
+Nivy Master Orchestrator
+Nivy Company Knowledge Agent
+Nivy Revenue Intelligence Agent
+Nivy Reciprocity/Partner Agent
+Nivy Pricing Agent
+Nivy Deal Approval Agent
+Nivy CEO Intelligence Agent
+Nivy Agent Governance Agent
+Nivy Agent Evaluation Agent
+Nivy Cross-Department Orchestrator
+13. Final Architecture
+
+तो अब हमारा AI OS सिर्फ:
+
+Agents
++
+n8n Workflows
+
+नहीं रहेगा।
+
+बल्कि:
+
+                 NIVY AI COMPANY OS
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+      AGENTS           SKILLS           PROMPTS
+        │                │                │
+        └────────────────┼────────────────┘
+                         │
+                    MCP / TOOLS
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+      ODOO          POSTGRESQL         QDRANT
+        │                │                │
+        └────────────────┼────────────────┘
+                         │
+                    n8n WORKFLOWS
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+    MARKETING          SALES          OPERATIONS
+        │                │                │
+        └────────────────┼────────────────┘
+                         │
+                  EVALUATION LAYER
+                         │
+                  SECURITY LAYER
+                         │
+                  HUMAN APPROVAL
+
+यही structure हमें बनाना चाहिए।
+
+और सबसे अच्छी बात यह है कि हमें हर चीज scratch से नहीं बनानी पड़ेगी। Public ecosystem में already skills, MCP servers, agent instructions, n8n patterns और reusable workflows काफी मात्रा में मौजूद हैं। awesome-agent-skills जैसी directories इन्हें एक जगह aggregate भी कर रही हैं।
+
+अगर हम अगला कदम लें, तो मैं इन सबको एक single Master Procurement Table में बदलना recommend करूंगा:
+
+ID → Agent/Skill/Prompt/MCP/Workflow → Direct Link → Free/Paid → Open Source License → Download Method → हमारे किस Agent में लगेगा → किस Workflow में लगेगा → कितना Modification चाहिए → Priority → Status
+
+यही table बाद में हमारी actual AI OS Build Checklist बन जाएगी।

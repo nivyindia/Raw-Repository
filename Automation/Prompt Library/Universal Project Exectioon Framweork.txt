@@ -1,0 +1,1481 @@
+# CLAUDE MASTER COMMAND — BUILD NIVY PROJECTS UPEF v1.0
+
+You are my **Notion Workspace Architect and Universal Project Execution Framework (UPEF) Architect**.
+
+Build a scalable **Nivy Projects** workspace in my connected Notion account.
+
+The system must be:
+
+* Industry-agnostic
+* Brand-aware
+* Department-aware
+* Scalable
+* Modular
+* AI-friendly
+* Token/context efficient
+* Suitable for any type of project
+* Designed so that one project contains all of its project-specific information
+
+Do not design the system specifically for IT, software, websites, SEO, or digital marketing.
+
+---
+
+# 1. FUNDAMENTAL ARCHITECTURE
+
+Use this model:
+
+```text
+NIVY PROJECTS
+│
+├── 00. MASTER CONTROL
+├── 01. PROJECTS
+├── 02. KNOWLEDGE & LEARNING
+├── 03. TEMPLATES & STANDARDS
+├── 04. AI OPERATING SYSTEM
+└── 05. ARCHIVE
+```
+
+Use:
+
+**ONE WORKSPACE**
+
+**ONE MASTER PROJECT DATABASE**
+
+**ONE UNIVERSAL PROJECT TEMPLATE**
+
+**OPTIONAL PROJECT-TYPE MODULES**
+
+Do NOT create separate project databases for individual brands, departments, or industries.
+
+---
+
+# 2. PROJECT CLASSIFICATION SYSTEM
+
+Projects need deeper classification for organization, filtering, reporting, automation and AI routing.
+
+Use the following hierarchy:
+
+```text
+Brand
+ ↓
+Department
+ ↓
+Sub-department
+ ↓
+Function / Area
+ ↓
+Project Type
+ ↓
+Project
+```
+
+Example:
+
+```text
+Nivy Next
+ ↓
+Marketing
+ ↓
+SEO
+ ↓
+Technical SEO
+ ↓
+SEO Audit
+ ↓
+Client Website SEO Audit
+```
+
+Another example:
+
+```text
+Nivy Academy
+ ↓
+Education
+ ↓
+Course Development
+ ↓
+Curriculum
+ ↓
+New Course
+ ↓
+AI Marketing Course
+```
+
+Another:
+
+```text
+Internal / Corporate
+ ↓
+Operations
+ ↓
+Process Management
+ ↓
+Automation
+ ↓
+Workflow Automation
+ ↓
+Lead Management Automation
+```
+
+These are examples only.
+
+Do NOT assume these are the only valid classifications.
+
+---
+
+# 3. CLASSIFICATION MUST BE METADATA, NOT NESTED WORKSPACES
+
+Do NOT create:
+
+```text
+Brand Workspace
+ → Department Workspace
+   → Sub-department Workspace
+```
+
+Instead, create classification properties/relations in the master Projects database.
+
+This allows:
+
+* Cross-brand reporting
+* Cross-department reporting
+* Project-type reporting
+* Filtering
+* Dashboards
+* AI routing
+* Automation
+* Future analytics
+
+without duplicating databases.
+
+---
+
+# 4. CLASSIFICATION PROPERTIES
+
+The master Projects database should support:
+
+* Project ID
+* Project Name
+* Brand
+* Department
+* Sub-department
+* Function / Area
+* Project Type
+* Project Category
+* Client / Organization
+* Owner
+* Status
+* Priority
+* Health
+* Start Date
+* Target Date
+* Progress
+* Current Phase
+* Current Workstream
+* Current Milestone
+* Current Task
+* Budget
+* Actual Cost
+* External Project Link
+* Project Folder / Location
+* Created Date
+* Last Updated
+
+Use relations rather than plain text where that creates meaningful long-term value.
+
+Do not over-engineer classification unnecessarily.
+
+---
+
+# 5. CLASSIFICATION FLEXIBILITY
+
+The classification system must support:
+
+* Existing brands
+* Future brands
+* Existing departments
+* Future departments
+* New sub-departments
+* New functions
+* New project types
+* Custom classifications
+
+Do NOT hard-code the system so that a new business area requires rebuilding the workspace.
+
+If a project does not fit an existing classification:
+
+**Use "Other" or "Custom" temporarily and flag it for classification review.**
+
+Do not invent permanent organizational structures without sufficient information.
+
+---
+
+# 6. CURRENT NIVY BRANDS
+
+Initially support:
+
+* Nivy
+* Nivy Next
+* Nivy Advisory
+* Nivy Academy
+* Nivy Jobs
+* Nivy Studio
+* Internal / Corporate
+* Other
+
+Make the system easy to extend.
+
+---
+
+# 7. DEPARTMENT SYSTEM
+
+Do not assume every brand has the same departments.
+
+A brand may have:
+
+* Marketing
+* Sales
+* Operations
+* Finance
+* HR
+* Technology
+* Product
+* Research
+* Customer Success
+* Legal / Compliance
+* Education
+* Business Development
+* Administration
+* Other
+
+Departments should be reusable but configurable by brand.
+
+---
+
+# 8. CLASSIFICATION VS EXECUTION
+
+Keep these completely separate.
+
+Classification answers:
+
+**"Where does this project belong?"**
+
+Execution answers:
+
+**"How should this project be completed?"**
+
+Therefore:
+
+```text
+CLASSIFICATION
+Brand
+→ Department
+→ Sub-department
+→ Function
+→ Project Type
+
+EXECUTION
+Intake
+→ Discovery
+→ Research
+→ Requirements
+→ Planning
+→ Execution
+→ QA
+→ Delivery
+→ Closure
+```
+
+Never allow classification to unnecessarily change the Universal Core.
+
+---
+
+# 9. UNIVERSAL PROJECT LIFECYCLE
+
+Every project should be capable of following:
+
+```text
+INTAKE
+ ↓
+DISCOVERY
+ ↓
+RESEARCH
+ ↓
+REQUIREMENTS
+ ↓
+STRATEGY
+ ↓
+SOLUTION DESIGN
+ ↓
+IMPLEMENTATION PLAN
+ ↓
+EXECUTION
+ ↓
+QUALITY / VERIFICATION
+ ↓
+APPROVAL
+ ↓
+DELIVERY
+ ↓
+CLOSURE
+ ↓
+LEARNING
+```
+
+The actual lifecycle may be simplified or expanded according to project needs.
+
+Do not force irrelevant phases.
+
+---
+
+# 10. UNIVERSAL PROJECT TEMPLATE
+
+Create one reusable project template containing:
+
+```text
+PROJECT DASHBOARD
+
+00. PROJECT CONTROL
+01. DISCOVERY
+02. RESEARCH
+03. REQUIREMENTS
+04. STRATEGY
+05. ARCHITECTURE / SOLUTION DESIGN
+06. IMPLEMENTATION PLAN
+07. EXECUTION
+08. QUALITY & VERIFICATION
+09. APPROVALS
+10. DELIVERABLES
+11. DOCUMENTATION
+12. RESOURCES & ACCOUNTS
+13. AI SESSIONS
+14. FILES & EVIDENCE
+15. DECISIONS
+16. ASSUMPTIONS
+17. RISKS & ISSUES
+18. CHANGE REQUESTS
+19. LESSONS LEARNED
+20. PROJECT CLOSURE
+```
+
+These are universal containers.
+
+Relevant project-specific content should be added inside them.
+
+---
+
+# 11. PROJECT DASHBOARD
+
+Show:
+
+* Project ID
+* Project Name
+* Brand
+* Department
+* Sub-department
+* Function
+* Project Type
+* Objective
+* Success Criteria
+* Status
+* Health
+* Priority
+* Progress
+* Current Phase
+* Current Milestone
+* Current Task
+* Next Best Action
+* Blockers
+* Pending Approvals
+* Active Risks
+* Key Decisions
+* Deliverables
+* Recent Activity
+* Important Links
+
+---
+
+# 12. PROJECT CONTROL
+
+Include:
+
+* Project DNA
+* Objective
+* Scope
+* Out of Scope
+* Success Criteria
+* Constraints
+* Stakeholders
+* Resources
+* Budget
+* Timeline
+* Current State
+* Active Context
+* Next Actions
+
+Maintain:
+
+* PROJECT-DNA
+* PROJECT-SUMMARY
+* CURRENT-STATE
+* ACTIVE-CONTEXT
+* NEXT-ACTIONS
+
+These must remain concise.
+
+---
+
+# 13. DISCOVERY
+
+Support:
+
+* Background
+* Problem
+* Opportunity
+* Goals
+* Stakeholders
+* Users / Beneficiaries
+* Existing Situation
+* Existing Resources
+* Constraints
+* Open Questions
+* Required User Input
+
+---
+
+# 14. RESEARCH
+
+Create structured research records with:
+
+* Research ID
+* Question
+* Type
+* Source
+* URL
+* Date
+* Finding
+* Evidence
+* Confidence
+* Impact
+* Recommendation
+* Status
+* Related Requirement
+* Related Decision
+
+Possible research types:
+
+* Market
+* Competitor
+* Customer
+* Industry
+* Academic
+* Technology
+* Financial
+* Legal
+* Operational
+* Internal
+* Custom
+
+Only relevant research should be used.
+
+---
+
+# 15. REQUIREMENTS
+
+Support:
+
+* Business
+* Functional
+* Non-functional
+* User
+* Technical
+* Operational
+* Compliance
+* Quality
+* Resource
+* Custom
+
+Use:
+
+`REQ-001`
+
+Requirements should connect to relevant:
+
+* Tasks
+* Deliverables
+* Decisions
+* Tests
+* Evidence
+
+---
+
+# 16. STRATEGY
+
+Support:
+
+* Goals
+* Objectives
+* Target Audience
+* Positioning
+* Value Proposition
+* Approach
+* Alternatives
+* Priorities
+* Resource Strategy
+* Financial Strategy
+* Marketing Strategy
+* Operational Strategy
+* Implementation Strategy
+
+Only relevant elements should be used.
+
+---
+
+# 17. SOLUTION DESIGN
+
+Use the universal concept of:
+
+**Architecture / Solution Design**
+
+Interpret it according to project type.
+
+Examples:
+
+Website:
+
+* Sitemap
+* Information Architecture
+* Technical Architecture
+
+Software:
+
+* System Architecture
+* Database
+* APIs
+
+Business:
+
+* Operating Model
+* Process Architecture
+
+Operations:
+
+* Workflow
+* Process Design
+
+Research:
+
+* Methodology
+* Data Structure
+
+Do not force technical architecture onto non-technical projects.
+
+---
+
+# 18. IMPLEMENTATION PLAN
+
+Use:
+
+**PHASE → WORKSTREAM → MILESTONE → TASK → SUBTASK**
+
+Break large work into small executable units.
+
+Tasks should be:
+
+* Specific
+* Actionable
+* Independently trackable
+* Independently verifiable
+* Small enough for efficient AI execution
+
+---
+
+# 19. TASK SYSTEM
+
+Each task should support:
+
+* Task ID
+* Title
+* Objective
+* Phase
+* Workstream
+* Milestone
+* Priority
+* Status
+* Owner
+* AI / Human
+* Dependencies
+* Inputs
+* Expected Output
+* Definition of Done
+* Evidence
+* Estimated Effort
+* Start Date
+* Due Date
+* Completion Date
+* Related Requirement
+* Related Deliverable
+* Related Risk
+* Related Decision
+* Related AI Session
+
+Statuses:
+
+* Backlog
+* Ready
+* In Progress
+* Waiting
+* Blocked
+* Review
+* Rework
+* Completed
+* Verified
+
+---
+
+# 20. TASK DEPENDENCIES
+
+Support:
+
+* Blocking tasks
+* Dependent tasks
+* Parallel tasks
+* Critical tasks
+* Next available tasks
+
+Claude should be able to identify the next executable task from project state.
+
+---
+
+# 21. DEFINITION OF DONE
+
+Every significant task must have a Definition of Done.
+
+Completion should mean:
+
+**Execution completed + acceptance criteria satisfied + required evidence available.**
+
+Verification remains separate.
+
+---
+
+# 22. QUALITY & VERIFICATION
+
+Support:
+
+* Quality Criteria
+* Checklists
+* Tests
+* Reviews
+* Validation
+* Defects
+* Rework
+* Verification
+* Acceptance
+
+Verification must be adapted to project type.
+
+---
+
+# 23. APPROVALS
+
+Track:
+
+* Approval ID
+* Decision Required
+* Context
+* AI Recommendation
+* Options
+* Impact
+* User Decision
+* Approved By
+* Date
+* Status
+
+Statuses:
+
+* Not Required
+* Pending
+* Approved
+* Rejected
+* Needs Revision
+
+---
+
+# 24. DELIVERABLES
+
+Track:
+
+* Deliverable ID
+* Name
+* Description
+* Version
+* Status
+* Owner
+* Acceptance Criteria
+* Evidence
+* Approval
+* Final Location
+
+---
+
+# 25. DOCUMENTATION
+
+Support:
+
+* Reports
+* Specifications
+* SOPs
+* Guides
+* Manuals
+* Research
+* Meeting Records
+* Final Reports
+* Operational Documentation
+
+---
+
+# 26. RESOURCES & ACCOUNTS
+
+Track:
+
+* People
+* Teams
+* Vendors
+* Organizations
+* Software
+* Services
+* Accounts
+* Equipment
+* Physical Resources
+* Cloud Services
+
+Properties:
+
+* Resource ID
+* Name
+* Type
+* Purpose
+* Owner
+* Status
+* Location
+* URL
+* Credential Vault Reference
+
+Never store:
+
+* Passwords
+* API keys
+* Private keys
+* Authentication secrets
+
+Store only approved vault references.
+
+---
+
+# 27. AI SESSIONS
+
+Track important AI sessions.
+
+Properties:
+
+* Session ID
+* AI
+* Date
+* Purpose
+* Chat Link
+* Input
+* Output
+* Decisions
+* Tasks Created
+* Tasks Completed
+* Files Created
+* Current State
+* Handoff
+
+Every session must support:
+
+```text
+What Was Done
+What Changed
+Decisions
+Files Created
+Tasks Completed
+Blockers
+Current State
+Next Action
+Required User Input
+```
+
+---
+
+# 28. FILES & EVIDENCE
+
+Track:
+
+* Evidence ID
+* File
+* Type
+* Version
+* Purpose
+* Location
+* Related Task
+* Related Requirement
+* Related Deliverable
+* Evidence Type
+* Date
+
+---
+
+# 29. DECISIONS
+
+Track:
+
+* Decision ID
+* Decision
+* Context
+* Options
+* AI Recommendation
+* Final Decision
+* Reason
+* Decision Maker
+* Date
+* Affected Items
+
+Format:
+
+`DEC-001`
+
+---
+
+# 30. ASSUMPTIONS
+
+Track:
+
+* Assumption ID
+* Assumption
+* Reason
+* Confidence
+* Impact
+* Status
+* Can Change?
+* Related Items
+
+Format:
+
+`ASM-001`
+
+---
+
+# 31. RISKS & ISSUES
+
+Track:
+
+* ID
+* Type
+* Description
+* Probability
+* Impact
+* Severity
+* Mitigation
+* Owner
+* Status
+* Resolution
+* Related Items
+
+Keep Risk and Issue distinguishable.
+
+---
+
+# 32. CHANGE REQUESTS
+
+Track:
+
+* Change ID
+* Requested Change
+* Reason
+* Requested By
+* Impact
+* Affected Requirements
+* Affected Tasks
+* Affected Deliverables
+* Cost Impact
+* Time Impact
+* Approval
+* Status
+
+---
+
+# 33. LESSONS LEARNED
+
+Track:
+
+* Learning ID
+* Observation
+* What Worked
+* What Failed
+* Root Cause
+* Lesson
+* Recommendation
+* Evidence
+* Confidence
+* Reusable?
+* Status
+
+Do not automatically promote a lesson to global knowledge.
+
+---
+
+# 34. GLOBAL KNOWLEDGE
+
+Create:
+
+**02 — KNOWLEDGE & LEARNING**
+
+Store reusable organizational knowledge:
+
+* SOPs
+* Best Practices
+* Patterns
+* Rules
+* Checklists
+* Playbooks
+* Reusable Research
+* Validated Lessons
+* AI Learnings
+
+Use:
+
+```text
+Project Learning
+ ↓
+Validation
+ ↓
+Learning Candidate
+ ↓
+Approval
+ ↓
+Global Knowledge
+```
+
+---
+
+# 35. TEMPLATES & STANDARDS
+
+Create:
+
+**03 — TEMPLATES & STANDARDS**
+
+Include:
+
+* Universal Project Template
+* Project-Type Modules
+* Task Templates
+* Document Templates
+* QA Templates
+* SOP Templates
+* Naming Standards
+* ID Standards
+* Classification Standards
+
+---
+
+# 36. PROJECT-TYPE MODULES
+
+Create optional modules.
+
+Examples:
+
+* Business
+* Software / IT
+* Website
+* SEO / Marketing
+* Research
+* Finance
+* HR
+* Operations
+* Legal / Compliance
+* Education
+* Product
+* Custom
+
+Modules must be optional.
+
+Claude should:
+
+1. Understand the project.
+2. Identify its type.
+3. Select relevant modules.
+4. Activate only relevant modules.
+5. Keep the Universal Core.
+6. Avoid irrelevant sections.
+
+---
+
+# 37. AI OPERATING SYSTEM
+
+Create:
+
+**04 — AI OPERATING SYSTEM**
+
+Reserve this area for:
+
+* UPEF Core Rules
+* AI Behavior Rules
+* Decision Logic
+* Question Engine
+* Approval Policy
+* Autonomy Levels
+* Token Management
+* Context Management
+* Research Protocol
+* Task Decomposition
+* QA Protocol
+* Learning Protocol
+* Session Handoff Protocol
+* Error / Escalation Protocol
+
+The detailed behavior rules will later be implemented through Claude Skills / AI instructions.
+
+---
+
+# 38. AI AUTONOMY
+
+Support:
+
+### AUTO
+
+AI can execute independently.
+
+### ASK
+
+AI asks when information is missing or human judgment is required.
+
+### APPROVAL
+
+AI must obtain explicit approval before execution.
+
+High-risk, destructive, financial, legal, production or irreversible actions should require appropriate approval.
+
+---
+
+# 39. HUMAN INPUT ENGINE
+
+Before asking the user a question, Claude should check:
+
+1. Current State
+2. Project Control
+3. Requirements
+4. Decisions
+5. Assumptions
+6. AI Session Handoffs
+7. Relevant Documents
+
+Do not ask questions whose answers already exist.
+
+Ask only when:
+
+* Information is genuinely unavailable
+* Human judgment is required
+* An important decision must be made
+* Approval is required
+* The action is risky or irreversible
+
+---
+
+# 40. TOKEN / CONTEXT MANAGEMENT
+
+Design the system for efficient AI execution.
+
+Use:
+
+* Current State
+* Active Context
+* Next Actions
+* Session Handoff
+* Context Map
+* Relevant References
+
+Preferred retrieval:
+
+```text
+Current State
+ ↓
+Current Phase
+ ↓
+Current Milestone
+ ↓
+Current Task
+ ↓
+Relevant Context
+```
+
+Never require the AI to read the entire project for a small task.
+
+Use:
+
+* Micro-tasks
+* Small batches
+* Compact handoffs
+* Context summaries
+* Archived stale information
+
+---
+
+# 41. LIVE PROJECT STATE
+
+Notion is the **live source of truth for project state**.
+
+Project information can change during execution.
+
+When something changes, update the relevant project information.
+
+Examples:
+
+* Requirements
+* Scope
+* Decisions
+* Assumptions
+* Tasks
+* Risks
+* Timeline
+* Deliverables
+* Current Phase
+* Current State
+
+The UPEF Skill remains stable.
+
+The project state evolves.
+
+---
+
+# 42. NEXT BEST ACTION
+
+Every active project should expose:
+
+* Current State
+* Current Priority
+* Current Blocker
+* Next Available Task
+* Next Best Action
+* Whether User Input Is Required
+
+---
+
+# 43. FAILURE / ESCALATION
+
+Use:
+
+```text
+Attempt
+ ↓
+Failure
+ ↓
+Root Cause
+ ↓
+Retry / Fix
+ ↓
+Verification
+```
+
+After repeated failure:
+
+```text
+Failure
+ ↓
+Failure
+ ↓
+Failure
+ ↓
+ESCALATE
+```
+
+Escalation must show:
+
+* Problem
+* Attempts
+* Failure reason
+* Evidence
+* Options
+* Recommendation
+* Decision required
+
+---
+
+# 44. PROJECT HEALTH
+
+Project health should consider:
+
+* Progress
+* Schedule
+* Budget
+* Quality
+* Risk
+* Dependencies
+* Scope
+* Blockers
+
+Do not calculate health solely from percentage completion.
+
+---
+
+# 45. PROJECT CLOSURE
+
+Closure checklist:
+
+* Objectives reviewed
+* Success criteria evaluated
+* Deliverables completed
+* Quality verified
+* Approvals completed
+* Evidence collected
+* Documentation completed
+* Resources/accounts documented
+* Open issues resolved
+* Lessons captured
+* Reusable assets identified
+* Approved knowledge extracted
+* Final report completed
+* Project archived
+
+---
+
+# 46. ARCHIVE
+
+Create:
+
+**05 — ARCHIVE**
+
+Include:
+
+* Completed Projects
+* Old Versions
+* Superseded Documents
+* Old Research
+* Old AI Sessions
+* Deprecated Templates
+* Obsolete Knowledge
+
+Keep archived information out of normal active views.
+
+---
+
+# 47. MASTER CONTROL DASHBOARD
+
+Create a central dashboard with:
+
+* Active Projects
+* Projects by Brand
+* Projects by Department
+* Projects by Sub-department
+* Projects by Project Type
+* At Risk
+* Blocked
+* Pending Approval
+* Upcoming Deadlines
+* Recently Updated
+* Completed
+* My Tasks
+* Due Today
+* Due This Week
+
+---
+
+# 48. BRAND DASHBOARDS
+
+Create filtered views from the same master Projects database.
+
+Examples:
+
+* Nivy
+* Nivy Next
+* Nivy Advisory
+* Nivy Academy
+* Nivy Jobs
+* Nivy Studio
+* Internal / Corporate
+
+Do NOT create separate project databases.
+
+---
+
+# 49. DEPARTMENT VIEWS
+
+Create filtered views capable of showing projects by:
+
+* Department
+* Sub-department
+* Function / Area
+* Project Type
+
+These must be views/filters, not duplicate project databases.
+
+---
+
+# 50. RELATIONSHIP ARCHITECTURE
+
+Where useful, connect:
+
+```text
+Projects
+ ↓
+Phases
+ ↓
+Workstreams
+ ↓
+Milestones
+ ↓
+Tasks
+ ↓
+Subtasks
+```
+
+And:
+
+```text
+Requirements ↔ Tasks
+Requirements ↔ Deliverables
+Tasks ↔ Evidence
+Tasks ↔ Risks
+Tasks ↔ Decisions
+Tasks ↔ AI Sessions
+Deliverables ↔ Evidence
+Lessons ↔ Projects
+Knowledge ↔ Source Projects
+```
+
+Avoid unnecessary relations.
+
+---
+
+# 51. NO-DUPLICATION RULE
+
+Do not create:
+
+* Separate project databases for brands
+* Separate project databases for departments
+* Separate task databases for industries
+* Separate research databases for each project
+* Duplicate AI rule databases
+* Duplicate knowledge databases
+
+Prefer one scalable architecture.
+
+---
+
+# 52. SCALABILITY
+
+The system must work for:
+
+* 1 project
+* 10 projects
+* 100 projects
+* 1,000+ projects
+
+Prioritize:
+
+* Simplicity
+* Searchability
+* Performance
+* Relations
+* Templates
+* Filtered views
+* Reusability
+* Maintainability
+
+---
+
+# 53. FINAL CREATION RULE
+
+Before changing the workspace:
+
+1. Inspect the existing Nivy Projects workspace.
+2. Identify existing structures.
+3. Avoid duplicates.
+4. Preserve unrelated content.
+5. Build the Universal Core.
+6. Build classification architecture.
+7. Build the universal project template.
+8. Build optional modules.
+9. Build dashboards/views.
+10. Do not populate fake projects.
+11. Use placeholders where required.
+12. Never store secrets.
+
+---
+
+# 54. FINAL VALIDATION
+
+Verify:
+
+✓ Nivy Projects workspace exists
+✓ Master Control exists
+✓ One master Projects database exists
+✓ Brand classification exists
+✓ Department classification exists
+✓ Sub-department classification exists
+✓ Function / Area classification exists
+✓ Project Type classification exists
+✓ Brand views exist
+✓ Department views exist
+✓ Universal Project Template exists
+✓ UPEF Core is industry-agnostic
+✓ Project-type modules are optional
+✓ Projects remain self-contained
+✓ Discovery exists
+✓ Research exists
+✓ Requirements exist
+✓ Strategy exists
+✓ Solution Design exists
+✓ Implementation Plan exists
+✓ Micro-task system exists
+✓ Dependencies exist
+✓ QA exists
+✓ Approvals exist
+✓ Deliverables exist
+✓ Documentation exists
+✓ Resources/Accounts exist
+✓ AI Sessions exist
+✓ Files/Evidence exists
+✓ Decisions exist
+✓ Assumptions exist
+✓ Risks/Issues exist
+✓ Change Requests exist
+✓ Lessons Learned exists
+✓ Global Knowledge exists
+✓ Templates & Standards exists
+✓ AI Operating System exists
+✓ Token/context management is supported
+✓ Live project state is supported
+✓ Next Best Action is supported
+✓ Failure escalation is supported
+✓ Project closure is supported
+✓ Archive exists
+✓ No secrets are stored
+✓ Architecture is scalable
+
+---
+
+# 55. FINAL REPORT
+
+After implementation, provide a concise report containing:
+
+1. Workspace structure created
+2. Databases created
+3. Templates created
+4. Relations created
+5. Views created
+6. Classification architecture created
+7. Brand structure
+8. Department structure
+9. Project-type modules
+10. AI Operating System structure
+11. Manual configuration required
+12. Notion/API limitations
+13. Recommended UPEF v1.1 improvements
+
+Do not create unnecessary complexity merely for completeness.
+
+The goal is:
+
+**Nivy Projects = one centralized, universal, scalable project operating system where every project contains its own complete working context, while classification, AI execution, knowledge, and reporting remain structured and reusable.**

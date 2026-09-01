@@ -1,0 +1,1781 @@
+# MASTER COMMAND
+
+## GitHub Master Company Profile + Omnichannel Social, SEO & GEO Automation System
+
+You are my senior software architect, automation engineer, DevOps engineer, AI engineer, SEO engineer and GitHub/n8n/Playwright specialist.
+
+I want you to BUILD a production-ready system that uses a GitHub repository as the **single human-approved Master Company Profile / Source of Truth**.
+
+Do not merely explain the architecture.
+
+Create the repository structure, files, database schema, n8n workflows, APIs, Playwright framework, Ollama prompts, documentation, tests and deployment configuration.
+
+==================================================
+
+1. CORE PRINCIPLE
+   ==================================================
+
+The most important rule of this project is:
+
+GITHUB MASTER PROFILE
+↓
+HUMAN EDIT
+↓
+HUMAN APPROVAL
+↓
+GIT COMMIT
+↓
+GITHUB WEBHOOK
+↓
+N8N
+↓
+VALIDATE + PARSE
+↓
+POSTGRESQL
+↓
+OLLAMA
+↓
+PLATFORM-SPECIFIC CONTENT
+↓
+VALIDATION
+↓
+APPROVAL IF REQUIRED
+↓
+OFFICIAL API / PERMITTED PLAYWRIGHT
+↓
+PLATFORM UPDATE
+↓
+VERIFICATION
+↓
+AUDIT LOG + REPORT
+
+GitHub is the human-readable canonical source.
+
+PostgreSQL is the machine-readable operational database.
+
+Ollama is the AI transformation layer.
+
+n8n is the orchestration layer.
+
+Official APIs are preferred.
+
+Playwright is only the fallback where automation is permitted and technically appropriate.
+
+==================================================
+2. EXISTING COMPANY PROFILE
+===========================
+
+I already have my company profile prepared somewhere.
+
+I may provide you:
+
+* an existing GitHub URL
+* an existing Markdown file
+* an existing document
+* YAML/JSON
+* text
+* or a combination of these.
+
+FIRST inspect the provided source.
+
+Do not rewrite or invent company information.
+
+Extract the existing information and convert it into the new Master Profile structure.
+
+If information is ambiguous, mark it:
+
+NEEDS_REVIEW
+
+If information is missing:
+
+MISSING
+
+Never invent factual company information.
+
+==================================================
+3. GITHUB AS SOURCE OF TRUTH
+============================
+
+Create/use a GitHub repository such as:
+
+company-master-profile
+
+or:
+
+nivy-company-os
+
+The repository must contain:
+
+company-profile/
+├── master-profile.md
+├── company-facts.yaml
+├── brands.yaml
+├── services.yaml
+├── industries.yaml
+├── locations.yaml
+├── people.yaml
+├── contact.yaml
+├── social-profiles.yaml
+├── keywords.yaml
+├── competitors.yaml
+├── certifications.yaml
+├── awards.yaml
+├── brand-guidelines.yaml
+└── assets/
+
+The most important file is:
+
+master-profile.md
+
+This should be human-readable.
+
+The YAML files should contain structured information required by automation.
+
+==================================================
+4. MASTER PROFILE CONTENT
+=========================
+
+Create fields for:
+
+Company name
+Legal name
+Brand name
+Founder
+Leadership
+Website
+Email
+Phone
+Address
+Country
+City
+Locations
+Founded year
+Short description
+Medium description
+Long description
+Tagline
+Mission
+Vision
+USP
+Services
+Industries
+Target audiences
+Target countries
+Target cities
+Keywords
+Competitors
+Certifications
+Awards
+Achievements
+Social links
+Business directory links
+Contact information
+Brand tone
+Brand voice
+Approved claims
+Restricted claims
+Important company facts
+
+Also support:
+
+brands
+sub-brands
+products
+services
+business units
+
+==================================================
+5. SOURCE OF TRUTH RULES
+========================
+
+Implement these rules:
+
+RULE 1:
+GitHub approved profile is the canonical source.
+
+RULE 2:
+PostgreSQL must not become an independent source of truth.
+
+RULE 3:
+AI-generated information must NEVER overwrite canonical facts automatically.
+
+RULE 4:
+Ollama may rewrite/adapt factual information but may not invent facts.
+
+RULE 5:
+Platform-specific versions are derivatives of the Master Profile.
+
+RULE 6:
+If a platform contains information not present in Master Profile, flag it.
+
+RULE 7:
+Human approval is required for important factual changes.
+
+RULE 8:
+Every change must be versioned.
+
+==================================================
+6. PROFILE VERSIONING
+=====================
+
+Every approved profile change must have:
+
+version
+commit SHA
+author
+date
+change summary
+changed fields
+previous value
+new value
+approval status
+
+Example:
+
+Version: 1.4.0
+
+Changed:
+
+* Added AI Agent Development service
+* Updated company description
+
+Reason:
+Business service expansion
+
+Status:
+APPROVED
+
+==================================================
+7. GITHUB WORKFLOW
+==================
+
+Create GitHub Actions where useful.
+
+Implement:
+
+Pull Request
+↓
+Validation
+↓
+Schema validation
+↓
+Fact validation
+↓
+Character validation
+↓
+Broken-link check
+↓
+Human approval
+↓
+Merge
+↓
+Webhook
+↓
+n8n
+
+Do not automatically publish unapproved profile changes.
+
+==================================================
+8. GITHUB WEBHOOK → N8N
+=======================
+
+Create an n8n webhook endpoint:
+
+POST /webhooks/github/master-profile
+
+The workflow should:
+
+1. Receive GitHub webhook.
+2. Verify webhook signature.
+3. Determine repository.
+4. Determine branch.
+5. Determine commit SHA.
+6. Determine changed files.
+7. Ignore irrelevant files.
+8. Fetch changed profile files.
+9. Validate them.
+10. Parse them.
+11. Compare old/new version.
+12. Update PostgreSQL.
+13. Determine affected platforms.
+14. Generate platform-specific changes.
+15. Put changes into approval queue.
+16. Publish automatically only where configured as AUTO.
+17. Log everything.
+
+==================================================
+9. POSTGRESQL
+=============
+
+Create PostgreSQL schema.
+
+Tables:
+
+companies
+brands
+people
+services
+industries
+locations
+contacts
+social_profiles
+websites
+keywords
+competitors
+certifications
+awards
+assets
+brand_guidelines
+
+master_profile_versions
+master_profile_changes
+
+platforms
+platform_capabilities
+platform_accounts
+platform_profiles
+platform_profile_fields
+
+generated_profiles
+profile_validations
+profile_completeness
+
+content
+content_variants
+content_publications
+
+seo_properties
+keywords
+keyword_rankings
+serps
+backlinks
+mentions
+reviews
+nap_records
+geo_visibility
+
+automation_jobs
+automation_runs
+automation_errors
+manual_actions
+
+approval_requests
+audit_logs
+
+Add:
+
+UUIDs
+foreign keys
+indexes
+timestamps
+soft delete where useful
+
+==================================================
+10. DATABASE SYNC
+=================
+
+Create:
+
+GitHub
+→ Parse
+→ Normalize
+→ Validate
+→ PostgreSQL
+
+The database must store:
+
+canonical_value
+source
+source_commit
+source_file
+version
+updated_at
+
+Never silently overwrite data.
+
+==================================================
+11. PLATFORM REGISTRY
+=====================
+
+Create a database registry containing every target platform.
+
+For every platform store:
+
+platform_name
+category
+official_url
+developer_url
+documentation_url
+api_available
+oauth_available
+profile_api
+publishing_api
+analytics_api
+browser_automation_possible
+browser_automation_allowed
+manual_only
+rate_limit
+pricing
+access_requirements
+last_verified
+notes
+
+NEVER invent API information.
+
+Research current official documentation.
+
+==================================================
+12. SOCIAL PLATFORMS
+====================
+
+Research and support where possible:
+
+Facebook Pages
+Instagram
+LinkedIn Personal
+LinkedIn Company Page
+X/Twitter
+YouTube
+TikTok
+Pinterest
+Reddit
+Threads
+Snapchat
+Telegram
+Discord
+Quora
+Medium
+Tumblr
+Mastodon
+Bluesky
+
+==================================================
+13. SEARCH / WEBMASTER
+======================
+
+Research:
+
+Google Search Console
+Google Business Profile
+Google Analytics
+Google Trends
+Google Ads Keyword Planner
+Google PageSpeed Insights
+Google Lighthouse
+Bing Webmaster Tools
+Bing Places
+Yandex Webmaster
+Naver Search Advisor
+Baidu Webmaster Tools
+
+==================================================
+14. LOCAL / BUSINESS SEO
+========================
+
+Research:
+
+Google Business Profile
+Bing Places
+Apple Business Connect
+Yelp
+Foursquare
+Tripadvisor
+Yellow Pages
+MapQuest
+HERE
+Waze
+BBB
+Hotfrog
+Manta
+Chamber of Commerce
+Crunchbase
+Clutch
+GoodFirms
+DesignRush
+Sortlist
+UpCity
+G2
+Capterra
+Trustpilot
+
+Do not create duplicate or false listings.
+
+==================================================
+15. CONTENT PLATFORMS
+=====================
+
+Research:
+
+WordPress
+Medium
+Substack
+Blogger
+Ghost
+Tumblr
+Hashnode
+DEV Community
+Vocal
+LinkedIn Articles
+Reddit
+Quora
+
+==================================================
+16. VIDEO PLATFORMS
+===================
+
+Research:
+
+YouTube
+Vimeo
+TikTok
+Instagram Reels
+Facebook Video
+Dailymotion
+Twitch
+Rumble
+
+==================================================
+17. DEVELOPER / TECH PLATFORMS
+==============================
+
+Research:
+
+GitHub
+GitLab
+Bitbucket
+Stack Overflow
+Stack Exchange
+DEV
+Hashnode
+CodePen
+Product Hunt
+Hacker News
+Kaggle
+
+==================================================
+18. DESIGN PLATFORMS
+====================
+
+Research:
+
+Behance
+Dribbble
+ArtStation
+DeviantArt
+Vimeo
+Pinterest
+Adobe Portfolio
+
+==================================================
+19. STARTUP / COMPANY DATABASES
+===============================
+
+Research:
+
+Crunchbase
+Wellfound
+F6S
+Gust
+StartupBlink
+Tracxn
+Dealroom
+Product Hunt
+
+==================================================
+20. SEO PROVIDERS
+=================
+
+Create optional adapters for:
+
+Semrush
+Ahrefs
+Moz
+DataForSEO
+SerpApi
+Similarweb
+Majestic
+
+The core system must work without paid SEO APIs.
+
+==================================================
+21. AI / GEO VISIBILITY
+=======================
+
+Create a measurable AI/GEO monitoring layer for:
+
+Google AI search surfaces
+Bing/Copilot
+Perplexity
+ChatGPT-related discoverability
+Gemini
+Claude
+You.com
+Brave Search
+
+Do not claim an AI ranking API exists unless officially documented.
+
+Classify each integration:
+
+OFFICIAL_API
+INDIRECT_MEASUREMENT
+MANUAL
+UNAVAILABLE
+
+==================================================
+22. OLLAMA
+==========
+
+Use Ollama for AI transformations.
+
+Environment variables:
+
+OLLAMA_BASE_URL
+OLLAMA_MODEL
+
+Create prompts for:
+
+profile adaptation
+bio generation
+about generation
+headline generation
+social description
+service descriptions
+SEO titles
+meta descriptions
+content generation
+content repurposing
+keyword clustering
+search intent
+competitor analysis
+content gap
+review sentiment
+review response drafting
+NAP consistency
+entity consistency
+GEO analysis
+
+Every prompt must include:
+
+"Use only facts supplied by the approved Master Profile.
+Never invent company facts."
+
+==================================================
+23. PLATFORM PROFILE GENERATOR
+==============================
+
+Build:
+
+Master Profile
+↓
+Platform Adapter
+↓
+Platform-specific profile
+
+Examples:
+
+LinkedIn
+Instagram
+Facebook
+X
+YouTube
+TikTok
+Pinterest
+Reddit
+Quora
+Medium
+etc.
+
+Each generated version must respect:
+
+character limits
+URL limits
+formatting
+platform-specific fields
+platform-specific terminology
+
+==================================================
+24. PROFILE COMPLETENESS
+========================
+
+For every platform calculate:
+
+Profile Completeness Score
+
+Check:
+
+name
+username
+profile image
+banner
+bio
+about
+website
+email
+phone
+location
+category
+services
+CTA
+links
+keywords
+description
+
+Example:
+
+LinkedIn: 92%
+Instagram: 100%
+X: 85%
+
+Create dashboard.
+
+==================================================
+25. PROFILE CHANGE DETECTION
+============================
+
+When Master Profile changes:
+
+Detect changed fields.
+
+Example:
+
+Old:
+Digital Marketing
+
+New:
+AI-powered Digital Marketing and Automation
+
+Determine which platforms are affected.
+
+Example:
+
+Website description
+LinkedIn About
+Facebook About
+Instagram Bio
+X Bio
+YouTube About
+
+Only regenerate affected derivatives.
+
+Do not unnecessarily modify unrelated profiles.
+
+==================================================
+26. APPROVAL SYSTEM
+===================
+
+Every generated change gets:
+
+DRAFT
+↓
+VALIDATION
+↓
+APPROVAL_REQUIRED
+↓
+APPROVED
+↓
+PUBLISHED
+
+Support:
+
+AUTO
+APPROVAL_REQUIRED
+MANUAL_ONLY
+
+Default important profile changes to:
+
+APPROVAL_REQUIRED
+
+==================================================
+27. OFFICIAL APIs
+=================
+
+For each platform:
+
+Research current official API documentation.
+
+Use official API wherever possible.
+
+Store credentials using:
+
+environment variables
+OAuth
+Docker secrets
+secure credential storage
+
+Never hardcode credentials.
+
+Create reusable integration interface:
+
+authenticate()
+getProfile()
+updateProfile()
+publish()
+getAnalytics()
+verify()
+
+Only implement methods supported by the platform.
+
+==================================================
+28. PLAYWRIGHT
+==============
+
+Create a reusable TypeScript Playwright framework.
+
+Structure:
+
+browser/
+├── core/
+├── sessions/
+├── adapters/
+├── pages/
+├── selectors/
+├── validators/
+├── screenshots/
+├── storage/
+└── tests/
+
+Use Playwright only when:
+
+* API is unavailable
+* automation is permitted
+* account access is legitimate
+* no security bypass is required
+
+NEVER bypass:
+
+CAPTCHA
+MFA
+anti-bot systems
+rate limits
+access controls
+security challenges
+
+If automation is not allowed:
+
+MANUAL_ONLY
+
+==================================================
+29. N8N WORKFLOWS
+=================
+
+Create importable JSON workflows:
+
+github_profile_webhook.json
+
+github_profile_sync.json
+
+profile_change_detector.json
+
+master_profile_parser.json
+
+master_profile_validator.json
+
+postgres_profile_sync.json
+
+platform_profile_generator.json
+
+profile_completeness.json
+
+platform_api_sync.json
+
+playwright_profile_sync.json
+
+approval_queue.json
+
+manual_action_queue.json
+
+social_content_generator.json
+
+content_repurposing.json
+
+content_distribution.json
+
+google_search_console.json
+
+google_business_profile.json
+
+bing_webmaster.json
+
+seo_audit.json
+
+keyword_monitoring.json
+
+serp_monitoring.json
+
+backlink_monitoring.json
+
+competitor_monitoring.json
+
+brand_mentions.json
+
+review_monitoring.json
+
+nap_consistency.json
+
+entity_consistency.json
+
+geo_visibility.json
+
+weekly_report.json
+
+monthly_report.json
+
+error_retry.json
+
+platform_health_check.json
+
+==================================================
+30. CONTENT ENGINE
+==================
+
+Create a master content workflow.
+
+ONE MASTER CONTENT
+↓
+AI transformation
+↓
+LinkedIn
+X
+Facebook
+Instagram
+Threads
+Pinterest
+Reddit
+Quora
+YouTube
+Newsletter
+Blog
+
+Do not simply copy/paste identical content.
+
+Each platform must receive native formatting.
+
+==================================================
+31. SEO ENGINE
+==============
+
+Build:
+
+technical SEO
+on-page SEO
+keyword clustering
+search intent
+competitor research
+content gap
+internal linking
+schema recommendations
+meta title
+meta description
+heading analysis
+image ALT
+Core Web Vitals
+indexing
+sitemap
+robots.txt
+canonical
+structured data
+
+==================================================
+32. ENTITY SEO
+==============
+
+Create:
+
+ENTITY_CONSISTENCY_SCORE
+
+Track:
+
+company
+brand
+founder
+services
+industry
+location
+website
+social profiles
+directories
+
+Detect contradictions.
+
+==================================================
+33. NAP CONSISTENCY
+===================
+
+Compare:
+
+Name
+Address
+Phone
+Website
+Email
+Hours
+Category
+
+across platforms.
+
+Generate:
+
+NAP_CONSISTENCY_REPORT
+
+==================================================
+34. MANUAL ACTION QUEUE
+=======================
+
+When automation is unavailable:
+
+create manual task.
+
+Fields:
+
+platform
+action
+instructions
+required_data
+status
+assigned_to
+evidence
+created_at
+completed_at
+
+The dashboard must clearly show:
+
+MANUAL ACTION REQUIRED
+
+Never pretend a manual action was completed.
+
+==================================================
+35. AUDIT LOG
+=============
+
+Every change must log:
+
+timestamp
+source
+commit SHA
+user
+platform
+field
+old value
+new value
+method
+approval
+status
+error
+
+Never log secrets.
+
+==================================================
+36. DASHBOARD
+=============
+
+Create Next.js dashboard.
+
+Pages:
+
+/dashboard
+/company
+/master-profile
+/versions
+/changes
+/platforms
+/profiles
+/profile-completeness
+/approvals
+/manual-actions
+/content
+/content-calendar
+/seo
+/keywords
+/serps
+/backlinks
+/competitors
+/mentions
+/reviews
+/local-seo
+/nap
+/entity
+/geo
+/analytics
+/reports
+/automation
+/errors
+/settings
+
+==================================================
+37. MASTER PROFILE EDITING
+==========================
+
+The dashboard may display/edit the Master Profile.
+
+However:
+
+The canonical editable files remain in GitHub.
+
+Preferred workflow:
+
+Dashboard edit
+↓
+Generate Git branch
+↓
+Create commit/PR
+↓
+Validation
+↓
+Human approval
+↓
+Merge
+↓
+Webhook
+↓
+n8n
+↓
+PostgreSQL
+
+Do not silently change PostgreSQL without updating GitHub.
+
+==================================================
+38. GITHUB URL
+==============
+
+I want to be able to provide one GitHub repository URL later.
+
+Example:
+
+https://github.com/OWNER/REPOSITORY
+
+The system must be configurable through:
+
+GITHUB_REPOSITORY
+GITHUB_BRANCH
+GITHUB_MASTER_PROFILE_PATH
+
+Example:
+
+GITHUB_REPOSITORY=owner/company-master-profile
+GITHUB_BRANCH=main
+GITHUB_MASTER_PROFILE_PATH=company-profile/master-profile.md
+
+The repository URL should be changeable through configuration.
+
+Do not hardcode it into source code.
+
+==================================================
+39. PRIVATE REPOSITORY SUPPORT
+==============================
+
+Support both:
+
+PUBLIC repository
+PRIVATE repository
+
+For private repositories use GitHub OAuth/token/app authentication.
+
+Never store GitHub tokens in source code.
+
+==================================================
+40. GITHUB CHANGE DETECTION
+===========================
+
+Support:
+
+GitHub Webhooks
+
+and optionally:
+
+scheduled polling
+
+Fallback:
+
+If webhook fails, scheduled n8n workflow checks the latest commit SHA.
+
+Store:
+
+last_processed_commit_sha
+
+If:
+
+current_commit_sha != last_processed_commit_sha
+
+then process changes.
+
+==================================================
+41. PROFILE IMPORT
+==================
+
+Create an importer that can read:
+
+Markdown
+YAML
+JSON
+
+Normalize into PostgreSQL.
+
+Example:
+
+master-profile.md
++
+company-facts.yaml
++
+services.yaml
+
+→ normalized Master Profile.
+
+==================================================
+42. VALIDATION
+==============
+
+Before syncing:
+
+Validate:
+
+required fields
+URLs
+emails
+phone
+character limits
+duplicate information
+invalid claims
+missing values
+conflicting values
+schema
+YAML syntax
+Markdown structure
+
+Block invalid changes.
+
+==================================================
+43. SECURITY
+============
+
+Implement:
+
+OAuth
+secret management
+RBAC
+audit logging
+input validation
+rate limiting
+CSRF protection
+secure cookies
+session isolation
+token refresh
+secret redaction
+
+Roles:
+
+ADMIN
+MANAGER
+MARKETING
+SEO
+EDITOR
+VIEWER
+
+==================================================
+44. DOCKER
+==========
+
+Create:
+
+docker-compose.yml
+
+Services:
+
+postgres
+n8n
+ollama
+api
+worker
+web
+
+Add health checks and persistent volumes.
+
+Use Redis only if required.
+
+==================================================
+45. PROJECT STRUCTURE
+=====================
+
+Create:
+
+company-automation/
+│
+├── README.md
+├── .env.example
+├── .gitignore
+├── docker-compose.yml
+├── Makefile
+│
+├── company-profile/
+│   ├── master-profile.md
+│   ├── company-facts.yaml
+│   ├── brands.yaml
+│   ├── services.yaml
+│   ├── industries.yaml
+│   ├── locations.yaml
+│   ├── people.yaml
+│   ├── contact.yaml
+│   ├── social-profiles.yaml
+│   ├── keywords.yaml
+│   ├── competitors.yaml
+│   ├── certifications.yaml
+│   ├── awards.yaml
+│   └── assets/
+│
+├── database/
+│   ├── migrations/
+│   ├── seeds/
+│   └── schema.sql
+│
+├── n8n/
+│   ├── workflows/
+│   └── README.md
+│
+├── apps/
+│   ├── api/
+│   ├── web/
+│   └── worker/
+│
+├── integrations/
+│   ├── github/
+│   ├── google/
+│   ├── meta/
+│   ├── linkedin/
+│   ├── x/
+│   ├── youtube/
+│   ├── pinterest/
+│   ├── reddit/
+│   ├── wordpress/
+│   ├── github/
+│   ├── gitlab/
+│   ├── telegram/
+│   ├── discord/
+│   ├── seo/
+│   └── directories/
+│
+├── browser/
+│   ├── core/
+│   ├── sessions/
+│   ├── adapters/
+│   ├── pages/
+│   ├── selectors/
+│   ├── validators/
+│   └── tests/
+│
+├── ai/
+│   ├── prompts/
+│   ├── ollama/
+│   ├── profile-generator/
+│   ├── content-generator/
+│   ├── seo-analyzer/
+│   └── geo-monitor/
+│
+├── docs/
+│   ├── architecture.md
+│   ├── setup.md
+│   ├── github-source-of-truth.md
+│   ├── platform-matrix.md
+│   ├── api-setup.md
+│   ├── playwright.md
+│   ├── n8n.md
+│   ├── ollama.md
+│   ├── seo.md
+│   ├── geo.md
+│   ├── security.md
+│   └── troubleshooting.md
+│
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   ├── e2e/
+│   └── platform/
+│
+└── scripts/
+├── setup.sh
+├── migrate.sh
+├── backup.sh
+└── health-check.sh
+
+==================================================
+46. ENVIRONMENT VARIABLES
+=========================
+
+Create .env.example.
+
+Include:
+
+GITHUB_REPOSITORY=
+GITHUB_BRANCH=main
+GITHUB_MASTER_PROFILE_PATH=
+GITHUB_WEBHOOK_SECRET=
+
+DATABASE_URL=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+
+N8N_ENCRYPTION_KEY=
+
+OLLAMA_BASE_URL=
+OLLAMA_MODEL=
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+META_APP_ID=
+META_APP_SECRET=
+
+LINKEDIN_CLIENT_ID=
+LINKEDIN_CLIENT_SECRET=
+
+X_CLIENT_ID=
+X_CLIENT_SECRET=
+
+REDDIT_CLIENT_ID=
+REDDIT_CLIENT_SECRET=
+
+PINTEREST_CLIENT_ID=
+PINTEREST_CLIENT_SECRET=
+
+WORDPRESS_URL=
+WORDPRESS_CLIENT_ID=
+WORDPRESS_CLIENT_SECRET=
+
+SEM_RUSH_API_KEY=
+AHREFS_API_KEY=
+MOZ_API_KEY=
+DATAFORSEO_LOGIN=
+DATAFORSEO_PASSWORD=
+SERPAPI_KEY=
+
+Only include credentials that are actually required.
+
+==================================================
+47. PLATFORM RESEARCH
+=====================
+
+Create:
+
+docs/platform-matrix.md
+
+For every platform include:
+
+Platform
+Category
+Official URL
+Developer URL
+Official API
+Documentation
+OAuth
+Profile update
+Publishing
+Analytics
+Browser automation
+Allowed?
+Manual required?
+Rate limits
+Pricing
+Access requirements
+Implementation status
+Last verified
+
+Use CURRENT official documentation.
+
+If unknown:
+
+UNKNOWN
+
+Never guess.
+
+==================================================
+48. IMPORTANT API RULE
+======================
+
+Do not fabricate:
+
+API endpoints
+OAuth scopes
+permissions
+rate limits
+pricing
+features
+
+If the API requires application approval, document it.
+
+If the API does not allow a required action, do not pretend it does.
+
+==================================================
+49. PLAYWRIGHT RULE
+===================
+
+Playwright must never be used to bypass platform security.
+
+If a platform prevents automation:
+
+stop automation
+create manual task
+record reason
+
+==================================================
+50. REPORTING
+=============
+
+Generate:
+
+Daily automation report
+Weekly social report
+Weekly SEO report
+Monthly SEO report
+Profile completeness report
+Platform health report
+NAP report
+Entity consistency report
+GEO visibility report
+Failed automation report
+
+==================================================
+51. CHANGE IMPACT REPORT
+========================
+
+When I change the Master Profile, generate:
+
+CHANGE IMPACT REPORT
+
+Example:
+
+Changed:
+Services
+
+Affected:
+
+LinkedIn About
+Facebook About
+Instagram Bio
+YouTube About
+Website structured data
+Google Business Profile
+Clutch profile
+GoodFirms profile
+
+Not affected:
+
+X username
+GitHub username
+Founder profile
+
+This is extremely important.
+
+==================================================
+52. DRY RUN MODE
+================
+
+Before publishing changes, support:
+
+DRY_RUN=true
+
+In dry-run mode:
+
+Do everything except external changes.
+
+Show:
+
+platform
+field
+old value
+new value
+reason
+source
+approval
+action
+
+==================================================
+53. ROLLBACK
+============
+
+If a bad profile update occurs:
+
+GitHub version rollback
+↓
+n8n detects rollback
+↓
+PostgreSQL updated
+↓
+affected platforms identified
+↓
+reversal changes generated
+↓
+approval
+↓
+platform update
+
+==================================================
+54. TEST MODE
+=============
+
+Create:
+
+TEST_MODE=true
+
+No external publishing in test mode.
+
+Use mocked APIs.
+
+==================================================
+55. DEFINITION OF DONE
+======================
+
+The project is complete when:
+
+[ ] GitHub Master Profile exists
+[ ] Markdown profile exists
+[ ] YAML structured profile exists
+[ ] GitHub versioning works
+[ ] GitHub webhook works
+[ ] n8n receives webhook
+[ ] PostgreSQL schema works
+[ ] GitHub → PostgreSQL sync works
+[ ] Change detection works
+[ ] Change impact analysis works
+[ ] Ollama profile transformation works
+[ ] Platform-specific profile generation works
+[ ] Validation works
+[ ] Approval workflow works
+[ ] API adapters exist where officially supported
+[ ] Playwright framework exists
+[ ] Manual action queue exists
+[ ] Profile completeness works
+[ ] NAP consistency works
+[ ] Entity consistency works
+[ ] SEO engine exists
+[ ] GEO monitoring exists
+[ ] Dashboard exists
+[ ] Audit logs exist
+[ ] Error handling exists
+[ ] Retry mechanism exists
+[ ] Docker setup works
+[ ] Tests exist
+[ ] Documentation exists
+[ ] No secrets committed
+[ ] No fabricated APIs
+[ ] No prohibited automation
+[ ] Dry-run mode works
+[ ] Rollback mechanism exists
+
+==================================================
+56. IMPLEMENTATION ORDER
+========================
+
+Do not attempt to blindly implement everything at once.
+
+PHASE 1
+Inspect existing repository and existing company profile.
+
+PHASE 2
+Create GitHub Master Profile structure.
+
+PHASE 3
+Create PostgreSQL schema.
+
+PHASE 4
+Create GitHub → n8n → PostgreSQL synchronization.
+
+PHASE 5
+Create Ollama profile transformation.
+
+PHASE 6
+Create platform registry and research matrix.
+
+PHASE 7
+Implement official APIs.
+
+PHASE 8
+Implement permitted Playwright adapters.
+
+PHASE 9
+Create profile completeness and consistency engine.
+
+PHASE 10
+Create social/content automation.
+
+PHASE 11
+Create SEO engine.
+
+PHASE 12
+Create GEO engine.
+
+PHASE 13
+Create dashboard.
+
+PHASE 14
+Testing/security/production deployment.
+
+==================================================
+57. FIRST ACTION
+================
+
+DO NOT start by writing random code.
+
+First inspect the current repository.
+
+Then ask me for the existing GitHub repository URL ONLY if I have not provided one.
+
+If I have already provided a repository URL, inspect it.
+
+Then inspect the existing company profile.
+
+Create:
+
+docs/platform-matrix.md
+
+and:
+
+docs/github-source-of-truth.md
+
+Then show me:
+
+1. Existing repository structure
+2. Existing company profile structure
+3. Information successfully extracted
+4. Missing information
+5. Conflicting information
+6. Proposed new Master Profile structure
+7. Platform capability matrix
+8. Implementation plan
+
+After that begin implementation.
+
+==================================================
+58. FINAL RULE
+==============
+
+The system must make future company profile changes extremely simple.
+
+My desired future workflow is:
+
+I edit:
+
+company-profile/master-profile.md
+
+I review it.
+
+I commit it.
+
+Then automatically:
+
+GitHub
+→ webhook
+→ n8n
+→ validation
+→ PostgreSQL
+→ change detection
+→ Ollama
+→ platform-specific versions
+→ approval
+→ APIs/Playwright
+→ verification
+→ report
+
+I should NOT have to manually edit 30–50 social profiles every time the company's approved description, service list, tagline, contact details, website or other master information changes.
+
+Build the system around this principle.
+
+BEGIN.

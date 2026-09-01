@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo123
+      POSTGRES_DB: odoo
+    ports:
+      - "5432:5432"
+
+  odoo:
+    image: odoo:19
+    depends_on:
+      - postgres
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: postgres
+      USER: odoo
+      PASSWORD: odoo123
