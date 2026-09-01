@@ -1,279 +1,67 @@
 # BILLION DREAMS UNITED OS — CANONICAL DATA MODEL
-# Stage B.3 | Version 0.2 | 2026-09-01
-# Six critical entities from B.2 + ten additional business entities.
+# Stage B.4 | Version 1.0 | 2026-09-01
+# All 30 canonical entities. B.5 will standardize common fields explicitly.
 
-version: "0.2"
-status: "expanded-field-schema"
+version: "1.0"
+status: "complete-entity-schema"
 entities:
-  Lead:
-    description: "Prospective customer or business contact entering the sales funnel."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      source: {type: string, required: true}
-      source_url: {type: string, required: false}
-      first_name: {type: string, required: false}
-      last_name: {type: string, required: false}
-      email: {type: string, required: false}
-      phone: {type: string, required: false}
-      company_name: {type: string, required: false}
-      job_title: {type: string, required: false}
-      country: {type: string, required: false}
-      status: {type: string, required: true}
-      score: {type: number, required: false}
-      assigned_to: {type: string, required: false}
-  Account:
-    description: "Business/customer organization associated with contacts and commercial activity."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      name: {type: string, required: true}
-      legal_name: {type: string, required: false}
-      website: {type: string, required: false}
-      industry: {type: string, required: false}
-      country: {type: string, required: false}
-      status: {type: string, required: true}
-      owner_id: {type: string, required: false}
-  Opportunity:
-    description: "Qualified commercial opportunity being progressed toward revenue."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: true}
-      contact_id: {type: string, required: false}
-      name: {type: string, required: true}
-      stage: {type: string, required: true}
-      amount: {type: number, required: false}
-      currency: {type: string, required: false}
-      probability: {type: number, required: false}
-      expected_close_date: {type: date, required: false}
-      owner_id: {type: string, required: false}
-      source: {type: string, required: false}
-  Contact:
-    description: "Individual person associated with an account or lead."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: false}
-      first_name: {type: string, required: true}
-      last_name: {type: string, required: false}
-      email: {type: string, required: false}
-      phone: {type: string, required: false}
-      job_title: {type: string, required: false}
-      country: {type: string, required: false}
-      status: {type: string, required: true}
-  Project:
-    description: "Client delivery engagement managed after commercial handoff."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: true}
-      opportunity_id: {type: string, required: false}
-      name: {type: string, required: true}
-      status: {type: string, required: true}
-      start_date: {type: date, required: false}
-      target_end_date: {type: date, required: false}
-      project_manager_id: {type: string, required: false}
-      budget: {type: number, required: false}
-      currency: {type: string, required: false}
-  Invoice:
-    description: "Commercial invoice issued for products or services."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: true}
-      project_id: {type: string, required: false}
-      invoice_number: {type: string, required: true}
-      issue_date: {type: date, required: true}
-      due_date: {type: date, required: true}
-      status: {type: string, required: true}
-      subtotal: {type: number, required: true}
-      tax_amount: {type: number, required: false}
-      total_amount: {type: number, required: true}
-      currency: {type: string, required: true}
-      paid_at: {type: datetime, required: false}
-  Company:
-    description: "Legal or operating company represented in the OS."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: false}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      name: {type: string, required: true}
-      legal_name: {type: string, required: false}
-      registration_number: {type: string, required: false}
-      country: {type: string, required: true}
-      status: {type: string, required: true}
-  Brand:
-    description: "A market-facing brand operating under a company."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      name: {type: string, required: true}
-      website: {type: string, required: false}
-      market: {type: string, required: false}
-      status: {type: string, required: true}
-  Client:
-    description: "Customer relationship record for an active or former client."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: true}
-      primary_contact_id: {type: string, required: false}
-      onboarding_date: {type: date, required: false}
-      status: {type: string, required: true}
-      success_owner_id: {type: string, required: false}
-  Campaign:
-    description: "Marketing campaign used to generate or nurture demand."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      name: {type: string, required: true}
-      channel: {type: string, required: true}
-      objective: {type: string, required: true}
-      status: {type: string, required: true}
-      start_date: {type: date, required: false}
-      end_date: {type: date, required: false}
-      budget: {type: number, required: false}
-  Meeting:
-    description: "Scheduled interaction between company representatives and external parties."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: false}
-      opportunity_id: {type: string, required: false}
-      contact_id: {type: string, required: false}
-      scheduled_at: {type: datetime, required: true}
-      duration_minutes: {type: integer, required: false}
-      meeting_type: {type: string, required: true}
-      status: {type: string, required: true}
-      owner_id: {type: string, required: false}
-  Proposal:
-    description: "Commercial proposal presented to a prospect or client."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      opportunity_id: {type: string, required: true}
-      version: {type: string, required: true}
-      title: {type: string, required: true}
-      amount: {type: number, required: false}
-      currency: {type: string, required: false}
-      status: {type: string, required: true}
-      sent_at: {type: datetime, required: false}
-      expires_at: {type: datetime, required: false}
-  Contract:
-    description: "Commercial agreement governing an engagement."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: true}
-      opportunity_id: {type: string, required: false}
-      contract_number: {type: string, required: true}
-      status: {type: string, required: true}
-      effective_date: {type: date, required: false}
-      expiry_date: {type: date, required: false}
-      value: {type: number, required: false}
-      currency: {type: string, required: false}
-  Payment:
-    description: "Recorded receipt or settlement against a commercial obligation."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: true}
-      invoice_id: {type: string, required: false}
-      amount: {type: number, required: true}
-      currency: {type: string, required: true}
-      payment_date: {type: date, required: true}
-      method: {type: string, required: false}
-      status: {type: string, required: true}
-      reference: {type: string, required: false}
-  Task:
-    description: "Action item assigned to a person or operational owner."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      title: {type: string, required: true}
-      description: {type: string, required: false}
-      status: {type: string, required: true}
-      priority: {type: string, required: false}
-      assignee_id: {type: string, required: false}
-      due_date: {type: date, required: false}
-      related_entity_type: {type: string, required: false}
-      related_entity_id: {type: string, required: false}
-  Ticket:
-    description: "Customer or internal support/service issue requiring resolution."
-    fields:
-      id: {type: string, required: true}
-      company_id: {type: string, required: true}
-      brand_id: {type: string, required: true}
-      created_at: {type: datetime, required: true}
-      updated_at: {type: datetime, required: true}
-      account_id: {type: string, required: false}
-      client_id: {type: string, required: false}
-      subject: {type: string, required: true}
-      description: {type: string, required: true}
-      priority: {type: string, required: true}
-      status: {type: string, required: true}
-      assignee_id: {type: string, required: false}
-      resolved_at: {type: datetime, required: false}
+  Lead: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, source, source_url, first_name, last_name, email, phone, company_name, job_title, country, status, score, assigned_to]}
+  Account: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, name, legal_name, website, industry, country, status, owner_id]}
+  Opportunity: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, account_id, contact_id, name, stage, amount, currency, probability, expected_close_date, owner_id, source]}
+  Contact: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, account_id, first_name, last_name, email, phone, job_title, country, status]}
+  Project: {domain: delivery, fields: [id, company_id, brand_id, created_at, updated_at, account_id, opportunity_id, name, status, start_date, target_end_date, project_manager_id, budget, currency]}
+  Invoice: {domain: finance, fields: [id, company_id, brand_id, created_at, updated_at, account_id, project_id, invoice_number, issue_date, due_date, status, subtotal, tax_amount, total_amount, currency, paid_at]}
+  Company: {domain: organization, fields: [id, company_id, brand_id, created_at, updated_at, name, legal_name, registration_number, country, status]}
+  Brand: {domain: organization, fields: [id, company_id, brand_id, created_at, updated_at, name, website, market, status]}
+  Client: {domain: customer, fields: [id, company_id, brand_id, created_at, updated_at, account_id, primary_contact_id, onboarding_date, status, success_owner_id]}
+  Campaign: {domain: marketing, fields: [id, company_id, brand_id, created_at, updated_at, name, channel, objective, status, start_date, end_date, budget]}
+  Meeting: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, account_id, opportunity_id, contact_id, scheduled_at, duration_minutes, meeting_type, status, owner_id]}
+  Proposal: {domain: sales, fields: [id, company_id, brand_id, created_at, updated_at, opportunity_id, version, title, amount, currency, status, sent_at, expires_at]}
+  Contract: {domain: legal, fields: [id, company_id, brand_id, created_at, updated_at, account_id, opportunity_id, contract_number, status, effective_date, expiry_date, value, currency]}
+  Payment: {domain: finance, fields: [id, company_id, brand_id, created_at, updated_at, account_id, invoice_id, amount, currency, payment_date, method, status, reference]}
+  Task: {domain: operations, fields: [id, company_id, brand_id, created_at, updated_at, title, description, status, priority, assignee_id, due_date, related_entity_type, related_entity_id]}
+  Ticket: {domain: support, fields: [id, company_id, brand_id, created_at, updated_at, account_id, client_id, subject, description, priority, status, assignee_id, resolved_at]}
+  Agent: {domain: ai, fields: [id, company_id, brand_id, created_at, updated_at, name, purpose, status, version, owner_id, policy_id]}
+  AgentRun: {domain: ai, fields: [id, company_id, brand_id, created_at, updated_at, agent_id, workflow_run_id, input_ref, output_ref, status, started_at, completed_at, error_code]}
+  Skill: {domain: ai, fields: [id, company_id, brand_id, created_at, updated_at, name, description, version, status, agent_id]}
+  Tool: {domain: platform, fields: [id, company_id, brand_id, created_at, updated_at, name, provider, endpoint, auth_type, status, permission_scope]}
+  Workflow: {domain: automation, fields: [id, company_id, brand_id, created_at, updated_at, name, trigger_type, status, version, owner_id, definition_ref]}
+  WorkflowRun: {domain: automation, fields: [id, company_id, brand_id, created_at, updated_at, workflow_id, status, started_at, completed_at, error_code, execution_ref]}
+  Event: {domain: platform, fields: [id, company_id, brand_id, created_at, updated_at, event_type, source, entity_type, entity_id, payload_ref, occurred_at]}
+  Evaluation: {domain: governance, fields: [id, company_id, brand_id, created_at, updated_at, subject_type, subject_id, evaluator, criteria_version, score, status, evidence_ref]}
+  Approval: {domain: governance, fields: [id, company_id, brand_id, created_at, updated_at, subject_type, subject_id, requested_by, approver_id, status, requested_at, decided_at, decision_ref]}
+  Incident: {domain: governance, fields: [id, company_id, brand_id, created_at, updated_at, severity, category, title, description, status, owner_id, resolved_at]}
+  Department: {domain: organization, fields: [id, company_id, brand_id, created_at, updated_at, name, purpose, parent_department_id, owner_id, status]}
+  User: {domain: identity, fields: [id, company_id, brand_id, created_at, updated_at, email, display_name, role, status, external_ref]}
+  Employee: {domain: people, fields: [id, company_id, brand_id, created_at, updated_at, user_id, employee_number, job_title, department_id, status, manager_id]}
+  Partner: {domain: ecosystem, fields: [id, company_id, brand_id, created_at, updated_at, name, partner_type, website, country, status, owner_id]}
 
 relationships:
-  - {from: Lead, to: Account, type: "may_convert_to"}
-  - {from: Account, to: Contact, type: "has_many"}
-  - {from: Account, to: Opportunity, type: "has_many"}
-  - {from: Opportunity, to: Project, type: "may_create"}
-  - {from: Account, to: Project, type: "has_many"}
-  - {from: Project, to: Invoice, type: "may_generate"}
-  - {from: Account, to: Invoice, type: "has_many"}
-  - {from: Company, to: Brand, type: "has_many"}
-  - {from: Brand, to: Campaign, type: "has_many"}
-  - {from: Account, to: Client, type: "may_become"}
-  - {from: Opportunity, to: Meeting, type: "may_generate"}
-  - {from: Opportunity, to: Proposal, type: "has_many"}
-  - {from: Account, to: Contract, type: "has_many"}
-  - {from: Invoice, to: Payment, type: "has_many"}
-  - {from: Client, to: Ticket, type: "has_many"}
-  - {from: Project, to: Task, type: "has_many"}
+  - {from: Lead, to: Account, type: may_convert_to}
+  - {from: Account, to: Contact, type: has_many}
+  - {from: Account, to: Opportunity, type: has_many}
+  - {from: Opportunity, to: Project, type: may_create}
+  - {from: Account, to: Project, type: has_many}
+  - {from: Project, to: Invoice, type: may_generate}
+  - {from: Account, to: Invoice, type: has_many}
+  - {from: Company, to: Brand, type: has_many}
+  - {from: Brand, to: Campaign, type: has_many}
+  - {from: Account, to: Client, type: may_become}
+  - {from: Opportunity, to: Meeting, type: may_generate}
+  - {from: Opportunity, to: Proposal, type: has_many}
+  - {from: Account, to: Contract, type: has_many}
+  - {from: Invoice, to: Payment, type: has_many}
+  - {from: Client, to: Ticket, type: has_many}
+  - {from: Project, to: Task, type: has_many}
+  - {from: Agent, to: AgentRun, type: has_many}
+  - {from: Agent, to: Skill, type: uses}
+  - {from: Agent, to: Tool, type: may_use}
+  - {from: Workflow, to: WorkflowRun, type: has_many}
+  - {from: WorkflowRun, to: AgentRun, type: may_contain}
+  - {from: Event, to: Workflow, type: may_trigger}
+  - {from: Evaluation, to: Agent, type: evaluates}
+  - {from: Approval, to: AgentRun, type: may_gate}
+  - {from: Incident, to: WorkflowRun, type: may_reference}
+  - {from: Department, to: Employee, type: has_many}
+  - {from: User, to: Employee, type: may_map_to}
+  - {from: Company, to: Partner, type: has_many}
