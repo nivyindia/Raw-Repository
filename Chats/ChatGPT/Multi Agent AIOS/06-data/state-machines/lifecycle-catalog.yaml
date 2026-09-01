@@ -1,0 +1,95 @@
+# BILLION DREAMS UNITED OS — LIFECYCLE STATE-MACHINE CATALOG
+# Stage B.10 | Version 1.0 | 2026-09-01
+
+version: "1.0"
+status: "lifecycle-contract-catalog"
+
+state_machines:
+  - id: lead
+    entity: Lead
+    states: [new, enriched, qualified, disqualified, converted]
+    terminal_states: [disqualified, converted]
+  - id: account
+    entity: Account
+    states: [prospect, active, inactive, archived]
+    terminal_states: [archived]
+  - id: opportunity
+    entity: Opportunity
+    definition_ref: "06-data/state-machines/opportunity.yaml"
+  - id: project
+    entity: Project
+    definition_ref: "06-data/state-machines/project.yaml"
+  - id: invoice
+    entity: Invoice
+    states: [draft, issued, partially_paid, paid, overdue, void]
+    terminal_states: [paid, void]
+  - id: client
+    entity: Client
+    states: [onboarding, active, at_risk, inactive, offboarded]
+    terminal_states: [offboarded]
+  - id: campaign
+    entity: Campaign
+    states: [draft, scheduled, active, paused, completed, cancelled]
+    terminal_states: [completed, cancelled]
+  - id: meeting
+    entity: Meeting
+    states: [scheduled, confirmed, completed, no_show, cancelled]
+    terminal_states: [completed, no_show, cancelled]
+  - id: proposal
+    entity: Proposal
+    states: [draft, internal_review, sent, viewed, accepted, rejected, expired]
+    terminal_states: [accepted, rejected, expired]
+  - id: contract
+    entity: Contract
+    states: [draft, review, sent, signed, active, expired, terminated]
+    terminal_states: [expired, terminated]
+  - id: payment
+    entity: Payment
+    states: [pending, processing, succeeded, failed, refunded]
+    terminal_states: [succeeded, failed, refunded]
+  - id: task
+    entity: Task
+    states: [todo, in_progress, blocked, review, done, cancelled]
+    terminal_states: [done, cancelled]
+  - id: ticket
+    entity: Ticket
+    states: [open, triaged, in_progress, waiting, resolved, closed]
+    terminal_states: [closed]
+  - id: agent
+    entity: Agent
+    states: [draft, testing, approved, active, suspended, retired]
+    terminal_states: [retired]
+  - id: agent_run
+    entity: AgentRun
+    states: [queued, running, succeeded, failed, cancelled, escalated]
+    terminal_states: [succeeded, failed, cancelled, escalated]
+  - id: workflow
+    entity: Workflow
+    states: [draft, testing, approved, active, paused, retired]
+    terminal_states: [retired]
+  - id: workflow_run
+    entity: WorkflowRun
+    states: [queued, running, succeeded, failed, cancelled, escalated]
+    terminal_states: [succeeded, failed, cancelled, escalated]
+  - id: approval
+    entity: Approval
+    states: [requested, approved, rejected, expired, cancelled]
+    terminal_states: [approved, rejected, expired, cancelled]
+  - id: incident
+    entity: Incident
+    states: [open, investigating, contained, resolved, closed]
+    terminal_states: [closed]
+  - id: evaluation
+    entity: Evaluation
+    states: [queued, running, passed, failed, waived]
+    terminal_states: [passed, failed, waived]
+
+invariants:
+  - "Every lifecycle transition must be attributable to an event, command, or authorized human action."
+  - "Terminal states cannot be exited without an explicit versioned migration/change decision."
+  - "High-impact transitions must pass required authorization/approval gates."
+  - "State changes must be auditable with actor, timestamp, previous state, new state, and reason."
+  - "Unknown states or transitions are rejected rather than silently accepted."
+  - "Each state machine must be implemented and tested before its corresponding production component is marked complete."
+
+implementation_note: "B.10 establishes the catalog and lifecycle contract. Detailed transition definitions may be split into entity-specific files in subsequent stages."
