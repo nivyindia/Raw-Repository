@@ -1,0 +1,12 @@
+event_type: lead.created
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Lead, id: string}
+  actor: {type: string, id: string}
+  lead_id: string
+  company_id: string
+  brand_id: string
+  provenance_ref: string
