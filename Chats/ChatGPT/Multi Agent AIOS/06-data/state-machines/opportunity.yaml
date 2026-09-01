@@ -1,0 +1,52 @@
+# BILLION DREAMS UNITED OS — OPPORTUNITY STATE MACHINE
+# Stage B.8 | Version 1.0 | 2026-09-01
+
+id: opportunity
+entity: Opportunity
+version: "1.0"
+initial_state: new
+terminal_states: [won, lost, abandoned]
+
+states:
+  new:
+    description: "Opportunity created from a qualified lead/account."
+  qualified:
+    description: "Commercial opportunity meets qualification criteria."
+  discovery:
+    description: "Needs, scope, budget and decision process are being established."
+  proposal:
+    description: "A commercial proposal is being prepared or has been sent."
+  negotiation:
+    description: "Commercial terms, scope or contract terms are under negotiation."
+  contract_pending:
+    description: "Commercial agreement is awaiting signature/approval."
+  won:
+    description: "Opportunity converted to a successful commercial outcome."
+  lost:
+    description: "Opportunity closed without winning the business."
+  abandoned:
+    description: "Opportunity is intentionally stopped because it is no longer actionable."
+
+transitions:
+  - {from: new, to: qualified, trigger: qualification_completed, workflow: WF006, agent: A054}
+  - {from: qualified, to: discovery, trigger: discovery_started, workflow: WF007, agent: A055}
+  - {from: discovery, to: proposal, trigger: proposal_requested, workflow: WF022, agent: A060}
+  - {from: proposal, to: negotiation, trigger: proposal_feedback_received, workflow: WF023, agent: A060}
+  - {from: negotiation, to: contract_pending, trigger: commercial_terms_accepted, workflow: WF024, agent: A060}
+  - {from: contract_pending, to: won, trigger: contract_signed, workflow: WF025, agent: A065}
+  - {from: qualified, to: lost, trigger: disqualified_or_declined, workflow: WF017, agent: A052}
+  - {from: discovery, to: lost, trigger: opportunity_lost, workflow: WF017, agent: A052}
+  - {from: proposal, to: lost, trigger: proposal_declined, workflow: WF017, agent: A052}
+  - {from: negotiation, to: lost, trigger: negotiation_failed, workflow: WF017, agent: A052}
+  - {from: contract_pending, to: lost, trigger: contract_declined_or_expired, workflow: WF017, agent: A052}
+  - {from: qualified, to: abandoned, trigger: inactivity_timeout, workflow: WF018, agent: A050}
+  - {from: discovery, to: abandoned, trigger: inactivity_timeout, workflow: WF018, agent: A050}
+  - {from: proposal, to: abandoned, trigger: proposal_expired, workflow: WF018, agent: A050}
+
+invariants:
+  - "Only qualified opportunities may enter discovery."
+  - "Only opportunities with sufficient discovery evidence may enter proposal."
+  - "Won requires a verified contract-signed event or approved equivalent commercial close event."
+  - "Lost and abandoned are terminal unless an explicit reopen policy is implemented."
+  - "Every transition must be auditable with trigger, timestamp, actor/agent and resulting state."
+  - "Financially or contractually binding actions require approval according to the AI risk policy."
