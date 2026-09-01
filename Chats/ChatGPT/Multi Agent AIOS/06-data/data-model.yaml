@@ -1,17 +1,16 @@
 # BILLION DREAMS UNITED OS — CANONICAL DATA MODEL
-# Stage B.2 | Version 0.1 | 2026-09-01
-# Six critical entities: Lead, Account, Opportunity, Contact, Project, Invoice.
-# Common fields are standardized in B.5; fields below are the B.2 entity-specific baseline.
+# Stage B.3 | Version 0.2 | 2026-09-01
+# Six critical entities from B.2 + ten additional business entities.
 
-version: "0.1"
-status: "baseline-field-schema"
+version: "0.2"
+status: "expanded-field-schema"
 entities:
   Lead:
     description: "Prospective customer or business contact entering the sales funnel."
     fields:
-      id: {type: string, required: true, description: "Stable unique identifier"}
-      company_id: {type: string, required: true, description: "Owning company identifier"}
-      brand_id: {type: string, required: true, description: "Owning brand identifier"}
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
       created_at: {type: datetime, required: true}
       updated_at: {type: datetime, required: true}
       source: {type: string, required: true}
@@ -26,7 +25,6 @@ entities:
       status: {type: string, required: true}
       score: {type: number, required: false}
       assigned_to: {type: string, required: false}
-
   Account:
     description: "Business/customer organization associated with contacts and commercial activity."
     fields:
@@ -42,7 +40,6 @@ entities:
       country: {type: string, required: false}
       status: {type: string, required: true}
       owner_id: {type: string, required: false}
-
   Opportunity:
     description: "Qualified commercial opportunity being progressed toward revenue."
     fields:
@@ -61,7 +58,6 @@ entities:
       expected_close_date: {type: date, required: false}
       owner_id: {type: string, required: false}
       source: {type: string, required: false}
-
   Contact:
     description: "Individual person associated with an account or lead."
     fields:
@@ -78,7 +74,6 @@ entities:
       job_title: {type: string, required: false}
       country: {type: string, required: false}
       status: {type: string, required: true}
-
   Project:
     description: "Client delivery engagement managed after commercial handoff."
     fields:
@@ -96,7 +91,6 @@ entities:
       project_manager_id: {type: string, required: false}
       budget: {type: number, required: false}
       currency: {type: string, required: false}
-
   Invoice:
     description: "Commercial invoice issued for products or services."
     fields:
@@ -116,6 +110,155 @@ entities:
       total_amount: {type: number, required: true}
       currency: {type: string, required: true}
       paid_at: {type: datetime, required: false}
+  Company:
+    description: "Legal or operating company represented in the OS."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: false}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      name: {type: string, required: true}
+      legal_name: {type: string, required: false}
+      registration_number: {type: string, required: false}
+      country: {type: string, required: true}
+      status: {type: string, required: true}
+  Brand:
+    description: "A market-facing brand operating under a company."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      name: {type: string, required: true}
+      website: {type: string, required: false}
+      market: {type: string, required: false}
+      status: {type: string, required: true}
+  Client:
+    description: "Customer relationship record for an active or former client."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: true}
+      primary_contact_id: {type: string, required: false}
+      onboarding_date: {type: date, required: false}
+      status: {type: string, required: true}
+      success_owner_id: {type: string, required: false}
+  Campaign:
+    description: "Marketing campaign used to generate or nurture demand."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      name: {type: string, required: true}
+      channel: {type: string, required: true}
+      objective: {type: string, required: true}
+      status: {type: string, required: true}
+      start_date: {type: date, required: false}
+      end_date: {type: date, required: false}
+      budget: {type: number, required: false}
+  Meeting:
+    description: "Scheduled interaction between company representatives and external parties."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: false}
+      opportunity_id: {type: string, required: false}
+      contact_id: {type: string, required: false}
+      scheduled_at: {type: datetime, required: true}
+      duration_minutes: {type: integer, required: false}
+      meeting_type: {type: string, required: true}
+      status: {type: string, required: true}
+      owner_id: {type: string, required: false}
+  Proposal:
+    description: "Commercial proposal presented to a prospect or client."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      opportunity_id: {type: string, required: true}
+      version: {type: string, required: true}
+      title: {type: string, required: true}
+      amount: {type: number, required: false}
+      currency: {type: string, required: false}
+      status: {type: string, required: true}
+      sent_at: {type: datetime, required: false}
+      expires_at: {type: datetime, required: false}
+  Contract:
+    description: "Commercial agreement governing an engagement."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: true}
+      opportunity_id: {type: string, required: false}
+      contract_number: {type: string, required: true}
+      status: {type: string, required: true}
+      effective_date: {type: date, required: false}
+      expiry_date: {type: date, required: false}
+      value: {type: number, required: false}
+      currency: {type: string, required: false}
+  Payment:
+    description: "Recorded receipt or settlement against a commercial obligation."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: true}
+      invoice_id: {type: string, required: false}
+      amount: {type: number, required: true}
+      currency: {type: string, required: true}
+      payment_date: {type: date, required: true}
+      method: {type: string, required: false}
+      status: {type: string, required: true}
+      reference: {type: string, required: false}
+  Task:
+    description: "Action item assigned to a person or operational owner."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      title: {type: string, required: true}
+      description: {type: string, required: false}
+      status: {type: string, required: true}
+      priority: {type: string, required: false}
+      assignee_id: {type: string, required: false}
+      due_date: {type: date, required: false}
+      related_entity_type: {type: string, required: false}
+      related_entity_id: {type: string, required: false}
+  Ticket:
+    description: "Customer or internal support/service issue requiring resolution."
+    fields:
+      id: {type: string, required: true}
+      company_id: {type: string, required: true}
+      brand_id: {type: string, required: true}
+      created_at: {type: datetime, required: true}
+      updated_at: {type: datetime, required: true}
+      account_id: {type: string, required: false}
+      client_id: {type: string, required: false}
+      subject: {type: string, required: true}
+      description: {type: string, required: true}
+      priority: {type: string, required: true}
+      status: {type: string, required: true}
+      assignee_id: {type: string, required: false}
+      resolved_at: {type: datetime, required: false}
 
 relationships:
   - {from: Lead, to: Account, type: "may_convert_to"}
@@ -125,3 +268,12 @@ relationships:
   - {from: Account, to: Project, type: "has_many"}
   - {from: Project, to: Invoice, type: "may_generate"}
   - {from: Account, to: Invoice, type: "has_many"}
+  - {from: Company, to: Brand, type: "has_many"}
+  - {from: Brand, to: Campaign, type: "has_many"}
+  - {from: Account, to: Client, type: "may_become"}
+  - {from: Opportunity, to: Meeting, type: "may_generate"}
+  - {from: Opportunity, to: Proposal, type: "has_many"}
+  - {from: Account, to: Contract, type: "has_many"}
+  - {from: Invoice, to: Payment, type: "has_many"}
+  - {from: Client, to: Ticket, type: "has_many"}
+  - {from: Project, to: Task, type: "has_many"}
