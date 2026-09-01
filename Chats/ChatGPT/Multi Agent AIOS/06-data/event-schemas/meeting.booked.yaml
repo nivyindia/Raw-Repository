@@ -1,0 +1,14 @@
+event_type: meeting.booked
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Meeting, id: string}
+  actor: {type: string, id: string}
+  meeting_id: string
+  account_id: string
+  opportunity_id: string
+  contact_id: string
+  scheduled_at: datetime
+  booking_ref: string
