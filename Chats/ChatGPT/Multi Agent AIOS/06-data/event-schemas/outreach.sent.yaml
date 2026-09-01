@@ -1,0 +1,13 @@
+event_type: outreach.sent
+version: "1.0"
+payload:
+  event_id: string
+  occurred_at: datetime
+  source: string
+  entity: {type: Lead, id: string}
+  actor: {type: string, id: string}
+  lead_id: string
+  channel: string
+  message_ref: string
+  campaign_id: string
+  consent_status: string
