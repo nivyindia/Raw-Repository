@@ -63,6 +63,9 @@ services:
       N8N_SECURE_COOKIE: ${N8N_SECURE_COOKIE:-false}
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:-change-me-dev-encryption-key}
       GENERIC_TIMEZONE: ${GENERIC_TIMEZONE:-Asia/Kolkata}
+      AIOS_RUNTIME_URL: ${AIOS_RUNTIME_URL:-http://aios-runtime:8080}
+      ODOO_SYNC_URL: ${ODOO_SYNC_URL:-http://odoo-sync:8091}
+      AIOS_N8N_BASE_URL: ${AIOS_N8N_BASE_URL:-http://n8n:5678}
     volumes: [n8n_data:/home/node/.n8n]
     healthcheck:
       test: ["CMD-SHELL", "node -e \"require('http').get('http://127.0.0.1:5678/healthz', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))\""]
