@@ -1,0 +1,125 @@
+version: "1.0"
+name: AIOS Permission and Risk Matrix
+purpose: >-
+  Canonical authorization matrix mapping AI action risk levels L0-L4 to
+  allowed execution mode, approval requirements, and audit requirements.
+
+risk_levels:
+  L0:
+    name: read_only_low_risk
+    description: Read-only retrieval or analysis with no external side effect.
+    ai_allowed: true
+    approval_required: false
+    human_review: optional
+    audit_required: true
+
+  L1:
+    name: internal_reversible
+    description: Internal, reversible actions with limited operational impact.
+    ai_allowed: true
+    approval_required: false
+    human_review: sampled
+    audit_required: true
+
+  L2:
+    name: controlled_external_or_data_change
+    description: >-
+      Governed external communication or material internal data changes where
+      policy, consent, and authorization are explicitly satisfied.
+    ai_allowed: policy_gated
+    approval_required: policy_defined
+    human_review: required_for_exceptions
+    audit_required: true
+
+  L3:
+    name: material_external_action
+    description: >-
+      Material external, commercial, financial, contractual, or consequential
+      action requiring explicit authorization before execution.
+    ai_allowed: false_by_default
+    approval_required: true
+    human_review: required
+    audit_required: true
+
+  L4:
+    name: high_impact_restricted
+    description: >-
+      High-impact, irreversible, regulated, privileged, or otherwise restricted
+      action outside normal autonomous AI authority.
+    ai_allowed: false
+    approval_required: explicit_human
+    human_review: mandatory
+    audit_required: true
+    autonomous_execution: prohibited
+
+matrix:
+  - risk_level: L0
+    read_data: allowed
+    write_data: prohibited
+    external_communication: prohibited
+    financial_action: prohibited
+    contract_action: prohibited
+    approval_action: prohibited
+
+  - risk_level: L1
+    read_data: allowed
+    write_data: allowed_if_reversible_and_authorized
+    external_communication: prohibited
+    financial_action: prohibited
+    contract_action: prohibited
+    approval_action: prohibited
+
+  - risk_level: L2
+    read_data: allowed
+    write_data: allowed_if_policy_permits
+    external_communication: allowed_if_consent_and_policy_permit
+    financial_action: approval_required
+    contract_action: approval_required
+    approval_action: prohibited
+
+  - risk_level: L3
+    read_data: allowed
+    write_data: approval_required
+    external_communication: approval_required
+    financial_action: approval_required
+    contract_action: approval_required
+    approval_action: human_only
+
+  - risk_level: L4
+    read_data: restricted_by_policy
+    write_data: prohibited_for_autonomy
+    external_communication: prohibited_for_autonomy
+    financial_action: prohibited_for_autonomy
+    contract_action: prohibited_for_autonomy
+    approval_action: human_only
+
+global_rules:
+  default: deny
+  least_privilege: true
+  policy_must_be_resolved_before_action: true
+  authorization_chain: "Agent -> Skill -> Tool -> Action"
+  consent_must_not_be_inferred: true
+  protected_class_inference_prohibited: true
+  private_personal_data_use_requires_explicit_policy_basis: true
+  irreversible_actions_require_explicit_authorization: true
+  policy_exceptions_require_human_approval: true
+  every_write_must_be_audited: true
+  every_external_action_must_be_traceable: true
+  uncertainty_fails_closed: true
+
+approval_rules:
+  required_when:
+    - risk_level_is_L3_or_L4
+    - policy_explicitly_requires_approval
+    - action_exceeds_registered_agent_authority
+    - material_policy_exception_is_requested
+  approval_cannot:
+    - grant_permissions_not_defined_by_policy
+    - override_law_or_platform_rules
+    - remove_suppression_or_consent_requirements
+    - authorize prohibited L4 autonomous execution
+
+change_control:
+  owner_signoff_required: true
+  version_bump_required: true
+  pull_request_required: true
