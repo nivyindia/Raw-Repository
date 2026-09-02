@@ -1,0 +1,254 @@
+version: "1.0"
+spec_id: ODOO-APPROVAL-REQUEST-001
+name: Odoo approval.request Model Specification
+status: proposed
+owner: Billion Dreams United AIOS Governance
+purpose: >-
+  Define the governed Odoo approval.request data model used to authorize
+  AIOS actions that require human approval before execution.
+
+policy_cross_references:
+  permission_matrix: "07-policies/permission-matrix.yaml"
+  ai_risk_policy: "07-policies/ai-risk-policy.yaml"
+  communication_policy: "07-policies/communication-policy.yaml"
+
+odoo_model:
+  technical_name: approval.request
+  display_name: AIOS Approval Request
+  module_strategy:
+    preferred: OCA_or_governed_custom_module
+    implementation_note: >-
+      Map this specification to the selected Odoo Community/OCA approval
+      implementation; do not assume enterprise-only fields or behavior.
+
+fields:
+  name:
+    type: char
+    required: true
+    description: Human-readable approval title.
+  request_id:
+    type: char
+    required: true
+    unique: true
+    description: AIOS-generated idempotency-safe approval identifier.
+  state:
+    type: selection
+    required: true
+    values: [draft, pending, approved, rejected, expired, cancelled, executed, failed]
+    default: draft
+  requester_type:
+    type: selection
+    required: true
+    values: [ai_agent, human, workflow, system]
+  requester_id:
+    type: char
+    required: true
+  agent_id:
+    type: char
+    required: false
+    description: AIOS agent identifier when requester_type is ai_agent.
+  action_type:
+    type: char
+    required: true
+  action_reference:
+    type: char
+    required: true
+    description: Stable reference to the exact action awaiting approval.
+  target_reference:
+    type: char
+    required: true
+  risk_level:
+    type: selection
+    required: true
+    values: [L0, L1, L2, L3, L4]
+  policy_id:
+    type: char
+    required: true
+  policy_version:
+    type: char
+    required: true
+  policy_decision:
+    type: selection
+    required: true
+    values: [approval_required, approval_granted, approval_denied, blocked]
+  reason:
+    type: text
+    required: true
+  requested_scope:
+    type: json
+    required: true
+  proposed_payload_reference:
+    type: char
+    required: false
+    description: Reference to governed payload; avoid storing unnecessary sensitive data.
+  approval_required:
+    type: boolean
+    required: true
+  approver_id:
+    type: many2one_or_reference
+    required: false
+  approval_comment:
+    type: text
+    required: false
+  requested_at:
+    type: datetime
+    required: true
+  decision_at:
+    type: datetime
+    required: false
+  expires_at:
+    type: datetime
+    required: false
+  executed_at:
+    type: datetime
+    required: false
+  result_reference:
+    type: char
+    required: false
+  audit_reference:
+    type: char
+    required: true
+  correlation_id:
+    type: char
+    required: true
+  idempotency_key:
+    type: char
+    required: true
+    unique: true
+
+state_machine:
+  draft:
+    allowed_next: [pending, cancelled]
+  pending:
+    allowed_next: [approved, rejected, expired, cancelled]
+  approved:
+    allowed_next: [executed, failed, expired]
+  rejected:
+    allowed_next: []
+  expired:
+    allowed_next: []
+  cancelled:
+    allowed_next: []
+  executed:
+    allowed_next: []
+  failed:
+    allowed_next: [pending, cancelled]
+
+approval_rules:
+  mandatory_risk_levels: [L3, L4]
+  policy_defined_approval: true
+  material_irreversible_action: true
+  authority_exceeded: true
+  policy_exception: true
+  L0_L1_default_approval: false
+  L2_default_approval: policy_defined
+  L3_autonomous_execution: prohibited
+  L4_autonomous_execution: prohibited
+  approval_is_action_specific: true
+  approval_cannot_expand_permissions: true
+  prohibited_action_cannot_be_approved_by_ai: true
+
+approver_controls:
+  approver_must_be_authorized: true
+  requester_cannot_approve_own_request_by_default: true
+  separation_of_duties_required_for_material_actions: true
+  approver_identity_must_be_recorded: true
+  approval_timestamp_required: true
+  rejection_reason_required: true
+  expired_request_cannot_execute: true
+
+execution_guard:
+  execution_requires_state: approved
+  execution_requires_policy_version_match: true
+  execution_requires_scope_match: true
+  execution_requires_unexpired_approval: true
+  execution_requires_idempotency_key: true
+  approval_recheck_before_execution: true
+  any_mismatch_action: block_and_escalate
+  execution_result_must_update_request: true
+
+security:
+  default_deny: true
+  least_privilege: true
+  access_policy_scoped: true
+  sensitive_payload_minimization: true
+  secrets_in_payload: prohibited
+  unauthorized_state_transition: denied
+  direct_database_state_change_outside_governed_service: prohibited
+
+odoo_integration:
+  related_models:
+    - res.users
+    - res.company
+    - mail.activity
+    - mail.message
+  optional_aios_reference_models:
+    - aios.agent
+    - aios.policy
+    - aios.execution
+  integration_pattern:
+    - agent_or_workflow_creates_request
+    - governance_policy_evaluates_request
+    - authorized_human_reviews_request
+    - approval_state_is_persisted
+    - execution_service_rechecks_approval
+    - action_executes_only_if_all_gates_pass
+    - result_and_audit_reference_are_recorded
+
+api_contract:
+  create_request:
+    required: [request_id, requester_type, requester_id, action_type, action_reference, target_reference, risk_level, policy_id, policy_version, reason, requested_scope, correlation_id, idempotency_key]
+  approve:
+    required: [request_id, approver_id, approval_comment]
+  reject:
+    required: [request_id, approver_id, approval_comment]
+  execute:
+    required: [request_id, idempotency_key, correlation_id]
+  cancel:
+    required: [request_id, requester_id]
+
+webhooks_and_events:
+  approval.requested:
+    when: state_changes_to_pending
+    required_fields: [request_id, risk_level, action_type, target_reference, policy_id, requested_at]
+  approval.granted:
+    when: state_changes_to_approved
+    required_fields: [request_id, approver_id, decision_at]
+  approval.rejected:
+    when: state_changes_to_rejected
+    required_fields: [request_id, approver_id, decision_at, approval_comment]
+  approval.executed:
+    when: state_changes_to_executed
+    required_fields: [request_id, executed_at, result_reference]
+  approval.failed:
+    when: state_changes_to_failed
+    required_fields: [request_id, executed_at, audit_reference]
+
+sla_and_expiry:
+  expiry_required_for_external_material_actions: true
+  default_expiry_must_be_policy_defined: true
+  expired_approval_must_not_execute: true
+  reapproval_required_after_material_scope_change: true
+
+monitoring:
+  metrics:
+    - requests_created
+    - pending_requests
+    - approvals_granted
+    - approvals_rejected
+    - approvals_expired
+    - execution_blocks
+    - unauthorized_state_transitions
+    - policy_mismatch_events
+  alerts:
+    - L4_approval_request
+    - execution_without_valid_approval
+    - approval_scope_mismatch
+    - repeated_approval_failures
+    - unauthorized_state_transition
+
+change_control:
+  implementation_requires_governance_review: true
+  model_changes_require_version_bump: true
+  pull_request_required: true
+  migration_required_for_production_schema_changes: true
