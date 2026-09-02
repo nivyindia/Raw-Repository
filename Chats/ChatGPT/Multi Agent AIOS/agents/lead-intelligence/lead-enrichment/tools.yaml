@@ -1,0 +1,20 @@
+agent_id: A036
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - {id: TOOL-FIRECRAWL-EXTRACT, action: firecrawl.extract, access: execute}
+  - {id: TOOL-BROWSER-USE-RESEARCH, action: browser_use.research, access: execute}
+  - {id: TOOL-POSTGRES-QUERY-READONLY, action: postgres.query_readonly, access: read}
+  - {id: TOOL-POSTGRES-WRITE-EVENT, action: postgres.write_event, access: write}
+constraints:
+  provenance_required: true
+  public_data_only: true
+  sensitive_attribute_inference: forbidden
+  private_data_collection: forbidden
+  external_actions: prohibited
+  fail_closed_on_policy_error: true
+write_actions:
+  - action: postgres.write_event
+    allowed_event_types: [lead.enriched]
+    idempotency_key_required: true
+    audit_record_required: true
