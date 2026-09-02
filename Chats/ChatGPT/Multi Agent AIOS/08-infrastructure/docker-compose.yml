@@ -78,6 +78,27 @@ services:
     networks:
       - aios
 
+  aios-runtime:
+    build:
+      context: ../09-runtime
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      n8n:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      N8N_RUNTIME_URL: ${N8N_RUNTIME_URL:-http://n8n:5678}
+      LANGGRAPH_RUNTIME_URL: ${LANGGRAPH_RUNTIME_URL:-}
+      CREWAI_RUNTIME_URL: ${CREWAI_RUNTIME_URL:-}
+      HERMES_RUNTIME_URL: ${HERMES_RUNTIME_URL:-}
+      DIFY_RUNTIME_URL: ${DIFY_RUNTIME_URL:-}
+      RUNTIME_TIMEOUT_SECONDS: ${RUNTIME_TIMEOUT_SECONDS:-120}
+    networks:
+      - aios
+
 volumes:
   postgres_data:
   odoo_data:
