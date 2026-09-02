@@ -1,0 +1,9 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"aios://agents/A044/output.schema.json",
+  "title":"A044 Email Outreach Output",
+  "type":"object","additionalProperties":false,"required":["email_outreach_result"],
+  "properties":{"email_outreach_result":{"type":"object","additionalProperties":false,"required":["lead_id","outreach_status","channel","policy_decision"],"properties":{
+    "lead_id":{"type":"string"},"outreach_status":{"type":"string","enum":["sent","blocked","failed","skipped"]},"channel":{"const":"email"},"message_id":{"type":"string"},"campaign_id":{"type":"string"},"policy_decision":{"type":"string","enum":["allowed","blocked","approval_required"]},"personalization_summary":{"type":"string"},"sent_at":{"type":"string","format":"date-time"}
+  }}}
+}
