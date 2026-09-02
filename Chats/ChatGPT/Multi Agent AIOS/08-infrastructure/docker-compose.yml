@@ -17,8 +17,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
-    networks:
-      - aios
+    networks: [aios]
 
   odoo:
     image: odoo:19
@@ -26,8 +25,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    ports:
-      - "8069:8069"
+    ports: ["8069:8069"]
     environment:
       HOST: postgres
       PORT: 5432
@@ -42,8 +40,7 @@ services:
       timeout: 10s
       retries: 8
       start_period: 30s
-    networks:
-      - aios
+    networks: [aios]
 
   n8n:
     image: n8nio/n8n:latest
@@ -51,8 +48,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    ports:
-      - "5678:5678"
+    ports: ["5678:5678"]
     environment:
       DB_TYPE: postgresdb
       DB_POSTGRESDB_HOST: postgres
@@ -67,37 +63,33 @@ services:
       N8N_SECURE_COOKIE: ${N8N_SECURE_COOKIE:-false}
       N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:-change-me-dev-encryption-key}
       GENERIC_TIMEZONE: ${GENERIC_TIMEZONE:-Asia/Kolkata}
-    volumes:
-      - n8n_data:/home/node/.n8n
+    volumes: [n8n_data:/home/node/.n8n]
     healthcheck:
       test: ["CMD-SHELL", "node -e \"require('http').get('http://127.0.0.1:5678/healthz', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))\""]
       interval: 15s
       timeout: 10s
       retries: 10
       start_period: 30s
-    networks:
-      - aios
+    networks: [aios]
 
   aios-runtime:
-    build:
-      context: ../09-runtime
+    build: {context: ../09-runtime}
     restart: unless-stopped
     depends_on:
       postgres:
         condition: service_healthy
       n8n:
         condition: service_healthy
-    ports:
-      - "8080:8080"
+    ports: ["8080:8080"]
     environment:
+      AIOS_DATABASE_URL: postgresql://${POSTGRES_USER:-odoo}:${POSTGRES_PASSWORD:-change-me-dev-only}@postgres:5432/${POSTGRES_DB:-odoo}
       N8N_RUNTIME_URL: ${N8N_RUNTIME_URL:-http://n8n:5678}
       LANGGRAPH_RUNTIME_URL: ${LANGGRAPH_RUNTIME_URL:-}
       CREWAI_RUNTIME_URL: ${CREWAI_RUNTIME_URL:-}
       HERMES_RUNTIME_URL: ${HERMES_RUNTIME_URL:-}
       DIFY_RUNTIME_URL: ${DIFY_RUNTIME_URL:-}
       RUNTIME_TIMEOUT_SECONDS: ${RUNTIME_TIMEOUT_SECONDS:-120}
-    networks:
-      - aios
+    networks: [aios]
 
 volumes:
   postgres_data:
