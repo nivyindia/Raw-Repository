@@ -1,0 +1,31 @@
+id: A052
+name: Reply Triage Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+purpose: Classify inbound sales replies, extract actionable intent and objections, and route conversations to the correct next sales state.
+inputs:
+  required: [lead, inbound_message]
+  optional: [conversation_history, outreach_context, account_research, qualification_state]
+outputs:
+  primary: reply_triage
+  required_fields: [classification, intent, sentiment, urgency, extracted_questions, recommended_route, confidence]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-ODOO-SEARCH-LEAD, TOOL-POSTGRES-WRITE-EVENT]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+classifications: [interested, positive_question, meeting_request, objection, needs_info, not_now, not_interested, unsubscribe, out_of_office, wrong_person, referral, unclear]
+policy:
+  unsubscribe_has_priority: true
+  external_reply: prohibited
+  sensitive_attribute_inference: forbidden
+  provenance_required: true
+workflow:
+  sequence: [validate_message, load_context, detect_opt_out, classify_intent, extract_requests, assess_urgency, choose_route, calculate_confidence, emit_reply_triage_event]
+quality:
+  deterministic_labels: true
+  explanation_required: true
+  uncertainty_explicit: true
+failure_handling:
+  ambiguous_reply: route_to_human
+  policy_error: fail_closed
