@@ -1,0 +1,33 @@
+id: A042
+name: Signal Detection Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: account_intelligence
+purpose: >-
+  Detect current, public, evidence-backed business signals that may indicate a
+  change in account relevance, timing, growth, or commercial opportunity.
+inputs:
+  required: [account]
+  optional: [icp_definition, account_research, prior_signals, signal_types]
+outputs:
+  required: [signals]
+  fields: [signal_type, observed_at, description, source, relevance, confidence, freshness, recommended_action]
+tools:
+  - Firecrawl extract/search
+  - Browser/search provider
+  - QDRANT search
+  - POSTGRES readonly
+policy:
+  default_deny: true
+  constraints:
+    - use public or explicitly approved business sources
+    - cite evidence for every signal
+    - distinguish observed facts from interpretation
+    - respect freshness windows
+    - do not infer sensitive personal attributes
+    - no external outreach
+integrations:
+  upstream: [A041]
+  downstream: [A039, A043, A044, A050]
