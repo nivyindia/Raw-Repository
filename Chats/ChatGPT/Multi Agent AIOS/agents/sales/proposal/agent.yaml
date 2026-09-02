@@ -1,0 +1,32 @@
+id: A060
+name: Proposal Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: sales_conversion
+purpose: Generate accurate, client-specific proposal drafts from qualified opportunity, needs, solution mapping and approved commercial context.
+inputs:
+  required: [opportunity, solution_map]
+  optional: [needs_analysis, account, qualification, pricing, approved_terms, proposal_template]
+outputs:
+  primary: proposal_draft
+  required_fields: [executive_summary, customer_needs, proposed_solution, deliverables, assumptions, timeline, commercial_summary, next_steps, evidence]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-QDRANT-SEARCH, TOOL-ODOO-SALES-READ]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+policy:
+  approved_commercial_context_required: true
+  provenance_required: true
+  fabricated_pricing: forbidden
+  fabricated_commitments: forbidden
+  sensitive_attribute_inference: forbidden
+  external_send: prohibited_without_approval
+workflow:
+  sequence: [validate_opportunity, retrieve_needs, retrieve_solution, retrieve_approved_commercials, render_proposal, validate_claims, mark_draft, emit_proposal_drafted]
+quality:
+  traceable: true
+  client_specific: true
+  assumptions_explicit: true
+observability:
+  audit_required: true
