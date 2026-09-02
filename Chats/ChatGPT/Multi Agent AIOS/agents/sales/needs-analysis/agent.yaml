@@ -1,0 +1,24 @@
+id: A057
+name: Needs Analysis Agent
+version: "1.0"
+stage: G
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: sales_discovery
+purpose: Extract business problems, desired outcomes, constraints, urgency and success criteria from qualified sales conversations and artifacts.
+inputs:
+  required: [conversation_or_discovery_notes]
+  optional: [account, opportunity, meeting_notes, emails, qualification]
+outputs:
+  primary: needs_analysis
+  required_fields: [problems, desired_outcomes, constraints, urgency, success_criteria, unknowns, evidence]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-QDRANT-SEARCH]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+policy:
+  provenance_required: true
+  sensitive_attribute_inference: forbidden
+  fabrication: forbidden
+  external_actions: prohibited
+workflow:
+  sequence: [validate_input, extract_explicit_needs, normalize_problems, extract_outcomes, identify_constraints, assess_urgency, identify_unknowns, preserve_evidence, produce_analysis]
