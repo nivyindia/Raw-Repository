@@ -1,0 +1,24 @@
+agent_id: A001
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - id: TOOL-FIRECRAWL-EXTRACT
+    action: firecrawl.extract
+    purpose: Extract evidence from approved public sources.
+    access: read
+  - id: TOOL-BROWSER-USE-RESEARCH
+    action: browser_use.research
+    purpose: Conduct bounded research over approved public sources.
+    access: read
+  - id: TOOL-POSTGRES-QUERY-READONLY
+    action: postgres.query_readonly
+    purpose: Read explicitly authorized internal research/reference data.
+    access: read
+constraints:
+  public_data_only: true
+  approved_sources_required: true
+  external_communication: forbidden
+  external_publication: approval_required
+  policy_exception: approval_required
+  destructive_actions: forbidden
+authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
