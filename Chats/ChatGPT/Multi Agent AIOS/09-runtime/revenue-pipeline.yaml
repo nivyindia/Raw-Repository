@@ -1,0 +1,55 @@
+version: "1.0"
+name: revenue-acquisition-to-onboarding
+mode: governed
+primary_workflow_engine: n8n
+
+stages:
+  - id: research
+    agents: [A001, A002]
+  - id: lead-intelligence
+    agents: [A034, A035, A036, A037, A038, A039, A041, A042]
+  - id: outreach
+    agents: [A043, A049, A044, A050]
+  - id: response
+    agents: [A052, A054]
+  - id: sales
+    agents: [A055, A057, A058, A060]
+  - id: onboarding
+    agents: [A065]
+
+routing:
+  A044:
+    approval: required
+    external_action: email_send
+  A060:
+    approval: required
+    external_action: proposal_release
+  A065:
+    approval: required
+    external_action: onboarding_activation
+
+state:
+  system_of_record: odoo
+  operational_state: postgres
+  semantic_memory: qdrant
+  artifacts: minio
+
+events:
+  accepted:
+    - market.research.requested
+    - lead.discovered
+    - contact.discovered
+    - lead.enriched
+    - lead.quality.assessed
+    - lead.verified
+    - lead.scored
+    - account.signal.detected
+    - outreach.strategy.created
+    - outreach.draft.created
+    - outreach.followup.due
+    - sales.reply.received
+    - lead.qualified
+    - meeting.prepared
+    - solution.mapped
+    - proposal.ready
+    - onboarding.ready
