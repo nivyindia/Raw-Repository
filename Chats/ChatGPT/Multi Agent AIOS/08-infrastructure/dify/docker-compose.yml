@@ -1,0 +1,12 @@
+# Billion Dreams United OS — Dify deployment wrapper
+#
+# Dify maintains its production Docker Compose as a generated file in the
+# official repository. Keep Dify isolated from the core AIOS compose stack.
+# Use ./bootstrap.sh to clone/pin the upstream Dify Docker deployment and
+# prepare it for local execution.
+#
+# This file intentionally does not duplicate the generated upstream compose;
+# the bootstrap process is the source of truth so Dify upgrades remain aligned
+# with the upstream deployment model.
+
+services: {}
