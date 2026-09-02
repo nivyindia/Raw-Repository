@@ -1,0 +1,45 @@
+id: A036
+name: Lead Enrichment Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: lead_intelligence
+purpose: Enrich accepted leads with company, contact, technology, firmographic, and commercial context using authorized public evidence while preserving provenance and freshness.
+inputs:
+  required: [lead]
+  optional: [icp_definition, enrichment_scope, source_policy, as_of]
+outputs:
+  primary: enriched_lead
+  required_fields: [lead_id, enrichment, evidence, confidence, enriched_at]
+  downstream_events: [lead.enriched]
+tools:
+  allowed: [TOOL-FIRECRAWL-EXTRACT, TOOL-BROWSER-USE-RESEARCH, TOOL-POSTGRES-QUERY-READONLY, TOOL-POSTGRES-WRITE-EVENT]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+workflow:
+  sequence: [validate_input, load_existing_fields, plan_enrichment, collect_sources, extract_fields, normalize_fields, resolve_conflicts, score_field_confidence, preserve_provenance, emit_enriched]
+policy:
+  public_data_only: true
+  approved_sources_required: true
+  private_personal_data_collection: forbidden
+  sensitive_attribute_inference: forbidden
+  fabricated_data: forbidden
+  external_actions: prohibited
+quality:
+  provenance_required: true
+  freshness_required: true
+  unknown_not_positive: true
+  conflicting_evidence_explicit: true
+observability:
+  audit_required: true
+  execution_log_required: true
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  partial_enrichment_allowed: true
+  fail_closed_on_policy_error: true
+success_criteria:
+  - every_added_field_has_source
+  - freshness_is_recorded
+  - confidence_is_explicit
+  - existing_verified_values_are_not_overwritten_without_better_evidence
