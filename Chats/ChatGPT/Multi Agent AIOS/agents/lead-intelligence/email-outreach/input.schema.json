@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"aios://agents/A044/input.schema.json",
+  "title":"A044 Email Outreach Input",
+  "type":"object","additionalProperties":false,
+  "required":["lead_id","outreach_policy"],
+  "properties":{
+    "lead_id":{"type":"string","minLength":1},"outreach_policy":{"type":"object"},"campaign_id":{"type":"string"},"message_template_id":{"type":"string"},"personalization_context":{"type":"object"},"send_window":{"type":"object"},"approval_id":{"type":"string"}
+  }
+}
