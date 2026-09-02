@@ -1,0 +1,21 @@
+{
+  "name": "AIOS Revenue 01 — Lead Intake to Scoring",
+  "nodes": [
+    {"parameters":{"httpMethod":"POST","path":"aios/revenue/lead","responseMode":"responseNode"},"id":"lead-webhook","name":"Lead Intake","type":"n8n-nodes-base.webhook","typeVersion":2,"position":[0,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A036/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id: $execution.id, input: {lead: $json}})}}","options":{}},"id":"enrich","name":"A036 Enrichment","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[260,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A037/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id: $execution.id, input: {records: [$json]}})}}","options":{}},"id":"quality","name":"A037 Data Quality","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[520,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A039/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id: $execution.id, input: {lead: $json}})}}","options":{}},"id":"score","name":"A039 Lead Scoring","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[780,0]},
+    {"parameters":{"respondWith":"json","responseBody":"={{JSON.stringify({status:'accepted', pipeline:'revenue-01-lead-intake-to-scoring', result:$json})}}"},"id":"response","name":"Return Result","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[1040,0]}
+  ],
+  "connections": {
+    "Lead Intake":{"main":[[{"node":"A036 Enrichment","type":"main","index":0}]]},
+    "A036 Enrichment":{"main":[[{"node":"A037 Data Quality","type":"main","index":0}]]},
+    "A037 Data Quality":{"main":[[{"node":"A039 Lead Scoring","type":"main","index":0}]]},
+    "A039 Lead Scoring":{"main":[[{"node":"Return Result","type":"main","index":0}]]}
+  },
+  "active": false,
+  "settings": {"executionOrder":"v1"},
+  "versionId":"aios-revenue-01",
+  "meta": {"aios": true, "purpose":"lead-intake-to-scoring"},
+  "tags": []
+}
