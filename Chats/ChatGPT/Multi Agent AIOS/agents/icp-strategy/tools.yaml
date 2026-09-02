@@ -1,0 +1,13 @@
+agent_id: A002
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - {id: TOOL-FIRECRAWL-EXTRACT, action: firecrawl.extract, access: execute}
+  - {id: TOOL-QDRANT-SEARCH, action: qdrant.search, access: read}
+  - {id: TOOL-POSTGRES-QUERY-READONLY, action: postgres.query_readonly, access: read}
+constraints:
+  provenance_required: true
+  public_data_only: true
+  sensitive_attribute_inference: forbidden
+  external_actions: prohibited
+  fail_closed_on_uncertain_policy: true
