@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A036 Lead Enrichment Output",
+  "type": "object",
+  "required": ["lead_id", "enrichment", "evidence", "confidence", "enriched_at"],
+  "properties": {
+    "lead_id": {"type": "string"},
+    "enrichment": {"type": "object"},
+    "evidence": {"type": "array", "items": {"type": "object", "required": ["claim", "source"]}},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "conflicts": {"type": "array", "items": {"type": "object"}},
+    "enriched_at": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": false
+}
