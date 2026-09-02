@@ -1,0 +1,60 @@
+services:
+  mautic-db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${MAUTIC_DB_NAME:-mautic}
+      MARIADB_USER: ${MAUTIC_DB_USER:-mautic}
+      MARIADB_PASSWORD: ${MAUTIC_DB_PASSWORD:?set MAUTIC_DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MAUTIC_DB_ROOT_PASSWORD:?set MAUTIC_DB_ROOT_PASSWORD}
+    volumes:
+      - mautic_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u root -p$${MARIADB_ROOT_PASSWORD} --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks: [mautic]
+
+  mautic:
+    image: mautic/mautic:7-apache
+    restart: unless-stopped
+    depends_on:
+      mautic-db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${MAUTIC_PORT:-8080}:80"
+    environment:
+      MAUTIC_DB_HOST: mautic-db
+      MAUTIC_DB_PORT: 3306
+      MAUTIC_DB_NAME: ${MAUTIC_DB_NAME:-mautic}
+      MAUTIC_DB_USER: ${MAUTIC_DB_USER:-mautic}
+      MAUTIC_DB_PASSWORD: ${MAUTIC_DB_PASSWORD:?set MAUTIC_DB_PASSWORD}
+      PHP_INI_VALUE_DATE_TIMEZONE: ${TZ:-Asia/Kolkata}
+      PHP_INI_VALUE_MEMORY_LIMIT: 512M
+      PHP_INI_VALUE_UPLOAD_MAX_FILESIZE: 512M
+      PHP_INI_VALUE_POST_MAX_FILESIZE: 512M
+      PHP_INI_VALUE_MAX_EXECUTION_TIME: 300
+    volumes:
+      - mautic_config:/var/www/html/config
+      - mautic_logs:/var/www/html/var/logs
+      - mautic_media:/var/www/html/docroot/media
+    healthcheck:
+      test: ["CMD-SHELL", "php -r '$$s=@file_get_contents(\"http://127.0.0.1/\"); exit($$s===false ? 1 : 0);'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks: [mautic]
+
+volumes:
+  mautic_db_data:
+  mautic_config:
+  mautic_logs:
+  mautic_media:
+
+networks:
+  mautic:
+    name: billion-dreams-mautic
+    driver: bridge
