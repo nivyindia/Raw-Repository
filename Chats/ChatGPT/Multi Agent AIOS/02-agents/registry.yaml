@@ -1,13 +1,13 @@
 # BILLION DREAMS UNITED OS — AGENT REGISTRY
 # Stage C.1 | Version 0.1 | 2026-09-01
-# Skeleton only: id + name + status, as required by the implementation plan.
+# Skeleton plus verified Stage-F progress.
 
 version: "0.1"
-status: "skeleton"
+status: "active"
 source: "id-master-list.yaml"
 
 agents:
-  - {id: A001, name: "Market Research Agent", status: 0}
+  - {id: A001, name: "Market Research Agent", status: 25}
   - {id: A002, name: "ICP Strategist", status: 0}
   - {id: A003, name: "Buyer Persona Agent", status: 0}
   - {id: A004, name: "Competitor Intelligence Agent", status: 0}
