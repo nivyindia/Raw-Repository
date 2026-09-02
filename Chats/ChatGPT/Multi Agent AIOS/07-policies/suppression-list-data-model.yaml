@@ -1,0 +1,168 @@
+version: "1.0"
+model_id: SUPPRESSION-LIST-MODEL-001
+name: AIOS Suppression List Data Model
+status: active
+owner: Billion Dreams United AIOS Governance
+purpose: >-
+  Define the canonical data contract and cross-references for suppression,
+  opt-out, do-not-contact, and policy-exclusion records used by communication
+  agents and workflows.
+
+policy_cross_references:
+  communication_policy: "07-policies/communication-policy.yaml"
+  ai_risk_policy: "07-policies/ai-risk-policy.yaml"
+  permission_matrix: "07-policies/permission-matrix.yaml"
+
+canonical_record:
+  suppression_id:
+    type: string
+    required: true
+    unique: true
+  subject_type:
+    type: enum
+    values: [person, business, email, phone, domain, account, campaign_audience]
+    required: true
+  subject_reference:
+    type: string
+    required: true
+    description: Governed reference or normalized identifier; avoid unnecessary raw PII.
+  channel:
+    type: enum
+    values: [email, whatsapp, sms, linkedin, phone, all]
+    required: true
+  reason_code:
+    type: enum
+    values:
+      - unsubscribe
+      - do_not_contact
+      - complaint
+      - bounce
+      - legal_restriction
+      - internal_exclusion
+      - campaign_exclusion
+      - duplicate
+      - invalid_contact
+      - policy_block
+    required: true
+  source:
+    type: enum
+    values: [recipient_request, provider_event, crm, campaign, governance, compliance]
+    required: true
+  status:
+    type: enum
+    values: [active, expired, revoked]
+    required: true
+    default: active
+  effective_at:
+    type: datetime
+    required: true
+  expires_at:
+    type: datetime
+    required: false
+  scope:
+    type: enum
+    values: [channel, campaign, brand, company, global]
+    required: true
+  scope_reference:
+    type: string
+    required: false
+  evidence_reference:
+    type: string
+    required: false
+  created_by:
+    type: string
+    required: true
+  created_at:
+    type: datetime
+    required: true
+  updated_at:
+    type: datetime
+    required: true
+  audit_reference:
+    type: string
+    required: true
+
+normalization:
+  email:
+    normalize_case: true
+    trim_whitespace: true
+  phone:
+    normalize_to_e164_when_available: true
+  domain:
+    normalize_case: true
+    strip_protocol_and_path: true
+  matching:
+    exact_match_preferred: true
+    broader_match_requires_policy: true
+    uncertain_match_action: block
+
+decision_contract:
+  query_required_before_external_send: true
+  decision_values: [allow, suppress, uncertain]
+  suppress_action: block_send
+  uncertain_action: block_send_and_escalate
+  active_global_suppression_overrides_campaign_allow: true
+  channel_specific_suppression_overrides_channel_send: true
+  revoked_record_must_not_be_used_as_active_suppression: true
+
+write_controls:
+  create_record_requires_authorized_actor: true
+  update_requires_authorized_actor: true
+  delete_physical_record: prohibited_by_default
+  revocation_preferred_over_deletion: true
+  evidence_required_for_governance_changes: true
+  every_change_audited: true
+
+read_controls:
+  agent_access: policy_scoped
+  minimum_necessary_fields: true
+  raw_sensitive_data_exposure: prohibited_when_not_required
+  access_logged: true
+
+integration_points:
+  lead_discovery_A034:
+    pre_external_use_check: true
+    suppression_result_must_be_preserved: true
+  lead_enrichment_A036:
+    suppression_data_must_not_be_invented: true
+    source_provenance_required: true
+  verification_A038:
+    suppression_status_is_verifiable_attribute: true
+    evidence_required_for_status_change: true
+  lead_scoring_A039:
+    suppressed_lead_must_not_be_promoted_for_outreach: true
+    suppression_status_not_a_protected_class_signal: true
+  email_outreach_A044:
+    pre_send_check_required: true
+    active_match_blocks_send: true
+    uncertain_match_blocks_send: true
+    opt_out_event_must_update_model: true
+
+workflow_events:
+  suppression.created:
+    required_fields: [suppression_id, subject_type, subject_reference, channel, reason_code, source, effective_at]
+  suppression.updated:
+    required_fields: [suppression_id, audit_reference, updated_at]
+  suppression.revoked:
+    required_fields: [suppression_id, audit_reference, updated_at]
+  suppression.matched:
+    required_fields: [suppression_id, subject_reference, channel, matched_at, decision]
+
+operational_rules:
+  fail_closed: true
+  no_send_if_suppression_service_unavailable: true
+  no_send_if_record_conflict_unresolved: true
+  idempotent_writes_required: true
+  duplicate_suppression_records_should_be_merged_or_linked: true
+  downstream_campaign_membership_must_be_removed_or_paused_when_policy_requires: true
+
+privacy:
+  store_minimum_necessary_identifier: true
+  retention_follows_applicable_policy: true
+  access_requires_authorization: true
+  secrets_never_stored: true
+
+change_control:
+  schema_changes_require_governance_review: true
+  version_bump_required: true
+  pull_request_required: true
