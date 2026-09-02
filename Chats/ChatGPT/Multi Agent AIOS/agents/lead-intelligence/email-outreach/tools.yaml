@@ -1,0 +1,18 @@
+agent_id: A044
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - {id: TOOL-ODOO-SEARCH-LEAD, action: odoo.search_lead, access: read}
+  - {id: TOOL-POSTGRES-QUERY-READONLY, action: postgres.query_readonly, access: read}
+  - {id: TOOL-MAUTIC-SEND-EMAIL, action: mautic.send_email, access: external_write}
+  - {id: TOOL-POSTGRES-WRITE-EVENT, action: postgres.write_event, access: write}
+constraints:
+  consent_and_suppression_check_required: true
+  approved_campaign_required: true
+  approved_template_required: true
+  frequency_limits_required: true
+  external_send_irreversible: true
+  protected_class_targeting: forbidden
+  deceptive_identity_or_claims: forbidden
+  fabricated_personalization: forbidden
+  policy_exception: approval_required
