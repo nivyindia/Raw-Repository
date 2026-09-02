@@ -4,16 +4,20 @@
     {"parameters":{"httpMethod":"POST","path":"aios/revenue/reply","responseMode":"responseNode"},"id":"trigger","name":"Inbound Reply","type":"n8n-nodes-base.webhook","typeVersion":2,"position":[0,0]},
     {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A052/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"triage","name":"A052 Reply Triage","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[280,0]},
     {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A054/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"qualify","name":"A054 Qualification","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[560,0]},
-    {"parameters":{"respondWith":"json","responseBody":"={{JSON.stringify({status:'qualified_or_routed',pipeline:'revenue-03-reply-qualification',result:$json})}}"},"id":"response","name":"Return Routing","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[840,0]}
+    {"parameters":{"method":"POST","url":"={{($env.ODOO_SYNC_URL || 'http://odoo-sync:8091') + '/v1/crm/leads/upsert'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({lead_id:$json.lead_id || $json.crm_lead_id || null,values:{name:$json.name || $json.company || 'AIOS Lead',email_from:$json.email,phone:$json.phone,description:JSON.stringify({reply_triage:$json.reply_triage || $json.classification,qualification:$json.qualification_status || $json.status,reply:$json.inbound_message})}})}}"},"id":"crm","name":"Odoo Qualification Sync","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[820,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/events'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({event_type:'revenue.lead.qualified',execution_id:$execution.id,source:'n8n',entity_type:'crm.lead',entity_id:String($json.lead_id || $json.crm_lead_id || ''),payload:{qualification:$json,crm:$node['Odoo Qualification Sync'].json}})}}"},"id":"event","name":"Record Qualification Event","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[1080,0]},
+    {"parameters":{"respondWith":"json","responseBody":"={{JSON.stringify({status:'qualified_or_routed',pipeline:'revenue-03-reply-qualification',result:$json})}}"},"id":"response","name":"Return Routing","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[1340,0]}
   ],
   "connections": {
     "Inbound Reply":{"main":[[{"node":"A052 Reply Triage","type":"main","index":0}]]},
     "A052 Reply Triage":{"main":[[{"node":"A054 Qualification","type":"main","index":0}]]},
-    "A054 Qualification":{"main":[[{"node":"Return Routing","type":"main","index":0}]]}
+    "A054 Qualification":{"main":[[{"node":"Odoo Qualification Sync","type":"main","index":0}]]},
+    "Odoo Qualification Sync":{"main":[[{"node":"Record Qualification Event","type":"main","index":0}]]},
+    "Record Qualification Event":{"main":[[{"node":"Return Routing","type":"main","index":0}]]}
   },
   "active": false,
   "settings":{"executionOrder":"v1"},
   "versionId":"aios-revenue-03",
-  "meta":{"aios":true,"purpose":"reply-triage-and-qualification"},
+  "meta":{"aios":true,"purpose":"reply-triage-and-qualification-with-crm-and-events"},
   "tags":[]
 }
