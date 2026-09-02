@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A034 Lead Discovery Output",
+  "type": "object",
+  "required": ["leads", "discovered_at"],
+  "properties": {
+    "leads": {"type": "array", "items": {"type": "object", "required": ["lead_id", "company_name", "canonical_domain", "source", "discovery_reason", "evidence", "confidence", "discovered_at"]}},
+    "discovered_at": {"type": "string", "format": "date-time"},
+    "partial_batch": {"type": "boolean"}
+  },
+  "additionalProperties": false
+}
