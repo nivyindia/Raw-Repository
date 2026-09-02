@@ -45,7 +45,7 @@ agents:
   - {id: A036, name: "Lead Enrichment Agent", status: 0}
   - {id: A037, name: "Data Quality Agent", status: 0}
   - {id: A038, name: "Verification Agent", status: 0}
-  - {id: A039, name: "Lead Scoring Agent", status: 0}
+  - {id: A039, name: "Lead Scoring Agent", status: 25}
   - {id: A040, name: "Segmentation Agent", status: 0}
   - {id: A041, name: "Account Research Agent", status: 0}
   - {id: A042, name: "Signal Detection Agent", status: 0}
