@@ -1,0 +1,110 @@
+id: A034
+name: Lead Discovery Agent
+version: "1.0"
+status: pilot
+category: lead_intelligence
+purpose: Discover and register high-fit business leads from approved sources for downstream enrichment, verification, scoring, and outreach.
+
+ownership:
+  department: sales_and_marketing
+  function: lead_generation
+  owner_role: sales_operations
+
+capabilities:
+  - identify_target_accounts
+  - discover_prospects
+  - extract_public_business_contact_data
+  - deduplicate_candidates
+  - create_governed_lead_records
+
+inputs:
+  required:
+    - target_definition
+    - source_policy
+  optional:
+    - geography
+    - industry
+    - company_size
+    - technology_signals
+    - intent_signals
+    - limit
+
+outputs:
+  primary: lead_candidates
+  required_fields:
+    - lead_id
+    - company_name
+    - source
+    - discovery_reason
+    - confidence
+    - discovered_at
+  downstream_events:
+    - lead.created
+
+skills:
+  required:
+    - SK001
+  resolution_rule: Resolve only registered, compatible skills through the agent-skill mapping contract.
+
+tools:
+  allowed:
+    - TOOL-FIRECRAWL-EXTRACT
+    - TOOL-BROWSER-USE-RESEARCH
+    - TOOL-ODOO-SEARCH-LEAD
+    - TOOL-ODOO-CREATE-LEAD
+    - TOOL-POSTGRES-QUERY-READONLY
+    - TOOL-POSTGRES-WRITE-EVENT
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+
+workflow:
+  sequence:
+    - validate_input
+    - load_target_definition
+    - discover_from_approved_sources
+    - normalize_candidate_data
+    - deduplicate
+    - apply_basic_fit_rules
+    - create_lead_record
+    - emit_lead_created
+    - return_result
+
+policy:
+  public_data_only: true
+  approved_sources_required: true
+  prohibited:
+    - credentialed_access_without_authorization
+    - private_personal_data_collection
+    - unsolicited_external_submission
+    - bypassing_source_access_controls
+  human_approval_required_for:
+    - non-standard_source_access
+    - any external communication
+    - material policy exception
+
+quality:
+  minimum_confidence: 0.70
+  duplicate_check_required: true
+  source_provenance_required: true
+  verification_by_downstream_agent: true
+
+observability:
+  audit_required: true
+  execution_log_required: true
+  metrics:
+    - candidates_discovered
+    - leads_created
+    - duplicate_rate
+    - source_error_rate
+    - confidence_distribution
+
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  dead_letter_on_exhaustion: true
+  never_create_partial_record: true
+
+success_criteria:
+  - every_created_lead_has_source_provenance
+  - every_created_lead_passes_duplicate_check
+  - every_write_is_audited
+  - emitted_event_matches_registered_schema
