@@ -1,0 +1,29 @@
+agent_id: A041
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - {id: TOOL-FIRECRAWL-EXTRACT, action: firecrawl.extract, access: execute}
+  - {id: TOOL-BROWSER-USE-RESEARCH, action: browser_use.research, access: execute}
+  - {id: TOOL-QDRANT-SEARCH, action: qdrant.search, access: read}
+  - {id: TOOL-QDRANT-UPSERT, action: qdrant.upsert, access: write}
+  - {id: TOOL-POSTGRES-QUERY-READONLY, action: postgres.query_readonly, access: read}
+  - {id: TOOL-POSTGRES-WRITE-EVENT, action: postgres.write_event, access: write}
+constraints:
+  registered_policy_required: true
+  provenance_required: true
+  source_corroboration_required: true
+  llm_memory_as_evidence: forbidden
+  sensitive_personal_attribute_inference: forbidden
+  unauthorized_private_data_collection: forbidden
+  external_actions: prohibited
+  source_failure_must_not_be_positive_evidence: true
+  uncertain_state: fail_closed
+write_actions:
+  - action: qdrant.upsert
+    derived_context_only: true
+    canonical_source_required: true
+    tenant_scope_required: true
+  - action: postgres.write_event
+    allowed_event_types: [account.research.completed, account.research.failed]
+    idempotency_key_required: true
+    audit_record_required: true
