@@ -1,0 +1,119 @@
+id: A038
+name: Verification Agent
+version: "1.0"
+status: pilot
+category: lead_intelligence
+purpose: Verify critical business and contact attributes on governed lead records using approved sources, preserving provenance and reporting uncertainty without inventing facts.
+
+ownership:
+  department: sales_and_marketing
+  function: lead_generation
+  owner_role: sales_operations
+
+capabilities:
+  - verify_company_identity
+  - verify_business_contact_attributes
+  - cross_check_public_sources
+  - assess_field_level_confidence
+  - record_verification_evidence
+  - emit_verification_event
+
+inputs:
+  required:
+    - lead_id
+    - verification_policy
+  optional:
+    - fields_to_verify
+    - source_policy
+    - minimum_confidence
+    - geography
+
+outputs:
+  primary: verified_lead
+  required_fields:
+    - lead_id
+    - verification_status
+    - verified_fields
+    - verification_evidence
+    - confidence
+    - verified_at
+  downstream_events:
+    - lead.verified
+
+skills:
+  required:
+    - SK003
+  resolution_rule: Resolve only registered, compatible skills through the agent-skill mapping contract.
+
+tools:
+  allowed:
+    - TOOL-FIRECRAWL-EXTRACT
+    - TOOL-BROWSER-USE-RESEARCH
+    - TOOL-ODOO-SEARCH-LEAD
+    - TOOL-POSTGRES-QUERY-READONLY
+    - TOOL-POSTGRES-WRITE-EVENT
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+
+workflow:
+  sequence:
+    - validate_input
+    - load_lead_record
+    - identify_fields_requiring_verification
+    - select_approved_sources
+    - collect_independent_evidence
+    - compare_evidence_with_record
+    - assess_field_level_confidence
+    - classify_verified_unverified_conflicting
+    - preserve_provenance
+    - update_verification_state
+    - emit_lead_verified
+    - return_result
+
+policy:
+  public_data_only: true
+  approved_sources_required: true
+  independent_evidence_preferred: true
+  prohibited:
+    - private_personal_data_collection
+    - credentialed_access_without_authorization
+    - bypassing_source_access_controls
+    - speculative_inference_presented_as_fact
+    - destructive_overwrite_of_trusted_data
+    - unsolicited_external_submission
+  human_approval_required_for:
+    - ambiguous_identity_conflict
+    - non-standard_source_access
+    - material policy exception
+
+quality:
+  minimum_field_confidence: 0.80
+  source_provenance_required: true
+  evidence_required_for_verified_status: true
+  conflicting_evidence_must_be_flagged: true
+  never_upgrade_unknown_to_verified_without_evidence: true
+
+observability:
+  audit_required: true
+  execution_log_required: true
+  metrics:
+    - leads_processed
+    - fields_verified
+    - fields_unverified
+    - conflicts_detected
+    - source_error_rate
+    - verification_success_rate
+    - confidence_distribution
+
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  dead_letter_on_exhaustion: true
+  never_mark_verified_on_partial_failure: true
+  never_suppress_conflicting_evidence: true
+
+success_criteria:
+  - every_verified_field_has_supporting_evidence
+  - every_verification_has_source_provenance
+  - conflicts_are_explicitly_recorded
+  - every_write_or_state_change_is_audited
+  - emitted_event_matches_registered_schema
