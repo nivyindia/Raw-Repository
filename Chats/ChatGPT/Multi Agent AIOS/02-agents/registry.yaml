@@ -1,6 +1,6 @@
 # BILLION DREAMS UNITED OS — AGENT REGISTRY
-# Stage C.1 | Version 0.1 | 2026-09-01
-# Skeleton plus verified Stage-F progress.
+# Stage C.1 | Version 0.1 | 2026-09-02
+# Revenue-first build progress; 25 means contract artifacts finalized, not runtime-tested.
 
 version: "0.1"
 status: "active"
@@ -8,7 +8,7 @@ source: "id-master-list.yaml"
 
 agents:
   - {id: A001, name: "Market Research Agent", status: 25}
-  - {id: A002, name: "ICP Strategist", status: 0}
+  - {id: A002, name: "ICP Strategist", status: 25}
   - {id: A003, name: "Buyer Persona Agent", status: 0}
   - {id: A004, name: "Competitor Intelligence Agent", status: 0}
   - {id: A005, name: "Channel Strategy Agent", status: 0}
@@ -40,14 +40,14 @@ agents:
   - {id: A031, name: "PR Research Agent", status: 0}
   - {id: A032, name: "Marketing Analytics Agent", status: 0}
   - {id: A033, name: "Attribution Agent", status: 0}
-  - {id: A034, name: "Lead Discovery Agent", status: 0}
+  - {id: A034, name: "Lead Discovery Agent", status: 25}
   - {id: A035, name: "Contact Discovery Agent", status: 0}
-  - {id: A036, name: "Lead Enrichment Agent", status: 0}
+  - {id: A036, name: "Lead Enrichment Agent", status: 25}
   - {id: A037, name: "Data Quality Agent", status: 0}
-  - {id: A038, name: "Verification Agent", status: 0}
+  - {id: A038, name: "Verification Agent", status: 25}
   - {id: A039, name: "Lead Scoring Agent", status: 25}
   - {id: A040, name: "Segmentation Agent", status: 0}
-  - {id: A041, name: "Account Research Agent", status: 0}
+  - {id: A041, name: "Account Research Agent", status: 25}
   - {id: A042, name: "Signal Detection Agent", status: 0}
   - {id: A043, name: "Outreach Strategy Agent", status: 0}
   - {id: A044, name: "Email Outreach Agent", status: 0}
