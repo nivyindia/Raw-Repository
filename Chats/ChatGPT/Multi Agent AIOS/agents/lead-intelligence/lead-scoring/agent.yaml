@@ -1,0 +1,121 @@
+id: A039
+name: Lead Scoring Agent
+version: "1.1"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+purpose: >-
+  Score and prioritize verified leads using transparent, evidence-backed ICP fit,
+  buying intent, reachability, strategic value, and data quality signals.
+
+capabilities:
+  - deterministic_multi_factor_scoring
+  - evidence_backed_intent_assessment
+  - icp_fit_evaluation
+  - reachability_assessment
+  - strategic_value_assessment
+  - confidence_calculation
+  - score_explanation
+  - suppression_aware_prioritization
+  - stale_data_penalty
+  - policy_gated_promotion
+
+inputs:
+  required:
+    - lead
+    - icp_definition
+  optional:
+    - account_signals
+    - engagement_signals
+    - scoring_policy
+    - suppression_status
+    - as_of
+
+scoring_model:
+  total: 100
+  dimensions:
+    firmographic_fit:
+      max: 25
+      factors: [industry, geography, company_size, revenue_band, business_model, technology_fit]
+    intent:
+      max: 25
+      factors: [active_need, hiring, funding, expansion, technology_change, public_buying_signal, engagement]
+    reachability:
+      max: 20
+      factors: [verified_email, direct_contact, phone, professional_profile, contact_recency]
+    strategic_value:
+      max: 20
+      factors: [account_value, growth, market_position, partnership_value, expansion_potential]
+    data_quality:
+      max: 10
+      factors: [identity_confidence, field_completeness, source_quality, freshness]
+
+  formula: >-
+    firmographic_fit + intent + reachability + strategic_value + data_quality
+  tiers:
+    hot: {min_score: 75, action: priority_review}
+    warm: {min_score: 50, max_score: 74, action: nurture_or_review}
+    cold: {min_score: 0, max_score: 49, action: deprioritize}
+
+rules:
+  - Scores must be reproducible from recorded inputs and rules.
+  - LLM classification may extract or classify signals but must not silently invent facts.
+  - Every material positive signal requires evidence or an explicit source-backed classification.
+  - Unknown data is not treated as positive evidence.
+  - Conflicting evidence lowers confidence and is surfaced for review.
+  - Stale evidence is discounted according to scoring_policy.
+  - Suppressed leads must never be promoted for outreach.
+  - Verification failures must cap or invalidate the affected score components.
+  - Human-readable score reasons are mandatory.
+  - Score changes must be idempotent for the same input version.
+  - Protected-class or sensitive personal attributes must never affect scoring.
+
+quality_gates:
+  minimum_evidence_for_intent: true
+  minimum_identity_confidence: 0.85
+  confidence_required_for_hot: 0.75
+  material_conflict_requires_review: true
+  suppression_check_required: true
+  provenance_required: true
+
+outputs:
+  - lead_id
+  - score
+  - tier
+  - dimension_scores
+  - confidence
+  - positive_signals
+  - negative_signals
+  - score_reasons
+  - evidence
+  - recommended_action
+  - review_required
+  - scoring_policy_version
+  - scored_at
+
+policy:
+  authorization_chain: "Agent -> Skill -> Tool -> Action"
+  external_write: prohibited_without_policy_gate
+  outreach_promotion: policy_gated
+  uncertain_state: fail_closed
+  audit_required: true
+
+integrations:
+  upstream: [A034, A035, A036, A037, A038, A042]
+  downstream: [A040, A043, A044, A050]
+  systems: [PostgreSQL, Odoo, n8n, approval_engine]
+
+failure_handling:
+  missing_icp: stop
+  missing_identity: stop
+  stale_critical_data: downgrade_and_review
+  conflicting_material_evidence: review
+  suppression_uncertain: suppress
+  tool_failure: preserve_existing_score_and_retry
+
+observability:
+  emit_score_event: true
+  emit_audit_record: true
+  preserve_input_snapshot: true
+  preserve_policy_version: true
+  preserve_evidence_snapshot: true
