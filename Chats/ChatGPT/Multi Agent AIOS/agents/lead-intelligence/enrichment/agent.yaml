@@ -1,9 +1,9 @@
 id: A036
 name: Lead Enrichment Agent
-version: "1.0"
+version: "1.1"
 status: pilot
 category: lead_intelligence
-purpose: Enrich governed lead records with verified business-relevant company and contact attributes from approved sources.
+purpose: Enrich governed lead records with current, corroborated, business-relevant company and contact attributes from approved sources.
 
 ownership:
   department: sales_and_marketing
@@ -14,7 +14,10 @@ capabilities:
   - resolve_canonical_company_identity
   - enrich_company_attributes
   - enrich_business_contact_attributes
-  - attach_source_provenance
+  - detect_stale_attributes
+  - corroborate_multi_source_evidence
+  - attach_field_level_provenance
+  - calculate_field_confidence
   - update_governed_lead_records
   - emit_enrichment_event
 
@@ -28,6 +31,7 @@ inputs:
     - geography
     - industry
     - refresh_if_older_than
+    - minimum_sources_per_material_field
 
 outputs:
   primary: enriched_lead
@@ -36,7 +40,7 @@ outputs:
     - enrichment_status
     - enriched_fields
     - source_provenance
-    - confidence
+    - field_confidence
     - enriched_at
   downstream_events:
     - lead.enriched
@@ -61,12 +65,17 @@ workflow:
     - validate_input
     - load_lead_record
     - identify_missing_or_stale_fields
-    - select_approved_sources
-    - collect_public_business_evidence
+    - resolve_canonical_identity
+    - build_field_source_plan
+    - collect_sources_in_parallel_when_independent
+    - isolate_source_failures
     - normalize_enrichment_data
+    - corroborate_material_fields
     - assess_field_level_confidence
     - preserve_provenance
+    - compare_against_existing_trusted_values
     - update_lead_record_idempotently
+    - verify_postconditions
     - emit_lead_enriched
     - return_result
 
@@ -74,24 +83,29 @@ policy:
   public_data_only: true
   approved_sources_required: true
   preserve_existing_trusted_data: true
+  evidence_first: true
   prohibited:
     - private_personal_data_collection
     - credentialed_access_without_authorization
     - bypassing_source_access_controls
     - speculative_inference_presented_as_fact
     - destructive_overwrite_of_trusted_fields
+    - unsupported_identity_merge
     - unsolicited_external_submission
   human_approval_required_for:
     - non-standard_source_access
     - material_policy_exception
     - ambiguous_identity_resolution_affecting_a_commercial_record
+    - overwrite_of_trusted_data_when_evidence_conflicts
 
 quality:
   minimum_field_confidence: 0.70
   source_provenance_required: true
   field_level_confidence_required: true
   identity_resolution_required: true
+  material_field_corroboration_preferred: true
   downstream_verification_by_A038: true
+  never_treat_llm_memory_as_source: true
 
 observability:
   audit_required: true
@@ -100,6 +114,8 @@ observability:
     - leads_processed
     - fields_enriched
     - fields_skipped
+    - fields_corroborated
+    - stale_fields_refreshed
     - source_error_rate
     - enrichment_success_rate
     - identity_resolution_conflicts
@@ -109,11 +125,14 @@ failure_handling:
   retry_transient_errors: true
   max_retries: 3
   dead_letter_on_exhaustion: true
+  continue_independent_fields_when_one_source_fails: true
   never_write_unverified_identity_match: true
   never_create_partial_lead: true
+  fail_closed_on_policy_ambiguity: true
 
 success_criteria:
   - every_enriched_field_has_source_provenance
+  - material_fields_have_corroborating_evidence_when_available
   - existing_trusted_values_are_not_downgraded_without_authorization
   - identity_match_is_supported_by_evidence
   - every_write_is_audited
