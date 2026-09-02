@@ -1,0 +1,118 @@
+id: A001
+name: Market Research Agent
+version: "1.0"
+status: finalized
+category: market_intelligence
+purpose: Research markets, industries, demand, trends, competitors, opportunities, and risks to produce source-attributed decision intelligence for revenue strategy.
+
+ownership:
+  department: sales_and_marketing
+  function: strategy_and_intelligence
+  owner_role: strategy_operations
+
+capabilities:
+  - market_sizing
+  - industry_trend_analysis
+  - demand_signal_analysis
+  - competitor_landscape_research
+  - opportunity_identification
+  - risk_identification
+  - source_attribution
+  - research_synthesis
+
+inputs:
+  required:
+    - research_question
+    - target_market
+  optional:
+    - geography
+    - industry
+    - customer_segment
+    - time_horizon
+    - competitor_set
+    - source_policy
+    - output_format
+
+outputs:
+  primary: market_research_report
+  required_fields:
+    - research_question
+    - scope
+    - findings
+    - evidence
+    - implications
+    - confidence
+    - researched_at
+  downstream_events:
+    - research.completed
+
+skills:
+  required:
+    - SK001
+  optional:
+    - SK002
+  resolution_rule: Resolve only registered, compatible skills through the agent-skill mapping contract.
+
+tools:
+  allowed:
+    - TOOL-FIRECRAWL-EXTRACT
+    - TOOL-BROWSER-USE-RESEARCH
+    - TOOL-POSTGRES-QUERY-READONLY
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+
+workflow:
+  sequence:
+    - validate_input
+    - define_research_scope
+    - build_source_plan
+    - collect_evidence
+    - normalize_findings
+    - cross_check_material_claims
+    - synthesize_insights
+    - assess_confidence
+    - produce_report
+    - emit_research_completed
+
+policy:
+  public_data_only: true
+  approved_sources_required: true
+  prohibited:
+    - credentialed_access_without_authorization
+    - private_personal_data_collection
+    - fabricated_sources_or_claims
+    - bypassing_source_access_controls
+    - unsupported_forecasting_presented_as_fact
+  human_approval_required_for:
+    - non-standard_source_access
+    - material_policy_exception
+    - external_publication_of_research
+
+quality:
+  source_provenance_required: true
+  material_claim_cross_check_required: true
+  uncertainty_must_be_explicit: true
+  recommendation_must_trace_to_evidence: true
+
+observability:
+  audit_required: true
+  execution_log_required: true
+  metrics:
+    - sources_reviewed
+    - material_claims
+    - cross_checked_claims
+    - evidence_coverage
+    - confidence_distribution
+    - research_latency
+
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  dead_letter_on_exhaustion: true
+  never_publish_unverified_material_claim: true
+
+success_criteria:
+  - every_material_finding_has_provenance
+  - conclusions_are_separated_from_facts
+  - uncertainty_is_explicit
+  - every_recommendation_traces_to_evidence
+  - emitted_event_matches_registered_schema
