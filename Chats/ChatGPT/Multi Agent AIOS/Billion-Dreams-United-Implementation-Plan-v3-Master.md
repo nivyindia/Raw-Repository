@@ -1,7 +1,7 @@
 # BILLION DREAMS UNITED — MULTI AGENT AIOS
 # MASTER IMPLEMENTATION PLAN v3
 
-**Version:** 3.0  
+**Version:** 3.1  
 **Date:** 2026-09-03  
 **Status:** Canonical planning layer / supersedes v2 for future implementation sequencing
 
@@ -61,6 +61,7 @@ Evaluation → Observability → Learning → Improvement
 8. **Every important action is traceable:** run → agent → skill → prompt/knowledge → tool → action → result → event.
 9. **Multi-tenant and least privilege by default.**
 10. **No false completion:** runtime reports only actions actually executed and verified.
+11. **Workspace knowledge is an input, not an uncontrolled runtime source:** existing Company OS, SOP, naming, brand, research and operational artifacts must be classified, mapped, versioned and governed before becoming AIOS knowledge.
 
 # 3. Roadmap
 
@@ -444,12 +445,490 @@ Later-scale capabilities:
 - capacity planning
 - governance at scale
 
-# 4. Current implementation status
+# 4. Cross-Workspace Source Inventory
+
+The public `nivyindia/Raw-Repository` contains important Company OS, Notion, research and Claude planning artifacts outside `Chats/ChatGPT/Multi Agent AIOS`. These are not automatically canonical runtime specifications. They are **source material to ingest, classify, reconcile and convert into AIOS registries/knowledge/policies/workflows where relevant**.
+
+### 4.1 Company OS / operating model sources
+- `Nivy Next/🟦 Nivy Next — Company OS 2a334207fb4d8186b405f32a6d1876f5.md`
+- `Notion - Nivy OS/🟦 Nivy Next — Company OS 72aeb94b1a2a8251a4c9814969454ca4.md`
+- `Notion - Nivy OS/🏢 Nivy OS — Company Operating System 806eb94b1a2a825894cb019a2efb2336.md`
+- `Notion - Nivy OS/⚡ NIVY OS CLAUDE COMMAND — Master Build & Restruct 358eb94b1a2a81b682cfe2dd2df08ba4.md`
+- `Notion - Nivy OS/🏗️ Phase 1 — New Master Structure Design 13aeb94b1a2a8399addf01fe9e912e97.md`
+- `Notion - Nivy OS/🗺️ NIVY EMPIRES — Master Reorganization Plan (Claude) ...md`
+- `Notion - Nivy OS/📐 Naming Conventions & Versioning Guide — Nivy ...md`
+
+**AIOS use:** company/brand/department structure, metadata standards, naming, ownership, dashboards, document architecture and operating-model knowledge.
+
+### 4.2 SOP / process / documentation sources
+- `Notion - Nivy OS/📚 SOPs Quick Reference Index — All Nivy Divisions ...md`
+- `Chats/Claude/Documentation-method-for-international-development.md`
+- Employee onboarding checklist artifacts under `Notion - Nivy OS/` and `Nivy Research Data/`
+- Document-control, naming, versioning and classification artifacts discovered in the workspace
+
+**AIOS use:** Knowledge Packs, procedural memory, workflow templates, SOP-aware agents, onboarding and operational playbooks.
+
+### 4.3 Revenue / growth / one-person-company sources
+- `Chats/Claude/Revenue-Priorities-Plan.md`
+- `Chats/ChatGPT/One-person-AI-company.md`
+- `Chats/ChatGPT/Multi Agent AIOS/Blueprint Update.md`
+- `Chats/ChatGPT/Multi Agent AIOS/Billion-Dreams-United-AI-Native-Company-OS-v6.md`
+- `Chats/ChatGPT/Multi Agent AIOS/Missing-Layers-Review.md`
+- `Chats/ChatGPT/Multi Agent AIOS/Agent List.txt`
+
+**AIOS use:** revenue prioritization, daily/weekly business automation, sales/marketing/finance coverage, missing-layer backlog and ready-made agent/workflow procurement strategy.
+
+### 4.4 AIOS-native architecture sources
+- `Chats/ChatGPT/Multi Agent AIOS/ARCHITECTURE_DECISIONS.md`
+- `Chats/ChatGPT/Multi Agent AIOS/02-agents/AGENT_SKILL_MAPPING.md`
+- `Chats/ChatGPT/Multi Agent AIOS/02-agents/AGENT_TOOL_MAPPING.md`
+- `Chats/ChatGPT/Multi Agent AIOS/02-agents/F1-open-source-agent-reference-map.md`
+- `Chats/ChatGPT/Multi Agent AIOS/03-skills/registry.yaml`
+- `Chats/ChatGPT/Multi Agent AIOS/04-tools/TOOL_REGISTRY.yaml`
+- `Chats/ChatGPT/Multi Agent AIOS/06-data/DATA_CATALOG.md`
+- `Chats/ChatGPT/Multi Agent AIOS/09-runtime/`
+- `Chats/ChatGPT/Multi Agent AIOS/Billion-Dreams-United-Implementation-Plan-v2-Granular-Steps.md`
+
+**AIOS use:** canonical technical contracts, capability registries, data catalog, runtime implementation and historical implementation evidence.
+
+### 4.5 Sources that must be treated as superseded/draft
+- `Nivy Next/⚠️ Archive — Draft Company OS (Do Not Use) ...md`
+- Any document explicitly marked Draft, Archive, superseded or Do Not Use
+
+These can inform history or conflict resolution but must not silently become canonical runtime truth.
+
+### 4.6 Workspace ingestion rule
+For every relevant external workspace file:
+
+`Discover → classify → identify authority → detect conflicts → extract reusable knowledge/process → assign registry/knowledge-pack destination → version → link provenance → approve for runtime use`
+
+Do not bulk-copy the entire workspace into Qdrant or agent context. Only approved, classified and access-controlled knowledge becomes runtime knowledge.
+
+# 5. Small-Phase Execution Plan
+
+The A–Q architecture is the macro roadmap. The following phases are the **actual execution units**. Each phase should be small enough to implement as one focused batch and should leave a concrete repository artifact behind.
+
+## Phase 0 — Baseline & Source Reconciliation
+
+### 0.1 Canonical-plan alignment
+- Make v3.1 the canonical implementation plan.
+- Update Master Index to point to v3.1.
+- Mark v2 as historical evidence.
+
+### 0.2 Workspace inventory
+- Inventory AIOS folder.
+- Inventory relevant Company OS / Notion / Claude / Research artifacts.
+- Identify canonical vs duplicate/draft documents.
+
+### 0.3 Conflict register
+- Record conflicting architecture, naming, document-type, ownership, lifecycle and company-structure definitions.
+- Decide authoritative source for each domain.
+
+**Deliverable:** source map + conflict map + canonical navigation.
+
+## Phase 1 — Governance Metadata Foundation
+
+### 1.1 Document metadata
+- Code
+- Title
+- Department
+- Brand
+- Type
+- PARA bucket
+- Version
+- Lifecycle
+- Confidentiality
+- Owner/RACI
+- Dates
+- Tags
+
+### 1.2 Naming/versioning
+- Normalize AIOS asset naming and versions.
+- Connect document versioning with registry versions.
+
+### 1.3 Ownership
+- Owner registry
+- RACI
+- approval authority
+
+**Deliverable:** governance metadata contract.
+
+## Phase 2 — Capability Registry Foundation
+
+### 2.1 Skill Registry
+- Upgrade SK001–SK050 from skeleton to implementation-grade.
+- Add owner/version/permissions/dependencies/provenance/evaluation/cost/deprecation.
+
+### 2.2 Prompt Registry
+- Create prompt IDs, versions, templates, variables, model compatibility and evaluation references.
+
+### 2.3 Knowledge Pack Registry
+- Define pack IDs, scope, source, freshness, access policy and owner.
+
+### 2.4 Memory Registry
+- Define memory classes, retention, privacy, provenance, scope and deletion.
+
+### 2.5 Reusable Asset Registry
+- Register open-source agents, n8n workflows, prompts, skills, tools, connectors, templates, playbooks and evaluators.
+
+**Deliverable:** reusable capability layer.
+
+## Phase 3 — Agent Factory & Capability Binding
+
+### 3.1 Agent Factory template
+- agent.yaml
+- skills
+- prompts
+- knowledge
+- tools
+- policy
+- memory
+- events
+- evaluation
+- observability
+- deployment
+
+### 3.2 Agent → Skill mapping
+- Map all current Tier-1 agents.
+- Validate tool authorization.
+- Validate prompt/knowledge references.
+
+### 3.3 Open-source integration pipeline
+- Discover
+- license/audit
+- import/fork
+- modify
+- map to AIOS
+- govern
+
+**Deliverable:** repeatable agent creation system.
+
+## Phase 4 — Runtime & Execution Foundation
+
+### 4.1 Gateway
+- Agent discovery
+- invocation
+- policy boundary
+- runtime selection
+
+### 4.2 Adapters
+- Hermes
+- LangGraph
+- Dify
+- CrewAI
+
+### 4.3 Persistence
+- executions
+- events
+- approvals
+- outbox
+- run state
+
+### 4.4 Reliability
+- timeouts
+- retries
+- idempotency
+- dead-letter/error handling
+
+**Deliverable:** governed executable runtime.
+
+## Phase 5 — CRM & Revenue State Machine
+
+### 5.1 CRM lifecycle
+- New
+- Scored
+- Outreach
+- Qualified
+- Meeting
+- Proposal
+- Negotiation
+- Won
+- Onboarding
+- Delivery
+- Renewal/Upsell
+
+### 5.2 State/event mapping
+- Every state transition gets an event.
+- Every event identifies execution/entity/source.
+
+### 5.3 Odoo integration
+- CRM upsert
+- dedupe
+- lifecycle mutation
+- provenance fields
+
+**Deliverable:** authoritative revenue state machine.
+
+## Phase 6 — Lead Intelligence Engine
+
+### 6.1 Discovery
+A034 Lead Discovery.
+
+### 6.2 Contact
+A035 Contact Discovery.
+
+### 6.3 Enrichment
+A036 Enrichment.
+
+### 6.4 Quality
+A037 Data Quality.
+
+### 6.5 Verification
+A038 Verification.
+
+### 6.6 Scoring
+A039 Lead Scoring.
+
+### 6.7 Account intelligence
+A041 Account Research + A042 Signal Detection.
+
+### 6.8 Segmentation
+A040 where required by the revenue workflow.
+
+**Deliverable:** evidence-backed, CRM-ready lead intelligence.
+
+## Phase 7 — Outreach Engine
+
+### 7.1 Strategy
+A043 Outreach Strategy.
+
+### 7.2 Personalization
+A049 Personalization.
+
+### 7.3 Draft/send
+A044 Email Outreach with approval gate.
+
+### 7.4 Follow-up
+A050 Follow-Up.
+
+### 7.5 Reply handling
+A052 Reply Triage.
+
+**Deliverable:** governed outbound/inbound sales loop.
+
+## Phase 8 — Qualification → Meeting → Proposal
+
+### 8.1 Qualification
+A054.
+
+### 8.2 Meeting preparation
+A055.
+
+### 8.3 Needs analysis / solution mapping
+A057 / A058 where applicable.
+
+### 8.4 Proposal
+A060.
+
+### 8.5 Approval / negotiation / contract
+- approval token
+- contract state
+- audit event
+
+**Deliverable:** opportunity conversion engine.
+
+## Phase 9 — Contract → Cash
+
+### 9.1 Contract event
+- contract.created
+- contract.approved
+
+### 9.2 Invoice
+- invoice creation
+- invoice state
+
+### 9.3 Payment
+- payment link/provider
+- payment confirmation
+- failure/refund handling
+
+### 9.4 Revenue events
+- payment.received
+- payment.failed
+- refund.requested
+
+**Deliverable:** measurable contract-to-cash path.
+
+## Phase 10 — Cash → Customer Delivery
+
+### 10.1 Payment → onboarding event
+
+### 10.2 Onboarding
+A065.
+
+### 10.3 Delivery handoff
+- project/task creation
+- owner assignment
+- customer communication
+
+### 10.4 Customer timeline
+- sales context
+- commitments
+- documents
+- delivery state
+
+**Deliverable:** closed sales-to-delivery handoff.
+
+## Phase 11 — Customer Success & Expansion
+
+### 11.1 Health
+- health score
+- engagement
+- delivery risk
+
+### 11.2 Retention
+- churn signals
+- renewal prediction
+- renewal workflow
+
+### 11.3 Expansion
+- upsell
+- cross-sell
+- referral
+- advocacy
+
+**Deliverable:** post-sale revenue engine.
+
+## Phase 12 — Communications & Intelligence
+
+### 12.1 Central inbox
+### 12.2 Email/WhatsApp/SMS
+### 12.3 LinkedIn where permitted
+### 12.4 Voice/call preparation
+### 12.5 Conversation intelligence
+### 12.6 Meeting intelligence
+### 12.7 Document/OCR intelligence
+
+**Deliverable:** unified customer communication intelligence.
+
+## Phase 13 — Marketing & Growth
+
+### 13.1 Market/competitor research
+### 13.2 Positioning/messaging
+### 13.3 Content engine
+### 13.4 SEO
+### 13.5 Social
+### 13.6 Email nurturing
+### 13.7 Community/partnerships/PR
+### 13.8 Attribution
+### 13.9 Growth experiments
+
+Every activity must map to measurable pipeline/revenue outcomes.
+
+**Deliverable:** marketing-to-revenue loop.
+
+## Phase 14 — Finance & Business Operations
+
+### 14.1 Pricing/quotes
+### 14.2 Invoices
+### 14.3 Collections
+### 14.4 Commission
+### 14.5 Refunds
+### 14.6 Revenue reporting
+### 14.7 HR/people operations where relevant
+### 14.8 Operational task queues / priority / SLA / notifications
+
+**Deliverable:** finance + operations automation layer.
+
+## Phase 15 — CEO Control & Intelligence
+
+### 15.1 Global dashboard
+### 15.2 Brand registry / company registry
+### 15.3 Department dashboards
+### 15.4 Revenue/pipeline intelligence
+### 15.5 Agent/workflow health
+### 15.6 Cost/usage
+### 15.7 Approvals and risk queue
+### 15.8 Forecasts/anomalies/recommendations
+
+**Deliverable:** CEO/management command center.
+
+## Phase 16 — Evaluation, QA & Observability
+
+Testing remains deliberately later in the current build strategy, but implementation hooks are required throughout.
+
+### 16.1 Golden cases
+### 16.2 Prompt/skill evaluation
+### 16.3 Tool-call evaluation
+### 16.4 Workflow tests
+### 16.5 Policy tests
+### 16.6 Trace/cost/latency
+### 16.7 Failure taxonomy
+### 16.8 Drift detection
+
+**Deliverable:** measurable quality/reliability layer.
+
+## Phase 17 — Learning & Continuous Improvement
+
+### 17.1 Outcome telemetry
+### 17.2 Failure/opportunity detection
+### 17.3 Prompt improvement
+### 17.4 Skill improvement
+### 17.5 Workflow/routing improvement
+### 17.6 Knowledge freshness
+### 17.7 Model/cost optimization
+### 17.8 Governed rollout
+
+**Deliverable:** closed improvement loop.
+
+## Phase 18 — A2A & Multi-Agent Collaboration
+
+### 18.1 Capability discovery
+### 18.2 Delegation permissions
+### 18.3 Shared execution context
+### 18.4 A2A boundaries
+### 18.5 Conflict resolution
+### 18.6 Cancellation/timeouts
+
+**Deliverable:** controlled multi-agent collaboration.
+
+## Phase 19 — Agent Factory / Marketplace / Digital Twin
+
+### 19.1 Agent generation
+### 19.2 Skill bundle generation
+### 19.3 Workflow generation
+### 19.4 Internal Agent Library
+### 19.5 Marketplace
+### 19.6 Company templates
+### 19.7 Digital Twin
+### 19.8 Simulation/forecasting
+
+**Deliverable:** scalable agent-production system.
+
+## Phase 20 — Scale & Multi-Company Operations
+
+### 20.1 Multi-tenancy
+### 20.2 RBAC/data isolation
+### 20.3 Company-specific policies
+### 20.4 Company-specific agents/knowledge
+### 20.5 Queues/SLO/SLA
+### 20.6 Horizontal scaling
+### 20.7 Backup/disaster recovery
+### 20.8 Cost budgets/capacity planning
+
+**Deliverable:** production-scale multi-company AIOS.
+
+## Phase 21 — Production Hardening
+
+### 21.1 Security review
+### 21.2 Secrets and data egress review
+### 21.3 Compliance review
+### 21.4 Failure recovery
+### 21.5 Backup/restore
+### 21.6 End-to-end validation
+### 21.7 Production deployment
+
+**Deliverable:** hardened production system.
+
+# 6. Current implementation status
 
 ### Already materially implemented
 - Agent registry and Tier-1 agent contracts
 - Skill registry skeleton
 - Agent-skill mapping contract
+- Agent-tool mapping contract
+- Tool registry
+- Data catalog
 - Agent execution contract
 - Runtime gateway
 - Runtime adapters for LangGraph/CrewAI/Hermes/Dify
@@ -459,6 +938,7 @@ Later-scale capabilities:
 - event/outbox routing foundation
 - CRM lifecycle definition
 - reusable open-source agent/workflow reference mapping
+- CI validation foundation
 
 ### Partially implemented / next hardening
 - Production-grade Skill Registry
@@ -471,35 +951,54 @@ Later-scale capabilities:
 - Payment/revenue event path
 - End-to-end event idempotency
 - observability/cost layer
+- workspace knowledge ingestion and provenance
 
-# 5. Immediate execution queue
+# 7. Immediate execution queue
 
-## Batch 1 — Foundation completion
-1. Upgrade skill registry to implementation-grade.
-2. Create Prompt Registry and prompt asset structure.
-3. Create Knowledge Pack Registry.
-4. Create Memory Policy/Registry.
-5. Create reusable Asset Registry.
-6. Create Agent Factory template.
-7. Map current Tier-1 agents to reusable skills.
+## Sprint 1 — Phase 0–2: Foundation
+1. Update Master Index to v3.1.
+2. Complete workspace/source inventory.
+3. Create conflict register.
+4. Upgrade Skill Registry.
+5. Create Prompt Registry.
+6. Create Knowledge Pack Registry.
+7. Create Memory Registry/Policy.
+8. Create Reusable Asset Registry.
 
-## Batch 2 — Revenue completion
-1. Complete Odoo CRM state mapping.
-2. Complete A044 approval-controlled send path.
-3. Complete contract → invoice → payment event path.
-4. Complete payment → onboarding event path.
-5. Add renewal/upsell/referral state transitions.
+## Sprint 2 — Phase 3–5: Agent Factory + Runtime + CRM
+1. Create Agent Factory template.
+2. Map Tier-1 agents to skills/prompts/knowledge/tools.
+3. Complete runtime persistence/outbox/error semantics.
+4. Complete CRM lifecycle/state mutation.
 
-## Batch 3 — Agent expansion
-Continue the highest-revenue Tier-1 agents and extract reusable capabilities from each rather than duplicating prompts.
+## Sprint 3 — Phase 6–8: Revenue Acquisition
+1. Finish lead intelligence chain.
+2. Finish outreach chain.
+3. Finish qualification → meeting → proposal.
 
-## Batch 4 — Intelligence/control
-Implement customer health, analytics, cost, anomaly detection and CEO command center.
+## Sprint 4 — Phase 9–11: Revenue-to-Customer
+1. Contract → invoice → payment.
+2. Payment → onboarding.
+3. Delivery → health.
+4. Renewal/upsell/referral/advocacy.
 
-## Batch 5 — Scale
-Agent Factory → A2A → Marketplace → Digital Twin → autonomous optimization → multi-company scale.
+## Sprint 5 — Phase 12–15: Company Operating Layer
+1. Communications intelligence.
+2. Marketing/growth.
+3. Finance/operations.
+4. CEO command center.
 
-# 6. Definition of Done for the AIOS
+## Sprint 6 — Phase 16–18: Intelligence + Collaboration
+1. Evaluation/observability.
+2. Learning loop.
+3. A2A/distributed collaboration.
+
+## Sprint 7 — Phase 19–21: Scale
+1. Agent Factory/Marketplace/Digital Twin.
+2. Multi-company scale.
+3. Production hardening.
+
+# 8. Definition of Done for the AIOS
 
 The AIOS is considered architecturally complete when:
 
@@ -513,11 +1012,12 @@ The AIOS is considered architecturally complete when:
 - revenue flows from acquisition through retention/expansion;
 - reusable assets can be versioned and composed;
 - open-source assets can be audited and integrated safely;
+- workspace knowledge is classified, governed and provenance-linked;
 - evaluation and observability can measure quality, cost and reliability;
 - the system can improve through governed versioned changes.
 
-# 7. Relationship to v2
+# 9. Relationship to previous plans
 
-v2 remains historical implementation evidence. v3 is the **canonical planning sequence for future work**. Existing implemented artifacts are retained; they are not discarded or rebuilt solely because the plan has been upgraded.
+v2 remains historical implementation evidence. v3.1 is the **canonical planning sequence for future work**. Existing implemented artifacts are retained; they are not discarded or rebuilt solely because the plan has been upgraded.
 
 The current strategy remains: **build first, revenue first, extract reusable capabilities during implementation, and defer the full testing campaign until the agreed later phase.**
