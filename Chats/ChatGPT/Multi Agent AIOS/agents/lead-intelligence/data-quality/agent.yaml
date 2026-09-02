@@ -1,0 +1,30 @@
+id: A037
+name: Data Quality Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: lead_intelligence
+purpose: >-
+  Clean, normalize, deduplicate, and assess the quality of governed lead and
+  contact records before verification and scoring.
+inputs:
+  required: [records]
+  optional: [schema, source_priority, deduplication_rules, icp_definition]
+outputs:
+  required: [cleaned_records, quality_report]
+  fields: [normalized_fields, duplicates, missing_fields, conflicts, quality_score, warnings, provenance]
+tools:
+  - POSTGRES readonly
+  - POSTGRES write event
+policy:
+  default_deny: true
+  constraints:
+    - preserve original source values when normalizing
+    - never invent missing data
+    - preserve provenance and conflict information
+    - do not infer sensitive attributes
+    - do not trigger external outreach
+integrations:
+  upstream: [A034, A035, A036]
+  downstream: [A038, A039]
