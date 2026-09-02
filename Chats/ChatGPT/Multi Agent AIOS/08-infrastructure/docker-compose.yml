@@ -80,15 +80,86 @@ services:
         condition: service_healthy
       n8n:
         condition: service_healthy
+      langgraph-adapter:
+        condition: service_started
+      crewai-adapter:
+        condition: service_started
+      hermes-adapter:
+        condition: service_started
+      dify-adapter:
+        condition: service_started
     ports: ["8080:8080"]
     environment:
       AIOS_DATABASE_URL: postgresql://${POSTGRES_USER:-odoo}:${POSTGRES_PASSWORD:-change-me-dev-only}@postgres:5432/${POSTGRES_DB:-odoo}
       N8N_RUNTIME_URL: ${N8N_RUNTIME_URL:-http://n8n:5678}
-      LANGGRAPH_RUNTIME_URL: ${LANGGRAPH_RUNTIME_URL:-}
-      CREWAI_RUNTIME_URL: ${CREWAI_RUNTIME_URL:-}
-      HERMES_RUNTIME_URL: ${HERMES_RUNTIME_URL:-}
-      DIFY_RUNTIME_URL: ${DIFY_RUNTIME_URL:-}
+      LANGGRAPH_RUNTIME_URL: ${LANGGRAPH_RUNTIME_URL:-http://langgraph-adapter:8090}
+      CREWAI_RUNTIME_URL: ${CREWAI_RUNTIME_URL:-http://crewai-adapter:8090}
+      HERMES_RUNTIME_URL: ${HERMES_RUNTIME_URL:-http://hermes-adapter:8090}
+      DIFY_RUNTIME_URL: ${DIFY_RUNTIME_URL:-http://dify-adapter:8090}
       RUNTIME_TIMEOUT_SECONDS: ${RUNTIME_TIMEOUT_SECONDS:-120}
+    networks: [aios]
+
+  langgraph-adapter:
+    build:
+      context: ../09-runtime
+      dockerfile: adapters/Dockerfile
+    restart: unless-stopped
+    environment:
+      RUNTIME_KIND: langgraph
+      RUNTIME_TARGET_URL: ${LANGGRAPH_TARGET_URL:-}
+      RUNTIME_API_KEY: ${LANGGRAPH_API_KEY:-}
+      LANGGRAPH_ASSISTANT_ID: ${LANGGRAPH_ASSISTANT_ID:-}
+      LANGGRAPH_INVOKE_PATH: ${LANGGRAPH_INVOKE_PATH:-/runs/wait}
+    networks: [aios]
+
+  crewai-adapter:
+    build:
+      context: ../09-runtime
+      dockerfile: adapters/Dockerfile
+    restart: unless-stopped
+    environment:
+      RUNTIME_KIND: crewai
+      RUNTIME_TARGET_URL: ${CREWAI_TARGET_URL:-}
+      RUNTIME_API_KEY: ${CREWAI_API_KEY:-}
+    networks: [aios]
+
+  hermes-adapter:
+    build:
+      context: ../09-runtime
+      dockerfile: adapters/Dockerfile
+    restart: unless-stopped
+    environment:
+      RUNTIME_KIND: hermes
+      RUNTIME_TARGET_URL: ${HERMES_TARGET_URL:-}
+      RUNTIME_API_KEY: ${HERMES_API_KEY:-}
+    networks: [aios]
+
+  dify-adapter:
+    build:
+      context: ../09-runtime
+      dockerfile: adapters/Dockerfile
+    restart: unless-stopped
+    environment:
+      RUNTIME_KIND: dify
+      RUNTIME_TARGET_URL: ${DIFY_TARGET_URL:-}
+      RUNTIME_API_KEY: ${DIFY_API_KEY:-}
+      DIFY_WORKFLOW_ID: ${DIFY_WORKFLOW_ID:-}
+      DIFY_INVOKE_PATH: ${DIFY_INVOKE_PATH:-/workflows/run}
+    networks: [aios]
+
+  odoo-sync:
+    build:
+      context: ../09-runtime
+      dockerfile: adapters/odoo-Dockerfile
+    restart: unless-stopped
+    depends_on:
+      odoo:
+        condition: service_healthy
+    environment:
+      ODOO_URL: ${ODOO_URL:-http://odoo:8069}
+      ODOO_DB: ${ODOO_DB:-odoo}
+      ODOO_USERNAME: ${ODOO_USERNAME:-}
+      ODOO_PASSWORD: ${ODOO_PASSWORD:-}
     networks: [aios]
 
 volumes:
