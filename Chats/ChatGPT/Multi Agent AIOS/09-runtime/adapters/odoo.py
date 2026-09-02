@@ -31,6 +31,16 @@ class OdooClient:
         if lead_id:
             self._execute("crm.lead", "write", [lead_id, safe_values])
             return lead_id
+
+        # Prefer an existing CRM lead with the same normalized email over creating duplicates.
+        email = str(safe_values.get("email_from") or "").strip().lower()
+        if email:
+            matches = self.find_by_email(email)
+            if matches:
+                existing_id = matches[0]
+                self._execute("crm.lead", "write", [existing_id, safe_values])
+                return existing_id
+
         return int(self._execute("crm.lead", "create", safe_values))
 
     def find_by_email(self, email: str) -> list[int]:
