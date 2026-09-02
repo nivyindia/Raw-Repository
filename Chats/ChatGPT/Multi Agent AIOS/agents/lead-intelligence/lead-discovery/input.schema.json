@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aios://agents/A034/input.schema.json",
+  "title": "A034 Lead Discovery Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["target_definition", "source_policy"],
+  "properties": {
+    "target_definition": {"type": "object"},
+    "source_policy": {"type": "object"},
+    "geography": {"type": "string"},
+    "industry": {"type": "string"},
+    "company_size": {"type": "string"},
+    "technology_signals": {"type": "array", "items": {"type": "string"}},
+    "intent_signals": {"type": "array", "items": {"type": "string"}},
+    "limit": {"type": "integer", "minimum": 1, "maximum": 1000}
+  }
+}
