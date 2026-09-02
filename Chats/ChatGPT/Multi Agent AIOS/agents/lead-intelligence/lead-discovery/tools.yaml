@@ -1,0 +1,44 @@
+agent_id: A034
+version: "1.1"
+policy: default_deny
+allowed_tools:
+  - id: TOOL-FIRECRAWL-EXTRACT
+    action: firecrawl.extract
+    purpose: Extract structured business evidence from approved public sources.
+    access: read
+  - id: TOOL-BROWSER-USE-RESEARCH
+    action: browser_use.research
+    purpose: Research approved public sources and verify source evidence.
+    access: read
+  - id: TOOL-ODOO-SEARCH-LEAD
+    action: odoo.search_lead
+    purpose: Detect existing governed CRM records for deduplication.
+    access: read
+  - id: TOOL-ODOO-CREATE-LEAD
+    action: odoo.create_lead
+    purpose: Create an accepted lead after policy, evidence, confidence, and duplicate gates pass.
+    access: write
+  - id: TOOL-POSTGRES-QUERY-READONLY
+    action: postgres.query_readonly
+    purpose: Read explicitly authorized internal reference data.
+    access: read
+  - id: TOOL-POSTGRES-WRITE-EVENT
+    action: postgres.write_event
+    purpose: Persist lead.created after successful CRM state change.
+    access: write
+constraints:
+  public_data_only: true
+  approved_sources_required: true
+  external_communication: forbidden
+  private_personal_data: forbidden
+  llm_knowledge_as_evidence: forbidden
+  policy_exception: approval_required
+  destructive_actions: forbidden
+authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+write_guards:
+  - duplicate_check_passed
+  - minimum_confidence_passed
+  - source_provenance_present
+  - evidence_present
+  - schema_valid
+  - audit_context_present
