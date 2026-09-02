@@ -1,0 +1,32 @@
+id: A050
+name: Follow-Up Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+purpose: Detect stale outbound opportunities and recommend the next appropriate follow-up using conversation context, sequence state, and policy gates.
+inputs:
+  required: [lead, outreach_history]
+  optional: [outreach_strategy, replies, engagement_signals, account_research, campaign_policy]
+outputs:
+  primary: follow_up_recommendation
+  required_fields: [action, timing, channel, draft, rationale, confidence, suppression_status]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-QDRANT-SEARCH, TOOL-ODOO-SEARCH-LEAD]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+policy:
+  suppression_check_required: true
+  contact_policy_required: true
+  external_send: prohibited
+  no_response_is_not_positive_evidence: true
+  sensitive_attribute_inference: forbidden
+workflow:
+  sequence: [load_history, detect_staleness, inspect_latest_response, check_policy, select_next_step, draft_follow_up, assign_timing, calculate_confidence, emit_recommendation]
+quality:
+  conversation_aware: true
+  duplicate_message_prevention: true
+  explicit_stop_conditions: true
+failure_handling:
+  suppression_uncertain: stop
+  policy_uncertain: stop
+  missing_history: recommend_research
