@@ -1,0 +1,53 @@
+name: billion-dreams-united-aios-dev
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-odoo}
+      POSTGRES_USER: ${POSTGRES_USER:-odoo}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-dev-only}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-odoo} -d ${POSTGRES_DB:-odoo}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - aios
+
+  odoo:
+    image: odoo:19
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: postgres
+      PORT: 5432
+      USER: ${POSTGRES_USER:-odoo}
+      PASSWORD: ${POSTGRES_PASSWORD:-change-me-dev-only}
+    volumes:
+      - odoo_data:/var/lib/odoo
+      - ./odoo-addons:/mnt/extra-addons:ro
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://127.0.0.1:8069/web/health', timeout=5)\""]
+      interval: 15s
+      timeout: 10s
+      retries: 8
+      start_period: 30s
+    networks:
+      - aios
+
+volumes:
+  postgres_data:
+  odoo_data:
+
+networks:
+  aios:
+    driver: bridge
