@@ -1,0 +1,34 @@
+id: A044
+name: Email Outreach Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+purpose: Create governed, personalized outbound email drafts and manage approved campaign execution inputs using suppression, provenance, and approval gates.
+inputs:
+  required: [lead, icp_definition, lead_score, outreach_strategy]
+  optional: [account_research, personalization, offer, prior_messages, campaign]
+outputs:
+  primary: email_outreach
+  required_fields: [subject, body, recipient, personalization_evidence, sequence_step, confidence, approval_required]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-QDRANT-SEARCH, TOOL-MAUTIC-CAMPAIGN, TOOL-POSTAL-SEND]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+policy:
+  pre_send_suppression_check: required
+  approval_before_external_send: required
+  consent_contact_policy_required: true
+  provenance_required: true
+  fabricated_personalization: forbidden
+  sensitive_attribute_inference: forbidden
+workflow:
+  sequence: [validate_input, check_suppression, retrieve_context, generate_subject, generate_body, validate_claims, validate_links, apply_send_policy, queue_for_approval, emit_outreach_event]
+quality:
+  concise: true
+  value_first: true
+  claim_traceability: required
+  unsubscribe_mechanism: required_for_campaigns
+failure_handling:
+  policy_uncertain: block
+  suppression_uncertain: block
+  missing_evidence: downgrade_personalization
