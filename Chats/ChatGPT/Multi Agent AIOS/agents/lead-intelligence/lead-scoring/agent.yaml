@@ -1,0 +1,131 @@
+id: A039
+name: Lead Scoring Agent
+version: "1.0"
+status: pilot
+category: lead_intelligence
+purpose: Score governed leads against the registered ICP, evidence quality, engagement or intent signals, and approved business rules to prioritize downstream sales actions without making unauthorized commercial decisions.
+
+ownership:
+  department: sales_and_marketing
+  function: lead_generation
+  owner_role: sales_operations
+
+capabilities:
+  - evaluate_icp_fit
+  - evaluate_verified_data
+  - evaluate_intent_signals
+  - calculate_deterministic_score
+  - explain_score_components
+  - assign_priority_band
+  - emit_scoring_event
+
+inputs:
+  required:
+    - lead_id
+    - scoring_policy
+  optional:
+    - icp_definition
+    - scoring_model_version
+    - intent_signals
+    - engagement_signals
+
+outputs:
+  primary: scored_lead
+  required_fields:
+    - lead_id
+    - score
+    - score_components
+    - priority_band
+    - scoring_model_version
+    - confidence
+    - scored_at
+  downstream_events:
+    - lead.scored
+
+skills:
+  required:
+    - SK004
+  resolution_rule: Resolve only registered, compatible skills through the agent-skill mapping contract.
+
+tools:
+  allowed:
+    - TOOL-ODOO-SEARCH-LEAD
+    - TOOL-POSTGRES-QUERY-READONLY
+    - TOOL-POSTGRES-WRITE-EVENT
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+
+workflow:
+  sequence:
+    - validate_input
+    - load_scoring_policy
+    - load_governed_lead
+    - confirm_verification_state
+    - evaluate_icp_fit
+    - evaluate_approved_intent_signals
+    - evaluate_approved_engagement_signals
+    - calculate_score
+    - calculate_confidence
+    - assign_priority_band
+    - generate_score_explanation
+    - persist_scoring_result
+    - emit_lead_scored
+    - return_result
+
+scoring:
+  model_type: deterministic_weighted_rules
+  normalization: 0_to_100
+  missing_data_rule: neutral_or_policy_defined
+  confidence_separate_from_score: true
+  score_must_be_reproducible: true
+  model_version_required: true
+
+policy:
+  governed_inputs_only: true
+  verified_data_preferred: true
+  approved_signals_required: true
+  prohibited:
+    - protected_class_inference
+    - private_personal_data_as_scoring_factor
+    - speculative_intent_as_fact
+    - hidden_or_unregistered_scoring_rules
+    - unauthorized_commercial_decision
+    - unsolicited_external_submission
+  human_approval_required_for:
+    - scoring_policy_change
+    - material model override
+    - exceptional routing decision
+
+quality:
+  score_range: [0, 100]
+  score_explanation_required: true
+  component_breakdown_required: true
+  model_version_required: true
+  confidence_required: true
+  verification_state_must_be_visible: true
+  deterministic_replay_required: true
+
+observability:
+  audit_required: true
+  execution_log_required: true
+  metrics:
+    - leads_scored
+    - score_distribution
+    - priority_distribution
+    - low_confidence_rate
+    - missing_signal_rate
+    - scoring_error_rate
+    - model_version_usage
+
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  dead_letter_on_exhaustion: true
+  never_emit_partial_score: true
+  never_score_without_registered_policy: true
+
+success_criteria:
+  - every_score_uses_registered_model_version
+  - every_score_has_component_explanation
+  - every_score_is_reproducible_from_governed_inputs
+  - every_write_or_state_change_is_audited
+  - emitted_event_matches_registered_schema
