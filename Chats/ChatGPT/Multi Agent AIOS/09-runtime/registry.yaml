@@ -1,0 +1,36 @@
+version: "1.0"
+primary_business_workflow_engine: n8n
+runtimes:
+  n8n:
+    base_url_env: N8N_RUNTIME_URL
+  langgraph:
+    base_url_env: LANGGRAPH_RUNTIME_URL
+  crewai:
+    base_url_env: CREWAI_RUNTIME_URL
+  hermes:
+    base_url_env: HERMES_RUNTIME_URL
+  dify:
+    base_url_env: DIFY_RUNTIME_URL
+
+agents:
+  A001: {runtime: langgraph}
+  A002: {runtime: langgraph}
+  A034: {runtime: langgraph}
+  A035: {runtime: langgraph}
+  A036: {runtime: langgraph}
+  A037: {runtime: langgraph}
+  A038: {runtime: langgraph}
+  A039: {runtime: langgraph}
+  A041: {runtime: langgraph}
+  A042: {runtime: langgraph}
+  A043: {runtime: crewai}
+  A044: {runtime: n8n, approval_required: true}
+  A049: {runtime: crewai}
+  A050: {runtime: n8n}
+  A052: {runtime: langgraph}
+  A054: {runtime: crewai}
+  A055: {runtime: langgraph}
+  A057: {runtime: langgraph}
+  A058: {runtime: crewai}
+  A060: {runtime: n8n, approval_required: true}
+  A065: {runtime: n8n, approval_required: true}
