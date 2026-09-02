@@ -1,76 +1,21 @@
 {
   "name": "AIOS Event Router — Revenue Outbox",
   "nodes": [
-    {
-      "parameters": {"rule": {"interval": [{"field": "seconds", "secondsInterval": 15}]}},
-      "id": "schedule",
-      "name": "Poll Revenue Outbox",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [0, 0]
-    },
-    {
-      "parameters": {
-        "method": "GET",
-        "url": "={{($env.AIOS_RUNTIME_URL || 'http://aios-runtime:8080') + '/v1/outbox/claim?consumer=n8n-revenue-router&limit=20&lease_seconds=300'}}",
-        "options": {}
-      },
-      "id": "claim",
-      "name": "Claim Outbox",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [260, 0]
-    },
-    {
-      "parameters": {
-        "jsCode": "const routes = {\n  'revenue.lead.scored': { path: '/webhook/aios/revenue/outreach', mode: 'automatic' },\n  'revenue.lead.qualified': { path: '/webhook/aios/revenue/opportunity', mode: 'conditional', conditionField: 'payload.qualification.qualification_status', conditionValue: 'qualified' }\n};\nconst events = $json.events || [];\nreturn events.map(event => {\n  const route = routes[event.event_type];\n  if (!route) return null;\n  if (route.mode === 'conditional') {\n    const value = event.payload?.qualification?.qualification_status;\n    if (value !== route.conditionValue) return null;\n  }\n  return { json: { ...event, route_path: route.path } };\n}).filter(Boolean);"
-      },
-      "id": "route",
-      "name": "Resolve Revenue Route",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [520, 0]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "={{($env.AIOS_N8N_BASE_URL || 'http://n8n:5678') + $json.route_path}}",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({event_id:$json.event_id,event_type:$json.event_type,execution_id:$json.payload?.execution_id || $json.execution_id,entity_type:$json.entity_type,entity_id:$json.entity_id,payload:$json.payload,provenance:$json.provenance,schema_version:$json.schema_version,source:'aios-event-router'})}}",
-        "options": {}
-      },
-      "id": "dispatch",
-      "name": "Dispatch Revenue Event",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [800, 0]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "={{($env.AIOS_RUNTIME_URL || 'http://aios-runtime:8080') + '/v1/outbox/ack'}}",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{JSON.stringify({outbox_id:$json.outbox_id,consumer:'n8n-revenue-router',success:true})}}",
-        "options": {}
-      },
-      "id": "ack",
-      "name": "Ack Delivered Event",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [1080, 0]
-    }
+    {"parameters":{"rule":{"interval":[{"field":"seconds","secondsInterval":15}]}},"id":"schedule","name":"Poll Revenue Outbox","type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0]},
+    {"parameters":{"method":"GET","url":"={{($env.AIOS_RUNTIME_URL || 'http://aios-runtime:8080') + '/v1/outbox/claim?consumer=n8n-revenue-router&limit=20&lease_seconds=300'}}","options":{}},"id":"claim","name":"Claim Outbox","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[260,0]},
+    {"parameters":{"jsCode":"const routes = {'revenue.lead.scored': {path:'/webhook/aios/revenue/outreach',mode:'automatic'}, 'revenue.lead.qualified': {path:'/webhook/aios/revenue/opportunity',mode:'conditional',conditionValue:'qualified'}};\nconst events = $json.events || [];\nreturn events.map(event => { const route=routes[event.event_type]; if(!route) return null; if(route.mode==='conditional' && event.payload?.qualification?.qualification_status!==route.conditionValue) return null; return {json:{...event,route_path:route.path}}; }).filter(Boolean);"},"id":"route","name":"Resolve Revenue Route","type":"n8n-nodes-base.code","typeVersion":2,"position":[520,0]},
+    {"parameters":{"method":"POST","url":"={{($env.AIOS_N8N_BASE_URL || 'http://n8n:5678') + $json.route_path}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({event_id:$json.event_id,event_type:$json.event_type,execution_id:$json.payload?.execution_id || $json.execution_id,entity_type:$json.entity_type,entity_id:$json.entity_id,payload:$json.payload,provenance:$json.provenance,schema_version:$json.schema_version,source:'aios-event-router'})}}","options":{}},"id":"dispatch","name":"Dispatch Revenue Event","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[800,0]},
+    {"parameters":{"method":"POST","url":"={{($env.AIOS_RUNTIME_URL || 'http://aios-runtime:8080') + '/v1/outbox/ack'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({outbox_id:$node['Resolve Revenue Route'].item.json.outbox_id,consumer:'n8n-revenue-router',success:true})}}","options":{}},"id":"ack","name":"Ack Delivered Event","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[1080,0]}
   ],
   "connections": {
-    "Poll Revenue Outbox": {"main": [[{"node": "Claim Outbox", "type": "main", "index": 0}]]},
-    "Claim Outbox": {"main": [[{"node": "Resolve Revenue Route", "type": "main", "index": 0}]]},
-    "Resolve Revenue Route": {"main": [[{"node": "Dispatch Revenue Event", "type": "main", "index": 0}]]},
-    "Dispatch Revenue Event": {"main": [[{"node": "Ack Delivered Event", "type": "main", "index": 0}]]}
+    "Poll Revenue Outbox":{"main":[[{"node":"Claim Outbox","type":"main","index":0}]]},
+    "Claim Outbox":{"main":[[{"node":"Resolve Revenue Route","type":"main","index":0}]]},
+    "Resolve Revenue Route":{"main":[[{"node":"Dispatch Revenue Event","type":"main","index":0}]]},
+    "Dispatch Revenue Event":{"main":[[{"node":"Ack Delivered Event","type":"main","index":0}]]}
   },
   "active": false,
-  "settings": {"executionOrder": "v1"},
-  "versionId": "aios-event-router-v1",
-  "meta": {"aios": true, "purpose": "durable-revenue-event-outbox-to-n8n-workflow-routing"},
-  "tags": []
+  "settings":{"executionOrder":"v1"},
+  "versionId":"aios-event-router-v1",
+  "meta":{"aios":true,"purpose":"durable-revenue-event-outbox-to-n8n-workflow-routing"},
+  "tags":[]
 }
