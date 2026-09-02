@@ -1,0 +1,21 @@
+{
+  "name": "AIOS Revenue 02 — Personalization and Outreach",
+  "nodes": [
+    {"parameters":{"httpMethod":"POST","path":"aios/revenue/outreach","responseMode":"responseNode"},"id":"trigger","name":"Outreach Trigger","type":"n8n-nodes-base.webhook","typeVersion":2,"position":[0,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A043/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"strategy","name":"A043 Outreach Strategy","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[250,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A049/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"personalize","name":"A049 Personalization","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[500,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A044/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"email","name":"A044 Email Outreach","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[750,0]},
+    {"parameters":{"respondWith":"json","responseBody":"={{JSON.stringify({status:'draft_ready',pipeline:'revenue-02-outreach',result:$json})}}"},"id":"response","name":"Return Draft","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[1000,0]}
+  ],
+  "connections": {
+    "Outreach Trigger":{"main":[[{"node":"A043 Outreach Strategy","type":"main","index":0}]]},
+    "A043 Outreach Strategy":{"main":[[{"node":"A049 Personalization","type":"main","index":0}]]},
+    "A049 Personalization":{"main":[[{"node":"A044 Email Outreach","type":"main","index":0}]]},
+    "A044 Email Outreach":{"main":[[{"node":"Return Draft","type":"main","index":0}]]}
+  },
+  "active": false,
+  "settings":{"executionOrder":"v1"},
+  "versionId":"aios-revenue-02",
+  "meta":{"aios":true,"purpose":"personalization-and-governed-outreach"},
+  "tags":[]
+}
