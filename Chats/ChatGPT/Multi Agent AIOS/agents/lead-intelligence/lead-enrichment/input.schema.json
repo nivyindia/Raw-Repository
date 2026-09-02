@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A036 Lead Enrichment Input",
+  "type": "object",
+  "required": ["lead"],
+  "properties": {
+    "lead": {"type": "object", "required": ["lead_id", "company_name", "canonical_domain"]},
+    "icp_definition": {"type": "object"},
+    "enrichment_scope": {"type": "array", "items": {"type": "string"}},
+    "source_policy": {"type": "object"},
+    "as_of": {"type": "string", "format": "date-time"}
+  },
+  "additionalProperties": false
+}
