@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A002 ICP Input",
+  "type": "object",
+  "required": ["market_research"],
+  "properties": {
+    "market_research": {"type": "object"},
+    "business_offer": {"type": "object"},
+    "existing_customers": {"type": "array", "items": {"type": "object"}},
+    "exclusions": {"type": "array", "items": {"type": "string"}},
+    "geography": {"type": "string"},
+    "revenue_targets": {"type": "object"}
+  },
+  "additionalProperties": false
+}
