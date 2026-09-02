@@ -68,15 +68,9 @@ def persist_event(event_type: str, execution_id: str, agent_id: str, payload: di
             """INSERT INTO aios_outbox (event_id,event_type,payload)
             VALUES (%s,%s,%s::jsonb)""",
             (event_id, event_type, json.dumps({
-                "event_id": event_id,
-                "event_type": event_type,
-                "execution_id": execution_id,
-                "agent_id": agent_id,
-                "entity_type": entity_type,
-                "entity_id": entity_id,
-                "source": source,
-                "payload": payload,
-                "provenance": provenance or {},
+                "event_id": event_id, "event_type": event_type, "execution_id": execution_id,
+                "agent_id": agent_id, "entity_type": entity_type, "entity_id": entity_id,
+                "source": source, "payload": payload, "provenance": provenance or {},
                 "schema_version": schema_version,
             })),
         )
@@ -119,15 +113,17 @@ def ingest_event(request: EventIn) -> dict[str, Any]:
     return {"status": "accepted", "event_id": event_id, "execution_id": request.execution_id, "event_type": request.event_type, "outbox": "queued"}
 
 @app.get("/v1/outbox/claim")
-def claim_outbox(consumer: str = Query(..., min_length=1, max_length=120), limit: int = Query(10, ge=1, le=100), lease_seconds: int = Query(300, ge=30, le=3600)) -> dict[str, Any]:
+def claim_outbox(consumer: str = Query(..., min_length=1, max_length=120), limit: int = Query(10, ge=1, le=100), lease_seconds: int = Query(300, ge=30, le=3600), event_prefix: str | None = Query(None, max_length=120)) -> dict[str, Any]:
     url = require_db()
+    prefix = event_prefix or None
     with psycopg.connect(url) as conn:
         rows = conn.execute(
             """WITH candidates AS (
                 SELECT o.outbox_id
                 FROM aios_outbox o
-                WHERE (o.status='pending' AND o.available_at <= NOW())
-                   OR (o.status='processing' AND o.locked_at < NOW() - (%s * INTERVAL '1 second'))
+                WHERE ((o.status='pending' AND o.available_at <= NOW())
+                   OR (o.status='processing' AND o.locked_at < NOW() - (%s * INTERVAL '1 second')))
+                  AND (%s IS NULL OR o.event_type LIKE %s)
                 ORDER BY o.outbox_id
                 FOR UPDATE SKIP LOCKED
                 LIMIT %s
@@ -137,10 +133,10 @@ def claim_outbox(consumer: str = Query(..., min_length=1, max_length=120), limit
             FROM candidates c
             WHERE o.outbox_id=c.outbox_id
             RETURNING o.outbox_id,o.event_id,o.event_type,o.payload,o.attempts""",
-            (lease_seconds, limit, consumer),
+            (lease_seconds, prefix, (prefix + "%") if prefix else None, limit, consumer),
         ).fetchall()
         conn.commit()
-    return {"consumer": consumer, "count": len(rows), "events": [
+    return {"consumer": consumer, "count": len(rows), "event_prefix": prefix, "events": [
         {"outbox_id": r[0], "event_id": str(r[1]), "event_type": r[2], "payload": r[3], "attempts": r[4]} for r in rows
     ]}
 
