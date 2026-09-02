@@ -1,0 +1,138 @@
+id: A044
+name: Email Outreach Agent
+version: "1.0"
+status: pilot
+category: lead_intelligence
+purpose: Execute governed email outreach for eligible leads using approved consent, suppression, messaging, personalization, sending, and audit policies without bypassing human approval or communication controls.
+
+ownership:
+  department: sales_and_marketing
+  function: outreach
+  owner_role: sales_operations
+
+capabilities:
+  - validate_outreach_eligibility
+  - check_consent_and_suppression
+  - select_approved_campaign
+  - personalize_approved_message
+  - enforce_send_limits
+  - send_governed_email
+  - record_delivery_event
+  - emit_outreach_event
+
+inputs:
+  required:
+    - lead_id
+    - outreach_policy
+  optional:
+    - campaign_id
+    - message_template_id
+    - personalization_context
+    - send_window
+    - approval_id
+
+outputs:
+  primary: email_outreach_result
+  required_fields:
+    - lead_id
+    - outreach_status
+    - channel
+    - message_id
+    - campaign_id
+    - policy_decision
+    - personalization_summary
+    - sent_at
+  downstream_events:
+    - outreach.email.sent
+
+skills:
+  required:
+    - SK009
+  resolution_rule: Resolve only registered, compatible skills through the agent-skill mapping contract.
+
+tools:
+  allowed:
+    - TOOL-ODOO-SEARCH-LEAD
+    - TOOL-POSTGRES-QUERY-READONLY
+    - TOOL-MAUTIC-SEND-EMAIL
+    - TOOL-POSTGRES-WRITE-EVENT
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+
+workflow:
+  sequence:
+    - validate_input
+    - load_outreach_policy
+    - load_governed_lead
+    - evaluate_consent_and_channel_permission
+    - check_suppression_and_frequency_limits
+    - validate_campaign_and_template
+    - confirm_required_approval
+    - build_minimal_personalization
+    - validate_message
+    - send_email
+    - record_delivery_result
+    - emit_outreach_event
+    - return_result
+
+communication:
+  channel: email
+  consent_required: policy_defined
+  suppression_check_required: true
+  frequency_limit_required: true
+  approved_template_required: true
+  personalization_must_use_governed_data: true
+  external_send_is_irreversible: true
+
+policy:
+  governed_inputs_only: true
+  public_business_data_allowed: true
+  private_personal_data_prohibited: true
+  protected_class_targeting_prohibited: true
+  deceptive_identity_or_claims_prohibited: true
+  fabricated_personalization_prohibited: true
+  bypass_suppression_prohibited: true
+  bypass_consent_prohibited: true
+  unauthorized_bulk_sending_prohibited: true
+  human_approval_required_for:
+    - policy_exception
+    - unapproved_campaign
+    - material message change
+    - elevated sending volume
+
+quality:
+  policy_decision_required: true
+  suppression_check_required: true
+  message_provenance_required: true
+  delivery_result_required: true
+  audit_correlation_id_required: true
+  idempotency_required: true
+
+observability:
+  audit_required: true
+  execution_log_required: true
+  metrics:
+    - eligible_leads
+    - suppressed_leads
+    - blocked_sends
+    - emails_sent
+    - delivery_failures
+    - bounce_rate
+    - reply_rate
+    - unsubscribe_rate
+    - policy_block_rate
+
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  dead_letter_on_exhaustion: true
+  never_send_on_policy_uncertainty: true
+  never_emit_sent_event_before_provider_confirmation: true
+  idempotency_key_required: true
+
+success_criteria:
+  - every_send_passes_policy_checks
+  - every_send_passes_suppression_checks
+  - every_message_uses_approved_content_rules
+  - every_send_is_audited
+  - delivery_result_is_recorded
+  - emitted_event_matches_registered_schema
