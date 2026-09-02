@@ -1,0 +1,11 @@
+stage: F
+micro_step: F.1.1
+agent_id: A001
+agent_name: Market Research Agent
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+artifacts:
+  - agents/market-research/agent.yaml
+  - agents/market-research/prompt.md
+runtime_verified: false
+next_micro_step: F.1.2
