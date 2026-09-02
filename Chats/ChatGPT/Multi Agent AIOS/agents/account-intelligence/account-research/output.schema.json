@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aios://agents/A041/output.schema.json",
+  "title": "A041 Account Research Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["account_id", "account_brief", "evidence", "confidence", "research_policy_version", "researched_at"],
+  "properties": {
+    "account_id": {"type": "string"},
+    "account_brief": {"type": "object"},
+    "firmographics": {"type": "object"},
+    "key_signals": {"type": "array", "items": {"type": "object"}},
+    "technology_context": {"type": "array", "items": {"type": "object"}},
+    "competitors": {"type": "array", "items": {"type": "object"}},
+    "opportunities": {"type": "array", "items": {"type": "object"}},
+    "risks": {"type": "array", "items": {"type": "object"}},
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "recommended_next_actions": {"type": "array", "items": {"type": "object"}},
+    "evidence": {"type": "array", "minItems": 2, "items": {"type": "object", "required": ["claim", "source"]}},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "research_policy_version": {"type": "string"},
+    "researched_at": {"type": "string", "format": "date-time"}
+  }
+}
