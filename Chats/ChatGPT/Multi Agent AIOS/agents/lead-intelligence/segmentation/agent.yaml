@@ -1,0 +1,30 @@
+id: A040
+name: Segmentation Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: lead_intelligence
+purpose: >-
+  Segment qualified lead and account records into actionable commercial groups
+  using approved ICP, firmographic, behavioral, lifecycle, and engagement signals.
+inputs:
+  required: [lead_or_account_records]
+  optional: [icp_definition, lead_score, account_research, signals, segmentation_rules]
+outputs:
+  required: [segments]
+  fields: [segment_id, segment_name, membership_reason, evidence, confidence, recommended_motion]
+tools:
+  - POSTGRES readonly
+  - QDRANT search
+policy:
+  default_deny: true
+  constraints:
+    - use approved business and engagement attributes
+    - do not use sensitive personal attributes for segmentation
+    - preserve evidence and confidence
+    - do not fabricate behavioral signals
+    - no external outreach or CRM mutation
+integrations:
+  upstream: [A002, A036, A037, A038, A039, A042]
+  downstream: [A043, A044, A050]
