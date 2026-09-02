@@ -1,0 +1,221 @@
+version: "1.0"
+policy_id: COMMUNICATION-POLICY-001
+name: AIOS Communication Policy
+status: active
+owner: Billion Dreams United AIOS Governance
+purpose: >-
+  Govern AI-generated and AI-assisted internal and external communications,
+  including eligibility, consent, suppression, approval, personalization,
+  sending limits, content controls, and auditability.
+
+source_of_truth:
+  permission_matrix: "07-policies/permission-matrix.yaml"
+  ai_risk_policy: "07-policies/ai-risk-policy.yaml"
+
+principles:
+  - lawful_and_policy_compliant_communication
+  - consent_cannot_be_inferred
+  - default_deny_for_uncertain_external_communication
+  - minimum_necessary_data
+  - truthful_non_deceptive_content
+  - approved_channel_and_identity
+  - suppression_controls_are_mandatory
+  - complete_auditability
+  - human_approval_for_material_or_exceptional_actions
+
+communication_classes:
+  internal:
+    default_risk: L0
+    ai_allowed: true
+    autonomous_execution: true
+    approval_required: false
+    examples: [internal_notice, status_update, meeting_summary, internal_draft]
+  external_transactional:
+    default_risk: L1
+    ai_allowed: true
+    autonomous_execution: policy_gated
+    approval_required: policy_defined
+    examples: [approved_service_update, operational_notification]
+  external_outreach:
+    default_risk: L2
+    ai_allowed: true
+    autonomous_execution: policy_gated
+    approval_required: policy_defined
+    examples: [sales_email, campaign_message, prospect_followup]
+  material_external_commitment:
+    default_risk: L3
+    ai_allowed: true
+    autonomous_execution: false
+    approval_required: true
+    examples: [contractual_commitment, binding_offer, material_negotiation]
+  restricted_high_impact:
+    default_risk: L4
+    ai_allowed: false
+    autonomous_execution: false
+    approval_required: true
+
+pre_send_gates:
+  required_for_external_messages:
+    - identify_sender_agent_or_user
+    - identify_recipient_or_audience
+    - resolve_communication_class
+    - resolve_risk_level
+    - validate_agent_skill_tool_action_authorization
+    - validate_channel
+    - validate_recipient_eligibility
+    - check_consent_when_required
+    - check_suppression_list
+    - check_frequency_and_rate_limits
+    - validate_campaign_or_business_purpose
+    - validate_approved_template_or_content_policy
+    - validate_personalization_data
+    - obtain_required_human_approval
+    - validate_audit_context
+
+consent:
+  rule: explicit_or_otherwise_lawful_basis_required_when_applicable
+  inference_prohibited: true
+  consent_must_be_current_per_applicable_policy: true
+  withdrawal_must_be_honored: true
+  consent_does_not_override_suppression_or_law: true
+
+suppression:
+  mandatory_check_before_external_send: true
+  sources:
+    - global_suppression_list
+    - campaign_suppression_list
+    - channel_opt_out
+    - do_not_contact_record
+    - policy_specific_exclusions
+  uncertain_match_action: block_send
+  removal_requires_authorized_governance_action: true
+
+recipient_data:
+  allowed:
+    - governed_business_contact_data
+    - minimum_necessary_personalization_context
+  prohibited:
+    - sensitive_or_protected_class_attributes
+    - unlawfully_obtained_personal_data
+    - speculative_personal_details
+    - private_data_without_explicit_policy_basis
+  personalization:
+    must_be_evidence_based: true
+    fabricated_personalization: prohibited
+    protected_class_targeting: prohibited
+    minimum_necessary: true
+
+content:
+  requirements:
+    - truthful
+    - materially_accurate
+    - non_deceptive
+    - consistent_with_approved_brand_or_campaign_policy
+    - clear_business_purpose
+    - appropriate_identity
+  prohibited:
+    - impersonation
+    - fabricated_claims
+    - false_urgency
+    - deceptive_subject_lines
+    - undisclosed_material_misrepresentation
+    - discriminatory_targeting
+    - harassment_or_abusive_messaging
+    - policy_or_suppression_bypass
+
+channels:
+  approved_only: true
+  channel_must_be_registered: true
+  credentials_must_not_be_shared_with_agents: true
+  examples:
+    - approved_email_provider
+    - approved_whatsapp_provider
+    - approved_crm_messaging
+  unregistered_channel_action: deny_and_escalate
+
+frequency_and_rate_limits:
+  required: true
+  limits_must_be_policy_defined: true
+  agent_must_not_invent_limits: true
+  duplicate_send_protection: required
+  idempotency_key_required_for_automated_external_send: true
+  provider_confirmation_required_before_sent_event: true
+
+campaign_controls:
+  campaign_id_required_for_bulk_or_sequence_outreach: true
+  campaign_must_be_registered: true
+  approved_template_required: true
+  material_template_change_requires_reapproval: true
+  audience_definition_must_be_governed: true
+  policy_exception_requires_human_approval: true
+
+human_approval:
+  required_for:
+    - L3_communication
+    - material_external_commitment
+    - unapproved_campaign
+    - material_message_change
+    - policy_exception
+    - elevated_or_abnormal_volume
+    - unresolved_recipient_or_consent_ambiguity
+  approval_scope: exact_action_only
+  approval_cannot_authorize_prohibited_behavior: true
+
+failure_behavior:
+  missing_consent: block
+  suppression_match: block
+  uncertain_recipient_eligibility: block_and_escalate
+  policy_failure: block
+  approval_failure: block
+  channel_failure: do_not_retry_outside_policy
+  provider_confirmation_missing: do_not_emit_sent_event
+  audit_failure: block_external_send
+
+post_send:
+  required_records:
+    - communication_id
+    - sender_identity
+    - recipient_reference
+    - channel
+    - campaign_id_when_applicable
+    - template_id_when_applicable
+    - policy_decision
+    - approval_reference_when_applicable
+    - provider_message_id_when_available
+    - timestamp
+    - delivery_status
+  events:
+    sent_event_only_after_provider_confirmation: true
+    delivery_and_bounce_events: record_when_available
+    opt_out_events: propagate_to_suppression_controls
+
+monitoring:
+  required_metrics:
+    - sends_attempted
+    - sends_blocked
+    - suppression_blocks
+    - consent_blocks
+    - approval_requests
+    - approval_rejections
+    - duplicate_send_preventions
+    - delivery_failures
+    - opt_out_events
+    - policy_exceptions
+  alerts:
+    - repeated_suppression_bypass_attempts
+    - unauthorized_channel_use
+    - missing_audit_records
+    - abnormal_send_volume
+    - L3_or_L4_communication_attempt
+
+retention_and_privacy:
+  store_minimum_necessary_data: true
+  access_must_be_authorized: true
+  retention_must_follow_applicable_data_policy: true
+  secrets_and_credentials_never_stored_in_message_payloads: true
+
+change_control:
+  owner_approval_required: true
+  version_bump_required: true
+  pull_request_required: true
+  policy_conflict_resolution: "more_restrictive_rule_applies_until_governance_resolution"
