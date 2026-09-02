@@ -1,0 +1,16 @@
+agent_id: A038
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - {id: TOOL-FIRECRAWL-EXTRACT, action: firecrawl.extract, access: read}
+  - {id: TOOL-BROWSER-USE-RESEARCH, action: browser_use.research, access: read}
+  - {id: TOOL-ODOO-SEARCH-LEAD, action: odoo.search_lead, access: read}
+  - {id: TOOL-POSTGRES-QUERY-READONLY, action: postgres.query_readonly, access: read}
+  - {id: TOOL-POSTGRES-WRITE-EVENT, action: postgres.write_event, access: write}
+constraints:
+  public_data_only: true
+  approved_sources_required: true
+  independent_evidence_preferred: true
+  verified_threshold: 0.80
+  conflicts_must_be_flagged: true
+  policy_exception: approval_required
