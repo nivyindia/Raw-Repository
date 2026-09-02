@@ -5,17 +5,21 @@
     {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A055/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"prep","name":"A055 Meeting Prep","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[250,0]},
     {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A060/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"proposal","name":"A060 Proposal","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[500,0]},
     {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A065/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"onboarding","name":"A065 Onboarding","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[750,0]},
-    {"parameters":{"respondWith":"json","responseBody":"={{JSON.stringify({status:'opportunity_processed',pipeline:'revenue-04-meeting-proposal-onboarding',result:$json})}}"},"id":"response","name":"Return Result","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[1000,0]}
+    {"parameters":{"method":"POST","url":"={{($env.ODOO_SYNC_URL || 'http://odoo-sync:8091') + '/v1/crm/leads/upsert'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({lead_id:$json.lead_id || $json.crm_lead_id || null,values:{name:$json.name || $json.company || 'AIOS Opportunity',contact_name:$json.contact_name,email_from:$json.email,phone:$json.phone,description:JSON.stringify({meeting_prep:$json.meeting_prep || $json.prep,proposal:$json.proposal,onboarding:$json.onboarding}),expected_revenue:$json.expected_revenue,probability:$json.probability}})}}"},"id":"crm","name":"Odoo Opportunity Sync","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[1010,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/events'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({event_type:'revenue.opportunity.processed',execution_id:$execution.id,source:'n8n',entity_type:'crm.lead',entity_id:String($json.lead_id || $json.crm_lead_id || ''),payload:{opportunity:$json,crm:$node['Odoo Opportunity Sync'].json}})}}"},"id":"event","name":"Record Opportunity Event","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[1270,0]},
+    {"parameters":{"respondWith":"json","responseBody":"={{JSON.stringify({status:'opportunity_processed',pipeline:'revenue-04-meeting-proposal-onboarding',result:$json})}}"},"id":"response","name":"Return Result","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[1530,0]}
   ],
   "connections": {
     "Qualified Opportunity":{"main":[[{"node":"A055 Meeting Prep","type":"main","index":0}]]},
     "A055 Meeting Prep":{"main":[[{"node":"A060 Proposal","type":"main","index":0}]]},
     "A060 Proposal":{"main":[[{"node":"A065 Onboarding","type":"main","index":0}]]},
-    "A065 Onboarding":{"main":[[{"node":"Return Result","type":"main","index":0}]]}
+    "A065 Onboarding":{"main":[[{"node":"Odoo Opportunity Sync","type":"main","index":0}]]},
+    "Odoo Opportunity Sync":{"main":[[{"node":"Record Opportunity Event","type":"main","index":0}]]},
+    "Record Opportunity Event":{"main":[[{"node":"Return Result","type":"main","index":0}]]}
   },
   "active": false,
   "settings":{"executionOrder":"v1"},
   "versionId":"aios-revenue-04",
-  "meta":{"aios":true,"purpose":"meeting-proposal-onboarding"},
+  "meta":{"aios":true,"purpose":"meeting-proposal-onboarding-with-crm-and-events"},
   "tags":[]
 }
