@@ -1,0 +1,85 @@
+name: AIOS CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-test:
+    name: Lint and test repository artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Validate YAML files
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib, sys
+          try:
+              import yaml
+          except ImportError:
+              print('Installing PyYAML...')
+              raise SystemExit(2)
+          files = list(pathlib.Path('.').rglob('*.yml')) + list(pathlib.Path('.').rglob('*.yaml'))
+          files = [p for p in files if '.git' not in p.parts]
+          errors = []
+          for path in files:
+              try:
+                  with path.open(encoding='utf-8') as f:
+                      list(yaml.safe_load_all(f))
+              except Exception as exc:
+                  errors.append(f'{path}: {exc}')
+          if errors:
+              print('\n'.join(errors))
+              raise SystemExit(1)
+          print(f'Validated {len(files)} YAML files.')
+          PY
+
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check --quiet PyYAML jsonschema
+
+      - name: Validate JSON files
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          files = [p for p in pathlib.Path('.').rglob('*.json') if '.git' not in p.parts]
+          for path in files:
+              with path.open(encoding='utf-8') as f:
+                  json.load(f)
+          print(f'Validated {len(files)} JSON files.')
+          PY
+
+      - name: Validate shell scripts
+        shell: bash
+        run: |
+          mapfile -t files < <(find . -type f -name '*.sh' -not -path './.git/*')
+          for file in "${files[@]}"; do
+            bash -n "$file"
+          done
+          echo "Validated ${#files[@]} shell scripts."
+
+      - name: Validate AIOS Docker Compose files
+        shell: bash
+        run: |
+          mapfile -t files < <(find 'Chats/ChatGPT/Multi Agent AIOS/08-infrastructure' -type f \( -name 'docker-compose.yml' -o -name 'compose.yml' \) 2>/dev/null)
+          for file in "${files[@]}"; do
+            echo "Checking $file"
+            docker compose -f "$file" config --quiet
+          done
+          echo "Validated ${#files[@]} Docker Compose files."
+
+      - name: Repository smoke test
+        run: |
+          test -d 'Chats/ChatGPT/Multi Agent AIOS'
+          test -f 'Chats/ChatGPT/Multi Agent AIOS/COMPLETION_MATRIX.md'
+          test -f 'Chats/ChatGPT/Multi Agent AIOS/BUILD_RULES.md'
+          echo 'AIOS repository smoke test passed.'
