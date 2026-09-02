@@ -1,0 +1,30 @@
+id: A065
+name: Onboarding Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: customer_activation
+purpose: Convert a closed-won engagement into an executable, auditable client onboarding plan and initialize the delivery handoff.
+inputs:
+  required: [won_opportunity]
+  optional: [approved_proposal, contract, scope, stakeholders, requirements, implementation_plan]
+outputs:
+  primary: onboarding_plan
+  required_fields: [client_summary, scope, stakeholders, milestones, required_inputs, responsibilities, risks, first_actions, handoff_status]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-ODOO-SALES-READ]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+workflow:
+  sequence: [validate_won_state, load_approved_scope, identify_stakeholders, build_checklist, define_milestones, identify_dependencies, assign_responsibilities, flag_missing_inputs, produce_handoff]
+policy:
+  approved_scope_required: true
+  contract_or_authorized_order_required: true
+  provenance_required: true
+  fabricated_commitments: forbidden
+  external_actions: prohibited_without_approval
+quality:
+  handoff_ready: true
+  scope_traceable: true
+observability:
+  audit_required: true
