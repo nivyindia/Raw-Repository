@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"aios://agents/A038/input.schema.json",
+  "title":"A038 Verification Input",
+  "type":"object","additionalProperties":false,
+  "required":["lead_id","verification_policy"],
+  "properties":{
+    "lead_id":{"type":"string","minLength":1},"verification_policy":{"type":"object"},"fields_to_verify":{"type":"array","items":{"type":"string"}},"source_policy":{"type":"object"},"minimum_confidence":{"type":"number","minimum":0,"maximum":1},"geography":{"type":"string"}
+  }
+}

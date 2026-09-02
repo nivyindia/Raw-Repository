@@ -1,0 +1,17 @@
+agent_id: A036
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - {id: TOOL-FIRECRAWL-EXTRACT, action: firecrawl.extract, access: read}
+  - {id: TOOL-BROWSER-USE-RESEARCH, action: browser_use.research, access: read}
+  - {id: TOOL-ODOO-SEARCH-LEAD, action: odoo.search_lead, access: read}
+  - {id: TOOL-ODOO-UPDATE-LEAD, action: odoo.update_lead, access: write}
+  - {id: TOOL-POSTGRES-QUERY-READONLY, action: postgres.query_readonly, access: read}
+  - {id: TOOL-POSTGRES-WRITE-EVENT, action: postgres.write_event, access: write}
+constraints:
+  public_data_only: true
+  preserve_trusted_data: true
+  speculative_inference: forbidden
+  destructive_overwrite: forbidden
+  external_submission: forbidden
+  policy_exception: approval_required

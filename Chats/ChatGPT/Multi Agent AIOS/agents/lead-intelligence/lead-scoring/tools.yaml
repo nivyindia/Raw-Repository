@@ -1,0 +1,16 @@
+agent_id: A039
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - {id: TOOL-ODOO-SEARCH-LEAD, action: odoo.search_lead, access: read}
+  - {id: TOOL-POSTGRES-QUERY-READONLY, action: postgres.query_readonly, access: read}
+  - {id: TOOL-POSTGRES-WRITE-EVENT, action: postgres.write_event, access: write}
+constraints:
+  deterministic_scoring_only: true
+  registered_policy_required: true
+  protected_class_inference: forbidden
+  private_personal_data_as_factor: forbidden
+  hidden_rules: forbidden
+  unauthorized_commercial_decision: forbidden
+  score_range: [0, 100]
+  policy_exception: approval_required

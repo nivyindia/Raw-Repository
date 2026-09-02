@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"aios://agents/A036/output.schema.json",
+  "title":"A036 Lead Enrichment Output",
+  "type":"object","additionalProperties":false,
+  "required":["enriched_lead"],
+  "properties":{"enriched_lead":{"type":"object","additionalProperties":false,"required":["lead_id","enrichment_status","enriched_fields","source_provenance","confidence","enriched_at"],"properties":{
+    "lead_id":{"type":"string"},"enrichment_status":{"type":"string","enum":["enriched","unchanged","partial","blocked"]},"enriched_fields":{"type":"array","items":{"type":"string"}},"source_provenance":{"type":"array","items":{"type":"object"}},"confidence":{"type":"number","minimum":0,"maximum":1},"enriched_at":{"type":"string","format":"date-time"}
+  }}}
+}

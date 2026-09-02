@@ -1,0 +1,16 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"aios://agents/A036/input.schema.json",
+  "title":"A036 Lead Enrichment Input",
+  "type":"object","additionalProperties":false,
+  "required":["lead_id","enrichment_policy"],
+  "properties":{
+    "lead_id":{"type":"string","minLength":1},
+    "enrichment_policy":{"type":"object"},
+    "fields_requested":{"type":"array","items":{"type":"string"}},
+    "source_policy":{"type":"object"},
+    "geography":{"type":"string"},
+    "industry":{"type":"string"},
+    "refresh_if_older_than":{"type":"string","format":"date-time"}
+  }
+}
