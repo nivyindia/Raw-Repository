@@ -1,0 +1,25 @@
+id: A058
+name: Solution Mapping Agent
+version: "1.0"
+stage: G
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: sales_solution
+purpose: Map validated customer needs to appropriate Billion Dreams United services, deliverables, assumptions and measurable outcomes.
+inputs:
+  required: [needs_analysis]
+  optional: [service_catalog, pricing_context, account, opportunity, qualification]
+outputs:
+  primary: solution_map
+  required_fields: [need_to_solution_mappings, deliverables, assumptions, dependencies, expected_outcomes, gaps, evidence]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-QDRANT-SEARCH]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+policy:
+  source_provenance_required: true
+  service_catalog_required: true
+  unsupported_solution_claims: forbidden
+  sensitive_attribute_inference: forbidden
+  external_actions: prohibited
+workflow:
+  sequence: [validate_needs, retrieve_service_catalog, map_needs, define_deliverables, state_assumptions, identify_dependencies, estimate_outcomes_without_fabrication, identify_gaps, produce_solution_map]
