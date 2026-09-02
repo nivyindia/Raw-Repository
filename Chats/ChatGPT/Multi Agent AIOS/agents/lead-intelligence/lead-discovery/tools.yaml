@@ -1,0 +1,33 @@
+agent_id: A034
+version: "1.0"
+policy: default_deny
+allowed_tools:
+  - id: TOOL-FIRECRAWL-EXTRACT
+    action: firecrawl.extract
+    purpose: Extract public business information from approved sources.
+    access: read
+  - id: TOOL-BROWSER-USE-RESEARCH
+    action: browser_use.research
+    purpose: Research approved public sources.
+    access: read
+  - id: TOOL-ODOO-SEARCH-LEAD
+    action: odoo.search_lead
+    purpose: Search existing leads for deduplication.
+    access: read
+  - id: TOOL-ODOO-CREATE-LEAD
+    action: odoo.create_lead
+    purpose: Create a governed lead record.
+    access: write
+  - id: TOOL-POSTGRES-QUERY-READONLY
+    action: postgres.query_readonly
+    purpose: Read governed reference data.
+    access: read
+  - id: TOOL-POSTGRES-WRITE-EVENT
+    action: postgres.write_event
+    purpose: Persist registered domain events.
+    access: write
+constraints:
+  public_data_only: true
+  approved_sources_required: true
+  external_communication: forbidden
+  policy_exception: approval_required
