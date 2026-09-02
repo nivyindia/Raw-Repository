@@ -1,0 +1,28 @@
+version: "1.0"
+consumer: "n8n-revenue-router"
+claim:
+  endpoint: "/v1/outbox/claim"
+  lease_seconds: 300
+  batch_size: 20
+  max_attempts: 8
+routes:
+  revenue.lead.scored:
+    workflow: "AIOS Revenue 02 — Personalization and Outreach"
+    path: "/webhook/aios/revenue/outreach"
+    mode: "automatic"
+  revenue.lead.qualified:
+    workflow: "AIOS Revenue 04 — Meeting to Proposal to Onboarding"
+    path: "/webhook/aios/revenue/opportunity"
+    mode: "conditional"
+    condition:
+      field: "payload.qualification.qualification_status"
+      equals: "qualified"
+  revenue.outreach.draft_ready:
+    workflow: null
+    mode: "approval_required"
+    note: "Do not auto-send. Route to the human approval layer before Postal/SMTP execution."
+  revenue.opportunity.processed:
+    workflow: null
+    mode: "terminal"
+    note: "Reserved for payment, delivery, renewal and upsell event consumers."
+unknown_event_policy: "leave_unrouted"
