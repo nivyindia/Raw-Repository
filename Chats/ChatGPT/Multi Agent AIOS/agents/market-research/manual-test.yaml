@@ -1,0 +1,26 @@
+test_id: A001-F1.2-001
+agent_id: A001
+name: Market research contract smoke test
+purpose: Validate that the A001 tool boundary and input/output contracts are internally consistent before runtime execution.
+input:
+  research_question: "What are the current demand trends for AI-enabled digital marketing services among SMBs?"
+  target_market: "United States"
+  geography: "United States"
+  industry: "digital marketing services"
+  customer_segment: "SMB"
+  time_horizon: "last 12 months"
+  source_policy:
+    public_data_only: true
+    approved_sources_required: true
+expected_tool_sequence:
+  - firecrawl.extract
+  - browser_use.research
+  - postgres.query_readonly
+expected_output_checks:
+  - required_fields_present: [research_question, scope, findings, evidence, implications, confidence, researched_at]
+  - material_findings_have_provenance: true
+  - uncertainty_explicit: true
+  - external_communication_performed: false
+  - production_state_changed: false
+runtime_status: pending
+runtime_note: Requires an execution environment with the declared tools connected; this repository step does not claim a live agent run.
