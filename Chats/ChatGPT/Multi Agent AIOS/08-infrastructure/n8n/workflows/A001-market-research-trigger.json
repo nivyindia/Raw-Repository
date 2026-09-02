@@ -1,0 +1,53 @@
+{
+  "name": "A001 Market Research Agent - Event Trigger",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "aios/a001/market-research",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "a001-webhook",
+      "name": "A001 Research Event",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "a001-market-research-trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json;\nif (!body.research_question || !body.target_market) {\n  throw new Error('A001 requires research_question and target_market');\n}\nreturn [{ json: { event_type: body.event_type ?? 'market.research.requested', event_id: body.event_id ?? `a001-${Date.now()}`, agent_id: 'A001', agent_name: 'Market Research Agent', input: { research_question: body.research_question, target_market: body.target_market, geography: body.geography, industry: body.industry, customer_segment: body.customer_segment, time_horizon: body.time_horizon, competitor_set: body.competitor_set, source_policy: body.source_policy, output_format: body.output_format }, received_at: new Date().toISOString() } }];"
+      },
+      "id": "a001-normalize",
+      "name": "Validate & Normalize A001 Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 0]
+    },
+    {
+      "parameters": {
+        "mode": "manualMapping",
+        "jsonOutput": "={{ { agent_id: $json.agent_id, event_id: $json.event_id, status: 'accepted', input: $json.input, execution_boundary: 'A001 runtime executor', next_action: 'invoke_registered_agent_runtime' } }}"
+      },
+      "id": "a001-runtime-boundary",
+      "name": "A001 Runtime Boundary",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 0]
+    }
+  ],
+  "connections": {
+    "A001 Research Event": {
+      "main": [[{"node": "Validate & Normalize A001 Input", "type": "main", "index": 0}]]
+    },
+    "Validate & Normalize A001 Input": {
+      "main": [[{"node": "A001 Runtime Boundary", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": ["AIOS", "A001", "market-research", "F.1.3"]
+}
