@@ -1,0 +1,55 @@
+id: A039-F8.2-MANUAL-001
+agent_id: A039
+micro_step: F.8.2
+purpose: deterministic contract-level manual test before runtime wiring
+policy_version: "A039-score-v1.1"
+inputs:
+  lead:
+    lead_id: "TEST-A039-001"
+    industry: "B2B SaaS"
+    geography: "United States"
+    company_size: "51-200"
+    verified_email: true
+    professional_profile: true
+    identity_confidence: 0.97
+    field_completeness: 0.95
+    source_quality: 0.95
+    freshness: 0.92
+  icp_definition:
+    industry: ["B2B SaaS"]
+    geography: ["United States"]
+    company_size: ["51-200"]
+  account_signals:
+    - {type: "expansion", evidence: "first-party announcement", strength: 0.9}
+  engagement_signals:
+    - {type: "meaningful_engagement", evidence: "qualified inbound interaction", strength: 0.9}
+  suppression_status: "not_suppressed"
+expected:
+  firmographic_fit: 22
+  intent: 20
+  reachability: 15
+  strategic_value: 18
+  data_quality: 9
+  total_score: 84
+  tier: "hot"
+  review_required: false
+additional_cases:
+  - id: warm-case
+    component_scores: [18, 12, 12, 14, 8]
+    expected_score: 64
+    expected_tier: warm
+  - id: cold-case
+    component_scores: [8, 5, 5, 8, 5]
+    expected_score: 31
+    expected_tier: cold
+  - id: suppression-case
+    component_scores: [25, 25, 20, 20, 10]
+    expected_score: 100
+    suppression_status: suppressed
+    expected_recommended_action: suppress
+    expected_review_required: true
+result:
+  status: PASS
+  deterministic_cases_passed: 4
+  deterministic_cases_failed: 0
+  notes: "Score arithmetic, tier boundaries, and suppression hard-stop verified. External Odoo/PostgreSQL tool calls were not executed in this repository-only test."
