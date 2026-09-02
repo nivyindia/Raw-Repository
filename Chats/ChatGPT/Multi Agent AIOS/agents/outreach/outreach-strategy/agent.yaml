@@ -1,0 +1,31 @@
+id: A043
+name: Outreach Strategy Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+purpose: Build evidence-backed outbound channel and sequence strategy for qualified leads, respecting suppression, consent, deliverability, and approval policy.
+inputs:
+  required: [lead, icp_definition, lead_score]
+  optional: [account_research, signals, offer, channel_constraints, prior_engagement]
+outputs:
+  primary: outreach_strategy
+  required_fields: [recommended_channel, sequence, timing, message_angles, rationale, confidence, evidence]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-QDRANT-SEARCH, TOOL-ODOO-SEARCH-LEAD]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+policy:
+  suppression_check_required: true
+  consent_and_contact_policy_required: true
+  external_send: prohibited
+  sensitive_attribute_targeting: forbidden
+  provenance_required: true
+workflow:
+  sequence: [validate_lead, check_suppression, retrieve_context, select_channel, design_sequence, choose_message_angles, assign_timing, score_confidence, emit_strategy]
+quality:
+  evidence_backed: true
+  uncertainty_explicit: true
+  human_review_for_new_strategy: true
+failure_handling:
+  fail_closed_on_policy_error: true
+  missing_required_context: stop
