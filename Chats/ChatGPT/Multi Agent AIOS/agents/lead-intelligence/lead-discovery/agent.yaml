@@ -1,9 +1,9 @@
 id: A034
 name: Lead Discovery Agent
-version: "1.0"
+version: "1.1"
 status: pilot
 category: lead_intelligence
-purpose: Discover and register high-fit business leads from approved sources for downstream enrichment, verification, scoring, and outreach.
+purpose: Discover high-fit business leads through governed multi-source prospecting, normalize and deduplicate candidates, preserve evidence, and create auditable CRM lead records for downstream revenue agents.
 
 ownership:
   department: sales_and_marketing
@@ -12,10 +12,15 @@ ownership:
 
 capabilities:
   - identify_target_accounts
-  - discover_prospects
+  - plan_multi_source_discovery
+  - discover_prospects_in_parallel
   - extract_public_business_contact_data
+  - detect_basic_intent_signals
+  - normalize_candidate_data
   - deduplicate_candidates
+  - rank_discovery_evidence
   - create_governed_lead_records
+  - emit_lead_created_events
 
 inputs:
   required:
@@ -27,15 +32,20 @@ inputs:
     - company_size
     - technology_signals
     - intent_signals
+    - channels
     - limit
+    - campaign_id
+    - minimum_confidence
 
 outputs:
   primary: lead_candidates
   required_fields:
     - lead_id
     - company_name
+    - canonical_domain
     - source
     - discovery_reason
+    - evidence
     - confidence
     - discovered_at
   downstream_events:
@@ -59,52 +69,82 @@ tools:
 workflow:
   sequence:
     - validate_input
-    - load_target_definition
-    - discover_from_approved_sources
-    - normalize_candidate_data
-    - deduplicate
-    - apply_basic_fit_rules
-    - create_lead_record
+    - resolve_campaign_context
+    - compile_hard_and_soft_criteria
+    - build_channel_query_plan
+    - discover_sources_in_parallel
+    - extract_structured_candidates
+    - normalize_entities_and_domains
+    - attach_source_evidence
+    - deduplicate_against_batch_and_crm
+    - apply_discovery_level_fit_rules
+    - apply_minimum_confidence_gate
+    - create_governed_lead_record
+    - verify_write_postcondition
     - emit_lead_created
     - return_result
+
+source_strategy:
+  preferred_order:
+    - authoritative_company_sources
+    - approved_business_directories
+    - approved_search_and_research_sources
+    - approved_social_or_community_sources
+  multi_source_required_for_material_claims: true
+  fallback_rule: If a channel fails, continue only with other approved channels; never fabricate or infer missing source evidence.
+  llm_knowledge_fallback: forbidden
 
 policy:
   public_data_only: true
   approved_sources_required: true
+  external_communication: forbidden
+  private_personal_data_collection: forbidden
   prohibited:
     - credentialed_access_without_authorization
-    - private_personal_data_collection
+    - bypassing_captcha_or_access_controls
+    - bypassing_robots_or_paywalls
+    - fabricated_source_or_contact_data
+    - inferred_sensitive_attributes
     - unsolicited_external_submission
-    - bypassing_source_access_controls
   human_approval_required_for:
     - non-standard_source_access
     - any external communication
-    - material policy exception
+    - material_policy_exception
 
 quality:
   minimum_confidence: 0.70
   duplicate_check_required: true
   source_provenance_required: true
+  evidence_required_for_acceptance: true
   verification_by_downstream_agent: true
+  canonical_domain_preferred_identifier: true
 
 observability:
   audit_required: true
   execution_log_required: true
+  correlation_id_required: true
   metrics:
     - candidates_discovered
     - leads_created
     - duplicate_rate
     - source_error_rate
     - confidence_distribution
+    - evidence_coverage
+    - channel_yield
+    - discovery_latency
 
 failure_handling:
   retry_transient_errors: true
   max_retries: 3
   dead_letter_on_exhaustion: true
+  partial_batch_allowed: true
   never_create_partial_record: true
+  fail_closed_on_policy_or_schema_error: true
 
 success_criteria:
   - every_created_lead_has_source_provenance
+  - every_created_lead_has_evidence
   - every_created_lead_passes_duplicate_check
+  - every_created_lead_meets_minimum_confidence
   - every_write_is_audited
   - emitted_event_matches_registered_schema
