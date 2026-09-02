@@ -47,6 +47,174 @@ entries:
     owner: finance_operations
     notes: Financial records are authoritative in Odoo; material financial actions require policy-controlled approval.
 
+  - tool_id: TOOL-ODOO-SEARCH-LEAD
+    name: odoo.search_lead
+    category: crm
+    system_of_record: true
+    permissions: [read]
+    status: planned
+    owner: sales_operations
+    version: "1.0"
+    input_schema:
+      required: [query]
+      fields:
+        query: string
+        limit: integer
+        filters: object
+    output_schema:
+      type: object
+      fields: [leads, total]
+    audit: read_access_logged
+    notes: Governed read-only lead search against Odoo CRM.
+
+  - tool_id: TOOL-ODOO-CREATE-LEAD
+    name: odoo.create_lead
+    category: crm
+    system_of_record: true
+    permissions: [write]
+    status: planned
+    owner: sales_operations
+    version: "1.0"
+    input_schema:
+      required: [lead]
+      fields:
+        lead: object
+    output_schema:
+      type: object
+      fields: [lead_id, record, created]
+    audit: required
+    idempotency: required
+    notes: Creates a governed lead record in Odoo CRM.
+
+  - tool_id: TOOL-ODOO-UPDATE-LEAD
+    name: odoo.update_lead
+    category: crm
+    system_of_record: true
+    permissions: [write]
+    status: planned
+    owner: sales_operations
+    version: "1.0"
+    input_schema:
+      required: [lead_id, changes]
+      fields:
+        lead_id: string
+        changes: object
+    output_schema:
+      type: object
+      fields: [lead_id, record, updated]
+    audit: required
+    idempotency: required
+    notes: Updates an existing Odoo lead subject to authorization and field-level policy.
+
+  - tool_id: TOOL-ODOO-CREATE-OPPORTUNITY
+    name: odoo.create_opportunity
+    category: crm
+    system_of_record: true
+    permissions: [write]
+    status: planned
+    owner: sales_operations
+    version: "1.0"
+    input_schema:
+      required: [opportunity]
+      fields:
+        opportunity: object
+    output_schema:
+      type: object
+      fields: [opportunity_id, record, created]
+    audit: required
+    idempotency: required
+    notes: Creates an opportunity in Odoo CRM after qualification and policy checks.
+
+  - tool_id: TOOL-POSTGRES-QUERY-READONLY
+    name: postgres.query_readonly
+    category: data
+    system_of_record: false
+    permissions: [read]
+    status: planned
+    owner: data_platform
+    version: "1.0"
+    input_schema:
+      required: [query]
+      fields:
+        query: string
+        parameters: array
+        max_rows: integer
+    output_schema:
+      type: object
+      fields: [rows, row_count]
+    audit: required
+    safety:
+      write_statements_allowed: false
+      destructive_statements_allowed: false
+    notes: Read-only analytical/query interface to PostgreSQL.
+
+  - tool_id: TOOL-POSTGRES-WRITE-EVENT
+    name: postgres.write_event
+    category: data
+    system_of_record: true
+    permissions: [write]
+    status: planned
+    owner: data_platform
+    version: "1.0"
+    input_schema:
+      required: [event]
+      fields:
+        event: object
+    output_schema:
+      type: object
+      fields: [event_id, persisted]
+    audit: required
+    idempotency: required
+    notes: Persists governed event records to the canonical event store.
+
+  - tool_id: TOOL-FIRECRAWL-EXTRACT
+    name: firecrawl.extract
+    category: research
+    system_of_record: false
+    permissions: [execute]
+    status: planned
+    owner: research_operations
+    version: "1.0"
+    input_schema:
+      required: [url]
+      fields:
+        url: string
+        schema: object
+        formats: array
+        max_depth: integer
+    output_schema:
+      type: object
+      fields: [data, sources, metadata]
+    audit: required
+    safety:
+      allowed_domains_required: true
+      secrets_in_input: false
+    notes: Structured web extraction for governed research and lead-intelligence workflows.
+
+  - tool_id: TOOL-BROWSER-USE-RESEARCH
+    name: browser_use.research
+    category: research
+    system_of_record: false
+    permissions: [execute]
+    status: planned
+    owner: research_operations
+    version: "1.0"
+    input_schema:
+      required: [task]
+      fields:
+        task: string
+        allowed_domains: array
+        max_steps: integer
+    output_schema:
+      type: object
+      fields: [findings, sources, actions_taken]
+    audit: required
+    safety:
+      destructive_actions_allowed: false
+      external_submission_allowed: false
+      allowed_domains_required: true
+    notes: Browser-based research tool restricted to approved research actions and domains.
+
 runtime_requirements:
   - validate_tool_is_registered
   - validate_agent_skill_mapping
