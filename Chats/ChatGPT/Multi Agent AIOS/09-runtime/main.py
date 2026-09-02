@@ -14,12 +14,23 @@ from pydantic import BaseModel, Field
 
 ROOT = Path(__file__).resolve().parent
 REGISTRY = yaml.safe_load((ROOT / "registry.yaml").read_text())
-app = FastAPI(title="Billion Dreams United AIOS Runtime", version="1.1.0")
+app = FastAPI(title="Billion Dreams United AIOS Runtime", version="1.2.0")
 
 class Invocation(BaseModel):
     input: dict[str, Any] = Field(default_factory=dict)
     execution_id: str | None = None
     approval_token: str | None = None
+
+class EventIn(BaseModel):
+    event_type: str
+    execution_id: str
+    agent_id: str | None = None
+    entity_type: str | None = None
+    entity_id: str | None = None
+    source: str = "n8n"
+    payload: dict[str, Any] = Field(default_factory=dict)
+    provenance: dict[str, Any] = Field(default_factory=dict)
+    schema_version: str = "1.0"
 
 def runtime_url(runtime: str) -> str | None:
     return os.getenv(REGISTRY["runtimes"][runtime]["base_url_env"])
@@ -33,15 +44,19 @@ def agent(agent_id: str) -> dict[str, Any]:
 def db_url() -> str | None:
     return os.getenv("AIOS_DATABASE_URL")
 
-def persist_event(event_type: str, execution_id: str, agent_id: str, payload: dict[str, Any]) -> None:
+def persist_event(event_type: str, execution_id: str, agent_id: str, payload: dict[str, Any], source: str = "aios-runtime", entity_type: str | None = None, entity_id: str | None = None, provenance: dict[str, Any] | None = None, schema_version: str = "1.0") -> str:
+    event_id = str(uuid.uuid4())
     url = db_url()
     if not url:
-        return
+        return event_id
     with psycopg.connect(url) as conn:
         conn.execute(
-            "INSERT INTO aios_events (event_id,event_type,source,execution_id,agent_id,payload) VALUES (%s,%s,%s,%s,%s,%s::jsonb)",
-            (uuid.uuid4(), event_type, "aios-runtime", execution_id, agent_id, json.dumps(payload)),
+            """INSERT INTO aios_events
+            (event_id,event_type,source,execution_id,agent_id,entity_type,entity_id,payload,provenance,schema_version)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s::jsonb,%s::jsonb,%s)""",
+            (event_id, event_type, source, execution_id, agent_id, entity_type, entity_id, json.dumps(payload), json.dumps(provenance or {}), schema_version),
         )
+    return event_id
 
 def persist_execution(execution_id: str, agent_id: str, status: str, runtime: str, input_data: dict[str, Any], result: Any = None, error: Any = None, completed: bool = False) -> None:
     url = db_url()
@@ -57,7 +72,7 @@ def persist_execution(execution_id: str, agent_id: str, status: str, runtime: st
 
 @app.get("/health")
 def health() -> dict[str, Any]:
-    return {"status": "ok", "service": "aios-runtime", "version": "1.1.0", "database": "configured" if db_url() else "not_configured"}
+    return {"status": "ok", "service": "aios-runtime", "version": "1.2.0", "database": "configured" if db_url() else "not_configured"}
 
 @app.get("/v1/agents")
 def list_agents() -> dict[str, Any]:
@@ -66,6 +81,11 @@ def list_agents() -> dict[str, Any]:
 @app.get("/v1/agents/{agent_id}")
 def get_agent(agent_id: str) -> dict[str, Any]:
     return {"agent_id": agent_id, **agent(agent_id)}
+
+@app.post("/v1/events")
+def ingest_event(request: EventIn) -> dict[str, Any]:
+    event_id = persist_event(request.event_type, request.execution_id, request.agent_id or "n8n", request.payload, request.source, request.entity_type, request.entity_id, request.provenance, request.schema_version)
+    return {"status": "accepted", "event_id": event_id, "execution_id": request.execution_id, "event_type": request.event_type}
 
 @app.post("/v1/agents/{agent_id}/invoke")
 async def invoke(agent_id: str, request: Invocation) -> dict[str, Any]:
