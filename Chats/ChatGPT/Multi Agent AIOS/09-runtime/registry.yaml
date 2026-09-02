@@ -1,4 +1,4 @@
-version: "1.0"
+version: "1.1"
 primary_business_workflow_engine: n8n
 runtimes:
   n8n:
@@ -12,6 +12,7 @@ runtimes:
   dify:
     base_url_env: DIFY_RUNTIME_URL
 
+# n8n orchestrates business workflows; it is not used as an agent execution runtime.
 agents:
   A001: {runtime: langgraph}
   A002: {runtime: langgraph}
@@ -24,13 +25,13 @@ agents:
   A041: {runtime: langgraph}
   A042: {runtime: langgraph}
   A043: {runtime: crewai}
-  A044: {runtime: n8n, approval_required: true}
+  A044: {runtime: langgraph, approval_required: true}
   A049: {runtime: crewai}
-  A050: {runtime: n8n}
+  A050: {runtime: langgraph}
   A052: {runtime: langgraph}
   A054: {runtime: crewai}
   A055: {runtime: langgraph}
   A057: {runtime: langgraph}
   A058: {runtime: crewai}
-  A060: {runtime: n8n, approval_required: true}
-  A065: {runtime: n8n, approval_required: true}
+  A060: {runtime: langgraph, approval_required: true}
+  A065: {runtime: langgraph, approval_required: true}
