@@ -1,0 +1,37 @@
+id: A054
+name: Qualification Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+purpose: Determine whether a sales conversation is qualified using explicit need, fit, authority, budget, timing, and evidence while preserving uncertainty.
+inputs:
+  required: [lead, conversation_context]
+  optional: [icp_definition, lead_score, reply_triage, account_research, offer, qualification_policy]
+outputs:
+  primary: qualification_result
+  required_fields: [qualification_status, fit_score, need, authority, budget, timing, evidence, confidence, next_action]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-ODOO-SEARCH-LEAD, TOOL-POSTGRES-WRITE-EVENT]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+model:
+  framework: configurable_BANT_plus_fit
+  dimensions: [fit, need, authority, budget, timing]
+  unknown_not_positive: true
+  evidence_required_for_positive: true
+statuses: [qualified, nurture, disqualified, needs_human_review, insufficient_information]
+policy:
+  sensitive_attribute_inference: forbidden
+  fabricated_budget_or_authority: forbidden
+  provenance_required: true
+  external_actions: prohibited
+workflow:
+  sequence: [load_context, evaluate_fit, evaluate_need, evaluate_authority, evaluate_budget, evaluate_timing, resolve_conflicts, calculate_confidence, assign_status, recommend_next_action, emit_qualification_event]
+quality:
+  explainable: true
+  uncertainty_explicit: true
+  audit_required: true
+failure_handling:
+  missing_material_evidence: insufficient_information
+  conflicting_evidence: needs_human_review
+  policy_error: fail_closed
