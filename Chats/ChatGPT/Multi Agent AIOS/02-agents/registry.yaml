@@ -41,37 +41,37 @@ agents:
   - {id: A032, name: "Marketing Analytics Agent", status: 0}
   - {id: A033, name: "Attribution Agent", status: 0}
   - {id: A034, name: "Lead Discovery Agent", status: 25}
-  - {id: A035, name: "Contact Discovery Agent", status: 0}
+  - {id: A035, name: "Contact Discovery Agent", status: 25}
   - {id: A036, name: "Lead Enrichment Agent", status: 25}
-  - {id: A037, name: "Data Quality Agent", status: 0}
+  - {id: A037, name: "Data Quality Agent", status: 25}
   - {id: A038, name: "Verification Agent", status: 25}
   - {id: A039, name: "Lead Scoring Agent", status: 25}
-  - {id: A040, name: "Segmentation Agent", status: 0}
+  - {id: A040, name: "Segmentation Agent", status: 25}
   - {id: A041, name: "Account Research Agent", status: 25}
-  - {id: A042, name: "Signal Detection Agent", status: 0}
-  - {id: A043, name: "Outreach Strategy Agent", status: 0}
-  - {id: A044, name: "Email Outreach Agent", status: 0}
+  - {id: A042, name: "Signal Detection Agent", status: 25}
+  - {id: A043, name: "Outreach Strategy Agent", status: 25}
+  - {id: A044, name: "Email Outreach Agent", status: 25}
   - {id: A045, name: "LinkedIn Outreach Assistant", status: 0}
   - {id: A046, name: "Call Prep Agent", status: 0}
   - {id: A047, name: "WhatsApp Outreach Agent", status: 0}
   - {id: A048, name: "SMS Outreach Agent", status: 0}
-  - {id: A049, name: "Personalization Agent", status: 0}
-  - {id: A050, name: "Follow-Up Agent", status: 0}
+  - {id: A049, name: "Personalization Agent", status: 25}
+  - {id: A050, name: "Follow-Up Agent", status: 25}
   - {id: A051, name: "Deliverability Agent", status: 0}
-  - {id: A052, name: "Reply Triage Agent", status: 0}
+  - {id: A052, name: "Reply Triage Agent", status: 25}
   - {id: A053, name: "Objection Handling Agent", status: 0}
-  - {id: A054, name: "Qualification Agent", status: 0}
-  - {id: A055, name: "Meeting Prep Agent", status: 0}
+  - {id: A054, name: "Qualification Agent", status: 25}
+  - {id: A055, name: "Meeting Prep Agent", status: 25}
   - {id: A056, name: "Sales Copilot", status: 0}
-  - {id: A057, name: "Needs Analysis Agent", status: 0}
-  - {id: A058, name: "Solution Mapping Agent", status: 0}
+  - {id: A057, name: "Needs Analysis Agent", status: 25}
+  - {id: A058, name: "Solution Mapping Agent", status: 25}
   - {id: A059, name: "Demo Preparation Agent", status: 0}
-  - {id: A060, name: "Proposal Agent", status: 0}
+  - {id: A060, name: "Proposal Agent", status: 25}
   - {id: A061, name: "Pricing Agent", status: 0}
   - {id: A062, name: "Negotiation Copilot", status: 0}
   - {id: A063, name: "Contract Agent", status: 0}
   - {id: A064, name: "Deal Desk Agent", status: 0}
-  - {id: A065, name: "Onboarding Agent", status: 0}
+  - {id: A065, name: "Onboarding Agent", status: 25}
   - {id: A066, name: "Requirement Agent", status: 0}
   - {id: A067, name: "Customer Success Agent", status: 0}
   - {id: A068, name: "Account Intelligence Agent", status: 0}
