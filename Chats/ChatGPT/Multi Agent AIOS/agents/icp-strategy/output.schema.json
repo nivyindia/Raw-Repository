@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A002 ICP Output",
+  "type": "object",
+  "required": ["target_segments", "firmographics", "buyer_roles", "pain_points", "buying_signals", "exclusions", "confidence", "derived_from"],
+  "properties": {
+    "target_segments": {"type": "array", "items": {"type": "object"}},
+    "firmographics": {"type": "object"},
+    "buyer_roles": {"type": "array", "items": {"type": "object"}},
+    "pain_points": {"type": "array", "items": {"type": "object"}},
+    "buying_signals": {"type": "array", "items": {"type": "object"}},
+    "exclusions": {"type": "array", "items": {"type": "string"}},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "derived_from": {"type": "array", "items": {"type": "object"}}
+  },
+  "additionalProperties": false
+}
