@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aios://agents/A041/input.schema.json",
+  "title": "A041 Account Research Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["account"],
+  "properties": {
+    "account": {"type": "object", "required": ["account_id"]},
+    "research_scope": {"type": "array", "items": {"type": "string"}},
+    "target_market": {"type": "string"},
+    "icp_definition": {"type": "object"},
+    "known_contacts": {"type": "array", "items": {"type": "object"}},
+    "known_signals": {"type": "array", "items": {"type": "object"}},
+    "source_policy": {"type": "object"},
+    "as_of": {"type": "string", "format": "date-time"}
+  }
+}
