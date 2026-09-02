@@ -1,0 +1,195 @@
+version: "1.0"
+policy_id: AI-RISK-POLICY-001
+name: AI Risk and Autonomy Policy
+status: active
+owner: Billion Dreams United AIOS Governance
+purpose: >-
+  Define which AI actions are permitted at each AIOS risk level, when approval is
+  required, and when human review or autonomous execution is prohibited.
+
+source_of_truth:
+  permission_matrix: "07-policies/permission-matrix.yaml"
+
+principles:
+  - default_deny
+  - least_privilege
+  - policy_before_action
+  - explicit_authorization
+  - human_oversight_for_material_risk
+  - audit_every_write_and_external_action
+  - fail_closed_on_uncertainty
+  - no_inference_of_consent_or_authority
+
+risk_levels:
+  L0:
+    name: read_only_low_risk
+    ai_allowed: true
+    autonomous_execution: true
+    approval_required: false
+    human_review: false
+    audit_required: true
+    allowed: [read, retrieve, classify, summarize, analyze, draft_internal]
+    restrictions:
+      - no_state_change
+      - no_external_side_effect
+
+  L1:
+    name: internal_reversible
+    ai_allowed: true
+    autonomous_execution: true
+    approval_required: false
+    human_review: sampled
+    audit_required: true
+    allowed: [internal_reversible_write, create_internal_artifact, update_noncritical_record]
+    restrictions:
+      - action_must_be_authorized
+      - action_must_be_reversible
+      - no_material_external_commitment
+
+  L2:
+    name: controlled_external_or_data_change
+    ai_allowed: true
+    autonomous_execution: policy_gated
+    approval_required: policy_defined
+    human_review: required_for_exceptions
+    audit_required: true
+    allowed: [controlled_data_change, governed_external_action]
+    restrictions:
+      - explicit_policy_required
+      - consent_required_when_applicable
+      - suppression_and_frequency_controls_must_pass
+      - material_exceptions_require_human_approval
+
+  L3:
+    name: material_external_action
+    ai_allowed: true
+    autonomous_execution: false
+    approval_required: true
+    human_review: mandatory
+    audit_required: true
+    allowed: [material_external_action_after_approval]
+    restrictions:
+      - explicit_human_approval_before_execution
+      - authorization_scope_must_match_exact_action
+      - no_execution_on_approval_ambiguity
+      - full_traceability_required
+
+  L4:
+    name: high_impact_restricted
+    ai_allowed: false
+    autonomous_execution: false
+    approval_required: true
+    human_review: mandatory
+    audit_required: true
+    allowed: []
+    restrictions:
+      - autonomous_ai_execution_prohibited
+      - explicit_human_decision_required
+      - prohibited_actions_cannot_be_authorized_by_ai
+      - legal_platform_and_safety_constraints_override_business_policy
+
+approval_rules:
+  required_when:
+    - risk_level_is_L3_or_L4
+    - action_policy_explicitly_requires_approval
+    - requested_authority_exceeds_agent_scope
+    - policy_exception_is_requested
+    - action_is_material_or_irreversible
+  approval_must_include:
+    - requester_or_agent_id
+    - exact_action
+    - target
+    - risk_level
+    - policy_basis
+    - approver_identity
+    - decision
+    - timestamp
+  approval_does_not_allow:
+    - undefined_permissions
+    - bypass_of_law_or_platform_rules
+    - bypass_of_consent_or_suppression_controls
+    - prohibited_L4_autonomous_execution
+
+execution_gates:
+  pre_action:
+    - resolve_risk_level
+    - validate_agent_authorization
+    - validate_skill_authorization
+    - validate_tool_authorization
+    - validate_action_scope
+    - evaluate_policy
+    - verify_consent_if_required
+    - verify_suppression_if_required
+    - obtain_approval_if_required
+  on_uncertainty:
+    action: deny_and_escalate
+  on_policy_failure:
+    action: deny
+  on_approval_failure:
+    action: deny
+  post_action:
+    - record_result
+    - record_policy_decision
+    - record_approval_reference_when_applicable
+    - emit_governed_event_when_defined
+    - retain_audit_log
+
+communication_controls:
+  external_communication:
+    default_risk: L2
+    requires_approved_channel: true
+    requires_policy_check: true
+    consent_cannot_be_inferred: true
+  material_external_commitment:
+    default_risk: L3
+    human_approval_required: true
+
+financial_controls:
+  financial_action:
+    default_risk: L3
+    autonomous_execution: false
+    human_approval_required: true
+  high_impact_financial_action:
+    risk_level: L4
+    autonomous_execution: false
+
+restricted_behaviors:
+  - protected_class_inference
+  - use_of_private_personal_data_without_explicit_policy_basis
+  - deceptive_or_fraudulent_communication
+  - bypassing_security_or_access_controls
+  - bypassing_consent_or_suppression
+  - unauthorized_external_submission
+  - destructive_or_irreversible_action_without_required_authorization
+  - fabrication_of_evidence_or_audit_records
+
+escalation:
+  triggers:
+    - conflicting_policy_rules
+    - missing_policy
+    - missing_consent
+    - uncertain_identity_or_authority
+    - risk_level_cannot_be_determined
+    - approval_timeout_or_rejection
+    - prohibited_action_detected
+  action: stop_execution_and_route_to_human_governance
+
+monitoring:
+  required_metrics:
+    - policy_denials
+    - approval_requests
+    - approval_rejections
+    - policy_exceptions
+    - unauthorized_action_attempts
+    - L3_L4_execution_attempts
+    - audit_log_failures
+  alert_on:
+    - any_L4_autonomous_attempt
+    - repeated_policy_bypass_attempts
+    - missing_audit_record
+
+change_control:
+  owner_approval_required: true
+  version_bump_required: true
+  pull_request_required: true
+  backward_compatibility_review_required: true
