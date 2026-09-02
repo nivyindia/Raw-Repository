@@ -1,0 +1,42 @@
+id: A002
+name: ICP Strategist
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: revenue_strategy
+purpose: Define and maintain an evidence-backed ideal customer profile that downstream revenue agents can use for discovery, enrichment, scoring, messaging, and qualification.
+
+inputs:
+  required: [market_research]
+  optional: [business_offer, existing_customers, exclusions, geography, revenue_targets]
+outputs:
+  primary: icp_definition
+  required_fields: [target_segments, firmographics, buyer_roles, pain_points, buying_signals, exclusions, confidence, derived_from]
+  downstream_events: [icp.completed]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-QDRANT-SEARCH, TOOL-FIRECRAWL-EXTRACT]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+workflow:
+  sequence: [validate_input, retrieve_market_context, identify_segments, define_firmographics, define_buyer_roles, define_pain_points, define_signals, define_exclusions, score_confidence, produce_icp, emit_icp_completed]
+policy:
+  public_data_only: true
+  source_provenance_required: true
+  sensitive_attribute_inference: forbidden
+  fabricated_market_evidence: forbidden
+  external_actions: prohibited
+quality:
+  evidence_backed: true
+  uncertainty_explicit: true
+  recommendation_traceable: true
+observability:
+  audit_required: true
+  execution_log_required: true
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  fail_closed_on_policy_or_schema_error: true
+success_criteria:
+  - icp_is_specific_enough_for_lead_discovery
+  - every_material_assumption_is_explicit
+  - evidence_and_provenance_are_preserved
