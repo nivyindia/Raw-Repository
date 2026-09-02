@@ -1,0 +1,60 @@
+services:
+  caldiy:
+    image: calcom/cal.diy:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      DATABASE_URL: ${CAL_DATABASE_URL:-postgresql://cal:cal-dev-only@postgres:5432/cal}
+      NEXTAUTH_SECRET: ${CAL_NEXTAUTH_SECRET:?set CAL_NEXTAUTH_SECRET}
+      CALENDSO_ENCRYPTION_KEY: ${CAL_ENCRYPTION_KEY:?set CAL_ENCRYPTION_KEY}
+      NEXTAUTH_URL: ${CAL_NEXTAUTH_URL:-http://localhost:3000}
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks: [cal]
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/api/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cal
+      POSTGRES_USER: cal
+      POSTGRES_PASSWORD: ${CAL_POSTGRES_PASSWORD:-cal-dev-only}
+    volumes:
+      - cal_postgres_data:/var/lib/postgresql/data
+    networks: [cal]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cal -d cal"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - cal_redis_data:/data
+    networks: [cal]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  cal_postgres_data:
+  cal_redis_data:
+
+networks:
+  cal:
+    driver: bridge
