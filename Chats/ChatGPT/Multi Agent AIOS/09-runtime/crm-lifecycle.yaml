@@ -1,0 +1,106 @@
+version: "1.0"
+name: revenue-crm-lifecycle
+purpose: Canonical commercial lifecycle shared by AIOS agents, n8n workflows, and the Odoo CRM adapter.
+
+stages:
+  - id: new
+    label: New
+    odoo_type: lead
+    entry_events: [revenue.lead.created]
+    next: [scored, nurture, disqualified]
+  - id: scored
+    label: Scored
+    odoo_type: lead
+    entry_events: [revenue.lead.scored]
+    next: [outreach, nurture, disqualified]
+  - id: outreach
+    label: Outreach
+    odoo_type: lead
+    entry_events: [revenue.outreach.draft_ready]
+    next: [replied, nurture, unsubscribed]
+  - id: replied
+    label: Replied
+    odoo_type: lead
+    entry_events: [revenue.reply.received]
+    next: [qualified, nurture, disqualified, unsubscribed]
+  - id: qualified
+    label: Qualified
+    odoo_type: opportunity
+    entry_events: [revenue.lead.qualified]
+    next: [meeting, proposal, nurture, disqualified]
+  - id: meeting
+    label: Meeting
+    odoo_type: opportunity
+    entry_events: [revenue.meeting.scheduled, revenue.meeting.completed]
+    next: [proposal, nurture, disqualified]
+  - id: proposal
+    label: Proposal
+    odoo_type: opportunity
+    entry_events: [revenue.proposal.created, revenue.proposal.sent]
+    next: [negotiation, won, lost]
+  - id: negotiation
+    label: Negotiation
+    odoo_type: opportunity
+    entry_events: [revenue.negotiation.started]
+    next: [won, lost, nurture]
+  - id: won
+    label: Won
+    odoo_type: opportunity
+    entry_events: [revenue.opportunity.won, revenue.payment.received]
+    next: [onboarding]
+  - id: onboarding
+    label: Onboarding
+    odoo_type: opportunity
+    entry_events: [revenue.onboarding.started]
+    next: [delivery]
+  - id: delivery
+    label: Delivery
+    odoo_type: opportunity
+    entry_events: [revenue.delivery.started, revenue.delivery.completed]
+    next: [renewal, upsell]
+  - id: renewal
+    label: Renewal
+    odoo_type: opportunity
+    entry_events: [revenue.renewal.due]
+    next: [won, lost]
+  - id: upsell
+    label: Upsell
+    odoo_type: opportunity
+    entry_events: [revenue.upsell.detected]
+    next: [proposal, won, lost]
+  - id: nurture
+    label: Nurture
+    odoo_type: lead
+    entry_events: [revenue.nurture.started]
+    next: [scored, outreach, qualified, disqualified]
+  - id: disqualified
+    label: Disqualified
+    odoo_type: lead
+    entry_events: [revenue.lead.disqualified]
+    next: []
+  - id: unsubscribed
+    label: Unsubscribed
+    odoo_type: lead
+    entry_events: [revenue.contact.unsubscribed]
+    next: []
+  - id: lost
+    label: Lost
+    odoo_type: opportunity
+    entry_events: [revenue.opportunity.lost]
+    next: [nurture]
+
+field_mapping:
+  lifecycle_stage: x_aios_lifecycle_stage
+  execution_id: x_aios_execution_id
+  event_id: x_aios_last_event_id
+  confidence: x_aios_confidence
+  source: x_aios_source
+  provenance: x_aios_provenance
+
+rules:
+  - preserve_event_provenance: true
+  - never_move_back_without_event: true
+  - never_overwrite_human_owner: true
+  - never_mark_won_without_commercial_evidence: true
+  - unsubscribe_is_terminal_for_outreach: true
+  - duplicate_email_updates_existing_lead: true
