@@ -1,0 +1,16 @@
+id: F1-A039-status
+stage: F
+micro_step: F.1.1
+agent_id: A039
+agent_name: Lead Scoring Agent
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+artifacts:
+  - agents/lead-intelligence/lead-scoring/agent.yaml
+  - agents/lead-intelligence/lead-scoring/prompt.md
+runtime_verified: false
+open_source_patterns_adapted:
+  - Lead-Reach multi-dimensional scoring and intent signals
+  - LeadiAgent deterministic scoring with transparent factors
+  - n8n AI lead qualification separation of extraction and deterministic business logic
+next_micro_step: F.8.2
