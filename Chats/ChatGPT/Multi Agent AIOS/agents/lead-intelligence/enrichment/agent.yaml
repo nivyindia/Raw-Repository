@@ -1,0 +1,120 @@
+id: A036
+name: Lead Enrichment Agent
+version: "1.0"
+status: pilot
+category: lead_intelligence
+purpose: Enrich governed lead records with verified business-relevant company and contact attributes from approved sources.
+
+ownership:
+  department: sales_and_marketing
+  function: lead_generation
+  owner_role: sales_operations
+
+capabilities:
+  - resolve_canonical_company_identity
+  - enrich_company_attributes
+  - enrich_business_contact_attributes
+  - attach_source_provenance
+  - update_governed_lead_records
+  - emit_enrichment_event
+
+inputs:
+  required:
+    - lead_id
+    - enrichment_policy
+  optional:
+    - fields_requested
+    - source_policy
+    - geography
+    - industry
+    - refresh_if_older_than
+
+outputs:
+  primary: enriched_lead
+  required_fields:
+    - lead_id
+    - enrichment_status
+    - enriched_fields
+    - source_provenance
+    - confidence
+    - enriched_at
+  downstream_events:
+    - lead.enriched
+
+skills:
+  required:
+    - SK002
+  resolution_rule: Resolve only registered compatible skills through the agent-skill mapping contract.
+
+tools:
+  allowed:
+    - TOOL-FIRECRAWL-EXTRACT
+    - TOOL-BROWSER-USE-RESEARCH
+    - TOOL-ODOO-SEARCH-LEAD
+    - TOOL-ODOO-UPDATE-LEAD
+    - TOOL-POSTGRES-QUERY-READONLY
+    - TOOL-POSTGRES-WRITE-EVENT
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+
+workflow:
+  sequence:
+    - validate_input
+    - load_lead_record
+    - identify_missing_or_stale_fields
+    - select_approved_sources
+    - collect_public_business_evidence
+    - normalize_enrichment_data
+    - assess_field_level_confidence
+    - preserve_provenance
+    - update_lead_record_idempotently
+    - emit_lead_enriched
+    - return_result
+
+policy:
+  public_data_only: true
+  approved_sources_required: true
+  preserve_existing_trusted_data: true
+  prohibited:
+    - private_personal_data_collection
+    - credentialed_access_without_authorization
+    - bypassing_source_access_controls
+    - speculative_inference_presented_as_fact
+    - destructive_overwrite_of_trusted_fields
+    - unsolicited_external_submission
+  human_approval_required_for:
+    - non-standard_source_access
+    - material_policy_exception
+    - ambiguous_identity_resolution_affecting_a_commercial_record
+
+quality:
+  minimum_field_confidence: 0.70
+  source_provenance_required: true
+  field_level_confidence_required: true
+  identity_resolution_required: true
+  downstream_verification_by_A038: true
+
+observability:
+  audit_required: true
+  execution_log_required: true
+  metrics:
+    - leads_processed
+    - fields_enriched
+    - fields_skipped
+    - source_error_rate
+    - enrichment_success_rate
+    - identity_resolution_conflicts
+    - confidence_distribution
+
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  dead_letter_on_exhaustion: true
+  never_write_unverified_identity_match: true
+  never_create_partial_lead: true
+
+success_criteria:
+  - every_enriched_field_has_source_provenance
+  - existing_trusted_values_are_not_downgraded_without_authorization
+  - identity_match_is_supported_by_evidence
+  - every_write_is_audited
+  - emitted_event_matches_registered_schema
