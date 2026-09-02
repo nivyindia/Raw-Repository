@@ -1,6 +1,6 @@
 version: "1.0"
-status: baseline
-purpose: Canonical registry for tools exposed to AIOS agents.
+status: v1.0
+purpose: Canonical Tier-1 registry for tools exposed to AIOS agents.
 
 rules:
   authorization_chain: "agent -> skill -> tool -> action"
@@ -27,6 +27,8 @@ entries:
     permissions: [read, write]
     status: planned
     owner: platform_operations
+    version: "1.0"
+    healthcheck: required
     notes: Canonical CRM interface for governed customer and opportunity operations.
 
   - tool_id: TOOL-ODOO-SALES
@@ -36,6 +38,8 @@ entries:
     permissions: [read, write]
     status: planned
     owner: finance_operations
+    version: "1.0"
+    healthcheck: required
     notes: Sales-order and commercial transaction operations subject to approval policy.
 
   - tool_id: TOOL-ODOO-ACCOUNTING
@@ -45,6 +49,8 @@ entries:
     permissions: [read, write]
     status: planned
     owner: finance_operations
+    version: "1.0"
+    healthcheck: required
     notes: Financial records are authoritative in Odoo; material financial actions require policy-controlled approval.
 
   - tool_id: TOOL-ODOO-SEARCH-LEAD
@@ -55,6 +61,7 @@ entries:
     status: planned
     owner: sales_operations
     version: "1.0"
+    healthcheck: required
     input_schema:
       required: [query]
       fields:
@@ -75,6 +82,7 @@ entries:
     status: planned
     owner: sales_operations
     version: "1.0"
+    healthcheck: required
     input_schema:
       required: [lead]
       fields:
@@ -94,6 +102,7 @@ entries:
     status: planned
     owner: sales_operations
     version: "1.0"
+    healthcheck: required
     input_schema:
       required: [lead_id, changes]
       fields:
@@ -114,6 +123,7 @@ entries:
     status: planned
     owner: sales_operations
     version: "1.0"
+    healthcheck: required
     input_schema:
       required: [opportunity]
       fields:
@@ -133,6 +143,7 @@ entries:
     status: planned
     owner: data_platform
     version: "1.0"
+    healthcheck: required
     input_schema:
       required: [query]
       fields:
@@ -156,6 +167,7 @@ entries:
     status: planned
     owner: data_platform
     version: "1.0"
+    healthcheck: required
     input_schema:
       required: [event]
       fields:
@@ -175,6 +187,7 @@ entries:
     status: planned
     owner: research_operations
     version: "1.0"
+    healthcheck: required
     input_schema:
       required: [url]
       fields:
@@ -199,6 +212,7 @@ entries:
     status: planned
     owner: research_operations
     version: "1.0"
+    healthcheck: required
     input_schema:
       required: [task]
       fields:
@@ -214,6 +228,129 @@ entries:
       external_submission_allowed: false
       allowed_domains_required: true
     notes: Browser-based research tool restricted to approved research actions and domains.
+
+  - tool_id: TOOL-MAUTIC-SEND-EMAIL
+    name: mautic.send_email
+    category: communication
+    system_of_record: false
+    permissions: [execute]
+    status: planned
+    owner: marketing_operations
+    version: "1.0"
+    healthcheck: required
+    input_schema:
+      required: [recipient, message]
+      fields:
+        recipient: string
+        subject: string
+        message: object
+        campaign_id: string
+    output_schema:
+      type: object
+      fields: [message_id, accepted, status]
+    audit: required
+    safety:
+      consent_required: true
+      suppression_check_required: true
+    notes: Governed outbound email execution through Mautic.
+
+  - tool_id: TOOL-POSTAL-SEND-TRANSACTIONAL
+    name: postal.send_transactional
+    category: communication
+    system_of_record: false
+    permissions: [execute]
+    status: planned
+    owner: communications_operations
+    version: "1.0"
+    healthcheck: required
+    input_schema:
+      required: [recipient, template]
+      fields:
+        recipient: string
+        template: string
+        variables: object
+        idempotency_key: string
+    output_schema:
+      type: object
+      fields: [message_id, accepted, status]
+    audit: required
+    safety:
+      suppression_check_required: true
+    notes: Transactional email transport; marketing consent logic remains upstream.
+
+  - tool_id: TOOL-CAL-CREATE-BOOKING
+    name: cal.create_booking
+    category: scheduling
+    system_of_record: false
+    permissions: [execute]
+    status: planned
+    owner: revenue_operations
+    version: "1.0"
+    healthcheck: required
+    input_schema:
+      required: [event_type, start_time, attendee]
+      fields:
+        event_type: string
+        start_time: datetime
+        attendee: object
+        timezone: string
+    output_schema:
+      type: object
+      fields: [booking_id, status, meeting_url]
+    audit: required
+    idempotency: required
+    notes: Creates approved calendar bookings for sales and operational workflows.
+
+  - tool_id: TOOL-QDRANT-SEARCH
+    name: qdrant.search
+    category: vector_retrieval
+    system_of_record: false
+    permissions: [read]
+    status: planned
+    owner: data_platform
+    version: "1.0"
+    healthcheck: required
+    input_schema:
+      required: [collection, vector]
+      fields:
+        collection: string
+        vector: array
+        limit: integer
+        filter: object
+        score_threshold: number
+    output_schema:
+      type: object
+      fields: [matches, collection, count]
+    audit: required
+    safety:
+      source_of_truth: false
+      tenant_scope_required: true
+    notes: Governed semantic retrieval from Qdrant; source records remain authoritative elsewhere.
+
+  - tool_id: TOOL-QDRANT-UPSERT
+    name: qdrant.upsert
+    category: vector_retrieval
+    system_of_record: false
+    permissions: [write]
+    status: planned
+    owner: data_platform
+    version: "1.0"
+    healthcheck: required
+    input_schema:
+      required: [collection, points]
+      fields:
+        collection: string
+        points: array
+        wait: boolean
+    output_schema:
+      type: object
+      fields: [operation_id, status, upserted_count]
+    audit: required
+    idempotency: required
+    safety:
+      source_of_truth: false
+      tenant_scope_required: true
+    notes: Writes derived embeddings and payload metadata to Qdrant; canonical source data must remain in its system of record.
 
 runtime_requirements:
   - validate_tool_is_registered
@@ -232,3 +369,9 @@ change_control:
   permission_changes: require_security_review
   system_of_record_changes: require_data_governance_review
   production_activation: require_healthcheck_and_evaluation
+
+completion:
+  tier: Tier-1
+  target_tools: 15
+  registered_tools: 15
+  status: complete
