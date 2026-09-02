@@ -1,0 +1,37 @@
+id: A055
+name: Meeting Prep Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: sales_enablement
+purpose: Create a decision-ready meeting brief from qualified opportunity, account, contact, prior outreach and available research context.
+inputs:
+  required: [opportunity]
+  optional: [account, contacts, qualification, account_research, signal_history, outreach_history, meeting_metadata]
+outputs:
+  primary: meeting_brief
+  required_fields: [objective, account_summary, contact_summary, qualification_summary, hypotheses, discovery_questions, risks, next_step_plan, evidence]
+  downstream_events: [meeting.prep.completed]
+tools:
+  allowed: [TOOL-POSTGRES-QUERY-READONLY, TOOL-QDRANT-SEARCH]
+  authorization_rule: Agent -> Skill -> Tool -> Action; default deny.
+workflow:
+  sequence: [validate_opportunity, retrieve_context, summarize_account, summarize_contacts, inspect_history, form_hypotheses, generate_questions, identify_risks, produce_brief, emit_event]
+policy:
+  source_provenance_required: true
+  sensitive_attribute_inference: forbidden
+  fabricated_facts: forbidden
+  external_actions: prohibited
+  uncertain_claims_must_be_labeled: true
+quality:
+  evidence_backed: true
+  concise: true
+  action_oriented: true
+observability:
+  audit_required: true
+  execution_log_required: true
+failure_handling:
+  retry_transient_errors: true
+  max_retries: 3
+  fail_closed_on_schema_or_policy_error: true
