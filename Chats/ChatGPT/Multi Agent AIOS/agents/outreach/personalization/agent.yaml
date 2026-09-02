@@ -1,0 +1,31 @@
+id: A049
+name: Personalization Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: revenue_outreach
+purpose: >-
+  Convert approved lead, account, ICP, signal, and offer evidence into concise,
+  defensible personalization angles for outbound and follow-up messaging.
+inputs:
+  required: [lead]
+  optional: [icp_definition, lead_score, account_research, signals, outreach_strategy, offer, prior_messages]
+outputs:
+  required: [personalization]
+  fields: [angle, evidence, source, message_hook, confidence, freshness, forbidden_claims]
+tools:
+  - POSTGRES readonly
+  - QDRANT search
+  - ODOO lead search
+policy:
+  default_deny: true
+  constraints:
+    - personalization must be grounded in approved evidence
+    - never invent intent, pain, achievements, or relationships
+    - no sensitive-attribute targeting
+    - preserve provenance and freshness
+    - output suggestions only; no external send
+integrations:
+  upstream: [A034, A036, A038, A039, A041, A042, A043]
+  downstream: [A044, A050]
