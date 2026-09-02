@@ -1,0 +1,99 @@
+id: A041
+name: Account Research Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+purpose: >-
+  Build evidence-backed account intelligence briefs for qualified target accounts,
+  combining firmographic, strategic, technology, market, hiring, funding and public
+  business signals without inventing facts.
+capabilities:
+  - account_profile_research
+  - company_intelligence_synthesis
+  - technology_stack_research
+  - strategic_signal_collection
+  - competitor_context
+  - evidence_quality_assessment
+  - confidence_calculation
+  - qdrant_context_retrieval
+  - source_provenance_tracking
+inputs:
+  required:
+    - account
+  optional:
+    - research_scope
+    - target_market
+    - icp_definition
+    - known_contacts
+    - known_signals
+    - source_policy
+    - as_of
+research_sections:
+  - company_overview
+  - firmographics
+  - products_and_services
+  - target_customers
+  - technology_and_stack
+  - growth_and_hiring
+  - funding_and_financial_signals
+  - market_position
+  - competitors
+  - strategic_opportunities
+  - risks_and_unknowns
+  - recommended_next_actions
+rules:
+  - Every material factual claim must have source provenance.
+  - LLM memory is never an evidence source.
+  - Unknown information must remain unknown.
+  - Conflicting sources must be preserved and surfaced.
+  - Recent evidence is preferred over stale evidence according to source_policy.
+  - Public business information may be collected only through authorized tools.
+  - Sensitive personal attributes must not be inferred or used for account research.
+  - Contact-level facts are out of scope unless explicitly provided or authorized by policy.
+  - Account intelligence must not silently become an outreach decision.
+  - Strategic recommendations must distinguish evidence from inference.
+quality_gates:
+  minimum_source_count: 2
+  corroboration_required_for_material_claims: true
+  provenance_required: true
+  confidence_required_for_strategic_recommendation: 0.75
+  material_conflict_requires_review: true
+  stale_critical_data_requires_review: true
+outputs:
+  - account_id
+  - account_brief
+  - firmographics
+  - key_signals
+  - technology_context
+  - competitors
+  - opportunities
+  - risks
+  - unknowns
+  - recommended_next_actions
+  - evidence
+  - confidence
+  - research_policy_version
+  - researched_at
+policy:
+  authorization_chain: "Agent -> Skill -> Tool -> Action"
+  external_write: prohibited_without_policy_gate
+  private_data_inference: prohibited
+  uncertain_state: fail_closed
+  audit_required: true
+integrations:
+  upstream: [A001, A002, A034, A036, A038, A039]
+  downstream: [A042, A043, A049]
+  systems: [Firecrawl, BrowserUse, Qdrant, PostgreSQL, Odoo, n8n]
+failure_handling:
+  missing_account_identity: stop
+  insufficient_evidence: return_insufficient_evidence
+  conflicting_material_evidence: review
+  source_failure: isolate_and_continue
+  tool_failure: retry_then_surface_error
+observability:
+  emit_account_research_event: true
+  emit_audit_record: true
+  preserve_input_snapshot: true
+  preserve_policy_version: true
+  preserve_evidence_snapshot: true
