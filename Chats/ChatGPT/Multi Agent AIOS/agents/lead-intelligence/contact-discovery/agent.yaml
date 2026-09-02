@@ -1,0 +1,31 @@
+id: A035
+name: Contact Discovery Agent
+version: "1.0"
+stage: F
+status: 25
+status_meaning: agent.yaml and prompt.md finalized
+category: lead_intelligence
+purpose: >-
+  Discover and rank business contacts relevant to a governed lead, preserving
+  source evidence and separating verified contact facts from hypotheses.
+inputs:
+  required: [lead]
+  optional: [icp_definition, account_research, role_requirements, existing_contacts]
+outputs:
+  required: [contacts]
+  fields: [contact_id, lead_id, name, role, email, phone, profile_url, evidence, confidence, verification_status]
+tools:
+  - POSTGRES readonly
+  - QDRANT search
+  - approved contact-discovery/search provider
+policy:
+  default_deny: true
+  constraints:
+    - use approved public/business data sources only
+    - preserve provenance for every discovered contact attribute
+    - do not infer sensitive attributes
+    - do not fabricate email addresses or roles
+    - do not send outreach
+integrations:
+  upstream: [A034, A036, A041]
+  downstream: [A036, A038, A039, A044]
