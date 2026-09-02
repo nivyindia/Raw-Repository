@@ -1,0 +1,19 @@
+{
+  "name": "AIOS Revenue 03 — Reply to Qualification",
+  "nodes": [
+    {"parameters":{"httpMethod":"POST","path":"aios/revenue/reply","responseMode":"responseNode"},"id":"trigger","name":"Inbound Reply","type":"n8n-nodes-base.webhook","typeVersion":2,"position":[0,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A052/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"triage","name":"A052 Reply Triage","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[280,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A054/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"qualify","name":"A054 Qualification","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[560,0]},
+    {"parameters":{"respondWith":"json","responseBody":"={{JSON.stringify({status:'qualified_or_routed',pipeline:'revenue-03-reply-qualification',result:$json})}}"},"id":"response","name":"Return Routing","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[840,0]}
+  ],
+  "connections": {
+    "Inbound Reply":{"main":[[{"node":"A052 Reply Triage","type":"main","index":0}]]},
+    "A052 Reply Triage":{"main":[[{"node":"A054 Qualification","type":"main","index":0}]]},
+    "A054 Qualification":{"main":[[{"node":"Return Routing","type":"main","index":0}]]}
+  },
+  "active": false,
+  "settings":{"executionOrder":"v1"},
+  "versionId":"aios-revenue-03",
+  "meta":{"aios":true,"purpose":"reply-triage-and-qualification"},
+  "tags":[]
+}
