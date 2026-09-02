@@ -1,0 +1,21 @@
+{
+  "name": "AIOS Revenue 04 — Meeting to Proposal to Onboarding",
+  "nodes": [
+    {"parameters":{"httpMethod":"POST","path":"aios/revenue/opportunity","responseMode":"responseNode"},"id":"trigger","name":"Qualified Opportunity","type":"n8n-nodes-base.webhook","typeVersion":2,"position":[0,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A055/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"prep","name":"A055 Meeting Prep","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[250,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A060/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"proposal","name":"A060 Proposal","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[500,0]},
+    {"parameters":{"method":"POST","url":"={{$env.AIOS_RUNTIME_URL + '/v1/agents/A065/invoke'}}","sendBody":true,"specifyBody":"json","jsonBody":"={{JSON.stringify({execution_id:$execution.id,input:$json})}}"},"id":"onboarding","name":"A065 Onboarding","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[750,0]},
+    {"parameters":{"respondWith":"json","responseBody":"={{JSON.stringify({status:'opportunity_processed',pipeline:'revenue-04-meeting-proposal-onboarding',result:$json})}}"},"id":"response","name":"Return Result","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.1,"position":[1000,0]}
+  ],
+  "connections": {
+    "Qualified Opportunity":{"main":[[{"node":"A055 Meeting Prep","type":"main","index":0}]]},
+    "A055 Meeting Prep":{"main":[[{"node":"A060 Proposal","type":"main","index":0}]]},
+    "A060 Proposal":{"main":[[{"node":"A065 Onboarding","type":"main","index":0}]]},
+    "A065 Onboarding":{"main":[[{"node":"Return Result","type":"main","index":0}]]}
+  },
+  "active": false,
+  "settings":{"executionOrder":"v1"},
+  "versionId":"aios-revenue-04",
+  "meta":{"aios":true,"purpose":"meeting-proposal-onboarding"},
+  "tags":[]
+}
