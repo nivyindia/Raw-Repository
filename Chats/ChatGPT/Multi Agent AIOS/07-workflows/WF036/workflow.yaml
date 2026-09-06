@@ -1,0 +1,12 @@
+id: WF036
+name: Client Onboarding
+version: 1.0.0
+status: spec_ready
+trigger: payment.confirmed
+inputs: [client_id, opportunity_id, service, contract, payment]
+outputs: [project_id, onboarding_tasks, owner_assignments]
+steps: [create_project, create_tasks, assign_owners, send_welcome, persist, emit]
+tools: [odoo.update_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [client.onboarded]
