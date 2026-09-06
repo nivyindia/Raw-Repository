@@ -1,0 +1,12 @@
+id: WF024
+name: Meeting Prep
+version: 1.0.0
+status: spec_ready
+trigger: meeting.booked
+inputs: [lead_id, meeting_id, account_context, prior_activity]
+outputs: [meeting_brief, agenda, questions]
+steps: [retrieve_context, research_gaps, generate_brief, validate, persist]
+tools: [odoo.search_lead, firecrawl.extract, qdrant.search, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [meeting.prepared]
