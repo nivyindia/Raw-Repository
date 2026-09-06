@@ -1,0 +1,12 @@
+id: WF034
+name: Invoice Creation
+version: 1.0.0
+status: spec_ready
+trigger: deal.approved
+inputs: [opportunity_id, client_id, line_items, tax_profile, payment_terms]
+outputs: [invoice_id, invoice_status]
+steps: [validate_deal, build_invoice, create_odoo_invoice, persist_event, emit]
+tools: [odoo.create_opportunity, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [invoice.created]
