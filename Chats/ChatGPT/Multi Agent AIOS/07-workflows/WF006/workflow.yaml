@@ -1,0 +1,12 @@
+id: WF006
+name: Lead Segmentation
+version: 1.0.0
+status: spec_ready
+trigger: lead.qualified_for_segmentation
+inputs: [lead_id, score, firmographics, behavior]
+outputs: [segment, priority]
+steps: [load_rules, classify, update_crm, emit]
+tools: [postgres.query_readonly, odoo.update_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [lead.segmented]
