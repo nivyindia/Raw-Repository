@@ -1,0 +1,12 @@
+id: XW014
+name: AI Failure to Human
+version: 1.0.0
+status: spec_ready
+trigger: agent.failure_escalation
+inputs: [agent_id, run_id, failure_type, payload, risk_level]
+outputs: [incident_id, human_task_id, escalation_status]
+steps: [capture_failure, create_incident, create_human_task, notify, persist, emit]
+tools: [postgres.write_event, odoo.update_lead]
+error_policy: retry_once_then_escalate
+approval: human_required
+events_emitted: [ai.escalated_to_human]
