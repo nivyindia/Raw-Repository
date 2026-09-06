@@ -1,0 +1,12 @@
+id: XW001
+name: Content to Lead
+version: 1.0.0
+status: spec_ready
+trigger: content.engagement_detected
+inputs: [content_id, contact_id, engagement_type, engagement_score]
+outputs: [lead_id, attribution]
+steps: [identify_contact, score_intent, create_or_update_lead, attribute, emit]
+tools: [odoo.search_lead, odoo.create_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [lead.attributed_to_content]
