@@ -1,0 +1,12 @@
+id: WF009
+name: Buying Signal Detection
+version: 1.0.0
+status: spec_ready
+trigger: account.signal_scan_requested
+inputs: [account_id, domain, signal_types]
+outputs: [signals, confidence, urgency]
+steps: [scan_sources, detect_signals, score_confidence, persist, emit]
+tools: [firecrawl.extract, browser_use.research, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [signal.detected]
