@@ -1,0 +1,12 @@
+id: WF018
+name: Deliverability Monitoring
+version: 1.0.0
+status: spec_ready
+trigger: schedule.hourly
+inputs: [sender_domains, delivery_events]
+outputs: [health_score, alerts, suppression_updates]
+steps: [collect_metrics, analyze, threshold_gate, persist, alert]
+tools: [postgres.query_readonly, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [deliverability.alerted]
