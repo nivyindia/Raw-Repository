@@ -1,0 +1,12 @@
+id: WF019
+name: Follow-Up Engine
+version: 1.0.0
+status: spec_ready
+trigger: followup.due
+inputs: [lead_id, last_touch, sequence_state, consent_status]
+outputs: [action, scheduled_at]
+steps: [load_state, permission_gate, choose_action, schedule, log, emit]
+tools: [odoo.search_lead, odoo.update_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: required_for_nonstandard_actions
+events_emitted: [followup.scheduled]
