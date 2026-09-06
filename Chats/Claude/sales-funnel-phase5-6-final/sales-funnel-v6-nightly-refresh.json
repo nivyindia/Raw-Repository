@@ -1,0 +1,444 @@
+{
+  "name": "Sales Funnel - Phase 6 - Nightly Intelligence Refresh (companion)",
+  "nodes": [
+    {
+      "id": "75c35cfe-f9ad-414b-8fe5-207f531ee04e",
+      "name": "Nightly setup notes",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -220
+      ],
+      "parameters": {
+        "content": "## Phase 6 - Nightly Intelligence Refresh (companion workflow)\n\nSeparate from the main per-lead funnel because it sweeps the whole active-account base on a schedule instead of following one lead. Reuses Phase 2's enrichment + scoring logic via Execute Workflow.\n\n**Before running:** extract the node chain 'Enrich Company (Apollo)' through 'Score Lead' out of the main funnel workflow into its own small reusable sub-workflow, then paste that sub-workflow's ID into the 'Execute Workflow - Re-Enrich & Score' node below. See README.",
+        "height": 300,
+        "width": 420
+      }
+    },
+    {
+      "id": "b72d9f6a-8074-4862-866a-3e64c238ce4c",
+      "name": "Cron - Nightly Account Sweep",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        120
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 2 * * *"
+            }
+          ]
+        }
+      },
+      "notes": "Runs at 2:00 AM server time. Adjust the cron expression to your timezone/preference."
+    },
+    {
+      "id": "f34ef358-1dd6-48b7-9157-cb7c5f91bef0",
+      "name": "Fetch Active Accounts (Odoo)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.ODOO_URL}}/jsonrpc",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  jsonrpc: '2.0', method: 'call',\n  params: { service: 'object', method: 'execute_kw',\n    args: [$env.ODOO_DB, $env.ODOO_UID, $env.ODOO_API_KEY,\n      'crm.lead', 'search_read',\n      [[['active', '=', True], ['stage_id.is_won', '=', True]]],\n      {fields: ['id','name','email_from','partner_name']}\n    ]\n  }\n}) }}",
+        "options": {}
+      },
+      "notes": "Pulls every existing customer account (Won leads) from Odoo. Adjust the domain filter to match however you flag active customers in your Odoo setup."
+    },
+    {
+      "id": "021951b8-d88f-4a0d-bfdd-761f293a3e8d",
+      "name": "Split Accounts",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        520,
+        120
+      ],
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "notes": "One account per iteration, so a single slow enrichment call doesn't block the whole sweep."
+    },
+    {
+      "id": "054f94e8-06a9-4491-9a83-5c382632525a",
+      "name": "Prepare Enrichment Input",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        780,
+        0
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "company",
+              "type": "string",
+              "value": "={{$json.partner_name}}"
+            },
+            {
+              "name": "email",
+              "type": "string",
+              "value": "={{$json.email_from}}"
+            },
+            {
+              "name": "odoo_lead_id",
+              "type": "number",
+              "value": "={{$json.id}}"
+            }
+          ]
+        }
+      },
+      "notes": "Shapes each account into the same input fields the Phase 2 enrichment sub-workflow expects."
+    },
+    {
+      "id": "11006400-1720-4fd1-9f3f-255ee8b6cd4c",
+      "name": "Execute Workflow - Re-Enrich & Score",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        1040,
+        0
+      ],
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_ENRICHMENT_SUBWORKFLOW_ID",
+          "mode": "list"
+        }
+      },
+      "notes": "Point this at the extracted Phase 2 enrichment + scoring sub-workflow (Enrich Company through Score Lead). Replace REPLACE_WITH_ENRICHMENT_SUBWORKFLOW_ID with its real workflow ID once you've split it out - see README for the extraction steps."
+    },
+    {
+      "id": "4f080759-5974-471e-b224-56d5b8153747",
+      "name": "Fetch Previous Score (Postgres)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1300,
+        0
+      ],
+      "parameters": {
+        "operation": "select",
+        "schema": "public",
+        "table": "account_score_history",
+        "returnAll": false,
+        "limit": 1,
+        "where": {
+          "values": [
+            {
+              "column": "email",
+              "value": "={{$json.email}}"
+            }
+          ]
+        },
+        "sort": {
+          "values": [
+            {
+              "column": "scored_at",
+              "direction": "DESC"
+            }
+          ]
+        }
+      },
+      "notes": "Reads the most recent prior score for this account from account_score_history (create this table before running - see README). If no row exists yet, treat previous_score as 0 in the next node."
+    },
+    {
+      "id": "78173cda-3517-480a-a403-1e064886cb88",
+      "name": "Compute Score Delta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const previous = $json.previous_score ?? 0;\nconst current = $json.lead_score ?? 0;\nreturn {\n  ...$json,\n  previous_score: previous,\n  current_score: current,\n  score_delta: current - previous\n};"
+      }
+    },
+    {
+      "id": "194d4b35-2c3d-4f3e-942c-c651f3455661",
+      "name": "Is Score Rising?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1820,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.score_delta}}",
+              "rightValue": "={{Number($env.SCORE_RISE_THRESHOLD || 10)}}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "notes": "Fires the alert branch when the score climbed by at least SCORE_RISE_THRESHOLD points (default 10) since the last sweep."
+    },
+    {
+      "id": "54182fc2-9e8b-4e46-b0e7-5e3a12ecc1fe",
+      "name": "Create Urgent Task (Odoo)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2080,
+        -120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.ODOO_URL}}/jsonrpc",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  jsonrpc: '2.0', method: 'call',\n  params: { service: 'object', method: 'execute_kw',\n    args: [$env.ODOO_DB, $env.ODOO_UID, $env.ODOO_API_KEY,\n      'mail.activity', 'create',\n      [{\n        res_model: 'crm.lead', res_id: $json.odoo_lead_id,\n        activity_type_id: 1,\n        summary: 'Score jumped +' + $json.score_delta + ' - check for upsell/renewal signal',\n        date_deadline: new Date().toISOString().slice(0,10)\n      }]\n    ]\n  }\n}) }}",
+        "options": {}
+      },
+      "notes": "Creates a due-today activity on the account owner's Odoo to-do list. Adjust activity_type_id to match a type that exists in your Odoo instance."
+    },
+    {
+      "id": "59559404-2842-4efa-8476-ad142bbc919a",
+      "name": "Notify Team - Rising Score Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2340,
+        -120
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.MATTERMOST_WEBHOOK_URL}}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "=Rising score: {{$json.company}} jumped {{$json.previous_score}} -> {{$json.current_score}} - possible upsell/renewal signal"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "ed58bf17-0144-4650-a08a-eb1bdc0171a8",
+      "name": "Skip Alert - Score Stable",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        120
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "bdaf66a9-3ca4-4251-9d9c-13d9353eaac8",
+      "name": "Log Score History (Postgres)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        2600,
+        0
+      ],
+      "parameters": {
+        "operation": "insert",
+        "schema": "public",
+        "table": "account_score_history",
+        "columns": "company, email, current_score, score_delta, scored_at",
+        "additionalFields": {}
+      },
+      "notes": "Logs this sweep's result so the next nightly run has a previous_score to compare against."
+    },
+    {
+      "id": "95364055-9cca-48e4-bb3f-59b8817ea77d",
+      "name": "Nightly Sweep Complete",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        780,
+        260
+      ],
+      "parameters": {},
+      "notes": "Fires once every account in tonight's batch has been processed."
+    }
+  ],
+  "connections": {
+    "Cron - Nightly Account Sweep": {
+      "main": [
+        [
+          {
+            "node": "Fetch Active Accounts (Odoo)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Active Accounts (Odoo)": {
+      "main": [
+        [
+          {
+            "node": "Split Accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Accounts": {
+      "main": [
+        [
+          {
+            "node": "Prepare Enrichment Input",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Nightly Sweep Complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Enrichment Input": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow - Re-Enrich & Score",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow - Re-Enrich & Score": {
+      "main": [
+        [
+          {
+            "node": "Fetch Previous Score (Postgres)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Previous Score (Postgres)": {
+      "main": [
+        [
+          {
+            "node": "Compute Score Delta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compute Score Delta": {
+      "main": [
+        [
+          {
+            "node": "Is Score Rising?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Score Rising?": {
+      "main": [
+        [
+          {
+            "node": "Create Urgent Task (Odoo)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Skip Alert - Score Stable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Urgent Task (Odoo)": {
+      "main": [
+        [
+          {
+            "node": "Notify Team - Rising Score Alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify Team - Rising Score Alert": {
+      "main": [
+        [
+          {
+            "node": "Log Score History (Postgres)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Skip Alert - Score Stable": {
+      "main": [
+        [
+          {
+            "node": "Log Score History (Postgres)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log Score History (Postgres)": {
+      "main": [
+        [
+          {
+            "node": "Split Accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "88e58c11-a16d-44ea-845b-52d11a5dcd16",
+  "meta": {
+    "instanceId": "phase6-nightly-refresh"
+  }
+}

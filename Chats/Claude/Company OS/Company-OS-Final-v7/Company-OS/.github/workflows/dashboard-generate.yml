@@ -1,0 +1,79 @@
+name: Generate Documentation Health Dashboard
+
+# Consolidates what health-report.yml, check-links.yml, and orphan-detection.yml
+# already check into the single dashboard.md file Doc 07 §9 specifies, plus the
+# 2 fields none of those three currently compute (Awaiting Review, Broken Links count).
+# Runs after the other Monday jobs so their same-day Issues are settled first.
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # weekly, Monday 06:00 UTC (after the 03:00/04:00/05:00 jobs)
+  workflow_dispatch: {}
+
+jobs:
+  build-dashboard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute all 7 metrics
+        run: |
+          TOTAL=0; OUTDATED=0; AWAITING_REVIEW=0; UNOWNED=0; DRAFT_STUCK=0; PUBLISHED=0; BROKEN_LINKS=0
+          TODAY=$(date +%Y-%m-%d)
+
+          for file in $(find 01_AREAS 02_PROJECTS 03_RESOURCES -name "*.md" ! -name "README.md" ! -name "Glossary.md" ! -name "FAQ.md"); do
+            TOTAL=$((TOTAL+1))
+            status=$(grep -m1 "^Lifecycle Status:" "$file" | sed 's/Lifecycle Status:[[:space:]]*//')
+            owner=$(grep -m1 "^Owner (Accountable):" "$file" | sed 's/Owner (Accountable):[[:space:]]*//')
+            next_review=$(grep -m1 "^Next Review:" "$file" | sed 's/Next Review:[[:space:]]*//')
+
+            [[ "$status" == "Published" ]] && PUBLISHED=$((PUBLISHED+1))
+            [[ "$status" == "Under Review" ]] && AWAITING_REVIEW=$((AWAITING_REVIEW+1))
+            if [[ -z "$owner" || "$owner" == "Unassigned" || "$owner" == "[Role]"* ]]; then
+              UNOWNED=$((UNOWNED+1))
+            fi
+            if [[ "$status" == "Draft" ]]; then
+              last_mod=$(git log -1 --format=%ct -- "$file" 2>/dev/null || echo 0)
+              age_days=$(( ($(date +%s) - last_mod) / 86400 ))
+              [ "$age_days" -gt 30 ] && DRAFT_STUCK=$((DRAFT_STUCK+1))
+            fi
+            [[ -n "$next_review" && "$next_review" < "$TODAY" ]] && OUTDATED=$((OUTDATED+1))
+
+            dir=$(dirname "$file")
+            for link in $(grep -oE '\]\([^)]+\.md\)' "$file" | sed -E 's/\]\((.+)\)/\1/'); do
+              [[ "$link" == http* ]] && continue
+              target=$(realpath -m --relative-to=. "$dir/$link")
+              [ ! -f "$target" ] && BROKEN_LINKS=$((BROKEN_LINKS+1))
+            done
+          done
+
+          {
+            echo "# Documentation Health Dashboard"
+            echo ""
+            echo "Home › 03_RESOURCES › Company_Master_Standards"
+            echo ""
+            echo "_Last updated: $TODAY (auto-generated weekly by \`dashboard-generate.yml\`, do not edit by hand)_"
+            echo ""
+            echo "| Metric | Count |"
+            echo "|---|---|"
+            echo "| Total Documents | $TOTAL |"
+            echo "| Outdated (past Next Review date) | $OUTDATED |"
+            echo "| Awaiting Review | $AWAITING_REVIEW |"
+            echo "| Unowned (no Owner set) | $UNOWNED |"
+            echo "| Draft (stuck >30 days) | $DRAFT_STUCK |"
+            echo "| Published | $PUBLISHED |"
+            echo "| Broken Internal Links | $BROKEN_LINKS |"
+            echo ""
+            echo "## Details"
+            echo "- Full weekly breakdown (per-file lists): see the latest \`health-report\` labeled Issue."
+            echo "- Orphan documents: see the latest \`orphan-report\` labeled Issue."
+            echo "- Broken link locations: see the \`check-links.yml\` run logs for the exact file/line."
+          } > 03_RESOURCES/Company_Master_Standards/dashboard.md
+
+      - name: Commit updated dashboard
+        run: |
+          git config user.email "dashboard-bot@company-os.local"
+          git config user.name "Dashboard Bot"
+          git add 03_RESOURCES/Company_Master_Standards/dashboard.md
+          git commit -m "Update documentation health dashboard" || echo "No changes"
+          git push

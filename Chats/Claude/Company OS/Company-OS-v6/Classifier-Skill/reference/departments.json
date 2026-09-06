@@ -1,0 +1,23 @@
+{
+  "departments": [
+    {"code": "CEO", "name": "CEO Office", "owner_role": "Founder/CEO"},
+    {"code": "STR", "name": "Strategy (CSO)", "owner_role": "Chief Strategy Officer"},
+    {"code": "OPS", "name": "Operations (COO)", "owner_role": "Chief Operating Officer"},
+    {"code": "FIN", "name": "Finance (CFO)", "owner_role": "Chief Financial Officer"},
+    {"code": "HR", "name": "Human Resources (CHRO)", "owner_role": "Chief HR Officer"},
+    {"code": "TECH", "name": "Technology (CTO)", "owner_role": "Chief Technology Officer"},
+    {"code": "MKT", "name": "Marketing (CMO)", "owner_role": "Chief Marketing Officer"},
+    {"code": "LEG", "name": "Legal & Compliance (CLO)", "owner_role": "Chief Legal Officer"},
+    {"code": "RISK", "name": "Risk & Governance (CRO)", "owner_role": "Chief Risk Officer"},
+    {"code": "DATA", "name": "Data & Innovation (CDO)", "owner_role": "Chief Data Officer"},
+    {"code": "SALES", "name": "Sales", "owner_role": "Head of Sales"},
+    {"code": "RND", "name": "Research & Development / Innovation Lab", "owner_role": "Head of R&D"},
+    {"code": "PMO", "name": "Project Management Office", "owner_role": "Head of PMO"},
+    {"code": "ADMIN", "name": "Administration & Facilities", "owner_role": "Admin Lead"},
+    {"code": "QA", "name": "Quality Assurance & Internal Audit", "owner_role": "QA Lead"},
+    {"code": "CS", "name": "Customer Success / Service Excellence", "owner_role": "CS Lead"},
+    {"code": "ALL", "name": "All Departments (company-wide)", "owner_role": "Workspace Admin"},
+    {"code": "PROJ", "name": "Cross-department Project", "owner_role": "Assigned Project Owner"}
+  ],
+  "brand_division_codes": "See GOVERNANCE/01-Department-Code-Registry.md Section C — fill in with actual brand names before use."
+}

@@ -1,0 +1,86 @@
+name: Weekly Documentation Health Report
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'   # weekly, Monday 05:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  health-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate health report
+        run: |
+          TOTAL=0
+          OUTDATED=0
+          UNOWNED=0
+          DRAFT_STUCK=0
+          PUBLISHED=0
+          TODAY=$(date +%Y-%m-%d)
+
+          echo "# Weekly Documentation Health Report — $TODAY" > report.md
+          echo "" >> report.md
+
+          for file in $(find 01_AREAS 02_PROJECTS 03_RESOURCES -name "*.md" ! -name "README.md" ! -name "Glossary.md" ! -name "FAQ.md"); do
+            TOTAL=$((TOTAL+1))
+
+            status=$(grep -m1 "^Lifecycle Status:" "$file" | sed 's/Lifecycle Status:[[:space:]]*//')
+            owner=$(grep -m1 "^Owner (Accountable):" "$file" | sed 's/Owner (Accountable):[[:space:]]*//')
+            next_review=$(grep -m1 "^Next Review:" "$file" | sed 's/Next Review:[[:space:]]*//')
+
+            if [[ "$status" == "Published" ]]; then
+              PUBLISHED=$((PUBLISHED+1))
+            fi
+
+            if [[ -z "$owner" || "$owner" == "Unassigned" || "$owner" == "[Role]"* ]]; then
+              UNOWNED=$((UNOWNED+1))
+              echo "$file" >> unowned_list.txt
+            fi
+
+            if [[ "$status" == "Draft" ]]; then
+              # crude staleness check: file not modified in last 30 days via git log
+              last_mod=$(git log -1 --format=%ct -- "$file" 2>/dev/null || echo 0)
+              now=$(date +%s)
+              age_days=$(( (now - last_mod) / 86400 ))
+              if [ "$age_days" -gt 30 ]; then
+                DRAFT_STUCK=$((DRAFT_STUCK+1))
+                echo "$file (${age_days}d)" >> stuck_draft_list.txt
+              fi
+            fi
+
+            if [[ -n "$next_review" && "$next_review" < "$TODAY" ]]; then
+              OUTDATED=$((OUTDATED+1))
+              echo "$file (review was due $next_review)" >> outdated_list.txt
+            fi
+          done
+
+          {
+            echo "## Summary"
+            echo "| Metric | Count |"
+            echo "|---|---|"
+            echo "| Total Documents | $TOTAL |"
+            echo "| Published | $PUBLISHED |"
+            echo "| Outdated (past Next Review) | $OUTDATED |"
+            echo "| Unowned (no Owner set) | $UNOWNED |"
+            echo "| Draft stuck >30 days | $DRAFT_STUCK |"
+            echo ""
+            if [ -f outdated_list.txt ]; then echo "## Outdated"; sed 's/^/- /' outdated_list.txt; echo ""; fi
+            if [ -f unowned_list.txt ]; then echo "## Unowned"; sed 's/^/- /' unowned_list.txt; echo ""; fi
+            if [ -f stuck_draft_list.txt ]; then echo "## Stuck in Draft"; sed 's/^/- /' stuck_draft_list.txt; fi
+          } >> report.md
+
+          cat report.md
+
+      - name: Post report as Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('report.md', 'utf8');
+            const title = `Documentation Health Report — ${new Date().toISOString().slice(0,10)}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              title, body, labels: ['health-report']
+            });

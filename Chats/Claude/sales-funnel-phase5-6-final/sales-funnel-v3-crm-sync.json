@@ -1,0 +1,1277 @@
+{
+  "name": "Sales Funnel - Phase 1+2+3 - Capture through CRM Sync",
+  "nodes": [
+    {
+      "id": "8bdf8d4f-22f7-48cd-98c2-95f53b3e93c1",
+      "name": "Setup notes",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        40
+      ],
+      "parameters": {
+        "content": "## Phase 1 - Capture & Clean\n\nBefore running:\n1. Set credential 'reacherApi' -> your self-hosted Reacher URL (email verification)\n2. Set credential 'postgresLeadsDb' -> your leads staging Postgres DB\n3. Set credential 'scraperService' -> your own Playwright/Crawlee microservice URL (n8n Code nodes cannot run headless browsers directly - this must be a small external service you host and call over HTTP)\n4. Point the webhook at your lead-capture form / landing page\n\nOutput of this workflow: a lead marked status = 'Verified', ready for Phase 2 (Enrich & Score) to pick up.",
+        "height": 260,
+        "width": 380,
+        "color": 4
+      }
+    },
+    {
+      "id": "08f877e7-7a5a-4722-87d2-920a183bf1d0",
+      "name": "Webhook - New Lead Form",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-capture",
+        "responseMode": "onReceived",
+        "responseData": "success"
+      },
+      "notes": "Point your website form / landing page submit action at this webhook URL."
+    },
+    {
+      "id": "f9375440-a13c-4a9b-bfdb-d437b25ccc76",
+      "name": "Normalize Webhook Lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Map incoming form fields to the canonical lead schema used across every phase\nconst body = $input.item.json.body || $input.item.json;\nreturn {\n  json: {\n    company: body.company || '',\n    domain: (body.website || '').replace(/^https?:\\/\\//,'').replace(/\\/$/,''),\n    contact_name: body.name || '',\n    email: body.email || '',\n    phone: body.phone || '',\n    country: body.country || '',\n    source: 'webform',\n    utm_source: body.utm_source || '',\n    utm_medium: body.utm_medium || '',\n    utm_campaign: body.utm_campaign || '',\n    stage: 'Raw Lead'\n  }\n};"
+      }
+    },
+    {
+      "id": "1adea2fa-73b7-406d-949f-bccd467b54f4",
+      "name": "Cron - Daily Scrape",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        320
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "notes": "Runs once a day to pull fresh leads from your scraper service."
+    },
+    {
+      "id": "4bfe0c0d-a768-451f-89e5-b53104706783",
+      "name": "Call Scraper Service",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        320
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.SCRAPER_SERVICE_URL}}/run",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "site:linkedin.com/in marketing director"
+            },
+            {
+              "name": "source",
+              "value": "google_maps"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "notes": "Calls YOUR self-hosted scraper microservice (Playwright/Crawlee). n8n's Code node runs in a restricted sandbox and cannot launch a headless browser itself - this HTTP call is the bridge to a small external service you host separately."
+    },
+    {
+      "id": "cbda1a19-89ec-4529-8f94-3dc22cbeeed7",
+      "name": "Normalize Scraper Lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        320
+      ],
+      "parameters": {
+        "jsCode": "// Scraper service is expected to return an array of raw lead objects\nconst items = $input.all();\nconst out = [];\nfor (const item of items) {\n  const rows = Array.isArray(item.json) ? item.json : (item.json.results || [item.json]);\n  for (const r of rows) {\n    out.push({\n      json: {\n        company: r.company || '',\n        domain: (r.website || '').replace(/^https?:\\/\\//,'').replace(/\\/$/,''),\n        contact_name: r.contact_name || '',\n        email: r.email || '',\n        phone: r.phone || '',\n        country: r.country || '',\n        source: 'scraper',\n        stage: 'Raw Lead'\n      }\n    });\n  }\n}\nreturn out;"
+      }
+    },
+    {
+      "id": "40a6184a-b212-447a-994a-5b73735f7485",
+      "name": "Combine Lead Sources",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        780,
+        160
+      ],
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex"
+      },
+      "notes": "Combines the webhook path and the scraper path into a single lead stream."
+    },
+    {
+      "id": "adb83064-b43c-4801-a580-181f4206dd52",
+      "name": "Check Duplicate (Postgres)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1040,
+        160
+      ],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id FROM leads WHERE domain = $1 OR email = $2 LIMIT 1;",
+        "additionalFields": {
+          "queryParams": "={{ [$json.domain, $json.email] }}"
+        }
+      },
+      "notes": "Requires credential 'postgresLeadsDb' pointing at your leads staging table."
+    },
+    {
+      "id": "beb5c64f-e72e-41c2-8b6f-8dcdb76f0ba5",
+      "name": "Is Duplicate?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1300,
+        160
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.id}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "4b5dd1d4-c292-41c4-81ba-bced0ecce934",
+      "name": "Discard Duplicate",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1560,
+        60
+      ],
+      "parameters": {},
+      "notes": "Duplicate leads end here. Nothing further happens."
+    },
+    {
+      "id": "ccccf059-fe0a-4923-8e2a-aed98c9f2d9e",
+      "name": "Verify Email (Reacher)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        260
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.REACHER_URL}}/v0/check_email",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "to_email",
+              "value": "={{$json.email}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "notes": "Requires credential/env var REACHER_URL pointing at your self-hosted Reacher instance."
+    },
+    {
+      "id": "e311327c-9c19-4600-ac58-33eb48d09d53",
+      "name": "Parse Verification Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1820,
+        260
+      ],
+      "parameters": {
+        "jsCode": "const r = $input.item.json;\nconst isReachable = r.is_reachable === 'safe' || r.is_reachable === 'risky';\nreturn {\n  json: {\n    ...$('Is Duplicate?').item.json,\n    email_valid: isReachable,\n    email_check_detail: r.is_reachable || 'unknown'\n  }\n};"
+      }
+    },
+    {
+      "id": "cac59e09-8821-4d39-8d53-a80ec5c7cfa1",
+      "name": "Is Valid Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2080,
+        260
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.email_valid}}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "503048c1-9324-4ab7-92b9-b08a61cbd61e",
+      "name": "Mark Invalid & Log",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2340,
+        360
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "stage",
+              "type": "string",
+              "value": "Invalid"
+            }
+          ]
+        }
+      },
+      "notes": "Invalid/disposable emails are logged here and do not proceed further."
+    },
+    {
+      "id": "415cdb10-7242-4e4b-a38a-edac7f360118",
+      "name": "Mark Cleaned & Verified",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2340,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "stage",
+              "type": "string",
+              "value": "Verified"
+            },
+            {
+              "name": "verified_at",
+              "type": "string",
+              "value": "={{$now.toISO()}}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "0ed1035e-fdb0-49ee-8bd8-8025f97cea67",
+      "name": "Phase 1 Output - Ready for Enrichment",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2600,
+        200
+      ],
+      "parameters": {},
+      "notes": "This is the handoff point. Phase 2 (Enrich & Score) picks up leads from here."
+    },
+    {
+      "id": "68b0ccf5-95f6-415d-a645-0c73a7df4205",
+      "name": "Phase 2 setup notes",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2600,
+        -80
+      ],
+      "parameters": {
+        "content": "## Phase 2 - Enrich & Score\n\nBefore running:\n1. Set env var APOLLO_API_KEY (or credential 'apolloApi')\n2. Set env var SCORING_ENGINE_URL if using self-hosted Ollama for AI scoring - otherwise the Code node below uses a rule-based fallback\n3. Picks up any lead reaching 'Phase 1 Output - Ready for Enrichment'\n\nOutput: each lead tagged Hot / Warm / Cold / Disqualified, ready for Phase 3 (CRM sync).",
+        "height": 220,
+        "width": 380,
+        "color": 5
+      }
+    },
+    {
+      "id": "86df1180-49a2-4706-b922-4efea9803f60",
+      "name": "Enrich Company (Apollo)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2860,
+        200
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apollo.io/v1/organizations/enrich",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "domain",
+              "value": "={{$json.domain}}"
+            }
+          ]
+        },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.APOLLO_API_KEY}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "notes": "Requires env var/credential APOLLO_API_KEY."
+    },
+    {
+      "id": "6bffdf36-f44b-486f-ab8f-3924bdf1548e",
+      "name": "Merge Company Fields",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3120,
+        200
+      ],
+      "parameters": {
+        "jsCode": "const lead = $('Mark Cleaned & Verified').item.json;\nconst org = $input.item.json.organization || {};\nreturn {\n  json: {\n    ...lead,\n    industry: org.industry || '',\n    employee_count: org.estimated_num_employees || null,\n    revenue_range: org.annual_revenue_printed || '',\n    linkedin_url: org.linkedin_url || '',\n    tech_stack: (org.technologies || []).join(', '),\n    recent_news: (org.news_articles || []).slice(0,3).map(a => a.title).join(' | '),\n    enrichment_status: org.id ? 'Enriched' : 'Research Needed'\n  }\n};"
+      }
+    },
+    {
+      "id": "7513be5e-527e-422e-9ef4-56d163694c85",
+      "name": "Loop Decision-Maker Roles",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        3380,
+        200
+      ],
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "notes": "Iterates over target roles: Owner/Founder, CEO, Marketing Head, Sales Head, Ops/Tech Head."
+    },
+    {
+      "id": "a2d62dd7-3c71-4b07-98d8-02b7ef44c258",
+      "name": "Prepare Role List",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3380,
+        60
+      ],
+      "parameters": {
+        "jsCode": "const lead = $input.item.json;\nconst roles = ['founder','ceo','marketing director','sales director','operations director'];\nreturn roles.map(role => ({ json: { ...lead, target_role: role } }));"
+      }
+    },
+    {
+      "id": "4ce6f67d-802d-4e6c-abe8-69c70af07d14",
+      "name": "Find Decision Maker (Apollo People Search)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3640,
+        60
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apollo.io/v1/mixed_people/search",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "q_organization_domains",
+              "value": "={{$json.domain}}"
+            },
+            {
+              "name": "person_titles[]",
+              "value": "={{$json.target_role}}"
+            },
+            {
+              "name": "per_page",
+              "value": "1"
+            }
+          ]
+        },
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{$env.APOLLO_API_KEY}}"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "89073655-54d9-444d-bc3a-ca29aa3d2ac3",
+      "name": "Extract Contact Fields",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3900,
+        60
+      ],
+      "parameters": {
+        "jsCode": "const p = ($input.item.json.people || [])[0];\nif (!p) return [];\nreturn {\n  json: {\n    role_target: $input.item.json.target_role,\n    name: p.name || '',\n    title: p.title || '',\n    email: p.email || '',\n    linkedin_url: p.linkedin_url || '',\n    phone: (p.phone_numbers && p.phone_numbers[0]) || ''\n  }\n};"
+      }
+    },
+    {
+      "id": "4adaf604-fde5-48a0-81bb-05bc58c9f6fe",
+      "name": "Collect All Decision Makers",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        4160,
+        60
+      ],
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "decision_makers"
+      },
+      "notes": "Aggregates up to 5 decision-maker contact records into one array field."
+    },
+    {
+      "id": "a434be58-63dc-4735-8712-fa1d3e9b8ccc",
+      "name": "Merge Company + Contacts",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        4420,
+        130
+      ],
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition"
+      }
+    },
+    {
+      "id": "323e16bd-d98f-40e9-9324-860b7d7141a2",
+      "name": "Score Lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4680,
+        130
+      ],
+      "parameters": {
+        "jsCode": "// Rule-based scoring - swap for a call to your self-hosted Ollama endpoint\n// (SCORING_ENGINE_URL env var) once local-LLM scoring is ready.\nconst l = $input.item.json;\nlet score = 0;\nconst tier1 = ['united states','united kingdom','canada','australia'];\nif (tier1.includes((l.country || '').toLowerCase())) score += 2;\nif (l.employee_count >= 11 && l.employee_count <= 200) score += 2;\nif ((l.decision_makers || []).length >= 1) score += 2;\nif ((l.recent_news || '').length > 0) score += 2;\nif (l.enrichment_status === 'Enriched') score += 2;\nlet tier = 'Disqualified';\nif (score >= 8) tier = 'Hot';\nelse if (score >= 5) tier = 'Warm';\nelse if (score >= 1) tier = 'Cold';\nreturn { json: { ...l, lead_score: score, score_tier: tier } };"
+      }
+    },
+    {
+      "id": "8e255f67-d7bf-4447-b783-a1a5a6af269a",
+      "name": "Route by Score Tier",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        4940,
+        130
+      ],
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.score_tier}}",
+                    "rightValue": "Hot",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "Hot"
+            },
+            {
+              "conditions": {
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.score_tier}}",
+                    "rightValue": "Warm",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "Warm"
+            },
+            {
+              "conditions": {
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.score_tier}}",
+                    "rightValue": "Cold",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "Cold"
+            },
+            {
+              "conditions": {
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.score_tier}}",
+                    "rightValue": "Disqualified",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "outputKey": "Disqualified"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "851deaf1-c9ae-4fff-add7-902aee0b7790",
+      "name": "Phase 2 Output - Hot",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        5200,
+        0
+      ],
+      "parameters": {},
+      "notes": "Hand off to Phase 3 CRM sync, priority routing."
+    },
+    {
+      "id": "0a123cea-b40b-4198-bfab-2dbb094f1bcc",
+      "name": "Phase 2 Output - Warm",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        5200,
+        100
+      ],
+      "parameters": {},
+      "notes": "Hand off to Phase 3 CRM sync."
+    },
+    {
+      "id": "90be3f89-81f9-40e3-9ac0-05e361bc204b",
+      "name": "Phase 2 Output - Cold",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        5200,
+        200
+      ],
+      "parameters": {},
+      "notes": "Hand off to Phase 3 CRM sync, nurture track."
+    },
+    {
+      "id": "a26e0da6-b00b-4bec-89fe-b89ee8ae2cd1",
+      "name": "Phase 2 Output - Disqualified",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        5200,
+        300
+      ],
+      "parameters": {},
+      "notes": "Logged but not actively worked."
+    },
+    {
+      "id": "1073a830-0338-45c3-8921-48ddcf039ee9",
+      "name": "Phase 3 setup notes",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        5200,
+        -160
+      ],
+      "parameters": {
+        "content": "## Phase 3 - CRM Sync\n\nBefore running:\n1. Set credential 'odooApi' (JSON-RPC user + API key)\n2. Set env var ODOO_URL\n3. Set env var MATTERMOST_WEBHOOK_URL (or swap for Slack/email) for Hot lead alerts\n\nTakes all 4 score-tier outputs from Phase 2, tags each with priority, writes one crm.lead record per lead into Odoo, and alerts on Hot leads only.\n\nOutput: lead exists in Odoo with correct stage/priority - ready for Phase 4 (Engage & Convert).",
+        "height": 240,
+        "width": 380,
+        "color": 6
+      }
+    },
+    {
+      "id": "243504f5-ed26-4e93-aa99-0f764885af03",
+      "name": "Tag Priority - Hot",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5460,
+        0
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "priority",
+              "type": "number",
+              "value": 1
+            },
+            {
+              "name": "score_tier",
+              "type": "string",
+              "value": "Hot"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "b1344cbe-000a-4b21-a61c-a5db53064783",
+      "name": "Tag Priority - Warm",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5460,
+        100
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "priority",
+              "type": "number",
+              "value": 2
+            },
+            {
+              "name": "score_tier",
+              "type": "string",
+              "value": "Warm"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "335ac570-f8ec-413a-9cd7-8604e2a9a9f3",
+      "name": "Tag Priority - Cold",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5460,
+        200
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "priority",
+              "type": "number",
+              "value": 3
+            },
+            {
+              "name": "score_tier",
+              "type": "string",
+              "value": "Cold"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "6d17e909-e462-4b08-95c0-1860804579f1",
+      "name": "Tag Priority - Disqualified",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5460,
+        300
+      ],
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "priority",
+              "type": "number",
+              "value": 4
+            },
+            {
+              "name": "score_tier",
+              "type": "string",
+              "value": "Disqualified"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "da0fb8d5-0277-4598-a32b-8e958fb35644",
+      "name": "Merge All Tiers",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        5720,
+        130
+      ],
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "multiplex",
+        "numberInputs": 4
+      },
+      "notes": "Recombines all 4 priority branches into a single stream before writing to Odoo."
+    },
+    {
+      "id": "d4add862-218a-492b-9064-dd96c7d9f33d",
+      "name": "Create/Update Odoo Lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        5980,
+        130
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.ODOO_URL}}/jsonrpc",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  jsonrpc: '2.0',\n  method: 'call',\n  params: {\n    service: 'object',\n    method: 'execute_kw',\n    args: [\n      $env.ODOO_DB, $env.ODOO_UID, $env.ODOO_API_KEY,\n      'crm.lead', 'create',\n      [{\n        name: $json.company,\n        contact_name: $json.contact_name,\n        email_from: $json.email,\n        phone: $json.phone,\n        description: 'Industry: ' + $json.industry + ' | Employees: ' + $json.employee_count,\n        priority: String($json.priority),\n        x_studio_score_tier: $json.score_tier,\n        x_studio_linkedin_url: $json.linkedin_url,\n        x_studio_decision_makers: JSON.stringify($json.decision_makers || [])\n      }]\n    ]\n  }\n}) }}",
+        "options": {}
+      },
+      "notes": "Requires env vars ODOO_URL, ODOO_DB, ODOO_UID, ODOO_API_KEY. Maps enriched fields into crm.lead, including two custom Odoo Studio fields (x_studio_score_tier, x_studio_decision_makers) - create these fields in Odoo Studio before running."
+    },
+    {
+      "id": "86b925bd-871a-4771-9808-372517884d3c",
+      "name": "Is Hot Lead?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        6240,
+        130
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.score_tier}}",
+              "rightValue": "Hot",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "5542b311-1f52-4197-a155-7d66907b8ede",
+      "name": "Alert Team (Hot Lead)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        6500,
+        40
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.MATTERMOST_WEBHOOK_URL}}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "=Hot lead: {{$json.company}} ({{$json.email}}) just entered the pipeline - score {{$json.lead_score}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "notes": "Swap MATTERMOST_WEBHOOK_URL for a Slack incoming webhook or an email node if you'd rather not run Mattermost."
+    },
+    {
+      "id": "7688d778-9772-4085-8de6-c690f0ad65a5",
+      "name": "Phase 3 Output - Lead in Odoo CRM",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        6760,
+        130
+      ],
+      "parameters": {},
+      "notes": "Handoff point. Phase 4 (Engage & Convert) picks up from here for every lead, regardless of tier."
+    }
+  ],
+  "connections": {
+    "Webhook - New Lead Form": {
+      "main": [
+        [
+          {
+            "node": "Normalize Webhook Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Webhook Lead": {
+      "main": [
+        [
+          {
+            "node": "Combine Lead Sources",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron - Daily Scrape": {
+      "main": [
+        [
+          {
+            "node": "Call Scraper Service",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Scraper Service": {
+      "main": [
+        [
+          {
+            "node": "Normalize Scraper Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Scraper Lead": {
+      "main": [
+        [
+          {
+            "node": "Combine Lead Sources",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Combine Lead Sources": {
+      "main": [
+        [
+          {
+            "node": "Check Duplicate (Postgres)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Duplicate (Postgres)": {
+      "main": [
+        [
+          {
+            "node": "Is Duplicate?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Duplicate?": {
+      "main": [
+        [
+          {
+            "node": "Discard Duplicate",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Verify Email (Reacher)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Email (Reacher)": {
+      "main": [
+        [
+          {
+            "node": "Parse Verification Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Verification Result": {
+      "main": [
+        [
+          {
+            "node": "Is Valid Email?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Valid Email?": {
+      "main": [
+        [
+          {
+            "node": "Mark Cleaned & Verified",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark Invalid & Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark Cleaned & Verified": {
+      "main": [
+        [
+          {
+            "node": "Phase 1 Output - Ready for Enrichment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 1 Output - Ready for Enrichment": {
+      "main": [
+        [
+          {
+            "node": "Enrich Company (Apollo)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrich Company (Apollo)": {
+      "main": [
+        [
+          {
+            "node": "Merge Company Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Company Fields": {
+      "main": [
+        [
+          {
+            "node": "Prepare Role List",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge Company + Contacts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Role List": {
+      "main": [
+        [
+          {
+            "node": "Find Decision Maker (Apollo People Search)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Decision Maker (Apollo People Search)": {
+      "main": [
+        [
+          {
+            "node": "Extract Contact Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Contact Fields": {
+      "main": [
+        [
+          {
+            "node": "Collect All Decision Makers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Collect All Decision Makers": {
+      "main": [
+        [
+          {
+            "node": "Merge Company + Contacts",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Company + Contacts": {
+      "main": [
+        [
+          {
+            "node": "Score Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score Lead": {
+      "main": [
+        [
+          {
+            "node": "Route by Score Tier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Score Tier": {
+      "main": [
+        [
+          {
+            "node": "Phase 2 Output - Hot",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Phase 2 Output - Warm",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Phase 2 Output - Cold",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Phase 2 Output - Disqualified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 2 Output - Hot": {
+      "main": [
+        [
+          {
+            "node": "Tag Priority - Hot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 2 Output - Warm": {
+      "main": [
+        [
+          {
+            "node": "Tag Priority - Warm",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 2 Output - Cold": {
+      "main": [
+        [
+          {
+            "node": "Tag Priority - Cold",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Phase 2 Output - Disqualified": {
+      "main": [
+        [
+          {
+            "node": "Tag Priority - Disqualified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag Priority - Hot": {
+      "main": [
+        [
+          {
+            "node": "Merge All Tiers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tag Priority - Warm": {
+      "main": [
+        [
+          {
+            "node": "Merge All Tiers",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Tag Priority - Cold": {
+      "main": [
+        [
+          {
+            "node": "Merge All Tiers",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Tag Priority - Disqualified": {
+      "main": [
+        [
+          {
+            "node": "Merge All Tiers",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Merge All Tiers": {
+      "main": [
+        [
+          {
+            "node": "Create/Update Odoo Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create/Update Odoo Lead": {
+      "main": [
+        [
+          {
+            "node": "Is Hot Lead?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Hot Lead?": {
+      "main": [
+        [
+          {
+            "node": "Alert Team (Hot Lead)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Phase 3 Output - Lead in Odoo CRM",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Phase 3 Output - Lead in Odoo CRM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e0a5ad54-b339-464f-95aa-63e88d0e1f9f",
+  "meta": {
+    "instanceId": "phase1-capture-clean"
+  }
+}

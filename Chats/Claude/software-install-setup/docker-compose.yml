@@ -1,0 +1,82 @@
+version: "3.8"
+
+services:
+  # ---------- n8n (the automation engine itself) ----------
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_SECURE_COOKIE=false
+      - GENERIC_TIMEZONE=Asia/Kolkata
+      - TZ=Asia/Kolkata
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - leads-db
+
+  # ---------- Postgres for leads / lost_deals / onboarding / score history ----------
+  leads-db:
+    image: postgres:16
+    container_name: leads-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=leads_user
+      - POSTGRES_PASSWORD=change_this_password
+      - POSTGRES_DB=leads
+    volumes:
+      - leads_db_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  # ---------- Odoo CRM ----------
+  odoo-db:
+    image: postgres:15
+    container_name: odoo-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=change_this_password
+      - POSTGRES_DB=postgres
+    volumes:
+      - odoo_db_data:/var/lib/postgresql/data
+
+  odoo:
+    image: odoo:17
+    container_name: odoo
+    restart: unless-stopped
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=odoo-db
+      - USER=odoo
+      - PASSWORD=change_this_password
+    volumes:
+      - odoo_data:/var/lib/odoo
+    depends_on:
+      - odoo-db
+
+  # ---------- Gotenberg (proposal PDF generation) ----------
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    container_name: gotenberg
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+
+  # ---------- Reacher (email verification) ----------
+  reacher:
+    image: reacherhq/backend:latest
+    container_name: reacher
+    restart: unless-stopped
+    ports:
+      - "8085:8080"
+
+volumes:
+  n8n_data:
+  leads_db_data:
+  odoo_db_data:
+  odoo_data:

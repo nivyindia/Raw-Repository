@@ -1,0 +1,36 @@
+name: "[DEPRECATED] Research-Inbox Auto-Classification"
+
+# ⛔ DEPRECATED — DO NOT USE.
+# This was an early, unfinished scaffold for inbox auto-classification, built
+# in the wrong repo. It was superseded before completion by the fully working
+# version, which lives here:
+#
+#   Research-Inbox/.github/workflows/classify-and-pr.yml
+#
+# That workflow does everything this one only stubbed out: it triggers
+# automatically on push to dump/, classifies via Claude, formats the document
+# per GOVERNANCE/04, opens a real PR into Company-OS, and cleans up the
+# source file. See Audit-and-Tasks/Company_OS_Full_Audit.md, item 2.2.
+#
+# Trigger is intentionally disabled below so this cannot run by accident.
+# Kept in git history for reference only. Safe to delete entirely in a
+# future cleanup pass once nobody needs the "why did we have two of these"
+# context anymore.
+
+on:
+  workflow_dispatch:
+    inputs:
+      note:
+        description: 'This workflow is deprecated — use Research-Inbox/classify-and-pr.yml instead. Running this will do nothing.'
+        required: false
+        default: 'deprecated — no-op'
+
+jobs:
+  deprecated-noop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Explain deprecation and exit
+        run: |
+          echo "::warning::This workflow is deprecated and does nothing."
+          echo "Use Research-Inbox/.github/workflows/classify-and-pr.yml instead."
+          exit 0

@@ -1,0 +1,51 @@
+name: Orphan Document Detection
+
+on:
+  schedule:
+    - cron: '0 4 * * 1'   # weekly, Monday 04:00 UTC
+  workflow_dispatch: {}     # allow manual trigger too
+
+jobs:
+  orphan-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find documents not linked from any README
+        run: |
+          ORPHANS=""
+          ALL_DOCS=$(find 01_AREAS 02_PROJECTS 03_RESOURCES -name "*.md" ! -name "README.md")
+          ALL_README_CONTENT=$(cat $(find . -name "README.md") 2>/dev/null)
+
+          for file in $ALL_DOCS; do
+            base=$(basename "$file")
+            if ! echo "$ALL_README_CONTENT" | grep -q "$base"; then
+              # also check if it's linked from any other non-README document
+              if ! grep -rq "$base" --include="*.md" 01_AREAS 02_PROJECTS 03_RESOURCES 2>/dev/null; then
+                ORPHANS="$ORPHANS\n- $file"
+              fi
+            fi
+          done
+
+          if [ -n "$ORPHANS" ]; then
+            echo -e "Orphan documents found (not linked from any README or other document):$ORPHANS" > orphan_report.txt
+            cat orphan_report.txt
+          else
+            echo "No orphan documents found." > orphan_report.txt
+          fi
+
+      - name: Open/update Issue with orphan report
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('orphan_report.txt', 'utf8');
+            const title = "Weekly Orphan Document Report";
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: ['orphan-report']
+            });
+            if (issues.length > 0) {
+              await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: issues[0].number, body });
+            } else {
+              await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body, labels: ['orphan-report'] });
+            }

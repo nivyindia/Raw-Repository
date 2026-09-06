@@ -1,0 +1,39 @@
+name: Check Broken Internal Links
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+  schedule:
+    - cron: '0 3 * * 1'   # weekly, Monday 03:00 UTC — catches links broken by files moved elsewhere
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for broken relative markdown links
+        run: |
+          FAILED=0
+          for file in $(find 01_AREAS 02_PROJECTS 03_RESOURCES 04_ARCHIVE -name "*.md"); do
+            dir=$(dirname "$file")
+            # Extract markdown-style relative links: [text](path.md)
+            links=$(grep -oE '\]\([^)]+\.md\)' "$file" | sed -E 's/\]\((.+)\)/\1/')
+            for link in $links; do
+              # skip external links
+              if [[ "$link" == http* ]]; then continue; fi
+              target="$dir/$link"
+              # normalize path
+              target=$(realpath -m --relative-to=. "$target")
+              if [ ! -f "$target" ]; then
+                echo "::error file=$file::Broken link to '$link' (resolved: $target does not exist)"
+                FAILED=1
+              fi
+            done
+          done
+
+          if [ "$FAILED" -eq 1 ]; then
+            exit 1
+          fi
+          echo "No broken internal links found."

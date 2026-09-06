@@ -1,0 +1,23 @@
+name: Stale Issue & PR Check
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # daily, 06:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 30
+          days-before-close: 14
+          stale-issue-message: "This Issue has had no activity for 30 days. Per GOVERNANCE/05-Repository-Branch-Workflow.md, stale work items should be closed or re-prioritized. It will auto-close in 14 days if there's no update."
+          stale-pr-message: "This Pull Request has had no activity for 30 days. Research sitting on a branch this long should either be finished or explicitly parked — see GOVERNANCE/05-Repository-Branch-Workflow.md, Section 5. It will auto-close in 14 days if there's no update."
+          stale-issue-label: "stale"
+          stale-pr-label: "stale"
+          exempt-issue-labels: "pinned,health-report,orphan-report"

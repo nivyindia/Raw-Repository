@@ -1,0 +1,60 @@
+name: Research-Inbox Auto-Classification
+
+# Triggers when something new lands in the Research-Inbox repository.
+# Calls the Claude API (using the same logic as the Company OS Classifier Skill)
+# to propose a classification, then opens a Pull Request into this repository
+# for human review. AI never merges directly — see GOVERNANCE/05, Section 5/8.
+#
+# ⚠️ SCAFFOLD — needs:
+#   1. An ANTHROPIC_API_KEY secret added to this repo
+#   2. This workflow actually placed in the Research-Inbox repository (triggers on push there),
+#      with a cross-repo token that can open PRs into this Company-OS repository
+#   3. The prompt below refined against your actual departments.json / document-types.json
+
+on:
+  workflow_dispatch:
+    inputs:
+      inbox_file_path:
+        description: 'Path of the new file in Research-Inbox to classify'
+        required: true
+
+jobs:
+  classify-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the inbox file and the classification registries
+        id: prep
+        run: |
+          echo "content<<EOF" >> "$GITHUB_OUTPUT"
+          cat "${{ github.event.inputs.inbox_file_path }}" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Call Claude API for classification
+        id: classify
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          curl -s https://api.anthropic.com/v1/messages \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "content-type: application/json" \
+            -d '{
+              "model": "claude-sonnet-4-6",
+              "max_tokens": 1500,
+              "messages": [{
+                "role": "user",
+                "content": "You are the Company OS Classifier Skill. Classify this document per Doc 01 (Departments) and Doc 02 (Types), output the code, filename, folder path, and metadata header exactly as specified in GOVERNANCE/04-Classification-Naming-Rulebook.md. Content follows:\n\n${{ steps.prep.outputs.content }}"
+              }]
+            }' > classification_result.json
+          cat classification_result.json
+
+          # TODO: parse classification_result.json (the "content" field) into
+          # a target file path + formatted content, e.g. with `jq` + a small python script.
+
+      - name: Open Pull Request with the AI-proposed classification
+        run: |
+          echo "TODO: write the parsed file to its proposed path, git checkout -b a new branch,"
+          echo "commit it, and open a PR via 'gh pr create' — leaving this as a manual step"
+          echo "to fill in once the parsing step above is finalized against your API response format."

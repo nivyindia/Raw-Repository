@@ -1,0 +1,58 @@
+name: Validate Naming & Folder Placement
+
+on:
+  pull_request:
+    paths:
+      - '01_AREAS/**/*.md'
+      - '02_PROJECTS/**/*.md'
+      - '03_RESOURCES/**/*.md'
+
+jobs:
+  validate-naming:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check filename pattern and folder-type match
+        run: |
+          FAILED=0
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- '01_AREAS/**/*.md' '02_PROJECTS/**/*.md' '03_RESOURCES/**/*.md' || true)
+
+          declare -A TYPE_FOLDER
+          TYPE_FOLDER["POL"]="Policies"
+          TYPE_FOLDER["SOP"]="SOPs"
+          TYPE_FOLDER["WI"]="Work_Instructions"
+          TYPE_FOLDER["TPL"]="Templates"
+          TYPE_FOLDER["REP"]="Reports"
+          TYPE_FOLDER["REC"]="Records"
+          TYPE_FOLDER["KB"]="Knowledge_Reference"
+          TYPE_FOLDER["MEET"]="Meeting_Notes"
+
+          for file in $CHANGED_FILES; do
+            base=$(basename "$file")
+            if [[ "$base" == "README.md" || "$base" == "Glossary.md" || "$base" == "FAQ.md" || "$base" == ".gitkeep" ]]; then
+              continue
+            fi
+
+            # Filename pattern: CODE — Title.md   where CODE = DEPT-TYPE-NUMBER
+            if ! [[ "$base" =~ ^[A-Z]+-[A-Z-]+-[0-9]+" — ".+\.md$ ]]; then
+              echo "::error file=$file::Filename does not match '[DEPT]-[TYPE]-[NUMBER] — Title.md' pattern (see GOVERNANCE/04-Classification-Naming-Rulebook.md)"
+              FAILED=1
+            fi
+
+            # Extract declared Type from the file content
+            declared_type=$(grep -m1 "^Type:" "$file" | sed 's/Type:[[:space:]]*//')
+            expected_folder="${TYPE_FOLDER[$declared_type]}"
+
+            if [ -n "$expected_folder" ]; then
+              if [[ "$file" != *"/$expected_folder/"* ]]; then
+                echo "::error file=$file::Declared Type '$declared_type' should live in a '$expected_folder/' folder, but this file is not — check placement against GOVERNANCE/03-Folder-Structure-Map.md"
+                FAILED=1
+              fi
+            fi
+          done
+
+          if [ "$FAILED" -eq 1 ]; then
+            exit 1
+          fi
+          echo "All changed documents pass naming and placement checks."
