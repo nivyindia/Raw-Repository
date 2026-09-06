@@ -1,0 +1,12 @@
+id: WF001
+name: Lead Capture
+version: 1.0.0
+status: spec_ready
+trigger: lead.created
+inputs: [lead_source, contact, company, consent_status]
+outputs: [lead_id, capture_status]
+steps: [validate_input, deduplicate, odoo_create_lead, emit_lead_captured]
+tools: [odoo.create_lead, odoo.search_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [lead.captured]
