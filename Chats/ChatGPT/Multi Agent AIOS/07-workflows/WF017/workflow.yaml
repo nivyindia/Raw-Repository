@@ -1,0 +1,12 @@
+id: WF017
+name: Personalization
+version: 1.0.0
+status: spec_ready
+trigger: outreach.personalization_requested
+inputs: [lead_id, account_brief, offer, message_template]
+outputs: [personalized_message, evidence]
+steps: [load_context, retrieve_knowledge, generate, validate, persist]
+tools: [qdrant.search, odoo.search_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: required_before_external_send
+events_emitted: [outreach.personalized]
