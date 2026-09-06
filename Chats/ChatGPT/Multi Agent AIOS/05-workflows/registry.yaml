@@ -1,0 +1,35 @@
+version: 1.0.0
+stage_g_status: spec_ready
+note: Stage G workflow specifications created. Runtime n8n wiring and E2E execution remain pending until the integration environment is available.
+workflows:
+  - {id: WF001, name: Lead Capture, status: spec_ready, version: 1.0.0}
+  - {id: WF002, name: Lead Deduplication, status: spec_ready, version: 1.0.0}
+  - {id: WF003, name: Lead Enrichment, status: spec_ready, version: 1.0.0}
+  - {id: WF004, name: Lead Verification, status: spec_ready, version: 1.0.0}
+  - {id: WF005, name: Lead Scoring, status: spec_ready, version: 1.0.0}
+  - {id: WF006, name: Lead Segmentation, status: spec_ready, version: 1.0.0}
+  - {id: WF007, name: ICP Research, status: spec_ready, version: 1.0.0}
+  - {id: WF008, name: Account Research, status: spec_ready, version: 1.0.0}
+  - {id: WF009, name: Buying Signal Detection, status: spec_ready, version: 1.0.0}
+  - {id: WF010, name: List Builder, status: spec_ready, version: 1.0.0}
+  - {id: WF011, name: Email Outreach, status: spec_ready, version: 1.0.0}
+  - {id: WF017, name: Personalization, status: spec_ready, version: 1.0.0}
+  - {id: WF018, name: Deliverability Monitoring, status: spec_ready, version: 1.0.0}
+  - {id: WF019, name: Follow-Up Engine, status: spec_ready, version: 1.0.0}
+  - {id: WF020, name: Reply Triage, status: spec_ready, version: 1.0.0}
+  - {id: WF022, name: Qualification, status: spec_ready, version: 1.0.0}
+  - {id: WF023, name: Meeting Booking, status: spec_ready, version: 1.0.0}
+  - {id: WF024, name: Meeting Prep, status: spec_ready, version: 1.0.0}
+  - {id: WF025, name: Meeting Summary, status: spec_ready, version: 1.0.0}
+  - {id: WF029, name: Proposal Generator, status: spec_ready, version: 1.0.0}
+  - {id: WF030, name: Pricing Approval, status: spec_ready, version: 1.0.0}
+  - {id: WF033, name: Deal Approval, status: spec_ready, version: 1.0.0}
+  - {id: WF034, name: Invoice Creation, status: spec_ready, version: 1.0.0}
+  - {id: WF035, name: Payment Confirmation, status: spec_ready, version: 1.0.0}
+  - {id: WF036, name: Client Onboarding, status: spec_ready, version: 1.0.0}
+cross_functional:
+  - {id: XW001, name: Content to Lead, status: spec_ready, version: 1.0.0}
+  - {id: XW002, name: Lead to Sales, status: spec_ready, version: 1.0.0}
+  - {id: XW010, name: Campaign to Revenue, status: spec_ready, version: 1.0.0}
+  - {id: XW014, name: AI Failure to Human, status: spec_ready, version: 1.0.0}
+  - {id: XW015, name: Knowledge Sync, status: spec_ready, version: 1.0.0}
