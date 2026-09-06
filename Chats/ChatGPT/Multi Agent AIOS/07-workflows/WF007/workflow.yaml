@@ -1,0 +1,12 @@
+id: WF007
+name: ICP Research
+version: 1.0.0
+status: spec_ready
+trigger: icp.research_requested
+inputs: [market, service, geography, existing_customers]
+outputs: [icp_profile, criteria, sources]
+steps: [research_sources, synthesize, validate, persist, emit]
+tools: [firecrawl.extract, browser_use.research, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [icp.researched]
