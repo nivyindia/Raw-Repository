@@ -1,0 +1,12 @@
+id: WF029
+name: Proposal Generator
+version: 1.0.0
+status: spec_ready
+trigger: proposal.requested
+inputs: [opportunity_id, scope, pricing, client_context, terms]
+outputs: [proposal_id, document_uri, approval_status]
+steps: [load_opportunity, compose, render, validate, store, request_approval]
+tools: [odoo.search_lead, odoo.create_opportunity, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: required_before_external_send
+events_emitted: [proposal.generated]
