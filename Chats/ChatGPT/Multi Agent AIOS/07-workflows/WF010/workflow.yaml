@@ -1,0 +1,12 @@
+id: WF010
+name: List Builder
+version: 1.0.0
+status: spec_ready
+trigger: campaign.list_requested
+inputs: [campaign_id, icp_id, segment, geography, exclusions]
+outputs: [lead_ids, list_count, quality_summary]
+steps: [query_candidates, filter, deduplicate, persist_list, emit]
+tools: [postgres.query_readonly, postgres.write_event, odoo.search_lead]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [campaign.list_ready]
