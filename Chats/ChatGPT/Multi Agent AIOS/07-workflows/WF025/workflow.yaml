@@ -1,0 +1,12 @@
+id: WF025
+name: Meeting Summary
+version: 1.0.0
+status: spec_ready
+trigger: meeting.completed
+inputs: [meeting_id, transcript, notes, lead_id]
+outputs: [summary, actions, crm_updates]
+steps: [parse_notes, summarize, extract_actions, validate, update_crm, emit]
+tools: [odoo.update_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [meeting.summarized]
