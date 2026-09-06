@@ -1,0 +1,12 @@
+id: WF008
+name: Account Research
+version: 1.0.0
+status: spec_ready
+trigger: account.research_requested
+inputs: [account_id, company_name, domain, target_role]
+outputs: [account_brief, decision_makers, signals]
+steps: [research, extract, synthesize, persist, emit]
+tools: [firecrawl.extract, browser_use.research, odoo.update_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [account.researched]
