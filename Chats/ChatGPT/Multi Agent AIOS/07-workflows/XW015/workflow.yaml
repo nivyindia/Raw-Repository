@@ -1,0 +1,12 @@
+id: XW015
+name: Knowledge Sync
+version: 1.0.0
+status: spec_ready
+trigger: knowledge.source_updated
+inputs: [source_id, source_type, content_uri, version]
+outputs: [document_id, embedding_status, sync_status]
+steps: [fetch_source, normalize, validate, chunk, upsert_knowledge, emit]
+tools: [qdrant.upsert, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [knowledge.synced]
