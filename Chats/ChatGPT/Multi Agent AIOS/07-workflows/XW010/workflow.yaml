@@ -1,0 +1,12 @@
+id: XW010
+name: Campaign to Revenue
+version: 1.0.0
+status: spec_ready
+trigger: invoice.created
+inputs: [invoice_id, opportunity_id, campaign_id, channel, revenue]
+outputs: [attribution, campaign_revenue, roi]
+steps: [resolve_attribution, aggregate_revenue, calculate_roi, persist, emit]
+tools: [postgres.query_readonly, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [revenue.attributed]
