@@ -1,0 +1,12 @@
+id: WF022
+name: Qualification
+version: 1.0.0
+status: spec_ready
+trigger: reply.triaged
+inputs: [lead_id, firmographics, need, budget, authority, timeline]
+outputs: [qualification_score, qualification_status, next_action]
+steps: [load_context, score, apply_rules, update_opportunity, route]
+tools: [odoo.search_lead, odoo.create_opportunity, odoo.update_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [lead.qualified]
