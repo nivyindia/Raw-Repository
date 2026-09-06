@@ -1,0 +1,12 @@
+id: WF023
+name: Meeting Booking
+version: 1.0.0
+status: spec_ready
+trigger: meeting.requested
+inputs: [lead_id, attendees, duration, timezone, availability_window]
+outputs: [booking_id, start_time, calendar_event_id]
+steps: [validate, find_slot, create_booking, update_crm, emit]
+tools: [cal.create_booking, odoo.update_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [meeting.booked]
