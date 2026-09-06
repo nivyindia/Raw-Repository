@@ -1,0 +1,194 @@
+name: Classify and PR into Company-OS
+
+# Triggers whenever something new is pushed into dump/.
+# Calls Claude to classify + format it per Company-OS governance, then opens
+# a Pull Request directly in the Company-OS repository, in the correct
+# department folder, in the correct format. A human still has to approve
+# and merge that PR — this workflow never merges anything itself.
+#
+# REQUIRED SECRETS (set in this repo's Settings → Secrets → Actions):
+#   ANTHROPIC_API_KEY   → your Claude API key
+#   COMPANY_OS_PAT       → a GitHub Personal Access Token (repo scope) that can
+#                            push branches + open PRs in the Company-OS repository
+#
+# REQUIRED VARIABLE (Settings → Secrets → Actions → Variables):
+#   COMPANY_OS_REPO      → e.g. "your-org/Company-OS"
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dump/**'
+
+jobs:
+  classify-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Research-Inbox
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Checkout Company-OS (for governance reference + as PR target)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ vars.COMPANY_OS_REPO }}
+          token: ${{ secrets.COMPANY_OS_PAT }}
+          path: company-os
+
+      - name: Find new/changed files in dump/
+        id: find
+        run: |
+          FILES=$(git diff --name-only HEAD~1 HEAD -- 'dump/**' || true)
+          if [ -z "$FILES" ]; then
+            FILES=$(find dump -type f \( -name "*.md" -o -name "*.txt" \))
+          fi
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$FILES" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Install jq and python deps
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq jq python3-pip
+
+      - name: Classify each file via Claude and open a PR
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GH_TOKEN: ${{ secrets.COMPANY_OS_PAT }}
+          COMPANY_OS_REPO: ${{ vars.COMPANY_OS_REPO }}
+        run: |
+          set -e
+          DEPARTMENTS=$(cat company-os/03_RESOURCES/Company_Master_Standards/GOVERNANCE/01-Department-Code-Registry.md)
+          TYPES=$(cat company-os/03_RESOURCES/Company_Master_Standards/GOVERNANCE/02-Document-Type-Code-Registry.md)
+          RULEBOOK=$(cat company-os/03_RESOURCES/Company_Master_Standards/GOVERNANCE/04-Classification-Naming-Rulebook.md)
+
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            [ ! -f "$file" ] && continue
+
+            echo "=== Classifying: $file ==="
+            RAW_CONTENT=$(cat "$file")
+
+            # Build the classification prompt as a JSON-safe file to avoid escaping issues
+            python3 - "$file" <<'PYEOF' > prompt.json
+import json, sys
+file_path = sys.argv[1]
+with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+    raw = f.read()
+with open("dept_reg.txt", "w") as d:
+    pass
+prompt = f"""You are the Company OS Classifier. Classify the RAW CONTENT below strictly
+following the attached Department Registry, Document Type Registry, and Classification
+Rulebook (all provided as system context in this same message via the repo governance files).
+
+Return ONLY a valid JSON object, no other text, with exactly these keys:
+{{
+  "department_code": "...",
+  "document_type_code": "...",
+  "para_bucket": "Project|Area|Resource|Archive",
+  "confidentiality": "Public|Internal|Confidential|Restricted",
+  "title": "Plain English Title",
+  "tags": "comma,separated,keywords",
+  "folder_path": "01_AREAS/[Dept]/[SubFolder]/",
+  "filename": "[DEPT]-[TYPE]-XXX — Title.md",
+  "formatted_document": "the FULL formatted markdown document, including the breadcrumb line, the complete metadata header, and the normalized content, ready to commit as-is",
+  "classification_confidence": "High|Medium|Low",
+  "flags_for_reviewer": "anything the human reviewer should double check, or empty string if none"
+}}
+
+RAW CONTENT:
+{raw}
+"""
+with open("prompt_text.txt", "w", encoding="utf-8") as f:
+    f.write(prompt)
+PYEOF
+
+            PROMPT_TEXT=$(cat prompt_text.txt)
+
+            python3 - <<PYEOF > api_payload.json
+import json
+payload = {
+    "model": "claude-sonnet-4-6",
+    "max_tokens": 4000,
+    "system": """$DEPARTMENTS
+
+---
+
+$TYPES
+
+---
+
+$RULEBOOK""",
+    "messages": [{"role": "user", "content": open("prompt_text.txt").read()}]
+}
+print(json.dumps(payload))
+PYEOF
+
+            curl -s https://api.anthropic.com/v1/messages \
+              -H "x-api-key: $ANTHROPIC_API_KEY" \
+              -H "anthropic-version: 2023-06-01" \
+              -H "content-type: application/json" \
+              -d @api_payload.json > api_response.json
+
+            # Extract the text block and parse as JSON
+            python3 - <<'PYEOF'
+import json, re, sys
+with open("api_response.json") as f:
+    resp = json.load(f)
+try:
+    text = resp["content"][0]["text"]
+except (KeyError, IndexError):
+    print("::error::Claude API call failed or returned unexpected format:", resp)
+    sys.exit(1)
+# Strip any accidental code fences
+text = re.sub(r'^```json\s*|\s*```$', '', text.strip())
+data = json.loads(text)
+with open("classification.json", "w") as f:
+    json.dump(data, f)
+PYEOF
+
+            DEPT=$(jq -r '.department_code' classification.json)
+            TYPE=$(jq -r '.document_type_code' classification.json)
+            CONFIDENCE=$(jq -r '.classification_confidence' classification.json)
+            FLAGS=$(jq -r '.flags_for_reviewer' classification.json)
+            FOLDER=$(jq -r '.folder_path' classification.json)
+            FILENAME=$(jq -r '.filename' classification.json)
+            TITLE=$(jq -r '.title' classification.json)
+
+            TARGET_PATH="company-os/${FOLDER}${FILENAME}"
+            mkdir -p "$(dirname "$TARGET_PATH")"
+            jq -r '.formatted_document' classification.json > "$TARGET_PATH"
+
+            # Create branch, commit, push, open PR in Company-OS
+            cd company-os
+            BRANCH="inbox/$(echo "$FILENAME" | sed 's/[^a-zA-Z0-9]/-/g' | cut -c1-50)"
+            git checkout -b "$BRANCH"
+            git add "${FOLDER}${FILENAME}"
+            git -c user.email="research-inbox-bot@company-os.local" -c user.name="Research-Inbox Bot" \
+              commit -m "Classify and add: $TITLE (from Research-Inbox)"
+            git push origin "$BRANCH"
+
+            PR_BODY="**Source:** Research-Inbox → \`$file\`
+**Classification confidence:** $CONFIDENCE
+**Department:** $DEPT | **Type:** $TYPE
+
+$( [ -n "$FLAGS" ] && [ "$FLAGS" != "" ] && echo "⚠️ **Reviewer, please check:** $FLAGS" )
+
+This PR was opened automatically. Please review the formatted document, confirm the classification, then approve and merge — the relevant Department CODEOWNER is auto-requested."
+            gh pr create --repo "$COMPANY_OS_REPO" \
+              --title "Inbox: $TITLE" \
+              --body "$PR_BODY" \
+              --label "from-inbox" \
+              --base main --head "$BRANCH"
+
+            cd ..
+            echo "PR opened for $file -> $TARGET_PATH"
+
+          done <<< "${{ steps.find.outputs.files }}"
+
+      - name: Remove processed files from dump/
+        run: |
+          # Only removed once the PR is confirmed open — commit the removal back to Research-Inbox
+          git add -A
+          git -c user.email="research-inbox-bot@company-os.local" -c user.name="Research-Inbox Bot" \
+            commit -m "Processed and moved to Company-OS PR(s)" || echo "Nothing to clean up"
+          git push

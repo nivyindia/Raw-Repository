@@ -1,0 +1,25 @@
+name: Confirm Inbox Document Merged
+
+# Runs when a PR labeled "from-inbox" (opened by Research-Inbox's classify-and-pr.yml)
+# is merged. Posts a confirmation comment so there's a clear record of:
+# raw dump → AI classification → human approval → now official, in this exact location.
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  confirm-merge:
+    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'from-inbox')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post confirmation comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: "✅ Approved and merged. This document is now official Company OS knowledge, in its correct department folder, in the standard format. The original raw note in Research-Inbox has already been cleaned up by the classification workflow."
+            });
