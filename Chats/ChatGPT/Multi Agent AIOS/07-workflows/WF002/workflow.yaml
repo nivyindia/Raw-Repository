@@ -1,0 +1,12 @@
+id: WF002
+name: Lead Deduplication
+version: 1.0.0
+status: spec_ready
+trigger: lead.captured
+inputs: [lead_id, email, domain, company_name]
+outputs: [duplicate_status, canonical_lead_id]
+steps: [normalize, postgres_duplicate_search, select_canonical, update_relationships, emit_result]
+tools: [postgres.query_readonly, postgres.write_event, odoo.update_lead]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [lead.deduplicated]
