@@ -1,0 +1,12 @@
+id: WF030
+name: Pricing Approval
+version: 1.0.0
+status: spec_ready
+trigger: proposal.generated
+inputs: [opportunity_id, proposed_price, discount, margin, pricing_policy]
+outputs: [decision, approved_price, approver]
+steps: [calculate_margin, compare_policy, create_approval, await_decision, emit]
+tools: [odoo.create_opportunity, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: required
+events_emitted: [pricing.approved, pricing.rejected]
