@@ -1,0 +1,12 @@
+id: WF033
+name: Deal Approval
+version: 1.0.0
+status: spec_ready
+trigger: deal.approval_requested
+inputs: [opportunity_id, contract_value, margin, risk_level, terms]
+outputs: [decision, approver, decision_reason]
+steps: [policy_check, risk_score, create_approval, await_decision, update_crm, emit]
+tools: [odoo.update_lead, odoo.create_opportunity, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: required
+events_emitted: [deal.approved, deal.rejected]
