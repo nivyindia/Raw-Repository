@@ -1,0 +1,12 @@
+id: XW002
+name: Lead to Sales
+version: 1.0.0
+status: spec_ready
+trigger: lead.qualified
+inputs: [lead_id, qualification, score, consent_status]
+outputs: [opportunity_id, owner, routing_status]
+steps: [permission_gate, create_opportunity, assign_owner, update_crm, emit]
+tools: [odoo.create_opportunity, odoo.update_lead, postgres.write_event]
+error_policy: retry_3_then_dead_letter
+approval: none
+events_emitted: [sales.routed]
