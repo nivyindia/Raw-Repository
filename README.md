@@ -1,8 +1,22 @@
 # Raw Repository
 
-> **UNIVERSAL START COMMAND:** Read `docs/REPO-CONTROL/00-MASTER-INSTRUCTIONS.md` and continue the work.
->
-> Give this exact instruction to ChatGPT/Codex/another AI agent after opening this repository. It is the repository's main work instruction. The agent must read the master instructions, discover the control pack and indexed sources, determine the highest-priority unfinished work, execute when permitted, verify it, update tracking/README, commit, and continue. If the control file is missing, search the repository for the equivalent control/instruction system before creating duplicates.
+## 🚀 START / CONTINUE WORK — UNIVERSAL REPOSITORY WORK SYSTEM
+
+> **`Repository: nivyindia/Raw-Repository | Repository URL: https://github.com/nivyindia/Raw-Repository | Branch: main | Branch URL: https://github.com/nivyindia/Raw-Repository/tree/main — Read docs/REPO-CONTROL/00-MASTER-INSTRUCTIONS.md and start/continue the work.`**
+
+### ⚡ QUICK RESUME — ONE-GLANCE STATUS
+| Item | Current state |
+|---|---|
+| **Repository** | `nivyindia/Raw-Repository` |
+| **Branch** | `main` |
+| **Start point** | `docs/REPO-CONTROL/00-MASTER-INSTRUCTIONS.md` |
+| **Current stage** | Source/control reconciliation |
+| **Status** | `IN PROGRESS` |
+| **Completed** | Source warehouse and repository-level work-control structure established |
+| **Remaining** | Reconcile source material and continue canonical implementation-support tasks |
+| **Current blocker** | None verified here |
+| **Exact %** | **Not calculated** — use verified canonical tracker only |
+| **Next action** | Read master → source index → inspect current source/reconciliation task → execute/verify |
 
 ## 📘 Repository Context — Read This First
 
