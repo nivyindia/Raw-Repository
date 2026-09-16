@@ -1,6 +1,6 @@
 # Master Automation & Implementation Registry
 
-**Status:** v1.0 — 2026-09-16
+**Status:** v1.1 — 2026-09-16
 
 ## Purpose
 
@@ -48,6 +48,53 @@ It answers, for every reusable capability:
 | REG-026 | AI infrastructure | Cross-company | All | Existing files 60–66 | Architecture/governance | Internal catalog | Mixed | Agent → registry → identity → tool → policy → audit | Library | Implement control plane |
 | REG-027 | Workforce OS | HR | All | Existing files 67–68 | Workforce workflows | Internal catalog | Mixed | Role → KRA/KPI → goals → tasks → evidence → review | Library | Integrate HR/task systems |
 | REG-028 | Enterprise capability model | Executive | All scales | Files 74–76 | Architecture | Internal catalog | Internal | Capability → maturity → scale → implementation | Library | Use as activation matrix |
+| REG-029 | Multi-source lead acquisition | Revenue | All | File 86 | Acquisition catalog | Internal catalog + verified public candidates | Mixed | ICP → source router → discovery → extraction → normalize → dedupe → enrichment → verification → CRM | Cataloged | Instantiate P0 acquisition workflows |
+| REG-030 | Universal web/social acquisition | Revenue/Research | All | Apify Agent Skills / apify-ultimate-scraper | Skill | GitHub: apify/agent-skills | Verify | Source selection → actor → extraction → structured output | Candidate | License/access + source-specific tests |
+| REG-031 | Web crawling/search MCP | Revenue/Research | All | Crawl4AI MCP candidates | MCP | GitHub: jeffmm/crawl4ai-mcp; sadiuysal/crawl4ai-mcp-server; potterdigital/crawl4ai-mcp | Verify | Search/crawl → extraction → structured lead/company data | Candidate | Select one + test |
+| REG-032 | Multi-platform lead-gen | Revenue | SMB→Enterprise | lead-gen-hacker | Workflow | GitHub: sirlifehacker/lead-gen-hacker | Verify | LinkedIn/Instagram/Maps/YouTube/Meta Ads → normalize → enrich → qualify | Candidate | Reproduce in sandbox |
+| REG-033 | Lead research agent | Revenue | All | lead-research-agent | Agent/system | GitHub: mcvalosborne/lead-research-agent | Verify | Twitter/LinkedIn/Reddit → enrich → score → outreach | Candidate | Source/security test |
+| REG-034 | Multi-channel lead agent | Revenue | All | Lead-Reach | Agent system | GitHub: getleads-humain/Lead-Reach | Verify | Web/LinkedIn/Twitter/GitHub/YouTube/Reddit → enrichment → research | Candidate | Architecture/test |
+| REG-035 | B2B enrichment MCP | Revenue/Data | SMB→Enterprise | b2b-enrichment-mcp | MCP | GitHub: Aleksey-Panf/b2b-enrichment-mcp | MIT | Domain/person → Hunter + Apollo enrichment → verification | Candidate | Credential/sandbox test |
+| REG-036 | Apollo official MCP | Revenue | SMB→Enterprise | apollo-mcp-plugin | MCP/skills | GitHub: apolloio/apollo-mcp-plugin | MIT | ICP → people/company search → enrichment → sequence | Candidate | Account/permission test |
+| REG-037 | Free email verification | Revenue/Data | All | Prospector MCP | MCP | GitHub: josiebot26/prospector-mcp-email-finder | Verify | Name/domain → discovery → DNS/SMTP verification | Candidate | Safety + deliverability test |
+| REG-038 | Public-data prospecting | Revenue | SMB→Enterprise | OpenLeads | System | GitHub: Samyrrrrrr990/openleads | Verify | Query → federated public sources → people → email → dedupe | Candidate | Legal/source/function test |
+| REG-039 | Agentic lead-gen pipeline | Revenue | All | Hermes lead-generation pipeline | Agent/skills | GitHub: vivekshetye/hermes-lead-generation-pipeline | Verify | Prospect → scrape → enrich → contact-find → score → outreach | Candidate | Skill extraction/test |
+
+## Sales acquisition coverage
+
+The acquisition layer is now explicitly tracked as a separate capability from downstream sales automation.
+
+`SOURCE DISCOVERY → ACQUISITION → NORMALIZATION → IDENTITY RESOLUTION → ENRICHMENT → VERIFICATION → SIGNALS → ICP/SCORING → CRM → OUTREACH`
+
+### Source families now represented
+
+- Search engines
+- Company websites
+- LinkedIn
+- Google Maps/local businesses
+- Instagram
+- Facebook/Meta Ads
+- X/Twitter
+- Reddit
+- YouTube
+- GitHub
+- Business directories
+- Review platforms
+- Job boards
+- Company databases
+- Email intelligence
+- Technology intelligence
+- Advertising intelligence
+- Government/public registries
+- Tenders/procurement
+- Events/conferences
+- Associations/chambers
+- Partner/referral ecosystems
+- News/media
+- Communities/forums
+- Social listening
+- First-party inbound
+- Existing databases/files
 
 ## Status definitions
 
