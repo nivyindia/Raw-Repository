@@ -1,6 +1,6 @@
 # Master Reuse Implementation Roadmap
 
-**Status:** v1.1 — 2026-09-16
+**Status:** v1.2 — 2026-09-16
 
 ## Objective
 
@@ -128,14 +128,31 @@ Every adopted external asset has a source, access/license status, owner, destina
 - Variance analysis
 - Margin analysis
 
-### HR
+### HR / Workforce
 
 - Recruiting workflow
 - Candidate screening
 - Interview coordination
 - Onboarding
-- Performance-review preparation
-- People reporting
+- Employee/department/role registry
+- Role responsibilities and job-purpose definitions
+- KRA/KPI design and target management
+- Company → department → team → employee goal cascade
+- Daily/weekly/monthly work planning
+- Employee work cockpit
+- Manager team cockpit
+- Department-head cockpit
+- Performance evidence and review preparation
+- Skills matrix and gap analysis
+- Learning/development plans
+- Workload/capacity monitoring
+- Accountability and exception workflows
+- Employee/manager AI copilots
+- Workforce analytics
+
+### Workforce architecture
+
+`Employee Master → Org/Role Model → Goals → KRA/KPI → Work Queue → SOP/Knowledge → Evidence → Review → Development → Executive Workforce Analytics`
 
 ### Controls
 
@@ -143,6 +160,9 @@ Every adopted external asset has a source, access/license status, owner, destina
 - No autonomous tax/audit/legal advice.
 - HR access separated by role/data sensitivity.
 - Material financial actions logged.
+- AI-generated KRAs/KPIs require human approval before becoming official targets.
+- Performance recommendations must be evidence-backed and reviewable.
+- Do not use opaque AI scores as the sole basis for hiring, firing, promotion, compensation or disciplinary action.
 
 ---
 
@@ -224,7 +244,7 @@ Separate:
 - Delivery status
 - Customer health
 - Finance
-- People
+- People / workforce
 - Product
 - Operations
 - Risks
@@ -241,6 +261,7 @@ Separate:
 - Decision briefs
 - Priority changes
 - Blocker escalation
+- Workforce health report
 - AI economics/ROI report
 
 ### Executive control loop
@@ -300,7 +321,7 @@ Test synthetic inputs, representative workflows, edge cases, human correction ra
 ## Immediate execution order
 
 1. Build registry schema.
-2. Register existing discovered P0/P1 assets.
+2. Register existing discovered P0/P1 assets, including workforce assets.
 3. Select 5–10 revenue workflows.
 4. Add one governed tool gateway.
 5. Add one approval mechanism.
@@ -312,4 +333,4 @@ Test synthetic inputs, representative workflows, edge cases, human correction ra
 
 ## Definition of done for discovery
 
-Major functions, asset types and cross-company infrastructure are now represented. The project should transition from broad discovery to controlled reuse testing and implementation.
+Major functions, asset types and cross-company infrastructure are now represented, including the employee/workforce operating layer. The project should transition from broad discovery to controlled reuse testing and implementation.
