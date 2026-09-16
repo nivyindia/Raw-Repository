@@ -1,6 +1,6 @@
 # Master Reuse Implementation Roadmap
 
-**Status:** v1.3 — 2026-09-16
+**Status:** v1.4 — 2026-09-16
 
 ## Objective
 
@@ -43,59 +43,91 @@ Every adopted external asset has a source, access/license status, owner, destina
 
 ## Phase 0.5 — Targeted international-company completeness research
 
-**Purpose:** close the finite material gaps identified by the ideal-company audit before broad discovery is considered complete.
+**Completed:** targeted research and comparison are now documented in 69–75.
 
 Source control files:
 
 - **69** — International company completeness audit
 - **70** — Missing capability research backlog
 - **71** — Ideal company vs Nivy coverage matrix
+- **72** — Targeted gap research and reusable candidates
+- **73** — Targeted gap adoption map
+- **74** — Ideal international company capability model
+- **75** — Final enterprise completeness audit
 
-### P0 targeted discovery
+### P0 results
+
+Credible reusable paths were identified for:
 
 1. Corporate Secretary / Board Management
 2. Treasury & Banking Operations
 3. Internal Audit / Controls Testing
-4. Corporate Development / M&A
+4. Corporate Development / M&A composition
 5. Enterprise Architecture / Application Portfolio
-6. Software/SaaS Asset Management
-7. ITSM / Enterprise Service Desk depth
-8. ESG/Sustainability + Carbon Accounting
+6. Software/SaaS Asset Management composition
+7. ITSM / Enterprise Service Desk
+8. ESG/Sustainability + Carbon
 9. Revenue Assurance
 10. Corporate Transformation Portfolio
 11. Global Entity/Subsidiary Management
 
-### P1 targeted discovery
+### P1 results
 
-12. Investor Relations
-13. Insurance Management
-14. Regulatory Reporting/Disclosure
-15. Ethics/Whistleblower Case Management
-16. Employee Relations/Grievance Management
-17. Global Mobility/Immigration
-18. Quality Management/QMS
-19. SLA Management
-20. Facilities/Workplace Management
-21. Corporate Travel/Expense Operations
-22. Supply Risk/Supplier Intelligence
-23. Crisis Command Center/Emergency Communications
-24. R&D/Innovation Portfolio
-25. IP/Patent Portfolio
-26. Global Tax Control Tower
+Reusable components or composition paths were identified for:
 
-### P2 targeted discovery
+- Investor Relations
+- Regulatory reporting
+- Ethics/whistleblower
+- Employee relations
+- Global mobility
+- SLA management
+- Supply risk
+- Crisis/incident workflows
+- R&D/innovation portfolio
+- IP/patent workflows
+- Global tax control
 
-- Physical security
-- Physical asset/fleet management
-- Legal hold/advanced records lifecycle
-- Corporate/public/government affairs
-- Responsible sourcing/supplier sustainability
-- Enterprise risk stress testing
-- Advanced stakeholder engagement
+Insurance, QMS, facilities/workplace and travel remain targeted implementation-depth areas.
 
-### Exit criteria
+### Exit status
 
-Every P0/P1 item has at least one credible reusable implementation path or an explicit evidence-based decision that it is not relevant to Nivy's current operating model.
+**Discovery exit achieved.** No further generic enterprise-function expansion is required. New discovery should be triggered only by a new capability, jurisdiction, industry requirement, obsolete candidate or material implementation gap.
+
+---
+
+## Phase 0.6 — Targeted gap verification and integration
+
+**Priority: P0/P1**
+
+This is the new immediate phase after completeness research.
+
+### Work packages
+
+1. Verify candidate licenses/access.
+2. Verify maintenance/activity and dependencies.
+3. Security/privacy review.
+4. Create synthetic test datasets.
+5. Test representative workflows.
+6. Measure human correction rate.
+7. Test permissions/approval gates.
+8. Test auditability and evidence capture.
+9. Normalize schemas.
+10. Integrate with the intended system of record.
+11. Pilot before production adoption.
+
+### First verification queue
+
+- LQGovernance-OpenBoard
+- Tessio
+- FreeITSM
+- security-atlas
+- riskready-community
+- sustainability-project
+- Rapo
+- revenue_leakage_system
+- treasury/finance skill candidates
+- corporate legal skills
+- EIOS/entity architecture
 
 ---
 
@@ -186,6 +218,18 @@ Every P0/P1 item has at least one credible reusable implementation path or an ex
 - Variance analysis
 - Margin analysis
 
+### Treasury / corporate finance extension
+
+- Bank/account registry
+- Cash-position aggregation
+- Liquidity forecast
+- Payment proposal/approval
+- Banking relationship management
+- FX exposure monitoring
+- Debt/financing calendar
+- Working-capital analytics
+- Treasury policy checks
+
 ### HR / Workforce
 
 - Recruiting workflow
@@ -207,20 +251,6 @@ Every P0/P1 item has at least one credible reusable implementation path or an ex
 - Accountability and exception workflows
 - Employee/manager AI copilots
 - Workforce analytics
-
-### Workforce architecture
-
-`Employee Master → Org/Role Model → Goals → KRA/KPI → Work Queue → SOP/Knowledge → Evidence → Review → Development → Executive Workforce Analytics`
-
-### Controls
-
-- AI drafts; authorized humans approve accounting entries and formal reports.
-- No autonomous tax/audit/legal advice.
-- HR access separated by role/data sensitivity.
-- Material financial actions logged.
-- AI-generated KRAs/KPIs require human approval before becoming official targets.
-- Performance recommendations must be evidence-backed and reviewable.
-- Do not use opaque AI scores as the sole basis for hiring, firing, promotion, compensation or disciplinary action.
 
 ---
 
@@ -253,6 +283,21 @@ Every P0/P1 item has at least one credible reusable implementation path or an ex
 - Audit
 - Evaluation
 
+### Corporate governance extension
+
+- Entity/subsidiary registry
+- Board/committee registry
+- Meeting/agenda/minutes workflow
+- Resolution/vote records
+- Director/officer records
+- Corporate calendar
+- Statutory filing/deadline tracking
+- Investor/stakeholder document workflow
+
+### Internal audit extension
+
+`Risk → Control → Audit Plan → Evidence Request → Evidence → Test → Finding → Remediation → Retest → Assurance Report`
+
 ### Memory architecture
 
 Separate:
@@ -272,6 +317,7 @@ Separate:
 - Roadmap support
 - Competitive intelligence
 - Feedback analysis
+- Innovation portfolio
 
 ### Data
 
@@ -288,6 +334,19 @@ Separate:
 - Technical research
 - Code/task assistance
 - Incident/runbook support
+- ITSM
+- Application portfolio
+- SaaS inventory/lifecycle
+- Architecture decisions
+- Technology standards
+
+### Quality
+
+- QMS
+- CAPA
+- Nonconformance
+- Quality audit
+- SLA monitoring
 
 ---
 
@@ -302,6 +361,7 @@ Separate:
 - Delivery status
 - Customer health
 - Finance
+- Treasury/liquidity
 - People / workforce
 - Product
 - Operations
@@ -309,10 +369,10 @@ Separate:
 - Strategic projects
 - Agent health/cost
 - Exceptions
-- Corporate governance/IR signals where applicable
-- Treasury/liquidity signals where applicable
-- Workforce health
+- Corporate governance/IR signals
 - Transformation portfolio
+- ESG signals
+- Resilience status
 
 ### Outputs
 
@@ -338,8 +398,6 @@ Separate:
 
 Only after individual workflows are reliable.
 
-### Target architecture
-
 `Human Intent → Control/Router → Specialist Agents/Skills → Knowledge/Memory → MCP/API → Workflow → Approval → Action → Audit → Evaluation → Learning`
 
 Agent-to-agent delegation must be scoped and observable; do not allow unrestricted autonomous delegation.
@@ -347,8 +405,6 @@ Agent-to-agent delegation must be scoped and observable; do not allow unrestrict
 ---
 
 ## Phase 8 — Resilience and company-wide optimization
-
-**New cross-company completion layer**
 
 - Model/provider failover
 - Connector failover
@@ -384,18 +440,19 @@ Test synthetic inputs, representative workflows, edge cases, human correction ra
 
 ## Immediate execution order
 
-1. Finish Phase 0 foundation/registry.
-2. Run targeted Phase 0.5 gap research.
-3. Register discovered P0/P1 assets.
-4. Select 5–10 revenue workflows.
-5. Add one governed tool gateway.
-6. Add one approval mechanism.
-7. Add audit + trace logging.
-8. Add evaluation/regression tests.
-9. Add cost and exception tracking.
-10. Pilot with synthetic + representative data.
-11. Promote successful workflows into the canonical Company OS.
+1. Build/finalize Phase 0 registry.
+2. Verify the Phase 0.6 candidate set.
+3. Select 5–10 revenue workflows.
+4. Add one governed tool gateway.
+5. Add one approval mechanism.
+6. Add audit + trace logging.
+7. Add evaluation/regression tests.
+8. Add cost and exception tracking.
+9. Pilot with synthetic + representative data.
+10. Promote successful workflows into the canonical Company OS.
 
 ## Definition of done for discovery
 
-Broad company-function discovery is complete enough for implementation, but the targeted P0/P1 completeness backlog must be researched before declaring enterprise-capability discovery scope-complete. After that finite backlog is closed, the default mode is controlled reuse testing and implementation rather than another generic discovery expansion.
+**Achieved:** the ideal international-company capability model has been compared against the reuse library, material P0/P1 gaps have been researched, and remaining work is explicitly classified as verification, implementation-depth, jurisdictional adaptation or deferred capability.
+
+From this point, the default operating mode is controlled reuse testing and implementation.
