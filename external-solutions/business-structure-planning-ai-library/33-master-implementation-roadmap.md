@@ -1,6 +1,6 @@
 # Master Reuse Implementation Roadmap
 
-**Status:** v1.0 — 2026-09-16
+**Status:** v1.1 — 2026-09-16
 
 ## Objective
 
@@ -10,23 +10,34 @@ Convert the research warehouse into a working AI-native company operating system
 
 ## Phase 0 — Foundation and governance
 
-**Goal:** make every future reuse decision traceable.
+**Goal:** make every future reuse decision traceable and controlled.
 
 ### Deliverables
 
 - Master asset registry
-- Standard asset metadata
-- Source/license verification field
-- Test-status field
-- Adaptation/version history
-- Human-approval policy
+- Agent/skill/MCP/workflow registry
+- Source/license verification
 - Permission matrix
+- Identity mapping: human → agent → tool
+- Human-approval policy
+- Policy-as-code candidates
 - Audit-log convention
+- Agent observability/evaluation
+- AI cost ledger
+- Exception queue
 - Production vs research separation
+
+### Reusable infrastructure candidates
+
+- MCP Gateway & Registry
+- Preloop
+- Airlock
+- mcp-approvals
+- OpenLIT / Phoenix / Future AGI / mcp-eval
 
 ### Exit criteria
 
-Every adopted external asset has a source, license/access status, owner, destination, test result and approval requirement.
+Every adopted external asset has a source, access/license status, owner, destination, test result, permissions and approval requirement.
 
 ---
 
@@ -68,11 +79,7 @@ Every adopted external asset has a source, license/access status, owner, destina
 - No invented service/pricing claims.
 - Human approval for external messaging during pilot.
 - CRM writes logged.
-- Opt-out and compliance handling explicit.
-
-### Success evidence
-
-Measure research time, qualified leads, reply rate, meeting rate, CRM completeness, human correction rate and workflow failure rate.
+- Opt-out/compliance handling explicit.
 
 ---
 
@@ -92,6 +99,8 @@ Measure research time, qualified leads, reply rate, meeting rate, CRM completene
 - Capacity planning
 - Vendor workflows
 - Change management
+- Exception management
+- Process mining before major automation
 
 ### Customer success
 
@@ -100,12 +109,7 @@ Measure research time, qualified leads, reply rate, meeting rate, CRM completene
 - Escalation packaging
 - Resolution summaries
 - Knowledge-base article generation
-
-Anthropic's current customer-support plugin follows a similar reusable pattern: ticket triage, response drafting, escalation, customer-context research and conversion of resolved cases into knowledge assets. citeturn0search2turn0search3
-
-### Controls
-
-Customer-facing messages remain reviewable until quality is demonstrated. Sensitive customer data must use least-privilege connectors.
+- Health/QBR workflows
 
 ---
 
@@ -137,24 +141,26 @@ Customer-facing messages remain reviewable until quality is demonstrated. Sensit
 
 - AI drafts; authorized humans approve accounting entries and formal reports.
 - No autonomous tax/audit/legal advice.
-- HR access separated by role and data sensitivity.
+- HR access separated by role/data sensitivity.
 - Material financial actions logged.
 
 ---
 
 ## Phase 4 — Governance + Knowledge
 
-**Priority: P1/P2**
+**Priority: P0/P1**
 
 ### Knowledge layer
 
 - Enterprise search
 - Source registry
+- Evidence registry
 - SOP library
 - Decision records
 - Company terminology
 - Reusable skills
 - Research provenance
+- Knowledge freshness/review
 
 ### Governance layer
 
@@ -164,10 +170,16 @@ Customer-facing messages remain reviewable until quality is demonstrated. Sensit
 - Risk identification
 - AI governance
 - Approval routing
+- Agent registry
+- Tool permissions
+- Audit
+- Evaluation
 
-### Architecture
+### Memory architecture
 
-`Question → Enterprise Search → Source Evidence → Skill/Agent → Draft → Human Review → Approved Knowledge/Action`
+Separate:
+
+`Source Memory | Company Memory | Workflow State | Decision Memory | Agent Memory | Evaluation Memory`
 
 ---
 
@@ -199,17 +211,13 @@ Customer-facing messages remain reviewable until quality is demonstrated. Sensit
 - Code/task assistance
 - Incident/runbook support
 
-Anthropic's current plugin architecture explicitly separates skills, commands and connectors, and its marketplace includes product-management and data workflows alongside sales, marketing, finance, legal and other functions. citeturn0search0turn0search7
-
 ---
 
 ## Phase 6 — Executive Company OS
 
 **Priority: P2 after revenue/delivery foundations**
 
-### Executive cockpit
-
-Inputs:
+### Executive cockpit inputs
 
 - Sales pipeline
 - Marketing performance
@@ -221,8 +229,10 @@ Inputs:
 - Operations
 - Risks
 - Strategic projects
+- Agent health/cost
+- Exceptions
 
-Outputs:
+### Outputs
 
 - Daily exception brief
 - Weekly company review
@@ -231,6 +241,7 @@ Outputs:
 - Decision briefs
 - Priority changes
 - Blocker escalation
+- AI economics/ROI report
 
 ### Executive control loop
 
@@ -244,156 +255,61 @@ Only after individual workflows are reliable.
 
 ### Target architecture
 
-```text
-                    ┌──────────────────────┐
-                    │   HUMAN / EXECUTIVE  │
-                    └──────────┬───────────┘
-                               │
-                      Approval / Intent
-                               │
-                    ┌──────────▼───────────┐
-                    │   ROUTER / CONTROL   │
-                    └──────────┬───────────┘
-                               │
-       ┌──────────────┬────────┼────────┬──────────────┐
-       ▼              ▼        ▼        ▼              ▼
-     SALES         MARKET     OPS     FINANCE          HR
-       │              │        │        │              │
-       └──────────────┴────────┼────────┴──────────────┘
-                               │
-                    ┌──────────▼───────────┐
-                    │ KNOWLEDGE / DATA     │
-                    │ CRM / ERP / Notion   │
-                    │ GitHub / BI / Email  │
-                    └──────────┬───────────┘
-                               │
-                    ┌──────────▼───────────┐
-                    │ WORKFLOW AUTOMATION  │
-                    │       n8n / MCP      │
-                    └──────────┬───────────┘
-                               │
-                    ┌──────────▼───────────┐
-                    │ APPROVAL + AUDIT     │
-                    └──────────┬───────────┘
-                               │
-                    ┌──────────▼───────────┐
-                    │ SYSTEMS OF RECORD    │
-                    └──────────────────────┘
-```
+`Human Intent → Control/Router → Specialist Agents/Skills → Knowledge/Memory → MCP/API → Workflow → Approval → Action → Audit → Evaluation → Learning`
+
+Agent-to-agent delegation must be scoped and observable; do not allow unrestricted autonomous delegation.
+
+---
+
+## Phase 8 — Resilience and company-wide optimization
+
+**New cross-company completion layer**
+
+- Model/provider failover
+- Connector failover
+- Backup/restore tests
+- Degraded-mode runbooks
+- Business continuity
+- Agent quarantine/kill switch
+- Cost optimization
+- Capacity planning
+- Process simulation
+- Continuous improvement loops
+- Regression suite for all production agents
+
+---
 
 ## Reuse-before-build decision gate
 
-For every requested capability:
-
 ### Gate 1 — Does an existing asset exist?
 
-Search:
-
-- official vendor/plugin repositories
-- GitHub
-- MCP/connector ecosystems
-- skill libraries
-- agent marketplaces
-- workflow libraries
-- SOP/process libraries
-- templates/playbooks
-- commercial solutions
+Search official vendor/plugin repositories, GitHub, MCP/connector ecosystems, skill libraries, agent marketplaces, workflow libraries, SOP/process libraries, templates/playbooks and commercial solutions.
 
 ### Gate 2 — Can it legally and technically be reused?
 
-Check:
-
-- license/access
-- dependencies
-- connector compatibility
-- security/privacy
-- maintenance
-- data residency requirements
-- permissions
-- output quality
+Check license/access, dependencies, connector compatibility, security/privacy, maintenance, data residency, permissions and output quality.
 
 ### Gate 3 — Can it meet Nivy requirements after adaptation?
 
-Test:
-
-- synthetic inputs
-- representative workflow
-- edge cases
-- human correction rate
-- failure modes
-- latency/cost
-- auditability
+Test synthetic inputs, representative workflows, edge cases, human correction rate, failure modes, latency/cost and auditability.
 
 ### Gate 4 — Integrate or build?
 
-**Reuse** if adequate.
+**Reuse** if adequate. **Adapt** if the core works but schema/policy/connector differs. **Compose** if several assets can be chained. **Build** only for a material gap.
 
-**Adapt** if the core capability works but terminology, schema, policy or connector needs modification.
+## Immediate execution order
 
-**Compose** if several existing capabilities can be chained.
+1. Build registry schema.
+2. Register existing discovered P0/P1 assets.
+3. Select 5–10 revenue workflows.
+4. Add one governed tool gateway.
+5. Add one approval mechanism.
+6. Add audit + trace logging.
+7. Add evaluation/regression tests.
+8. Add cost and exception tracking.
+9. Pilot with synthetic + representative data.
+10. Promote successful workflows into the canonical Company OS.
 
-**Build** only when a material gap remains.
+## Definition of done for discovery
 
-## Implementation backlog structure
-
-Each production candidate should become a tracked record with:
-
-| Field | Required |
-|---|---|
-| Capability | Yes |
-| Source asset | Yes |
-| Source URL | Yes |
-| License/access | Yes |
-| Nivy workflow | Yes |
-| Inputs | Yes |
-| Outputs | Yes |
-| Connectors | Yes |
-| Permissions | Yes |
-| Approval gate | Yes |
-| Test dataset | Yes |
-| Quality metric | Yes |
-| Owner | Yes |
-| Status | Yes |
-| Version | Yes |
-| Last tested | Yes |
-| Failure notes | When applicable |
-
-## Recommended execution order
-
-**Now:**
-
-1. Build the master registry.
-2. Select the first 5–10 P0 revenue workflows.
-3. Test the original reusable assets.
-4. Adapt only where required.
-5. Connect to the CRM and communication layer.
-6. Add approval/audit gates.
-7. Run a controlled pilot.
-8. Measure results.
-9. Promote successful workflows into the canonical Company OS.
-
-**After P0 proves reliable:** move to client delivery/operations, then finance/HR, then governance/knowledge, then product/data/technology, and finally cross-department executive orchestration.
-
-## Important architectural principle
-
-Do not create one giant autonomous agent.
-
-Use a **composition model**:
-
-`Router + Specialist Skills/Agents + Workflows + Connectors + Knowledge + Approval + Audit + Systems of Record`
-
-This matches the current reusable-plugin pattern documented by Anthropic, where skills, commands, connectors and sub-agents are modular components that can be customized to company processes. citeturn0search0turn0search1
-
-## Definition of done for this research phase
-
-The research phase is complete when:
-
-- major company functions have reusable-source coverage;
-- assets have been classified;
-- adoption priorities exist;
-- cross-department composition is defined;
-- source/provenance requirements are explicit;
-- implementation gates are defined;
-- the next work is execution/testing rather than more generic planning.
-
-**At this point, the project should transition from broad discovery to controlled reuse testing.**
+Major functions, asset types and cross-company infrastructure are now represented. The project should transition from broad discovery to controlled reuse testing and implementation.
