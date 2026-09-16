@@ -69,8 +69,6 @@ Implement:
 
 `Identity → Registry → Permissions → Policy → Routing → Approval → A2A → Observability → Evaluation → Cost → Exceptions → Kill switch`
 
-This matches current enterprise architecture guidance: control planes are increasingly treated as the common layer for identity, policy, registry, visibility and governance across heterogeneous agents. citeturn0search0turn0search11
-
 ### 4. Scale activation
 
 Use the scale matrix in file 76 to avoid overengineering small companies and under-controlling enterprise workflows.
