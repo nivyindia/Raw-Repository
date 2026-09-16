@@ -1,6 +1,6 @@
 # Master Reuse Library Index
 
-**Status:** v1.1 — 2026-09-16
+**Status:** v1.2 — 2026-09-16
 
 ## Purpose
 
@@ -17,6 +17,7 @@ This is the master navigation layer for the Existing Business Structure, Plannin
 | Asset extraction | 10–14, 22–23, 25, 28–29 | Agents, skills, prompts, SOPs, templates, workflows and systems |
 | Evaluation | 04, 20, 24, 26, 30 | Licensing, quality, controls and adoption |
 | Architecture | 27, 31, 60–65 | Connectors, approvals, systems of record and cross-company AI infrastructure |
+| Workforce | 67–68 | Employee/manager/department dashboards, roles, responsibilities, KRA/KPI, daily work and workforce AI |
 | Master navigation | 32–33, 66 | Unified index, roadmap and gap analysis |
 
 ## Department-to-asset map
@@ -30,7 +31,7 @@ This is the master navigation layer for the Existing Business Structure, Plannin
 | Product | research, specs, roadmap, feedback synthesis | P2 | Product Engine |
 | Engineering / IT | engineering workflows, issue management, documentation | P2 | Technology Engine |
 | Finance / Accounting | reconciliation, close, reporting, cash flow, margin analysis | P1 | Finance Engine |
-| HR / People | recruiting, screening, onboarding, performance, people reporting | P1 | People Engine |
+| HR / People | recruiting, screening, onboarding, performance, people reporting, employee workforce OS | P0/P1 | People + Workforce Engine |
 | Legal / Compliance | contract review, NDA triage, compliance, risk workflows | P2 | Governance Engine |
 | Operations | SOPs, capacity, vendors, change, runbooks, status reporting | P1 | Operations Engine |
 | Data / Analytics | SQL, analysis, validation, dashboards, data interpretation | P2 | Data Engine |
@@ -39,6 +40,28 @@ This is the master navigation layer for the Existing Business Structure, Plannin
 | AI Governance / AgentOps | registry, identity, policy, approval, audit, evaluation, cost | P0/P1 | AI Control Plane |
 | Process Intelligence | process mining, conformance, exceptions, optimization | P1 | Process Intelligence Layer |
 | Procurement | RFP, vendor evaluation, purchasing, supplier management | P1 | Procurement Engine |
+| Workforce Management | role architecture, org structure, employee cockpit, manager cockpit, KRA/KPI, goal cascade, task queue, performance evidence, workforce analytics | P0/P1 | Workforce Operating System |
+
+## Employee & Workforce Operating System
+
+Dedicated research is consolidated in:
+
+- **67** — Employee & Workforce Operating System reuse catalog
+- **68** — Employee & Workforce adoption map
+
+This layer covers the employee operating model, not merely HR administration:
+
+`Company Goal → Department Goal → Team Goal → Role → Responsibility → KRA → KPI → Daily Work → Evidence → Review → Development`
+
+Target dashboards:
+
+- Employee cockpit
+- Manager cockpit
+- Department-head cockpit
+- HR/People cockpit
+- Executive workforce cockpit
+
+Target reusable AI capabilities include Role Architect, Responsibility Mapper, KRA/KPI Generator, Goal Cascade Agent, Task Planner, Daily Work Agent, Performance Agent, Evidence Collector, Skill Gap Agent, Learning Agent, Manager Copilot, Employee Copilot, Workload Agent, Accountability Agent, SOP Agent, Escalation Agent and Onboarding/Offboarding Agents.
 
 ## Cross-company infrastructure
 
@@ -94,6 +117,7 @@ These files cover the infrastructure needed to make separate agents operate as o
 | Human approvals | explicit approval gates + audit logs |
 | Observability/evaluation | OpenLIT/Phoenix/Future AGI/mcp-eval candidates |
 | Local/private model runtime | Ollama where appropriate |
+| Workforce / employee OS | HRKit/WorkSphere/SmartHR Nexus + reusable HR skills + Nivy-independent role/KRA/KPI schema |
 
 These are implementation candidates, not unconditional commitments.
 
@@ -105,4 +129,4 @@ The target is not one giant autonomous agent. It is:
 
 ## Research completeness
 
-Major functional departments and asset types are covered. The remaining work is controlled source verification, functional testing, integration, governance testing and production measurement rather than another generic discovery sweep. See **66-master-cross-company-gap-analysis.md**.
+Major functional departments and asset types are covered, including the employee/workforce operating layer. The remaining work is controlled source verification, functional testing, integration, governance testing and production measurement rather than another generic discovery sweep. See **66-master-cross-company-gap-analysis.md** and **67–68** for workforce coverage.
