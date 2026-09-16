@@ -1,6 +1,6 @@
 # Master Reuse Library Index
 
-**Status:** v1.4 — 2026-09-16
+**Status:** v1.5 — 2026-09-16
 
 ## Purpose
 
@@ -20,6 +20,8 @@ This is the master navigation layer for the Existing Business Structure, Plannin
 | Workforce | 67–68 | Employee/manager/department dashboards, roles, responsibilities, KRA/KPI, daily work and workforce AI |
 | Completeness audit | 69–71, 74–75 | Ideal-company capability audit, missing-capability backlog, capability model and final enterprise audit |
 | Targeted gap research | 72–73 | P0/P1 missing-capability research and adoption map |
+| Scale & maturity | 76 | Micro/SMB → Mid-market → International → Enterprise → Multinational activation model |
+| Execution registry | 77–80 | Master asset/automation registry, coverage matrix, connector registry and production-readiness backlog |
 | Master navigation | 32–33, 66 | Unified index, roadmap and cross-company gap analysis |
 
 ## Department-to-asset map
@@ -66,8 +68,16 @@ Dedicated research is consolidated in:
 - **73** — Targeted gap adoption map
 - **74** — Ideal international company capability model
 - **75** — Final enterprise completeness audit
+- **76** — Company scale and maturity matrix
 
-The targeted audit covers corporate secretary/board, treasury, internal audit, corporate development/M&A, enterprise architecture, SaaS management, ITSM, ESG/carbon, revenue assurance, transformation portfolio, entity/subsidiary management, investor relations, insurance, regulatory reporting, ethics, employee relations, global mobility, QMS, SLA management, facilities/travel, supply risk, crisis command, R&D/innovation, IP/patents and global tax control.
+## Execution layer
+
+- **77** — Master Automation & Implementation Registry
+- **78** — Automation Coverage Matrix
+- **79** — Integration & Connector Registry
+- **80** — Production Readiness Backlog
+
+These files convert the research warehouse into an execution inventory. They explicitly distinguish **coverage** from **automation** and **production automation**.
 
 ## Key newly verified reusable paths
 
@@ -146,6 +156,8 @@ The target is not one giant autonomous agent. It is:
 
 ## Research completeness
 
-The ideal international-company capability model has now been explicitly compared with the existing library. The targeted gap research provides a reuse path for the material P0/P1 gaps. The next default mode is **verification/testing/integration**, not endless generic discovery.
+The ideal international-company capability model has now been explicitly compared with the existing library. The targeted gap research provides a reuse path for the material P0/P1 gaps. The execution registry now defines the transition from discovery to verification, integration, pilot and production.
+
+**Default mode from this point:** `VERIFY → TEST → SELECT → ADAPT → INTEGRATE → PILOT → PRODUCTION`.
 
 New discovery is justified only when a new capability, jurisdiction, industry requirement, obsolete candidate, or material implementation gap appears.
