@@ -1,6 +1,6 @@
 # Master Reuse Implementation Roadmap
 
-**Status:** v1.2 — 2026-09-16
+**Status:** v1.3 — 2026-09-16
 
 ## Objective
 
@@ -38,6 +38,64 @@ Convert the research warehouse into a working AI-native company operating system
 ### Exit criteria
 
 Every adopted external asset has a source, access/license status, owner, destination, test result, permissions and approval requirement.
+
+---
+
+## Phase 0.5 — Targeted international-company completeness research
+
+**Purpose:** close the finite material gaps identified by the ideal-company audit before broad discovery is considered complete.
+
+Source control files:
+
+- **69** — International company completeness audit
+- **70** — Missing capability research backlog
+- **71** — Ideal company vs Nivy coverage matrix
+
+### P0 targeted discovery
+
+1. Corporate Secretary / Board Management
+2. Treasury & Banking Operations
+3. Internal Audit / Controls Testing
+4. Corporate Development / M&A
+5. Enterprise Architecture / Application Portfolio
+6. Software/SaaS Asset Management
+7. ITSM / Enterprise Service Desk depth
+8. ESG/Sustainability + Carbon Accounting
+9. Revenue Assurance
+10. Corporate Transformation Portfolio
+11. Global Entity/Subsidiary Management
+
+### P1 targeted discovery
+
+12. Investor Relations
+13. Insurance Management
+14. Regulatory Reporting/Disclosure
+15. Ethics/Whistleblower Case Management
+16. Employee Relations/Grievance Management
+17. Global Mobility/Immigration
+18. Quality Management/QMS
+19. SLA Management
+20. Facilities/Workplace Management
+21. Corporate Travel/Expense Operations
+22. Supply Risk/Supplier Intelligence
+23. Crisis Command Center/Emergency Communications
+24. R&D/Innovation Portfolio
+25. IP/Patent Portfolio
+26. Global Tax Control Tower
+
+### P2 targeted discovery
+
+- Physical security
+- Physical asset/fleet management
+- Legal hold/advanced records lifecycle
+- Corporate/public/government affairs
+- Responsible sourcing/supplier sustainability
+- Enterprise risk stress testing
+- Advanced stakeholder engagement
+
+### Exit criteria
+
+Every P0/P1 item has at least one credible reusable implementation path or an explicit evidence-based decision that it is not relevant to Nivy's current operating model.
 
 ---
 
@@ -251,6 +309,10 @@ Separate:
 - Strategic projects
 - Agent health/cost
 - Exceptions
+- Corporate governance/IR signals where applicable
+- Treasury/liquidity signals where applicable
+- Workforce health
+- Transformation portfolio
 
 ### Outputs
 
@@ -263,6 +325,8 @@ Separate:
 - Blocker escalation
 - Workforce health report
 - AI economics/ROI report
+- Transformation portfolio report
+- Enterprise risk/resilience brief
 
 ### Executive control loop
 
@@ -320,17 +384,18 @@ Test synthetic inputs, representative workflows, edge cases, human correction ra
 
 ## Immediate execution order
 
-1. Build registry schema.
-2. Register existing discovered P0/P1 assets, including workforce assets.
-3. Select 5–10 revenue workflows.
-4. Add one governed tool gateway.
-5. Add one approval mechanism.
-6. Add audit + trace logging.
-7. Add evaluation/regression tests.
-8. Add cost and exception tracking.
-9. Pilot with synthetic + representative data.
-10. Promote successful workflows into the canonical Company OS.
+1. Finish Phase 0 foundation/registry.
+2. Run targeted Phase 0.5 gap research.
+3. Register discovered P0/P1 assets.
+4. Select 5–10 revenue workflows.
+5. Add one governed tool gateway.
+6. Add one approval mechanism.
+7. Add audit + trace logging.
+8. Add evaluation/regression tests.
+9. Add cost and exception tracking.
+10. Pilot with synthetic + representative data.
+11. Promote successful workflows into the canonical Company OS.
 
 ## Definition of done for discovery
 
-Major functions, asset types and cross-company infrastructure are now represented, including the employee/workforce operating layer. The project should transition from broad discovery to controlled reuse testing and implementation.
+Broad company-function discovery is complete enough for implementation, but the targeted P0/P1 completeness backlog must be researched before declaring enterprise-capability discovery scope-complete. After that finite backlog is closed, the default mode is controlled reuse testing and implementation rather than another generic discovery expansion.
