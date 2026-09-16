@@ -1,6 +1,6 @@
 # Master Reuse Library Index
 
-**Status:** v1.3 — 2026-09-16
+**Status:** v1.4 — 2026-09-16
 
 ## Purpose
 
@@ -18,8 +18,9 @@ This is the master navigation layer for the Existing Business Structure, Plannin
 | Evaluation | 04, 20, 24, 26, 30 | Licensing, quality, controls and adoption |
 | Architecture | 27, 31, 60–65 | Connectors, approvals, systems of record and cross-company AI infrastructure |
 | Workforce | 67–68 | Employee/manager/department dashboards, roles, responsibilities, KRA/KPI, daily work and workforce AI |
-| Completeness audit | 69–71 | Ideal-company capability audit, missing-capability backlog and coverage matrix |
-| Master navigation | 32–33, 66 | Unified index, roadmap and gap analysis |
+| Completeness audit | 69–71, 74–75 | Ideal-company capability audit, missing-capability backlog, capability model and final enterprise audit |
+| Targeted gap research | 72–73 | P0/P1 missing-capability research and adoption map |
+| Master navigation | 32–33, 66 | Unified index, roadmap and cross-company gap analysis |
 
 ## Department-to-asset map
 
@@ -54,19 +55,33 @@ This is the master navigation layer for the Existing Business Structure, Plannin
 Dedicated research is consolidated in:
 
 - **67** — Employee & Workforce Operating System reuse catalog
-- **68** — Employee & Workforce adoption map
+- **68** — Employee/Workforce adoption map
 
 ## International Company Completeness Audit
-
-The latest audit adds:
 
 - **69** — Ideal international company completeness audit
 - **70** — Missing capability research backlog
 - **71** — Ideal company vs Nivy coverage matrix
+- **72** — Targeted international company gap research
+- **73** — Targeted gap adoption map
+- **74** — Ideal international company capability model
+- **75** — Final enterprise completeness audit
 
-The audit identifies material under-covered enterprise capabilities that were not sufficiently represented in the prior automation library, including Corporate Secretary/Board Management, Investor Relations, Corporate Development/M&A, Treasury/Banking, Internal Audit/Controls Testing, Enterprise Architecture/Application Portfolio, Software/SaaS Asset Management, ITSM depth, ESG/Carbon, Revenue Assurance, Global Entity Management, Quality Management, Facilities/Travel, R&D/Innovation, IP/Patent Management and advanced crisis/resilience operations.
+The targeted audit covers corporate secretary/board, treasury, internal audit, corporate development/M&A, enterprise architecture, SaaS management, ITSM, ESG/carbon, revenue assurance, transformation portfolio, entity/subsidiary management, investor relations, insurance, regulatory reporting, ethics, employee relations, global mobility, QMS, SLA management, facilities/travel, supply risk, crisis command, R&D/innovation, IP/patents and global tax control.
 
-These are **targeted discovery gaps**, not automatic build requirements.
+## Key newly verified reusable paths
+
+- LQGovernance-OpenBoard — board governance with human approval and audit trail
+- Decidiq — governance decisions/meetings/voting
+- EIOS — entity-centered information architecture
+- Agent-skills-collection — treasury, working capital, banking, FX, controls and audit skills
+- Tessio / FreeITSM — self-hosted ITSM candidates
+- security-atlas / riskready-community — GRC/control/audit candidates
+- sustainability-project — ESG reporting candidate
+- Rapo / revenue_leakage_system — revenue-assurance candidates
+- legal-skills-open corporate skill — corporate legal/entity/governance skill
+
+These are **candidates**, not automatically adopted production components; license, security, maintenance and functional testing remain mandatory.
 
 ## Cross-company infrastructure
 
@@ -121,7 +136,7 @@ New coverage is consolidated in:
 | Observability/evaluation | OpenLIT/Phoenix/Future AGI/mcp-eval candidates |
 | Local/private model runtime | Ollama where appropriate |
 | Workforce / employee OS | HRKit/WorkSphere/SmartHR Nexus + reusable HR skills + Nivy-independent role/KRA/KPI schema |
-| Corporate/enterprise gaps | See 69–71 targeted discovery backlog |
+| Corporate/enterprise gaps | 72–75 targeted research and audit |
 
 ## Cross-company architecture rule
 
@@ -131,4 +146,6 @@ The target is not one giant autonomous agent. It is:
 
 ## Research completeness
 
-Broad horizontal discovery is now strong enough to move toward targeted gap research and controlled implementation. The completeness audit deliberately replaces endless generic discovery with a finite backlog of material enterprise capabilities. After those targeted gaps are researched, the default mode should be verification/testing rather than expanding the list indefinitely.
+The ideal international-company capability model has now been explicitly compared with the existing library. The targeted gap research provides a reuse path for the material P0/P1 gaps. The next default mode is **verification/testing/integration**, not endless generic discovery.
+
+New discovery is justified only when a new capability, jurisdiction, industry requirement, obsolete candidate, or material implementation gap appears.
