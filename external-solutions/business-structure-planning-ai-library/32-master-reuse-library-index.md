@@ -1,6 +1,6 @@
 # Master Reuse Library Index
 
-**Status:** v1.2 — 2026-09-16
+**Status:** v1.3 — 2026-09-16
 
 ## Purpose
 
@@ -18,6 +18,7 @@ This is the master navigation layer for the Existing Business Structure, Plannin
 | Evaluation | 04, 20, 24, 26, 30 | Licensing, quality, controls and adoption |
 | Architecture | 27, 31, 60–65 | Connectors, approvals, systems of record and cross-company AI infrastructure |
 | Workforce | 67–68 | Employee/manager/department dashboards, roles, responsibilities, KRA/KPI, daily work and workforce AI |
+| Completeness audit | 69–71 | Ideal-company capability audit, missing-capability backlog and coverage matrix |
 | Master navigation | 32–33, 66 | Unified index, roadmap and gap analysis |
 
 ## Department-to-asset map
@@ -25,22 +26,28 @@ This is the master navigation layer for the Existing Business Structure, Plannin
 | Department / function | Primary reusable layers | Priority | Destination |
 |---|---|---:|---|
 | Executive / Strategy | strategy, planning, productivity, enterprise search | P1 | Executive OS |
+| Corporate Affairs / Board / IR | board management, corporate records, investor relations, disclosures | P1 | Corporate Affairs Engine |
+| Corporate Development | M&A, diligence, valuation, integration | P1 | Corporate Development Engine |
+| Treasury / Corporate Finance | liquidity, banking, financing, insurance | P0/P1 | Treasury & Corporate Finance Engine |
 | Sales / RevOps | account research, lead scoring, outreach, pipeline, forecast | P0 | Revenue Engine |
 | Marketing | strategy, campaigns, content, SEO, competitive intelligence | P0 | Marketing Engine |
 | Customer Success | ticket triage, customer context, escalation, knowledge capture | P2 | Client Success Engine |
-| Product | research, specs, roadmap, feedback synthesis | P2 | Product Engine |
-| Engineering / IT | engineering workflows, issue management, documentation | P2 | Technology Engine |
+| Product / R&D | research, specs, roadmap, innovation portfolio | P2 | Product & Innovation Engine |
+| Engineering / IT | engineering workflows, ITSM, application portfolio, documentation | P2 | Technology Engine |
 | Finance / Accounting | reconciliation, close, reporting, cash flow, margin analysis | P1 | Finance Engine |
-| HR / People | recruiting, screening, onboarding, performance, people reporting, employee workforce OS | P0/P1 | People + Workforce Engine |
-| Legal / Compliance | contract review, NDA triage, compliance, risk workflows | P2 | Governance Engine |
+| HR / People | recruiting, screening, onboarding, performance, workforce OS | P0/P1 | People + Workforce Engine |
+| Legal / Compliance / Audit | contracts, compliance, controls testing, audit, risk | P1/P2 | Governance Engine |
 | Operations | SOPs, capacity, vendors, change, runbooks, status reporting | P1 | Operations Engine |
 | Data / Analytics | SQL, analysis, validation, dashboards, data interpretation | P2 | Data Engine |
 | Knowledge Management | enterprise search, documentation, source provenance, memory | P1 | Knowledge Layer |
 | Automation | n8n, MCP/connectors, scheduled workflows, event triggers | P0 | Automation Layer |
 | AI Governance / AgentOps | registry, identity, policy, approval, audit, evaluation, cost | P0/P1 | AI Control Plane |
 | Process Intelligence | process mining, conformance, exceptions, optimization | P1 | Process Intelligence Layer |
-| Procurement | RFP, vendor evaluation, purchasing, supplier management | P1 | Procurement Engine |
+| Procurement / Supply Risk | RFP, vendor evaluation, purchasing, supplier management, supply risk | P1 | Procurement Engine |
 | Workforce Management | role architecture, org structure, employee cockpit, manager cockpit, KRA/KPI, goal cascade, task queue, performance evidence, workforce analytics | P0/P1 | Workforce Operating System |
+| ESG / Sustainability | ESG data, carbon accounting, sustainability reporting, supplier sustainability | P1 | Sustainability Engine |
+| Facilities / Travel / Physical Ops | workplace, travel, assets, physical security | P2 | Workplace Operations Engine |
+| Quality | QMS, CAPA, quality audits, SLA management | P1/P2 | Quality Engine |
 
 ## Employee & Workforce Operating System
 
@@ -49,19 +56,17 @@ Dedicated research is consolidated in:
 - **67** — Employee & Workforce Operating System reuse catalog
 - **68** — Employee & Workforce adoption map
 
-This layer covers the employee operating model, not merely HR administration:
+## International Company Completeness Audit
 
-`Company Goal → Department Goal → Team Goal → Role → Responsibility → KRA → KPI → Daily Work → Evidence → Review → Development`
+The latest audit adds:
 
-Target dashboards:
+- **69** — Ideal international company completeness audit
+- **70** — Missing capability research backlog
+- **71** — Ideal company vs Nivy coverage matrix
 
-- Employee cockpit
-- Manager cockpit
-- Department-head cockpit
-- HR/People cockpit
-- Executive workforce cockpit
+The audit identifies material under-covered enterprise capabilities that were not sufficiently represented in the prior automation library, including Corporate Secretary/Board Management, Investor Relations, Corporate Development/M&A, Treasury/Banking, Internal Audit/Controls Testing, Enterprise Architecture/Application Portfolio, Software/SaaS Asset Management, ITSM depth, ESG/Carbon, Revenue Assurance, Global Entity Management, Quality Management, Facilities/Travel, R&D/Innovation, IP/Patent Management and advanced crisis/resilience operations.
 
-Target reusable AI capabilities include Role Architect, Responsibility Mapper, KRA/KPI Generator, Goal Cascade Agent, Task Planner, Daily Work Agent, Performance Agent, Evidence Collector, Skill Gap Agent, Learning Agent, Manager Copilot, Employee Copilot, Workload Agent, Accountability Agent, SOP Agent, Escalation Agent and Onboarding/Offboarding Agents.
+These are **targeted discovery gaps**, not automatic build requirements.
 
 ## Cross-company infrastructure
 
@@ -74,8 +79,6 @@ New coverage is consolidated in:
 - **64** — Agent registry, identity, approval and exception catalog
 - **65** — Cross-company AI infrastructure adoption map
 - **66** — Master cross-company gap analysis
-
-These files cover the infrastructure needed to make separate agents operate as one controlled company system.
 
 ## Reusable asset taxonomy
 
@@ -118,8 +121,7 @@ These files cover the infrastructure needed to make separate agents operate as o
 | Observability/evaluation | OpenLIT/Phoenix/Future AGI/mcp-eval candidates |
 | Local/private model runtime | Ollama where appropriate |
 | Workforce / employee OS | HRKit/WorkSphere/SmartHR Nexus + reusable HR skills + Nivy-independent role/KRA/KPI schema |
-
-These are implementation candidates, not unconditional commitments.
+| Corporate/enterprise gaps | See 69–71 targeted discovery backlog |
 
 ## Cross-company architecture rule
 
@@ -129,4 +131,4 @@ The target is not one giant autonomous agent. It is:
 
 ## Research completeness
 
-Major functional departments and asset types are covered, including the employee/workforce operating layer. The remaining work is controlled source verification, functional testing, integration, governance testing and production measurement rather than another generic discovery sweep. See **66-master-cross-company-gap-analysis.md** and **67–68** for workforce coverage.
+Broad horizontal discovery is now strong enough to move toward targeted gap research and controlled implementation. The completeness audit deliberately replaces endless generic discovery with a finite backlog of material enterprise capabilities. After those targeted gaps are researched, the default mode should be verification/testing rather than expanding the list indefinitely.
