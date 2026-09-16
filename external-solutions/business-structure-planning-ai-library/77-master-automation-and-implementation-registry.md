@@ -1,6 +1,6 @@
 # Master Automation & Implementation Registry
 
-**Status:** v1.3 — 2026-09-16
+**Status:** v1.4 — 2026-09-16
 
 This is the execution bridge between the reuse library and the production Company OS.
 
@@ -83,6 +83,7 @@ This is the execution bridge between the reuse library and the production Compan
 | REG-067 | Agency sales department | Revenue | SMB→Enterprise | agency-agents | Agent collection | hmzainjamil/agency-agents | Verify | Candidate | Extract reusable agents |
 | REG-068 | AI B2B sales pipeline | Revenue | SMB→Enterprise | ai-sales-agent | Sales platform | yoprobotics/ai-sales-agent | Verify | Candidate | Functional comparison |
 | REG-069 | HITL sales pipeline | Revenue | All | Mesh Pilot AI Sales Agent | Sales agent | Meshpilot-AGI/ai-sales-agent | MIT | Candidate | HITL/security test |
+| REG-070 | Complete international sales department | Revenue/Sales Ops/RevOps | Micro→Multinational | Files 89–90 | Operating model + resource catalog | Internal model + verified external resources | Mixed | Cataloged | Map every capability to resources; dedupe; verify/test; identify true gaps |
 
 ## Sales capability coverage
 
@@ -98,6 +99,35 @@ Covered at catalog/system level:
 - win/loss and sales leadership
 - basic handoff
 
+Expanded complete-department model in files 89–90:
+- Sales strategy and GTM strategy
+- annual/quarterly/monthly sales planning
+- organization hierarchy and role architecture
+- company→revenue→sales→team→role→individual KRA/KPI/goal cascade
+- quota planning and allocation
+- capacity/headcount/ramp planning
+- territory and account planning
+- compensation/commission operations
+- market intelligence and multi-source acquisition
+- complete lead/prospect/opportunity lifecycle
+- qualification/discovery/solution selling/pre-sales
+- RFP/RFQ/tender/bid management
+- proposal/business case/ROI/CPQ/deal desk
+- negotiation/closing/contract/order handoff
+- forecasting and forecast governance
+- sales performance and analytics
+- coaching/enablement/certification
+- partner/channel sales
+- account management
+- expansion/cross-sell/upsell
+- renewal
+- customer advocacy/reference/referral programs
+- sales QA/compliance/governance
+- international/country sales operations
+- sales-to-delivery/order-to-cash interface
+- RevOps systems/data/process governance
+- continuous improvement and experimentation
+
 Remaining material depth gaps:
 1. Sales Engineering / Technical Pre-Sales
 2. RFP/RFQ/Tender automation
@@ -111,13 +141,18 @@ Remaining material depth gaps:
 10. Sales compliance/governance
 11. Revenue handoff automation
 12. Production integration/testing
+13. Complete KRA/KPI/goal cascade implementation
+14. Capacity/headcount/ramp planning implementation
+15. International country sales packs
+16. Advocacy/referral operating system
+17. Sales command center / revenue intelligence integration
 
 ## Sales production chain
 
-`Market Intelligence → ICP → Source Acquisition → Account Discovery → Contact Discovery → Enrichment → Intent/Signals → Qualification → Sequence → Meeting → Discovery → Demo/Technical Validation → Opportunity → Deal Strategy → Proposal/CPQ → Deal Desk → Negotiation → Contract → Closed Won → Handoff → Expansion/Renewal → Win/Loss → Learning`
+`Strategy → Planning → Goal/KRA/KPI Cascade → Capacity → Territory → Quota → Compensation → Market Intelligence → Source Acquisition → Account Discovery → Contact Discovery → Enrichment → Intent/Signals → Qualification → Sequence → Meeting → Discovery → Demo/Technical Validation → Opportunity → Account Plan/MAP → Deal Strategy → Proposal/RFP → Pricing/CPQ → Deal Desk → Negotiation → Contract → Closed Won → Order/Handoff → Onboarding → Adoption → Value Realization → Expansion → Renewal → Advocacy/Referral → Win/Loss → Forecast Learning → Plan Adjustment`
 
 Cross-cutting:
-`CRM + Knowledge + Conversation Intelligence + Agent Control Plane + Identity/Permissions + Approval + Audit + Analytics + Experimentation`
+`CRM + Knowledge + Conversation Intelligence + Agent Control Plane + Identity/Permissions + Approval + Audit + Analytics + Experimentation + Workforce/KPI System`
 
 ## Mandatory implementation record
 
