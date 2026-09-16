@@ -1,6 +1,6 @@
 # Master Automation & Implementation Registry
 
-**Status:** v1.1 — 2026-09-16
+**Status:** v1.2 — 2026-09-16
 
 ## Purpose
 
@@ -59,91 +59,54 @@ It answers, for every reusable capability:
 | REG-037 | Free email verification | Revenue/Data | All | Prospector MCP | MCP | GitHub: josiebot26/prospector-mcp-email-finder | Verify | Name/domain → discovery → DNS/SMTP verification | Candidate | Safety + deliverability test |
 | REG-038 | Public-data prospecting | Revenue | SMB→Enterprise | OpenLeads | System | GitHub: Samyrrrrrr990/openleads | Verify | Query → federated public sources → people → email → dedupe | Candidate | Legal/source/function test |
 | REG-039 | Agentic lead-gen pipeline | Revenue | All | Hermes lead-generation pipeline | Agent/skills | GitHub: vivekshetye/hermes-lead-generation-pipeline | Verify | Prospect → scrape → enrich → contact-find → score → outreach | Candidate | Skill extraction/test |
+| REG-040 | Agentic GTM OS | Revenue | SMB→Enterprise | GTM Skills | Skills + MCP + workflows | GitHub: gtm-skills/gtm | MIT | Research → intelligence → outreach → CRM → close | Candidate | Extract skills + compare with 22–24 |
+| REG-041 | Unified agentic business OS | Cross-company | SMB→Enterprise | FlowWink | Business OS + MCP/A2A | GitHub: magnusfroste/flowwink | MIT | CRM/ERP/HR/finance/content/support → agent operator | Candidate | Architecture/sandbox test |
+| REG-042 | Agent-native business OS | Cross-company | SMB/agency | FusionClaw | Business OS + MCP | GitHub: Fusion-Data-Company/FusionClaw | MIT | CRM + employee ops + content + marketing + bookkeeping | Candidate | Architecture comparison |
+| REG-043 | AI-first CRM | Revenue | SMB→Mid-market | Relaticle | CRM + MCP | GitHub: Relaticle/relaticle | AGPL-3.0 | CRM records → agent research/action → pipeline | Candidate | Compare with Odoo |
+| REG-044 | Portable AI CRM skills | Revenue | Solo→SMB | crmkit | CRM + skills + MCP | GitHub: crmkit/crmkit | MIT | Import/digest/backup/inbox sync → CRM | Candidate | Skill extraction |
+| REG-045 | AI work/CRM platform | Revenue/Operations | SMB→Enterprise | TropaTT | CRM + project/work OS + MCP | GitHub: Anton-Barinov/TropaTT | Verify | Client → task/project/chat/calendar/KB → agent action | Candidate | Security/license/function test |
+| REG-046 | Sales intelligence MCP | Revenue | SMB→Mid-market | sales-intelligence-mcp | MCP | GitHub: aria-agentworks/sales-intelligence-mcp | MIT | Company lookup → contacts → scoring → outreach → CRM | Candidate | Provenance/API test |
+| REG-047 | Grounded sales research agent | Revenue | SMB→Enterprise | sales-research-agent | Agent + MCP | GitHub: aawais-ai/sales-research-agent | Verify | CRM → signal → decision maker → grounded outreach | Candidate | Run offline evaluation suite |
+| REG-048 | Professional AI workforce | Cross-company | All | agent-skills-professional | Skills | GitHub: aiagenta2z/agent-skills-professional | Verify | Role → responsibility → deliverable → structured output | Candidate | Map to workforce OS |
+| REG-049 | Business skills library | Cross-company | All | business-skills | Skills | GitHub: astDeniss/business-skills | Verify | Business function → SKILL.md → execution + QA | Candidate | Inventory and extract |
+| REG-050 | Digital marketing OS | Marketing | SMB→Enterprise | digital-marketing-pro | Marketing OS + skills | GitHub: indranilbanerjee/digital-marketing-pro | Verify | Strategy → SEO/AEO/GEO → paid/content/CRM/analytics | Candidate | Compare with Nivy Next |
+| REG-051 | GTM/RevOps skills | Revenue | SMB→Enterprise | sumble-skills-public | Skills | GitHub: SumbleData/sumble-skills-public | Verify | Account research → signals → scoring → list building | Candidate | Extract scoring patterns |
+| REG-052 | Legal/finance/capital skills | Legal/Finance/Corp Dev | Mid-market→Enterprise | CaseMark skills | Skills | GitHub: CaseMark/skills | Verify | Legal/finance/capital task → specialized skill → review | Candidate | Jurisdiction/license extraction |
+| REG-053 | AI-native ERP architecture | Enterprise | Enterprise | GERP | ERP + MCP + Temporal | GitHub: quantDIY/GERP | MIT | Finance/HCM/SCM/assets/legal/revenue/master data → workflows → MCP | Candidate | Architecture extraction |
+| REG-054 | AI-native ERP | Finance/Operations | SMB→Mid-market | lambda-erp | ERP + API + MCP | GitHub: lambdadevelopment/lambda-erp | Verify | Documents/masters/reports → governed API/MCP actions | Candidate | Odoo/ERPNext comparison |
+| REG-055 | Multi-backend ERP MCP | Finance/Operations | Mid-market→Enterprise | mcp-erp | MCP integration | GitHub: zavora-ai/mcp-erp | Verify | SAP/NetSuite/Odoo/Zoho Books/Business Central → unified schema → approval | Candidate | Connector/governance extraction |
+| REG-056 | Service-business operating system | Operations | SMB | evolved | Business OS + MCP | GitHub: kr8tiv-ai/evolved | MIT | Intake → pricing → dispatch → service → invoice/payment | Candidate | Extract field/service patterns |
+| REG-057 | Autonomous business lifecycle | Cross-company | SMB→Mid-market | autonomous-business-os | Multi-agent BOS | GitHub: Cubiczan/autonomous-business-os | Verify | Lead → qualification → onboarding → delivery → finance → knowledge | Candidate | Orchestration/evaluation test |
 
-## Sales acquisition coverage
+## Batch 04 source coverage
 
-The acquisition layer is now explicitly tracked as a separate capability from downstream sales automation.
+The batch expands coverage across:
 
-`SOURCE DISCOVERY → ACQUISITION → NORMALIZATION → IDENTITY RESOLUTION → ENRICHMENT → VERIFICATION → SIGNALS → ICP/SCORING → CRM → OUTREACH`
+- agentic GTM
+- sales intelligence
+- AI-native CRM
+- CRM skills
+- marketing operating systems
+- professional AI workforce skills
+- enterprise ERP architecture
+- ERP MCP integration
+- service-business operating systems
+- autonomous business lifecycle orchestration
+- MCP/A2A operator patterns
+- finance/legal/capital professional skills
 
-### Source families now represented
+## No automatic adoption
 
-- Search engines
-- Company websites
-- LinkedIn
-- Google Maps/local businesses
-- Instagram
-- Facebook/Meta Ads
-- X/Twitter
-- Reddit
-- YouTube
-- GitHub
-- Business directories
-- Review platforms
-- Job boards
-- Company databases
-- Email intelligence
-- Technology intelligence
-- Advertising intelligence
-- Government/public registries
-- Tenders/procurement
-- Events/conferences
-- Associations/chambers
-- Partner/referral ecosystems
-- News/media
-- Communities/forums
-- Social listening
-- First-party inbound
-- Existing databases/files
+A candidate being listed here does **not** mean it should be installed. Use the registry states and mandatory production controls in `77-master-automation-and-implementation-registry.md`.
 
-## Status definitions
+## Next research trigger
 
-- **Candidate:** discovered and mapped; not yet accepted for production.
-- **Verified:** source, license/access, maintenance and basic function checked.
-- **Tested:** representative functional tests passed.
-- **Controlled:** permissions, approvals, audit/evidence and failure handling tested.
-- **Adapted:** schemas, prompts, policies or UX adapted to Nivy.
-- **Integrated:** connected to intended systems of record/workflows.
-- **Pilot:** live/representative limited deployment with monitoring.
-- **Production:** approved for operational use.
-- **Regression-monitored:** production behavior continuously evaluated.
+Do not repeat generic discovery solely to increase the number of repositories. Research again when:
 
-## Mandatory implementation record
-
-No asset can be promoted to production without:
-
-1. source and provenance
-2. license/access decision
-3. owner
-4. system of record
-5. data classification
-6. credential/identity method
-7. least-privilege permissions
-8. human-approval policy
-9. failure/exception path
-10. audit/evidence capture
-11. functional test
-12. control/security test
-13. cost estimate
-14. rollback/kill-switch path
-15. regression test
-
-## Core workflow pattern
-
-`Trigger → Context → Agent/Skill → Tool/MCP → Policy Check → Approval (if required) → Action → Verify → Evidence → System-of-Record Update → KPI → Exception → Learning`
-
-## Scale activation
-
-| Scale | Default automation posture |
-|---|---|
-| Solo/Micro | Simple workflows, low-cost tools, human-in-loop |
-| Small | CRM/finance/HR integrations, reusable agents, scheduled automation |
-| SMB | Cross-department workflows, role-based access, dashboards, audit trail |
-| Mid-market | Shared services, workflow orchestration, formal controls, observability |
-| International | Multi-entity, currency/tax/privacy/localization, jurisdiction packs |
-| Enterprise | Control plane, SoD, policy-as-code, portfolio governance, resilience |
-| Multinational | Regional autonomy under global standards, data residency, cross-border controls, failover |
-
-## Completion rule
-
-The library is not considered implementation-complete merely because an asset was discovered. Completion means the asset has passed the required adoption state for its risk class and scale.
+- a capability is missing,
+- a country/jurisdiction needs a local solution,
+- an industry requires a specialist workflow,
+- a current candidate fails testing,
+- a license/access model becomes unsuitable,
+- a better maintained solution appears,
+- or an implementation blocker requires a new connector/skill.
