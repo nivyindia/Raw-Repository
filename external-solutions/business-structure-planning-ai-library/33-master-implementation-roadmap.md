@@ -1,6 +1,6 @@
 # Master Reuse Implementation Roadmap
 
-**Status:** v1.4 — 2026-09-16
+**Status:** v1.5 — 2026-09-16
 
 ## Objective
 
@@ -14,7 +14,10 @@ Convert the research warehouse into a working AI-native company operating system
 
 ### Deliverables
 
-- Master asset registry
+- Master asset registry — **file 77**
+- Automation coverage matrix — **file 78**
+- Integration/connector registry — **file 79**
+- Production readiness backlog — **file 80**
 - Agent/skill/MCP/workflow registry
 - Source/license verification
 - Permission matrix
@@ -43,7 +46,7 @@ Every adopted external asset has a source, access/license status, owner, destina
 
 ## Phase 0.5 — Targeted international-company completeness research
 
-**Completed:** targeted research and comparison are now documented in 69–75.
+**Completed:** targeted research and comparison are now documented in 69–76.
 
 Source control files:
 
@@ -54,40 +57,7 @@ Source control files:
 - **73** — Targeted gap adoption map
 - **74** — Ideal international company capability model
 - **75** — Final enterprise completeness audit
-
-### P0 results
-
-Credible reusable paths were identified for:
-
-1. Corporate Secretary / Board Management
-2. Treasury & Banking Operations
-3. Internal Audit / Controls Testing
-4. Corporate Development / M&A composition
-5. Enterprise Architecture / Application Portfolio
-6. Software/SaaS Asset Management composition
-7. ITSM / Enterprise Service Desk
-8. ESG/Sustainability + Carbon
-9. Revenue Assurance
-10. Corporate Transformation Portfolio
-11. Global Entity/Subsidiary Management
-
-### P1 results
-
-Reusable components or composition paths were identified for:
-
-- Investor Relations
-- Regulatory reporting
-- Ethics/whistleblower
-- Employee relations
-- Global mobility
-- SLA management
-- Supply risk
-- Crisis/incident workflows
-- R&D/innovation portfolio
-- IP/patent workflows
-- Global tax control
-
-Insurance, QMS, facilities/workplace and travel remain targeted implementation-depth areas.
+- **76** — Company scale and maturity matrix
 
 ### Exit status
 
@@ -99,7 +69,7 @@ Insurance, QMS, facilities/workplace and travel remain targeted implementation-d
 
 **Priority: P0/P1**
 
-This is the new immediate phase after completeness research.
+This is the immediate execution phase after completeness research.
 
 ### Work packages
 
@@ -115,7 +85,7 @@ This is the new immediate phase after completeness research.
 10. Integrate with the intended system of record.
 11. Pilot before production adoption.
 
-### First verification queue
+### Candidate verification queue
 
 - LQGovernance-OpenBoard
 - Tessio
@@ -128,6 +98,60 @@ This is the new immediate phase after completeness research.
 - treasury/finance skill candidates
 - corporate legal skills
 - EIOS/entity architecture
+
+---
+
+## Phase 0.7 — Integration fabric and control plane
+
+**This phase is now explicitly required before broad production scaling.**
+
+### Integration fabric
+
+Implement the governed connection layer:
+
+`CRM ↔ Email ↔ Calendar ↔ Messaging ↔ Accounting ↔ ERP ↔ HR ↔ Helpdesk ↔ Projects ↔ GitHub ↔ Knowledge ↔ Analytics ↔ AI runtime`
+
+Rules:
+
+- one system of record per business object
+- stable IDs/correlation IDs
+- API/webhook/MCP-first
+- idempotent writes
+- least privilege
+- approval gates for high-impact actions
+- audit/evidence capture
+- retries/timeouts/dead-letter handling
+- manual fallback for critical processes
+
+### AI control plane
+
+Implement:
+
+`Agent Identity → Registry → Tool Registry → Policy → Router → Approval → A2A → Observability → Evaluation → Cost → Exceptions → Kill Switch`
+
+The control layer must be separate from individual agent implementations so agents can be replaced without losing governance.
+
+---
+
+## Phase 0.8 — Production readiness
+
+Before production promotion, every workflow must pass:
+
+`Functional + Control + Operational + Economic + Pilot`
+
+Required controls:
+
+- secrets management
+- identity and least privilege
+- approval policy
+- audit trail
+- exception queue
+- rollback/manual fallback
+- cost limits
+- evaluation/regression suite
+- backup/restore
+- quarantine/kill switch
+- owner and escalation path
 
 ---
 
@@ -440,12 +464,12 @@ Test synthetic inputs, representative workflows, edge cases, human correction ra
 
 ## Immediate execution order
 
-1. Build/finalize Phase 0 registry.
-2. Verify the Phase 0.6 candidate set.
-3. Select 5–10 revenue workflows.
-4. Add one governed tool gateway.
-5. Add one approval mechanism.
-6. Add audit + trace logging.
+1. Use files 77–80 as the execution control layer.
+2. Verify the highest-priority candidate set.
+3. Establish the connector/integration inventory.
+4. Establish agent/tool identity and permissions.
+5. Implement one approval mechanism and unified audit convention.
+6. Select 5–10 revenue workflows.
 7. Add evaluation/regression tests.
 8. Add cost and exception tracking.
 9. Pilot with synthetic + representative data.
@@ -453,6 +477,6 @@ Test synthetic inputs, representative workflows, edge cases, human correction ra
 
 ## Definition of done for discovery
 
-**Achieved:** the ideal international-company capability model has been compared against the reuse library, material P0/P1 gaps have been researched, and remaining work is explicitly classified as verification, implementation-depth, jurisdictional adaptation or deferred capability.
+**Achieved:** the ideal international-company capability model has been compared against the reuse library, material P0/P1 gaps have been researched, scale coverage has been mapped, and remaining work is explicitly classified as verification, integration, productionization, jurisdictional adaptation, resilience or genuine build gaps.
 
 From this point, the default operating mode is controlled reuse testing and implementation.
