@@ -20,8 +20,10 @@
 | 08-company-function-discovery-matrix.md | Company-function coverage |
 | 09-department-solution-catalog.md | Department-level solution catalog |
 | 10-ai-agents-skills-prompts-catalog.md | Agents, skills, prompts and agentic assets |
-| **11-internet-reuse-catalog-2026-09.md** | **New internet discovery batch: agents, libraries, workflows, ERP, UI, knowledge and architecture resources** |
+| **11-internet-reuse-catalog-2026-09.md** | **Broad internet discovery: agents, libraries, workflows, ERP, UI, knowledge and architecture resources** |
 | **12-nivy-v1-reuse-shortlist.md** | **What to inspect/reuse first for the V1 revenue launch** |
+| **13-agentic-company-complete-department-catalog-2026-09.md** | **Company-wide agentic coverage: marketing, sales, lead intelligence, funnels, support, finance/HR/ops and major gaps** |
+| **14-agentic-company-channel-surface-expansion-2026-09.md** | **Second-wave channel/surface map: social, messaging, directories, databases, marketplaces, government, PR, ads, AI search, finance, HR, legal, browser, MCP/A2A and company-OS references** |
 
 ## How to use this library
 
@@ -33,11 +35,17 @@
 6. Prefer adapters and references over unnecessary vendoring.
 7. Record what was reused in the Nivy implementation.
 8. Feed new discoveries back into this library.
+9. Treat channel coverage as a continuously expanding connector registry, not a one-time list.
+10. Never assume that an API, automation permission, region, pricing tier or license exists merely because a directory mentions it.
 
 ## Coverage target
 
 The library is intended to eventually cover:
 
 **Executive → Strategy → Business Model → Goals/OKRs → Finance → Sales → Marketing → HR → Operations → Projects → Product → Engineering → IT → Security → Legal/Compliance → Procurement → Customer Success → Support → Knowledge → Documents → Analytics → AI Workforce → Automation → Governance**
+
+For go-to-market and digital presence, it must also cover:
+
+**Search → Social → Messaging → Email → Voice → Web → Communities → Reviews → Directories → Company/Contact Data → Jobs/Talent → Freelance/Service Marketplaces → Product/Software Marketplaces → Ecommerce → App Stores → Cloud Marketplaces → Events → PR/Media/Podcasts → Influencers/Creators → Affiliates/Referrals/Partners → Advertising → AI Search/GEO → Government Procurement → Public Registries/Open Data → Grants → Finance/Payments → HR/Payroll → Legal/Compliance → Customer Support → Meetings/Calendar → ERP/CRM → Knowledge → Analytics → Browser Automation → MCP → A2A → Identity/RBAC/Approval/Audit**
 
 The catalog is intentionally living and must continue to grow.
