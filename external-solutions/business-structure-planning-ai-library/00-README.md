@@ -28,6 +28,7 @@
 | **16-agentic-ai-system-universe-2026-09.md** | **Broad native/agentic AI system universe: agent runtimes, autonomous agents, multi-agent teams, coding/research/browser/voice/multimodal/business agents, AI OS/workspaces, MCP/A2A, local AI, RAG/memory, evaluation, security and infrastructure** |
 | **17-ai-technology-universe-ready-made-systems-2026-09.md** | **Ready-made systems across the wider AI technology universe: generative, reasoning, multimodal, world models, physical/embodied AI, causal, neuro-symbolic, synthetic data, federated, predictive, optimization, digital twins, self-improving AI, security, evaluation and infrastructure** |
 | **18-ai-technology-universe-gap-expansion-2026-09.md** | **Expanded technology-family catalog: model/data infrastructure, multimodal/creative, edge/mobile, scientific/healthcare, finance/HR/legal/cyber/DevOps, robotics, quantum/neuromorphic, BI/commerce, identity/security and reusable application infrastructure** |
+| **22-new-ai-system-discovery-batch-2026-09.md** | **Fresh 2026 discovery batch: AI company OS, AI-native ERP/accounting, corporate skills, agent catalogs, agentic commerce, recommendation systems, cross-border commerce, physical AI and model-infrastructure references** |
 
 ## How to use this library
 
