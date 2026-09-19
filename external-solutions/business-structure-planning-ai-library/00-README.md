@@ -24,6 +24,8 @@
 | **12-nivy-v1-reuse-shortlist.md** | **What to inspect/reuse first for the V1 revenue launch** |
 | **13-agentic-company-complete-department-catalog-2026-09.md** | **Company-wide agentic coverage: marketing, sales, lead intelligence, funnels, support, finance/HR/ops and major gaps** |
 | **14-agentic-company-channel-surface-expansion-2026-09.md** | **Second-wave channel/surface map: social, messaging, directories, databases, marketplaces, government, PR, ads, AI search, finance, HR, legal, browser, MCP/A2A and company-OS references** |
+| **15-agent-memory-rag-context-knowledge-systems-2026-09.md** | **Memory, RAG, GraphRAG, knowledge graphs, context engineering, retrieval, multimodal memory, shared memory, governance and evaluation systems** |
+| **16-agentic-ai-system-universe-2026-09.md** | **Broad native/agentic AI system universe: agent runtimes, autonomous agents, multi-agent teams, coding/research/browser/voice/multimodal/business agents, AI OS/workspaces, MCP/A2A, local AI, RAG/memory, evaluation, security and infrastructure** |
 
 ## How to use this library
 
