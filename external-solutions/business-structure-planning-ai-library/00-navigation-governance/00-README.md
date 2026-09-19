@@ -21,10 +21,11 @@
 | **08-unified-company-ui-workspace** | **Owner/executive/department/manager/employee UI, company portal, documents, knowledge, BI embedding and unified workspace references** |
 | **09-business-planning-strategy** | **Business model, business plan, strategy, canvas and plan-to-AI-company execution resources** |
 
-## Key UI and planning catalogs
+## Key catalogs
 
 - [Unified Company UI and Employee Dashboard Catalog](../08-unified-company-ui-workspace/01-unified-company-ui-and-employee-dashboard-catalog.md)
 - [Business Planning and AI Strategy Resource Catalog](../09-business-planning-strategy/01-business-planning-and-ai-strategy-resource-catalog.md)
+- [JARVIS, Voice, AI Creator, YouTube, Social Intelligence and Marketing Reuse Catalog](../03-solution-catalogs/23-jarvis-voice-creator-youtube-social-marketing-reuse-catalog-2026-09.md)
 
 ## Core rule for the UI
 
