@@ -27,6 +27,7 @@
 | **15-agent-memory-rag-context-knowledge-systems-2026-09.md** | **Memory, RAG, GraphRAG, knowledge graphs, context engineering, retrieval, multimodal memory, shared memory, governance and evaluation systems** |
 | **16-agentic-ai-system-universe-2026-09.md** | **Broad native/agentic AI system universe: agent runtimes, autonomous agents, multi-agent teams, coding/research/browser/voice/multimodal/business agents, AI OS/workspaces, MCP/A2A, local AI, RAG/memory, evaluation, security and infrastructure** |
 | **17-ai-technology-universe-ready-made-systems-2026-09.md** | **Ready-made systems across the wider AI technology universe: generative, reasoning, multimodal, world models, physical/embodied AI, causal, neuro-symbolic, synthetic data, federated, predictive, optimization, digital twins, self-improving AI, security, evaluation and infrastructure** |
+| **18-ai-technology-universe-gap-expansion-2026-09.md** | **Expanded technology-family catalog: model/data infrastructure, multimodal/creative, edge/mobile, scientific/healthcare, finance/HR/legal/cyber/DevOps, robotics, quantum/neuromorphic, BI/commerce, identity/security and reusable application infrastructure** |
 
 ## How to use this library
 
