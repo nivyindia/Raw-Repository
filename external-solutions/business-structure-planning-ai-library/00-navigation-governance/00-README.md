@@ -6,29 +6,39 @@
 
 **DISCOVER → DECOMPOSE → REUSE → ADAPT → INTEGRATE → BUILD ONLY WHAT IS MISSING**
 
-## Library map
+## Folder map
 
-| File | Purpose |
+| Folder | Purpose |
 |---|---|
-| 01-source-catalog.md | Existing researched sources and reusable references |
-| 02-capability-map.md | Company capabilities mapped to reusable assets |
-| 03-reusable-prompt-patterns.md | Reusable prompt patterns |
-| 04-evaluation-and-adoption-rules.md | Evaluation/adoption safeguards |
-| 05-research-tracker.md | Research progress tracker |
-| 06-internet-process-frameworks-and-methods.md | Process/framework discovery |
-| 07-discovery-scope.md | Discovery boundaries |
-| 08-company-function-discovery-matrix.md | Company-function coverage |
-| 09-department-solution-catalog.md | Department-level solution catalog |
-| 10-ai-agents-skills-prompts-catalog.md | Agents, skills, prompts and agentic assets |
-| **11-internet-reuse-catalog-2026-09.md** | **Broad internet discovery: agents, libraries, workflows, ERP, UI, knowledge and architecture resources** |
-| **12-nivy-v1-reuse-shortlist.md** | **What to inspect/reuse first for the V1 revenue launch** |
-| **13-agentic-company-complete-department-catalog-2026-09.md** | **Company-wide agentic coverage: marketing, sales, lead intelligence, funnels, support, finance/HR/ops and major gaps** |
-| **14-agentic-company-channel-surface-expansion-2026-09.md** | **Second-wave channel/surface map: social, messaging, directories, databases, marketplaces, government, PR, ads, AI search, finance, HR, legal, browser, MCP/A2A and company-OS references** |
-| **15-agent-memory-rag-context-knowledge-systems-2026-09.md** | **Memory, RAG, GraphRAG, knowledge graphs, context engineering, retrieval, multimodal memory, shared memory, governance and evaluation systems** |
-| **16-agentic-ai-system-universe-2026-09.md** | **Broad native/agentic AI system universe: agent runtimes, autonomous agents, multi-agent teams, coding/research/browser/voice/multimodal/business agents, AI OS/workspaces, MCP/A2A, local AI, RAG/memory, evaluation, security and infrastructure** |
-| **17-ai-technology-universe-ready-made-systems-2026-09.md** | **Ready-made systems across the wider AI technology universe: generative, reasoning, multimodal, world models, physical/embodied AI, causal, neuro-symbolic, synthetic data, federated, predictive, optimization, digital twins, self-improving AI, security, evaluation and infrastructure** |
-| **18-ai-technology-universe-gap-expansion-2026-09.md** | **Expanded technology-family catalog: model/data infrastructure, multimodal/creative, edge/mobile, scientific/healthcare, finance/HR/legal/cyber/DevOps, robotics, quantum/neuromorphic, BI/commerce, identity/security and reusable application infrastructure** |
-| **22-new-ai-system-discovery-batch-2026-09.md** | **Fresh 2026 discovery batch: AI company OS, AI-native ERP/accounting, corporate skills, agent catalogs, agentic commerce, recommendation systems, cross-border commerce, physical AI and model-infrastructure references** |
+| 00-navigation-governance | Indexes, source catalog, evaluation rules and research governance |
+| 01-discovery-research | Discovery scope, research trackers, source ledgers and executed research batches |
+| 02-company-department-models | International company model, department completeness, capability and operating models |
+| 03-solution-catalogs | Reusable agents, skills, prompts, workflows, templates, business systems and resource catalogs |
+| 04-ai-technology-agent-systems | AI technology universe, agent systems, memory/RAG, agent operations and knowledge systems |
+| 05-architecture-infrastructure | AI/company infrastructure, integration, identity, approvals, control plane and workforce architecture |
+| 06-adoption-implementation | Adoption maps, backlogs, implementation plans, automation registries, testing and rollout |
+| 07-department-sales | Deep sales operating model, resource discovery and sales completeness work |
+| **08-unified-company-ui-workspace** | **Owner/executive/department/manager/employee UI, company portal, documents, knowledge, BI embedding and unified workspace references** |
+| **09-business-planning-strategy** | **Business model, business plan, strategy, canvas and plan-to-AI-company execution resources** |
+
+## Key UI and planning catalogs
+
+- [Unified Company UI and Employee Dashboard Catalog](../08-unified-company-ui-workspace/01-unified-company-ui-and-employee-dashboard-catalog.md)
+- [Business Planning and AI Strategy Resource Catalog](../09-business-planning-strategy/01-business-planning-and-ai-strategy-resource-catalog.md)
+
+## Core rule for the UI
+
+The goal is **one Nivy workspace**, not many isolated department applications.
+
+One shell should provide:
+
+**Home → My Work → Company → People → Departments → Customers/Leads → Projects → Finance → Documents → Knowledge → Analytics → AI Workforce → Automations → Approvals → Governance**
+
+The same UI should change according to role and permissions:
+
+**Owner → Executive → Department Head → Manager → Employee → AI Operator**
+
+Underlying systems can remain specialized. Nivy should hide that fragmentation through common identity, navigation, search, permissions and cross-system data views.
 
 ## How to use this library
 
