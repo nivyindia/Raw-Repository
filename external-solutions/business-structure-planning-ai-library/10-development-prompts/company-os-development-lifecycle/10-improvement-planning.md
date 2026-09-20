@@ -20,3 +20,7 @@ critical correctness/security → foundational dependency → high operational i
 Create/update IMPROVEMENT-PLAN.md and TASKS.md.
 
 Do not implement yet. The output is a small-phase executable improvement backlog.
+
+
+## Output Storage
+Store improvement plans in the canonical improvement/planning folder and convert approved findings into linked executable tasks in TASKS.md or the task system. Do not create an isolated improvement list that is not connected to execution tracking.
