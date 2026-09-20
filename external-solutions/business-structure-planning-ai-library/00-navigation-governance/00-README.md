@@ -21,8 +21,9 @@
 | **08-unified-company-ui-workspace** | **Owner/executive/department/manager/employee UI, company portal, documents, knowledge, BI embedding and unified workspace references** |
 | **09-business-planning-strategy** | **Business model, business plan, strategy, canvas and plan-to-AI-company execution resources** |
 
-## Key catalogs
+## Master navigation
 
+- [MASTER — Complete Business Automation Universe](./01-MASTER-BUSINESS-AUTOMATION-LIST-2026-09.md) — canonical coverage checklist from atomic actions and micro tasks through workflows, cross-department automation, AI managers, executives, control towers and autonomous company.
 - [Unified Company UI and Employee Dashboard Catalog](../08-unified-company-ui-workspace/01-unified-company-ui-and-employee-dashboard-catalog.md)
 - [Business Planning and AI Strategy Resource Catalog](../09-business-planning-strategy/01-business-planning-and-ai-strategy-resource-catalog.md)
 - [JARVIS, Voice, AI Creator, YouTube, Social Intelligence and Marketing Reuse Catalog](../03-solution-catalogs/23-jarvis-voice-creator-youtube-social-marketing-reuse-catalog-2026-09.md)
@@ -52,15 +53,16 @@ Underlying systems can remain specialized. Nivy should hide that fragmentation t
 ## How to use this library
 
 1. Search this library before building anything new.
-2. Follow the source URL.
-3. Inspect repository/docs/license/current version.
-4. Record the exact reusable asset.
-5. Copy/adapt only when licensing permits.
-6. Prefer adapters and references over unnecessary vendoring.
-7. Record what was reused in the Nivy implementation.
-8. Feed new discoveries back into this library.
-9. Treat channel coverage as a continuously expanding connector registry, not a one-time list.
-10. Never assume that an API, automation permission, region, pricing tier or license exists merely because a directory mentions it.
+2. Use the [Master Business Automation List](./01-MASTER-BUSINESS-AUTOMATION-LIST-2026-09.md) as the canonical coverage checklist.
+3. Follow the source URL.
+4. Inspect repository/docs/license/current version.
+5. Record the exact reusable asset.
+6. Copy/adapt only when licensing permits.
+7. Prefer adapters and references over unnecessary vendoring.
+8. Record what was reused in the Nivy implementation.
+9. Feed new discoveries back into this library.
+10. Treat channel coverage as a continuously expanding connector registry, not a one-time list.
+11. Never assume that an API, automation permission, region, pricing tier or license exists merely because a directory mentions it.
 
 ## Coverage target
 
