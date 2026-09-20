@@ -70,3 +70,20 @@ Pinning a commit improves provenance but does not equal runtime qualification. N
 Run isolated runtime qualification with pinned source checkout, dependency lock capture, tests, network/secret inventory, security/data-flow review and reproducible pass/fail evidence.
 
 Until those checks pass, all four assets remain Runtime Pending.
+
+## Wave 8 evidence update — 2026-09
+
+Repository inspection against pinned commits found reproducible test/validation entry points, but the GitHub connector does not execute arbitrary repository commands. Therefore these are static runtime-readiness findings, not executed runtime results.
+
+| Asset | Reproducible test/validation evidence | Result |
+|---|---|---|
+| EA-002 | GTM Agents contains scripts/smoke_test_plugins.py and CI quality-checks described in CHANGELOG.md. | Static evidence PASS; execution pending |
+| EA-004 | B2B SDR documents define npm test; repository also has deployment doctor checks for Node/OpenClaw/workspace state. | Static evidence PASS; execution pending |
+| EA-008 | Skill repository contains executable Python testing/generator scripts and multiple test-oriented assets. | Static evidence PASS; target skill runtime still pending |
+| EA-012 | Openkoda contains Maven JUnit/Cucumber test entry points and test configuration. | Static evidence PASS; Maven execution pending |
+
+### Gate decision
+No asset is promoted to Qualified because actual execution, dependency installation, network behavior, secrets/data-flow review and Windows/Docker reproduction were not performed by the available GitHub execution interface.
+
+### Next action
+Use the repository's own documented test commands in an isolated Windows/Docker runner, capture stdout/stderr, dependency lock state and pass/fail evidence, then update qualification only when reproducible.
