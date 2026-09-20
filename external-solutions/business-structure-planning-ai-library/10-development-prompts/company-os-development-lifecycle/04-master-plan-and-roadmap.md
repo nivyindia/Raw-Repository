@@ -36,3 +36,7 @@ G9 release
 G10 post-release audit
 
 Never mark a gate complete from prose alone; require evidence.
+
+
+## Output Storage
+Store plans, roadmaps, projects, tasks, milestones, gates and dependency maps in their canonical planning folders/files. Do not create multiple competing master plans. Maintain one canonical source of truth and link supporting documents to it.
