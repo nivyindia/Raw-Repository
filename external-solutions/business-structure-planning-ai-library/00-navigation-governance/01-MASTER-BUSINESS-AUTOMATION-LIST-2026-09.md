@@ -584,6 +584,211 @@ Before declaring a capability researched, check all of these:
 
 This is a **coverage checklist**, not a claim that every item has already been researched or has a reusable implementation.
 
+
+---
+
+## 17. Additional missing automation coverage — gap expansion
+
+The following categories are added so the master list does not stop at common CRM/ERP/AI workflows.
+
+### 17.1 Atomic / micro-level gaps
+
+| Area | Additional required coverage | Progress |
+|---|---|---|
+| Inbox operations | spam/phishing classification, mailbox rules, thread merge/split, unsubscribe, bounce handling, sender reputation signals | Not Started |
+| Email operations | send-time optimization, out-of-office handling, failed-delivery recovery, attachment conversion, secure-link creation | Not Started |
+| Messaging | WhatsApp/SMS/Telegram/Teams/Slack channel preference, opt-in/opt-out, message threading, delivery/read status | Not Started |
+| Calls | call recording/consent, voicemail, callback queue, disposition, call-quality checks, phone-number normalization | Not Started |
+| Browser/desktop | clipboard, downloads/uploads, printing/scanning, desktop app handoff, session recovery, CAPTCHA/human handoff | Not Started |
+| Documents | redaction, PII detection, classification confidence, document comparison, clause/table extraction, watermarking, document expiry | Not Started |
+| Records | retention schedule, legal hold, records disposition, immutable archive, chain of custody | Not Started |
+| Data quality | completeness, freshness, referential integrity, outlier detection, reconciliation, lineage, quality scoring | Not Started |
+| Master data | customer/product/vendor/employee/location master-data synchronization and golden-record management | Not Started |
+| Identity | joiner/mover/leaver, SSO lifecycle, MFA enrollment, access review, privileged-access expiry, service-account lifecycle | Not Started |
+| Security | secret scanning, phishing triage, vulnerability ticketing, patch reminders, device posture, security evidence collection | Not Started |
+| Privacy | consent capture, DSAR intake/fulfillment, deletion/retention checks, purpose limitation, privacy incident routing | Not Started |
+| Payments | payment-link creation, payment-status polling, retry/dunning, refunds, chargeback/dispute routing, settlement reconciliation | Not Started |
+| Expenses | receipt capture, policy validation, duplicate detection, approval, reimbursement, accounting handoff | Not Started |
+| Travel | request → policy check → approval → booking → itinerary → expense → reconciliation | Not Started |
+| Assets | asset register, assignment, maintenance, depreciation handoff, return, disposal, certificate/evidence tracking | Not Started |
+| Scheduling | resource booking, room/equipment conflicts, waitlists, cancellation/no-show handling, recurring-resource planning | Not Started |
+| Search/research | source discovery, source deduplication, citation/evidence capture, freshness checks, contradiction detection, research-to-knowledge publishing | Not Started |
+| AI interactions | prompt routing, model selection, context assembly, tool selection, confidence threshold, fallback model, human escalation | Not Started |
+| AI memory | memory write/update/delete, stale-memory detection, provenance, user/team/company scope, memory conflict resolution | Not Started |
+| AI safety | prompt-injection detection, tool authorization, output validation, policy checks, unsafe-action blocking, evidence requirement | Not Started |
+| Observability | trace correlation, run replay, token/cost attribution, latency budget, quality score, incident linkage | Not Started |
+| Testing | unit/integration/e2e tests for automations, synthetic events, golden datasets, regression suites, load tests | Not Started |
+| Recovery | retry policy, circuit breaker, fallback, dead-letter queue, replay, idempotency key, compensating action | Not Started |
+| Localization | legal/entity formats, tax/currency rules, regional calendars, language fallback, timezone/DST edge cases | Not Started |
+| Accessibility | keyboard navigation, screen-reader checks, captions, alt text, contrast/accessibility evidence | Not Started |
+| Cost | per-agent/per-workflow/per-department cost allocation, quota, budget approval, anomaly detection, chargeback | Not Started |
+
+### 17.2 Missing business workflows / value streams
+
+| Value stream | Required automation coverage | Progress |
+|---|---|---|
+| Lead-to-cash | demand → lead → opportunity → quote → contract → order → invoice → collection → revenue | Not Started |
+| Quote-to-order | qualification → pricing → quote → approval → signature → order | Not Started |
+| Order-to-cash | order → fulfillment → invoice → payment → reconciliation → close | Not Started |
+| Procure-to-pay | request → sourcing → approval → PO → receipt → invoice → payment | Not Started |
+| Hire-to-retire | workforce plan → recruit → hire → onboard → develop → compensate → transfer → exit | Not Started |
+| Idea-to-product | idea → research → discovery → requirements → build → QA → launch → adoption → retirement | Not Started |
+| Incident-to-resolution | detect → triage → assign → mitigate → resolve → verify → RCA → prevent recurrence | Not Started |
+| Request-to-fulfillment | request → policy → approval → assignment → execution → evidence → closure | Not Started |
+| Record-to-report | capture → classify → post → reconcile → close → consolidate → report → audit | Not Started |
+| Contract-to-renewal | draft → review → approve → sign → obligation → monitor → renew/terminate | Not Started |
+| Source-to-contract | supplier discovery → qualification → RFQ → negotiation → contract → supplier performance | Not Started |
+| Customer-issue-to-knowledge | issue → resolve → verify → extract lesson → knowledge article → publish → reuse | Not Started |
+| Campaign-to-revenue | brief → audience → creative → media → lead → attribution → revenue → optimization | Not Started |
+| Content-to-distribution | research → brief → create → QA → approval → publish → syndicate → measure → repurpose | Not Started |
+| Employee-access lifecycle | hire/change/exit → identity → permissions → assets → review → revoke → audit | Not Started |
+| Data-to-decision | ingest → quality → semantic model → analysis → insight → decision → action → outcome | Not Started |
+| Model/agent-to-production | design → dataset → evaluation → approval → deployment → monitoring → rollback → retirement | Not Started |
+| Policy-to-control | policy → control → owner → implementation → evidence → test → remediation → attestation | Not Started |
+| Risk-to-treatment | identify → assess → prioritize → treatment → owner → monitor → accept/transfer/mitigate | Not Started |
+| Problem-to-prevention | detect → RCA → corrective action → verification → preventive control → monitoring | Not Started |
+| Asset-to-disposal | acquire → register → assign → maintain → inspect → return → dispose → evidence | Not Started |
+| Supplier-to-performance | onboard → contract → order → delivery → quality → scorecard → remediation → renewal | Not Started |
+| Revenue-to-forecast | pipeline → bookings → billing → collections → actuals → forecast → variance → action | Not Started |
+| Cash-to-treasury | bank/payment feeds → cash position → forecast → liquidity → funding → reconciliation → controls | Not Started |
+
+### 17.3 Missing department / corporate capability areas
+
+| Capability | Required automation families | Progress |
+|---|---|---|
+| Treasury | cash position, liquidity, bank connectivity, payment controls, funding, FX, reconciliation | Not Started |
+| Tax | tax data extraction, jurisdiction mapping, calculation, filing calendar, evidence, reconciliation, notices | Not Started |
+| Payroll | payroll inputs, validation, payroll run, exceptions, payslips, statutory filings, accounting reconciliation | Not Started |
+| Corporate Development | market scan, target screening, due diligence checklist, valuation inputs, integration tracking | Not Started |
+| M&A / Integration | diligence → deal room → approvals → Day-1 readiness → systems/access/data integration → synergy tracking | Not Started |
+| Investor Relations | KPI pack, investor Q&A, reporting calendar, disclosure workflow, stakeholder log | Not Started |
+| Fundraising | pipeline → investor research → outreach → diligence → data room → term-sheet workflow → close | Not Started |
+| Insurance / Risk Financing | policy inventory, renewal, claims intake, evidence, broker communication, coverage tracking | Not Started |
+| Corporate Affairs | stakeholder mapping, correspondence, approvals, filings, public-position workflow | Not Started |
+| Government / Public Sector | tender discovery, eligibility, bid preparation, compliance evidence, submission, contract tracking | Not Started |
+| Grants | opportunity discovery, eligibility, application, budget, reporting, milestone evidence | Not Started |
+| International Trade | import/export documentation, HS classification, duties, customs, sanctions checks, shipment compliance | Not Started |
+| Revenue Management / Pricing | price rules, discount governance, quote optimization, margin checks, elasticity/experiment tracking | Not Started |
+| FP&A | planning, budgeting, rolling forecast, scenario modeling, variance, management reporting | Not Started |
+| Corporate Performance | enterprise KPI tree, OKR linkage, initiative tracking, benefits realization, executive reporting | Not Started |
+| Enterprise Risk | risk register, controls, KRIs, treatment, risk acceptance, board reporting | Not Started |
+| Business Continuity | BIA, dependency mapping, continuity plans, exercises, crisis communication, recovery verification | Not Started |
+| Crisis Management | incident command, stakeholder communication, decision log, approvals, recovery, postmortem | Not Started |
+| Enterprise Architecture | capability map, application portfolio, dependency graph, standards, architecture review | Not Started |
+| Data Governance | ownership, glossary, lineage, quality, classification, access, retention, stewardship | Not Started |
+| AI Governance | inventory, risk tiering, evaluations, approvals, model/agent cards, monitoring, incident management | Not Started |
+| IP / Knowledge Assets | invention/idea register, licensing, trademarks, copyright evidence, renewal deadlines | Not Started |
+| R&D / Innovation | research intake, experiment backlog, hypothesis tracking, experiment results, commercialization handoff | Not Started |
+| Corporate Communications | internal announcements, external messaging, approvals, audience targeting, archive | Not Started |
+| Workplace / Facilities | office access, maintenance, vendors, rooms, utilities, safety, occupancy, incidents | Not Started |
+| Fleet / Mobility | vehicle/asset assignment, maintenance, fuel, route, compliance, incident, disposal | Not Started |
+| Sustainability / ESG | data collection, emissions/activity records, targets, evidence, reporting, supplier data | Not Started |
+| Franchise / Licensing | partner qualification, territory, agreements, fees/royalties, compliance, performance | Not Started |
+| Channel / Partner Sales | partner onboarding, deal registration, lead sharing, MDF, commissions, pipeline attribution | Not Started |
+| Affiliate / Referral | partner links/codes, attribution, validation, commissions, fraud checks, payout | Not Started |
+| Marketplace Operations | listing, catalog sync, pricing, orders, fees, returns, ratings, reconciliation | Not Started |
+| Subscription Operations | signup → entitlement → billing → renewal → failed payment → downgrade/upgrade → cancellation | Not Started |
+| Community / Membership | signup → verification → onboarding → engagement → moderation → renewal/churn | Not Started |
+| Customer Data Platform | identity resolution, profile stitching, consent, segmentation, activation, suppression | Not Started |
+| Search / GEO / AEO | crawler monitoring, indexation, entity consistency, citations/mentions, AI-answer visibility, change detection | Not Started |
+| Digital Presence | domain/DNS, website, analytics, forms, chat, social profiles, listings, reviews, app stores | Not Started |
+| Procurement Category Management | spend taxonomy, category strategy, supplier concentration, savings pipeline, benchmark tracking | Not Started |
+| Legal Operations | matter intake, assignment, deadlines, spend, outside counsel, evidence, reporting | Not Started |
+| Quality Management | QMS, SOP control, audits, nonconformance, CAPA, training evidence, change control | Not Started |
+| Knowledge Management | taxonomy, ownership, review cycles, stale-content detection, reuse analytics | Not Started |
+| Change Management | impact analysis, stakeholder mapping, communications, training, adoption, benefits verification | Not Started |
+
+### 17.4 Major company / autonomous-company level gaps
+
+| Level | Missing capability | Progress |
+|---|---|---|
+| Company | Universal event bus / event contract across every department | Not Started |
+| Company | Universal identity, RBAC, policy and approval plane | Not Started |
+| Company | Universal data model / semantic layer / business ontology | Not Started |
+| Company | Universal connector/integration registry | Not Started |
+| Company | Universal automation registry and dependency graph | Not Started |
+| Company | Universal human approval inbox | Not Started |
+| Company | Universal audit/evidence ledger | Not Started |
+| Company | Universal cost/usage ledger | Not Started |
+| Company | Universal exception/recovery service | Not Started |
+| Company | Universal notification and escalation service | Not Started |
+| Company | Universal document/template/report registry | Not Started |
+| Company | Universal KPI/metric/OKR registry | Not Started |
+| Company | Cross-company causal graph and root-cause engine | Not Started |
+| Company | Digital twin of company, systems, processes, people and resources | Not Started |
+| Company | Enterprise scenario/simulation engine | Not Started |
+| Company | Enterprise capacity/resource planning engine | Not Started |
+| Company | Cross-platform attribution and revenue truth layer | Not Started |
+| Company | Autonomous board/executive decision system with evidence and approvals | Not Started |
+| Company | AI workforce registry, hierarchy, lifecycle, permissions and performance system | Not Started |
+| Company | Automation workforce registry, hierarchy, lifecycle and performance system | Not Started |
+| Company | Unified employee/company workspace and command center | Not Started |
+| Company | Continuous discovery agent that detects new reusable solutions and gaps | Not Started |
+| Company | Automation test/simulation/canary platform | Not Started |
+| Company | Company-wide backup, disaster recovery and business continuity control plane | Not Started |
+| Company | Company-wide knowledge graph / memory / provenance layer | Not Started |
+| Company | Enterprise policy-as-code and bounded-autonomy engine | Not Started |
+| Company | Cross-system reconciliation engine | Not Started |
+| Company | Company-wide SLA/SLO/OLA management and escalation | Not Started |
+| Company | Portfolio/initiative benefits-realization engine | Not Started |
+| Company | Enterprise experimentation and optimization engine | Not Started |
+| Company | Autonomous self-healing control plane with safe rollback | Not Started |
+| Autonomous Company | Goal → planning → execution → measurement → correction → learning loop | Not Started |
+| Autonomous Company | Multi-agent manager hierarchy with bounded authority | Not Started |
+| Autonomous Company | Cross-department resource allocation and prioritization | Not Started |
+| Autonomous Company | Company-wide strategic scenario planning and simulation | Not Started |
+| Autonomous Company | Policy-constrained autonomous execution with human override | Not Started |
+| Autonomous Company | Continuous self-audit, self-evaluation and evidence generation | Not Started |
+| Autonomous Company | Continuous learning + reusable capability discovery loop | Not Started |
+| Autonomous Company | Safe shutdown / pause / recovery / disaster mode | Not Started |
+
+---
+
+## 18. Master progress tracker
+
+**Progress is deliberately conservative:** an item is not marked “Done” merely because the category exists in this checklist.  
+Status values: **Not Started → Discovery → Cataloged → Qualified → Implemented → Verified**.
+
+| Master layer | Scope | Progress |
+|---|---|---|
+| L0 | Atomic actions | Not Started |
+| L1 | Micro tasks | Not Started |
+| L2 | Task automations | Not Started |
+| L3 | Workflows | Not Started |
+| L4 | Business processes / value streams | Not Started |
+| L5 | Department systems | Not Started |
+| L6 | Cross-department workflows | Not Started |
+| L7 | Department AI managers | Not Started |
+| L8 | Company AI executives | Not Started |
+| L9 | Company control tower | Not Started |
+| L10 | Autonomous company | Not Started |
+| Cross-cutting | Agents / skills / prompts / templates | Cataloged |
+| Cross-cutting | APIs / connectors / MCP / A2A / webhooks | Cataloged |
+| Cross-cutting | Human approval / policy / RBAC | Cataloged |
+| Cross-cutting | Observability / evaluation / testing | Cataloged |
+| Cross-cutting | Exception handling / self-healing | Cataloged |
+| Cross-cutting | Security / privacy / compliance | Cataloged |
+| Cross-cutting | Cost / FinOps | Cataloged |
+| Cross-cutting | Backup / DR / lifecycle | Cataloged |
+| Library | Existing-solution discovery | Discovery |
+| Library | Reuse qualification | Discovery |
+| Library | Runtime verification | Discovery |
+| Nivy | Actual integration / implementation | Not Started |
+
+### Progress rule
+
+A row moves forward only when evidence exists:
+
+- **Not Started** — listed but no focused discovery completed.
+- **Discovery** — research is actively identifying reusable solutions.
+- **Cataloged** — candidates/resources are recorded with links and metadata.
+- **Qualified** — solution has been technically/business qualified for reuse.
+- **Implemented** — integrated into the Nivy architecture.
+- **Verified** — implementation has passed runtime/evidence checks.
+
+**Important:** “Cataloged” or “Discovery” at the library level does **not** mean every underlying automation is complete.
+
+
 ## 15. Master research batch
 
 **Complete Business Automation Universe — Atomic Tasks → Micro Automations → Workflows → Cross-Department Automations → Event/Exception/Self-Healing Automations**
