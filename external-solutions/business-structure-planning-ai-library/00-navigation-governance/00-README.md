@@ -143,3 +143,5 @@ Every new library file must be added here **at the same time it is created**. Li
 
 Latest build: **L10 Autonomous Company Discovery started**. The new Business Creation → Autonomy master scope now defines the end-to-end business-building factory that sits across L0–L10. See [Company Control Tower Reuse Catalog](../03-solution-catalogs/40-company-control-tower-reuse-catalog-2026-09.md) and [Autonomous Company Reuse Catalog](../03-solution-catalogs/41-autonomous-company-reuse-catalog-2026-09.md).
 
+
+- [Business Builder & Autonomous Company Reuse Research — Wave 1](../03-solution-catalogs/43-business-builder-autonomous-company-reuse-research-wave-1-2026-09.md)
