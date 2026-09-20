@@ -813,4 +813,4 @@ And additionally verify:
 
 **Status: MASTER AUTOMATION COVERAGE LIST EXPANDED.**
 
-**Latest build progress:** L0 Atomic Actions, L1 Micro Tasks, L2 Task Automations, L3 Workflows, L4 Business Processes and L5 Department Systems are in **Discovery**. See [Business Process & Value-Stream Reuse Catalog](../03-solution-catalogs/35-business-process-value-stream-reuse-catalog-2026-09.md) and [Department System Reuse Catalog](../03-solution-catalogs/36-department-system-reuse-catalog-2026-09.md). The [Library README](./00-README.md) is the master file-level index.
+**Latest build progress:** L0 Atomic Actions, L1 Micro Tasks, L2 Task Automations, L3 Workflows, L4 Business Processes, L5 Department Systems and L6 Cross-Department Systems are in **Discovery**. See [Business Process & Value-Stream Reuse Catalog](../03-solution-catalogs/35-business-process-value-stream-reuse-catalog-2026-09.md) and [Department System Reuse Catalog](../03-solution-catalogs/36-department-system-reuse-catalog-2026-09.md). The [Library README](./00-README.md) is the master file-level index.
