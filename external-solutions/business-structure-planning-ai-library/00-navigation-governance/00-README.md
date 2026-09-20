@@ -30,6 +30,7 @@
 - [Deep Qualification — Agent Company Reuse Candidates](../03-solution-catalogs/25-deep-qualification-agent-company-reuse-candidates-2026-09.md)
 - [Reproducible Qualification — Phase 1 Evidence](../03-solution-catalogs/26-reproducible-qualification-phase-1-2026-09.md)
 - [AI Company Operations, Advertising, Workforce Performance & Control-Tower Reuse Catalog](../03-solution-catalogs/27-ai-company-operations-advertising-workforce-performance-control-tower-2026-09.md)
+- [Autonomous Executive, Department Heads, Control Towers & Self-Healing Operations](../03-solution-catalogs/28-autonomous-executive-department-heads-control-towers-self-healing-operations-2026-09.md)
 
 ## Core rule for the UI
 
