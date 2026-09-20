@@ -32,3 +32,7 @@ For each finding:
 ID | severity | location | problem | evidence | impact | root cause | dependency | recommended correction | priority.
 
 Do not fix during the audit unless explicitly instructed. Produce an auditable findings report.
+
+
+## Output Storage
+Store audit reports only in the canonical audit folder, with dated/versioned records. Findings must have stable IDs and links to affected files/tasks/commits. Never mix audit findings into implementation files except for required remediation links.
