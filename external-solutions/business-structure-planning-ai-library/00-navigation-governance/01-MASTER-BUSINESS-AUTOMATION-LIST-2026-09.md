@@ -627,30 +627,30 @@ The following categories are added so the master list does not stop at common CR
 
 | Value stream | Required automation coverage | Progress |
 |---|---|---|
-| Lead-to-cash | demand → lead → opportunity → quote → contract → order → invoice → collection → revenue | Not Started |
-| Quote-to-order | qualification → pricing → quote → approval → signature → order | Not Started |
-| Order-to-cash | order → fulfillment → invoice → payment → reconciliation → close | Not Started |
-| Procure-to-pay | request → sourcing → approval → PO → receipt → invoice → payment | Not Started |
-| Hire-to-retire | workforce plan → recruit → hire → onboard → develop → compensate → transfer → exit | Not Started |
-| Idea-to-product | idea → research → discovery → requirements → build → QA → launch → adoption → retirement | Not Started |
-| Incident-to-resolution | detect → triage → assign → mitigate → resolve → verify → RCA → prevent recurrence | Not Started |
-| Request-to-fulfillment | request → policy → approval → assignment → execution → evidence → closure | Not Started |
-| Record-to-report | capture → classify → post → reconcile → close → consolidate → report → audit | Not Started |
-| Contract-to-renewal | draft → review → approve → sign → obligation → monitor → renew/terminate | Not Started |
-| Source-to-contract | supplier discovery → qualification → RFQ → negotiation → contract → supplier performance | Not Started |
-| Customer-issue-to-knowledge | issue → resolve → verify → extract lesson → knowledge article → publish → reuse | Not Started |
-| Campaign-to-revenue | brief → audience → creative → media → lead → attribution → revenue → optimization | Not Started |
-| Content-to-distribution | research → brief → create → QA → approval → publish → syndicate → measure → repurpose | Not Started |
-| Employee-access lifecycle | hire/change/exit → identity → permissions → assets → review → revoke → audit | Not Started |
-| Data-to-decision | ingest → quality → semantic model → analysis → insight → decision → action → outcome | Not Started |
-| Model/agent-to-production | design → dataset → evaluation → approval → deployment → monitoring → rollback → retirement | Not Started |
-| Policy-to-control | policy → control → owner → implementation → evidence → test → remediation → attestation | Not Started |
-| Risk-to-treatment | identify → assess → prioritize → treatment → owner → monitor → accept/transfer/mitigate | Not Started |
-| Problem-to-prevention | detect → RCA → corrective action → verification → preventive control → monitoring | Not Started |
-| Asset-to-disposal | acquire → register → assign → maintain → inspect → return → dispose → evidence | Not Started |
-| Supplier-to-performance | onboard → contract → order → delivery → quality → scorecard → remediation → renewal | Not Started |
-| Revenue-to-forecast | pipeline → bookings → billing → collections → actuals → forecast → variance → action | Not Started |
-| Cash-to-treasury | bank/payment feeds → cash position → forecast → liquidity → funding → reconciliation → controls | Not Started |
+| Lead-to-cash | demand → lead → opportunity → quote → contract → order → invoice → collection → revenue | Discovery |
+| Quote-to-order | qualification → pricing → quote → approval → signature → order | Discovery |
+| Order-to-cash | order → fulfillment → invoice → payment → reconciliation → close | Discovery |
+| Procure-to-pay | request → sourcing → approval → PO → receipt → invoice → payment | Discovery |
+| Hire-to-retire | workforce plan → recruit → hire → onboard → develop → compensate → transfer → exit | Discovery |
+| Idea-to-product | idea → research → discovery → requirements → build → QA → launch → adoption → retirement | Discovery |
+| Incident-to-resolution | detect → triage → assign → mitigate → resolve → verify → RCA → prevent recurrence | Discovery |
+| Request-to-fulfillment | request → policy → approval → assignment → execution → evidence → closure | Discovery |
+| Record-to-report | capture → classify → post → reconcile → close → consolidate → report → audit | Discovery |
+| Contract-to-renewal | draft → review → approve → sign → obligation → monitor → renew/terminate | Discovery |
+| Source-to-contract | supplier discovery → qualification → RFQ → negotiation → contract → supplier performance | Discovery |
+| Customer-issue-to-knowledge | issue → resolve → verify → extract lesson → knowledge article → publish → reuse | Discovery |
+| Campaign-to-revenue | brief → audience → creative → media → lead → attribution → revenue → optimization | Discovery |
+| Content-to-distribution | research → brief → create → QA → approval → publish → syndicate → measure → repurpose | Discovery |
+| Employee-access lifecycle | hire/change/exit → identity → permissions → assets → review → revoke → audit | Discovery |
+| Data-to-decision | ingest → quality → semantic model → analysis → insight → decision → action → outcome | Discovery |
+| Model/agent-to-production | design → dataset → evaluation → approval → deployment → monitoring → rollback → retirement | Discovery |
+| Policy-to-control | policy → control → owner → implementation → evidence → test → remediation → attestation | Discovery |
+| Risk-to-treatment | identify → assess → prioritize → treatment → owner → monitor → accept/transfer/mitigate | Discovery |
+| Problem-to-prevention | detect → RCA → corrective action → verification → preventive control → monitoring | Discovery |
+| Asset-to-disposal | acquire → register → assign → maintain → inspect → return → dispose → evidence | Discovery |
+| Supplier-to-performance | onboard → contract → order → delivery → quality → scorecard → remediation → renewal | Discovery |
+| Revenue-to-forecast | pipeline → bookings → billing → collections → actuals → forecast → variance → action | Discovery |
+| Cash-to-treasury | bank/payment feeds → cash position → forecast → liquidity → funding → reconciliation → controls | Discovery |
 
 ### 17.3 Missing department / corporate capability areas
 
