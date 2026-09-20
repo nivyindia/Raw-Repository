@@ -24,3 +24,7 @@ DO
 
 STOP CONDITION
 No new custom component is approved while a credible reusable candidate remains unreviewed.
+
+
+## Output Storage
+Store discovery results in the destination repository's designated research/reuse catalog folders. Exact external assets go only into their approved asset/library locations after provenance and license checks. Store source URLs, commits, versions and evidence beside the record. Never dump research into the project root.
