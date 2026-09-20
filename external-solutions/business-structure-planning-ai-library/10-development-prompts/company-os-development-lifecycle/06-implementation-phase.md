@@ -24,3 +24,7 @@ Implementation + test + evidence + documentation + status update.
 
 If blocked:
 record exact blocker, evidence, attempted solutions and next smallest unblock action.
+
+
+## Output Storage
+Implementation artifacts must be placed beside the component they belong to. Tests belong in the repository's test location; configuration in configuration locations; documentation in docs; evidence in evidence/artifact locations. Never put generated implementation files into the prompt/planning folders unless they are themselves prompt assets.
