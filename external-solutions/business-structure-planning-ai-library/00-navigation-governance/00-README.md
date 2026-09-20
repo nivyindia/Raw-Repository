@@ -113,6 +113,7 @@ The catalog is intentionally living and must continue to grow.
 - [Department AI Manager & AI Workforce Reuse Catalog](../03-solution-catalogs/38-department-ai-manager-and-ai-workforce-reuse-catalog-2026-09.md)
 - [Company AI Executive Reuse Catalog](../03-solution-catalogs/39-company-ai-executive-reuse-catalog-2026-09.md)
 - [Company Control Tower Reuse Catalog](../03-solution-catalogs/40-company-control-tower-reuse-catalog-2026-09.md)
+- [Autonomous Company Reuse Catalog](../03-solution-catalogs/41-autonomous-company-reuse-catalog-2026-09.md)
 
 ### 04 — AI Technology / Agent Systems
 - [Memory / RAG / Context / Knowledge Systems](../04-ai-technology-agent-systems/15-agent-memory-rag-context-knowledge-systems-2026-09.md)
@@ -137,5 +138,5 @@ Every new library file must be added here **at the same time it is created**. Li
 ### Master-build navigation
 **L0 Atomic Actions → L1 Micro Tasks → L2 Task Automations → L3 Workflows → L4 Business Processes → L5 Department Systems → L6 Cross-Department → L7 AI Managers → L8 AI Executives → L9 Control Tower → L10 Autonomous Company**
 
-Latest build: **L9 Company Control Tower Discovery started**. See [Company AI Executive Reuse Catalog](../03-solution-catalogs/39-company-ai-executive-reuse-catalog-2026-09.md) and [Company Control Tower Reuse Catalog](../03-solution-catalogs/40-company-control-tower-reuse-catalog-2026-09.md).
+Latest build: **L10 Autonomous Company Discovery started**. See [Company Control Tower Reuse Catalog](../03-solution-catalogs/40-company-control-tower-reuse-catalog-2026-09.md) and [Autonomous Company Reuse Catalog](../03-solution-catalogs/41-autonomous-company-reuse-catalog-2026-09.md).
 
