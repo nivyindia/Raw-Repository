@@ -755,7 +755,7 @@ Status values: **Not Started → Discovery → Cataloged → Qualified → Imple
 | L1 | Micro tasks | Discovery |
 | L2 | Task automations | Discovery |
 | L3 | Workflows | Discovery |
-| L4 | Business processes / value streams | Not Started |
+| L4 | Business processes / value streams | Discovery |
 | L5 | Department systems | Not Started |
 | L6 | Cross-department workflows | Not Started |
 | L7 | Department AI managers | Not Started |
