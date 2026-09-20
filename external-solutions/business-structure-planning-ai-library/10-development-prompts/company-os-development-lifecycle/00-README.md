@@ -73,3 +73,27 @@ Git strategy:
 - never use tags as mutable pointers
 
 A task is complete only when implementation + verification + evidence + documentation + status update are complete.
+
+
+## Autonomous Use
+Use **15-autonomous-entry-point-sequence-controller.md** as the default entry point when only a destination repository is supplied. It decides which lifecycle prompt to run next from repository state.
+
+### Required execution sequence
+**15 → 01 → 02 → 03 → 04 → 05 → 06 ↔ 07 ↔ 08 → 12 → 09 → 10 → 11 → 07 → 09 → 13 → 14 → repeat**
+
+The arrows are dependency-aware, not a requirement to finish every prompt once. The controller may return to an earlier prompt whenever audit, dependency, architecture, verification or release state requires it.
+
+## Universal File-Storage Rule
+Every prompt must persist its output in the destination repository's logical canonical folder. Important results must never remain only in chat. Before creating a file, search for an existing canonical destination and update/link it rather than creating duplicates. Implementation, research, audit, evidence, planning and release artifacts must remain separated.
+
+## Additional Controls
+- **Decision log:** record important architecture/product decisions and rationale.
+- **Risk register:** track security, reliability, cost, dependency, legal/license and operational risks.
+- **Dependency register:** record external/internal dependencies and version constraints.
+- **Evidence index:** link each verification result to task, commit and version.
+- **Change impact analysis:** required before contract/architecture changes.
+- **Rollback/migration record:** required for state/schema/contract changes.
+- **Definition of Done:** implementation + verification + evidence + documentation + status.
+- **Definition of Ready:** objective + dependencies + acceptance criteria + reuse check + verification method.
+- **Archive policy:** superseded artifacts are archived, not silently deleted.
+- **Resume guarantee:** repository state alone must be sufficient for another agent to continue.
