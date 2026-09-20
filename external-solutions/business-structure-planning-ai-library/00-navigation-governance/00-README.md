@@ -77,3 +77,58 @@ For go-to-market and digital presence, it must also cover:
 **Search → Social → Messaging → Email → Voice → Web → Communities → Reviews → Directories → Company/Contact Data → Jobs/Talent → Freelance/Service Marketplaces → Product/Software Marketplaces → Ecommerce → App Stores → Cloud Marketplaces → Events → PR/Media/Podcasts → Influencers/Creators → Affiliates/Referrals/Partners → Advertising → AI Search/GEO → Government Procurement → Public Registries/Open Data → Grants → Finance/Payments → HR/Payroll → Legal/Compliance → Customer Support → Meetings/Calendar → ERP/CRM → Knowledge → Analytics → Browser Automation → MCP → A2A → Identity/RBAC/Approval/Audit**
 
 The catalog is intentionally living and must continue to grow.
+
+## MASTER LIBRARY INDEX — FILE LINKS BY CATEGORY
+
+> **Use this section as the file-level navigation index.** These links point to the **actual library files**, not the source repositories/resources they catalogue.
+
+### 00 — Navigation & Governance
+- [Library README](./00-README.md)
+- [Master Business Automation List](./01-MASTER-BUSINESS-AUTOMATION-LIST-2026-09.md)
+
+### 02 — Company / Department Models
+- [Agentic Company — Complete Department Catalog](../02-company-department-models/13-agentic-company-complete-department-catalog-2026-09.md)
+- [Master International Department Completeness Framework](../02-company-department-models/95-master-international-department-completeness-framework.md)
+- [Master Prompt — Complete Department Discovery](../02-company-department-models/96-master-prompt-complete-department-discovery.md)
+
+### 03 — Solution Catalogs
+- [Internet Reuse Catalog](../03-solution-catalogs/11-internet-reuse-catalog-2026-09.md)
+- [Templates & Playbooks Catalog](../03-solution-catalogs/12-templates-and-playbooks-catalog.md)
+- [New AI System Discovery Batch](../03-solution-catalogs/22-new-ai-system-discovery-batch-2026-09.md)
+- [JARVIS / Voice / Creator / YouTube / Social / Marketing Reuse](../03-solution-catalogs/23-jarvis-voice-creator-youtube-social-marketing-reuse-catalog-2026-09.md)
+- [Complete AI-Native Company Capability & Technology Universe](../03-solution-catalogs/24-complete-ai-company-capability-technology-universe-2026-09.md)
+- [Deep Qualification — Agent Company Reuse Candidates](../03-solution-catalogs/25-deep-qualification-agent-company-reuse-candidates-2026-09.md)
+- [Reproducible Qualification — Phase 1 Evidence](../03-solution-catalogs/26-reproducible-qualification-phase-1-2026-09.md)
+- [AI Company Operations / Advertising / Workforce / Control Tower](../03-solution-catalogs/27-ai-company-operations-advertising-workforce-performance-control-tower-2026-09.md)
+- [Autonomous Executives / Department Heads / Control Towers / Self-Healing](../03-solution-catalogs/28-autonomous-executive-department-heads-control-towers-self-healing-operations-2026-09.md)
+- [AI Department Heads / Workforce / RevOps / Finance / Security](../03-solution-catalogs/29-ai-department-heads-workforce-revops-finance-security-control-2026-09.md)
+- [Final Gap Discovery — Ad Allocation / Causal KPI / Capacity / Board / Procurement / CHRO / Digital Twin](../03-solution-catalogs/30-final-gap-discovery-ad-allocation-causal-kpi-capacity-board-procurement-chro-digital-twin-2026-09.md)
+- [Complete AI Reuse Universe — Agents / Skills / Prompts / Workflows / Dashboards / Documents](../03-solution-catalogs/31-complete-ai-reuse-universe-agents-skills-prompts-workflows-dashboards-documents-2026-09.md)
+- [Atomic & Micro Automation Reuse Catalog](../03-solution-catalogs/32-atomic-micro-automation-reuse-catalog-2026-09.md)
+- [Task Automation Reuse Catalog](../03-solution-catalogs/33-task-automation-reuse-catalog-2026-09.md)
+
+### 04 — AI Technology / Agent Systems
+- [Memory / RAG / Context / Knowledge Systems](../04-ai-technology-agent-systems/15-agent-memory-rag-context-knowledge-systems-2026-09.md)
+- [Agentic AI System Universe](../04-ai-technology-agent-systems/16-agentic-ai-system-universe-2026-09.md)
+- [AI Technology Universe — Ready-Made Systems](../04-ai-technology-agent-systems/17-ai-technology-universe-ready-made-systems-2026-09.md)
+- [AI Technology Universe — Gap Expansion](../04-ai-technology-agent-systems/18-ai-technology-universe-gap-expansion-2026-09.md)
+- [Agentic Company Channel / Surface Expansion](../04-ai-technology-agent-systems/14-agentic-company-channel-surface-expansion-2026-09.md)
+
+### 06 — Adoption / Implementation
+- [Runtime Qualification — Phase 2 Windows](../06-adoption-implementation/26-runtime-qualification-phase-2-windows-2026-09.md)
+- [Phase 2 Windows Runner](../06-adoption-implementation/RUN-PHASE-2-WINDOWS.ps1)
+
+### 08 — Unified Company UI / Workspace
+- [Unified Company UI & Employee Dashboard Catalog](../08-unified-company-ui-workspace/01-unified-company-ui-and-employee-dashboard-catalog.md)
+
+### 09 — Business Planning / Strategy
+- [Business Planning & AI Strategy Resource Catalog](../09-business-planning-strategy/01-business-planning-and-ai-strategy-resource-catalog.md)
+
+### Indexing rule
+Every new library file must be added here **at the same time it is created**. Link the library file itself; source/resource links belong inside that catalog. Do not replace a library-file link with a GitHub repository/source link.
+
+### Master-build navigation
+**L0 Atomic Actions → L1 Micro Tasks → L2 Task Automations → L3 Workflows → L4 Business Processes → L5 Department Systems → L6 Cross-Department → L7 AI Managers → L8 AI Executives → L9 Control Tower → L10 Autonomous Company**
+
+Latest build: **L2 Task Automation Discovery started**. See [Task Automation Reuse Catalog](../03-solution-catalogs/33-task-automation-reuse-catalog-2026-09.md).
+
