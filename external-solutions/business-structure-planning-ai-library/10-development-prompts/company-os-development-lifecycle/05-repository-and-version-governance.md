@@ -31,3 +31,7 @@ MAJOR = breaking contract/architecture change.
 
 Before release verify:
 working tree state, tests, security checks, dependencies, documentation, evidence, migration path, rollback path, version metadata, and tag target.
+
+
+## Output Storage
+Store repository governance, branch policy, release policy, version policy, migration notes and changelog in the designated governance/release folders. Never store generated release notes or version records in arbitrary folders.
