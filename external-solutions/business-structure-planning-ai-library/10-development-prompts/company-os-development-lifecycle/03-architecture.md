@@ -46,3 +46,7 @@ purpose, inputs, outputs, interfaces, dependencies, state, failure modes, securi
 
 OUTPUT
 A canonical architecture with explicit dependency order and no circular foundational dependencies.
+
+
+## Output Storage
+Store canonical architecture documents only in the repository's architecture/docs area. Store diagrams/specifications/contracts in their corresponding logical subfolders. If a new architecture artifact has no existing destination, create the smallest logical folder and document the new convention in the repository index.
