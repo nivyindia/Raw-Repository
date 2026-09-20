@@ -830,3 +830,249 @@ For every capability discovered later:
 **SEARCH META-DIRECTORIES → SEARCH GITHUB → SEARCH OFFICIAL MARKETPLACES → SEARCH OPEN-SOURCE → SEARCH COMMERCIAL → SEARCH TEMPLATES → SEARCH SKILLS → SEARCH PROMPTS → SEARCH MCP/A2A → QUALIFY → DEDUPLICATE → INDEX → MAP TO Nivy → TEST → REUSE**
 
 **Status: MASTER REUSE UNIVERSE BASELINE CREATED — CONTINUOUS DISCOVERY REQUIRED.**
+
+
+---
+
+# 34. Missing micro-automation discovery — newly filled
+
+This section specifically closes the earlier **micro-task gap**. These are not replacements for Catalogs 24–30; they are the reusable implementation layer underneath them.
+
+## 34.1 Email, inbox and personal-assistant micro automation
+
+| Resource | Reusable capability | Source |
+|---|---|---|
+| Gmail Agent | Email classification, draft replies, meeting extraction, calendar slot finding, human approval | https://github.com/PierreExeter/gmail-agent |
+| Email Agent | Gmail triage, notify/respond classification, memory, approval inbox, calendar integration | https://github.com/iamtokarev/email_assistant |
+| Jarvis | Email/DM triage, reply drafting, approval workflow, relationship reminders, multi-channel integrations | https://github.com/nolanmak/Jarvis |
+| Auren | Natural-language multi-service execution across Gmail, Calendar and GitHub with plan → approval → execution → audit | https://github.com/pranavgawaii/Auren |
+| GAIA | Proactive inbox triage, email → todo, meeting briefings, scheduled/event workflows and notifications | https://github.com/theexperiencecompany/gaia |
+| Livia | Scheduling, correspondence, research, bookings, Gmail/Calendar and lightweight CRM | https://github.com/giuerr/livia |
+| NOVA Personal AI Assistant | Email/calendar agents with explicit approval before outbound actions | https://github.com/piyushsonawane07/NOVA-Personal-AI-Assistant |
+| Orderly | Mail summaries/drafts, plain-language mail rules, calendar proposals, reminders and daily briefing with fail-safe behavior | https://github.com/lerugray/orderly |
+| Assistant | Recurring jobs, deep research, persistent memory, notes/contacts, semantic workspace and calendar integrations | https://github.com/rb81/assistant |
+| Hermes | Telegram-based email/calendar/document liaison with human-approved email drafting | https://github.com/BradleyXiX/Hermes |
+
+These close the specific atomic tasks: **classify → summarize → extract → draft → route → schedule → approve → send → create task → remind → brief**. Several independent projects demonstrate the same reusable pattern, so Nivy should compose rather than rebuild these primitives. citeturn1search0turn1search1turn1search3turn1search4
+
+## 34.2 Ready-made workflow templates
+
+| Resource | Coverage | Source |
+|---|---|---|
+| Awesome n8n Templates | 280+ workflow templates across Gmail, Telegram, Sheets, Drive, WordPress, PDFs, Slack, WhatsApp, social, forms and AI | https://github.com/enescingoz/awesome-n8n-templates |
+| n8n AI SDR template | Lead ingestion, CRM update, personalized follow-ups, Calendar booking detection and no-show automation | https://n8n.io/workflows/13529-run-an-ai-sdr-sales-pipeline-with-openai-google-sheets-gmail-and-calendar/ |
+| n8n 5000+ collection | Large business automation collection spanning sales, marketing, finance, ecommerce, support, RAG and productivity | https://github.com/sander2610/n8n-automation-templates-500 |
+| n8n B2B portfolio | Lead qualification, CRM, invoice automation, normalization, deduplication, synchronization, enrichment and audit logging | https://github.com/tabii-dev/n8n-Portfolio |
+| AI Agent Skills | Reusable agent skills including knowledge work, documents, research, productivity and business workflows | https://github.com/Ezeafk/awesome-agent-skills |
+| Knowledge-work Agent Skills | Email, calendar, documents, PDF, spreadsheets, research and productivity skills | https://github.com/pbans-agent/awesome-agent-skills |
+| AI Library | Searchable reusable agent skills, instruction files, agent definitions, prompt templates and automations | https://ai.tedt.org/ |
+| Build Future Skills | Portable skills with source/reuse/trust metadata | https://buildfuture.ai/skills/ |
+
+The n8n ecosystem directly covers many previously missing micro tasks, including email automation, document processing, lead qualification, social workflows, forms and cross-application synchronization. citeturn0search0turn0search11turn0search5
+
+## 34.3 Forms → validation → approval → notification → audit
+
+| Resource | Reusable capability | Source |
+|---|---|---|
+| formsflow.ai | Forms + workflow + analytics + human/parallel/timed flows + notifications/reminders/alerts + dashboards | https://github.com/AOT-Technologies/forms-flow-ai |
+| Django Forms Workflows | Database forms, validation, calculated fields, multi-stage approvals, dynamic assignees and external data | https://github.com/opensensor/django-forms-workflows |
+| Approval MCP Server | MCP-native multi-stage approvals, quorum/sequential rules, delegation, escalation, SLA clocks and immutable audit | https://github.com/zavora-ai/mcp-approval |
+| deliberate | LangGraph approval layer with policy routing, multi-approver workflow, notifications, timeout/escalation and audit ledger | https://github.com/beomwookang/deliberate |
+| Regulatory Approval System | Risk scoring, staged human review, compliance check, SLA escalation and end-to-end audit | https://github.com/bhumika-aga/RegulatoryApprovalSystem |
+| Nodlyn templates | Approval, polling, branching, manager approval inbox and document archival patterns | https://nodlyn.com/blog/business-use-cases-and-templates |
+| formsflow.ai architecture | Form → workflow → notification → metrics/dashboard reference | https://github.com/AOT-Technologies/forms-flow-ai |
+
+These fill: **form creation → validation → enrichment → assignment → approval → correction → escalation → notification → completion → audit → dashboard**. formsflow.ai explicitly combines forms, workflow and analytics, while Django Forms Workflows provides detailed multi-stage approval primitives. citeturn2search15turn2search6
+
+## 34.4 Notification, routing and escalation
+
+| Resource | Reusable capability | Source |
+|---|---|---|
+| IncidentRelay | Alert intake, normalization, routing, deduplication, grouping, escalation, notifications, audit and replay | https://github.com/roxy-wi/IncidentRelay |
+| OpenWind | Entity/workflow/automation engines, role guards, conditional branches, SLA timers and immutable event log | https://github.com/TinyPhi/OpenWind |
+| Sphynx | Durable workflows, human task inbox, SLA, delegation, escalation, forms, policy decisions and 350+ connectors | https://github.com/Pommala-LLC/sphynx |
+| Tessio | AI ITSM triage, workflows, SLAs, breach detection/escalation, email-to-ticket, dashboards and reports | https://github.com/tessio-ai/tessio |
+
+The reusable cross-department primitive is:
+
+**EVENT → NORMALIZE → DEDUPLICATE → ROUTE → PRIORITIZE → NOTIFY → ACK → ESCALATE → RESOLVE → VERIFY → AUDIT**
+
+IncidentRelay is especially useful as a reference for generic event/alert routing rather than only IT incidents. citeturn2search3
+
+## 34.5 Document generation and document micro-services
+
+| Resource | Reusable capability | Source |
+|---|---|---|
+| Typst Business Templates | AI-assisted invoices, offers, contracts, documentation, diagrams and branded PDF generation | https://github.com/casoon/typst-business-templates |
+| rendoc MCP | AI/MCP PDF generation for invoices, contracts, reports, certificates and bulk documents | https://github.com/yoryocoruxo-ai/rendoc-mcp-server |
+| ComPDF Generation | HTML-template PDF generation for contracts, invoices, reports and certificates | https://github.com/ComPDFKit/compdf-generation |
+| ContractSpark | AI contract generation with reusable templates and PDF export | https://github.com/ICodingStack/ContractSpark |
+| AI Document Template Engine | Placeholder extraction, entity-field mapping, validation of missing fields and PDF generation | https://github.com/devikavn22/AI-Powered-Document-Template-Engine |
+| Axiom | Natural-language proposal and invoice generation with tracking | https://github.com/priyanshjhaa/Axiom |
+| AI Workflow Delivery Framework | Scope, contracts, retainer, invoice, email, proposal, handover, change-order and AI-maintenance templates | https://github.com/mjmirza/AI-Workflow-Delivery-Framework |
+
+This fills the missing chain:
+
+**DATA → TEMPLATE → FIELD MAPPING → VALIDATION → GENERATION → HUMAN REVIEW → PDF/DOCX → DELIVERY → TRACKING → ARCHIVE**
+
+rendoc additionally makes document generation directly callable by MCP-compatible AI assistants. citeturn1search20
+
+## 34.6 Dashboard/report generation and scheduled distribution
+
+| Resource | Reusable capability | Source |
+|---|---|---|
+| OpenBI | 90+ data sources, AI agents, dashboards, PDF/PPTX export and scheduled email/Telegram/webhook reports | https://github.com/narender-rk10/OpenBI |
+| Helical Insight | AI analytics, dashboards, paginated reports, embedding, SSO, multi-tenancy and scheduled report bursting | https://github.com/helicalinsight/helicalinsight |
+| Universal AI Dashboard Generator | CSV cleaning, deterministic insights, adaptive dashboard, PDF report and scheduled daily email | https://github.com/shaikmohammedshoaib666/universal-ai-dashboard-generator |
+| GenAIReportAgent | Scheduled web collection → structured report → dashboard → grounded chat | https://github.com/Yasser03/GenAIReportAgent |
+| Metabase | Query/dashboard/reporting | https://github.com/metabase/metabase |
+| Superset | BI/dashboarding | https://github.com/apache/superset |
+| Evidence | Code-based analytical reports | https://github.com/evidence-dev/evidence |
+
+OpenBI demonstrates the complete **data → AI analysis → dashboard → PDF/PPTX → scheduled delivery → run history** chain. citeturn2search4 Helical Insight adds enterprise-style scheduled report bursting and embedding. citeturn2search11
+
+## 34.7 Data-entry, cleaning, normalization, deduplication and enrichment
+
+| Resource | Reusable capability | Source |
+|---|---|---|
+| n8n B2B Portfolio | Data normalization, duplicate detection, deduplication, synchronization, enrichment and audit | https://github.com/tabii-dev/n8n-Portfolio |
+| Universal AI Dashboard Generator | Cleaning, duplicate removal, type/date normalization and evidence-based insights | https://github.com/shaikmohammedshoaib666/universal-ai-dashboard-generator |
+| NocoBase | Configurable data/business applications and workflows | https://github.com/nocobase/nocobase |
+| NocoDB | Spreadsheet-style structured data layer | https://github.com/nocodb/nocodb |
+| Directus | Data platform/API/CMS | https://github.com/directus/directus |
+| Airbyte | Data movement/integration | https://github.com/airbytehq/airbyte |
+| Debezium | Change-data capture | https://github.com/debezium/debezium |
+
+Required primitive:
+
+**INGEST → VALIDATE → NORMALIZE → ENRICH → DEDUPE → MAP → UPSERT → VERIFY → AUDIT**
+
+## 34.8 Cross-application command execution
+
+| Resource | Reusable capability | Source |
+|---|---|---|
+| Auren | Natural-language intent → execution plan → approval → parallel Gmail/Calendar/GitHub actions → audit | https://github.com/pranavgawaii/Auren |
+| General Bots | Self-hosted multi-agent platform with chat, CRM, mail, drive, calendar, RAG, documents, sheets/slides, WhatsApp and Teams | https://github.com/generalbots/generalbots |
+| Trinyx | Visual workflows + agents + forms + dashboards + approval screens + tables + 700+ integrations + run metrics | https://github.com/TrinyxAI/Trinyx |
+| OpenWind | Generic entity/workflow/automation architecture | https://github.com/TinyPhi/OpenWind |
+
+General Bots is particularly relevant to the missing **"small action across many business systems"** layer because it combines email, calendar, documents, sheets/slides, messaging and RAG in one self-hostable platform. citeturn0search16 Trinyx combines workflows, agents, forms, dashboards, approval screens, tables and integration catalog in one runtime. citeturn2search12
+
+---
+
+# 35. Micro-task coverage matrix — now explicitly tracked
+
+| Micro capability | Discovery coverage | Primary reuse candidates |
+|---|---|---|
+| Email classify | CLOSED AT CANDIDATE LEVEL | Gmail Agent, Email Agent, GAIA |
+| Email summarize | CLOSED | Gmail Agent, Orderly |
+| Email draft | CLOSED | Gmail Agent, Jarvis, NOVA |
+| Email approval | CLOSED | Jarvis, deliberate, NOVA |
+| Email → task | CLOSED | GAIA, n8n |
+| Email → calendar | CLOSED | Gmail Agent, LLM Email, NOVA |
+| Calendar scheduling | CLOSED | Livia, Auren, Cal.com, GAIA |
+| Calendar conflict handling | CLOSED | LLM Email, scheduling agents |
+| Meeting → tasks | CLOSED AT COMPONENT LEVEL | GAIA + meeting/transcription stack |
+| File OCR | CLOSED | Docling, OCRmyPDF, PaddleOCR, Tesseract |
+| File classify | CLOSED | Document/RAG stacks + n8n |
+| File metadata | CLOSED AT COMPONENT LEVEL | Paperless-ngx + document pipelines |
+| File duplicate detection | CLOSED AT COMPONENT LEVEL | n8n B2B workflows + data layer |
+| Form creation | CLOSED | formsflow.ai, Django Forms Workflows |
+| Form validation | CLOSED | Django Forms Workflows, formsflow.ai |
+| Form → approval | CLOSED | formsflow.ai, Approval MCP |
+| Approval escalation | CLOSED | deliberate, Approval MCP, IncidentRelay |
+| Notification routing | CLOSED | IncidentRelay, n8n, OpenWind |
+| Task creation/assignment | CLOSED AT COMPONENT LEVEL | n8n, workflow engines, project systems |
+| Data cleaning | CLOSED | Universal AI Dashboard Generator, n8n |
+| Data normalization | CLOSED | n8n B2B portfolio, integration layer |
+| Deduplication | CLOSED AT CANDIDATE LEVEL | n8n B2B portfolio |
+| Data enrichment | CLOSED AT CANDIDATE LEVEL | n8n B2B portfolio |
+| Report generation | CLOSED | OpenBI, Helical Insight, GenAIReportAgent |
+| Scheduled report delivery | CLOSED | OpenBI, Helical Insight |
+| Dashboard generation | CLOSED | OpenBI, Universal AI Dashboard Generator |
+| PDF generation | CLOSED | rendoc, Typst, ReportLab, ComPDF |
+| Proposal generation | CLOSED | Axiom, Typst Business Templates |
+| Invoice generation | CLOSED | Typst, Axiom, Oreko |
+| Contract generation | CLOSED | ContractSpark, rendoc, template engines |
+| SOP/document templates | CLOSED | AI Workflow Delivery Framework + template engines |
+| Cross-app command | CLOSED AT REFERENCE LEVEL | Auren, General Bots, Trinyx |
+| Exception/retry | CLOSED AT ENGINE LEVEL | n8n, Temporal, workflow engines |
+| SLA escalation | CLOSED | OpenWind, Tessio, IncidentRelay |
+| Audit trail | CLOSED | deliberate, Approval MCP, OpenWind, Trinyx |
+| Run replay | CLOSED AT COMPONENT LEVEL | IncidentRelay, observability stack |
+
+**Important:** "CLOSED" here means **a reusable candidate exists**, not that Nivy has integrated or production-qualified it.
+
+---
+
+# 36. Previously missing automation categories — coverage audit
+
+The library now explicitly covers:
+
+### A. Communication automation
+**Email → Calendar → Chat → WhatsApp → Voice → Notifications → Escalation**
+
+### B. Information automation
+**Search → Crawl → OCR → Parse → Extract → Classify → Summarize → Translate → Store → Retrieve**
+
+### C. Data automation
+**Ingest → Validate → Normalize → Enrich → Deduplicate → Map → Sync → Aggregate → Analyze**
+
+### D. Work automation
+**Trigger → Task → Assign → Prioritize → Execute → Verify → Escalate → Close**
+
+### E. Approval automation
+**Request → Risk → Route → Approve/Reject → Timeout → Escalate → Execute → Audit**
+
+### F. Document automation
+**Input → Template → Field mapping → Generate → Review → Sign → Deliver → Archive**
+
+### G. Reporting automation
+**Data → KPI → Analysis → Dashboard → Report → Schedule → Distribute → Acknowledge → Archive**
+
+### H. Knowledge automation
+**Capture → OCR → Chunk → Embed → Index → Retrieve → Cite → Update → Retire**
+
+### I. AI workforce automation
+**Hire/Provision → Identity → Skills → Assign → Run → Evaluate → Improve → Suspend/Retire**
+
+### J. Company control automation
+**Goal → Plan → Execute → Measure → Detect → Diagnose → Decide → Approve → Act → Verify → Learn**
+
+---
+
+# 37. Remaining gaps after this micro-automation expansion
+
+The earlier "micro automation missing" problem is now substantially covered by reusable candidates. The remaining gaps are **Nivy composition/integration**, not generic discovery:
+
+1. **Universal Automation Contract** — one schema for Trigger/Input/Context/Decision/Action/Verification/Exception/Escalation/Audit.
+2. **Nivy Universal Connector Registry** — canonical connector IDs for CRM, email, calendar, ERP, finance, HR, messaging, storage and AI systems.
+3. **Nivy Automation Registry** — every automation gets owner, trigger, permissions, dependencies, SLA, cost, risk, rollback and KPI.
+4. **Nivy Human Approval Inbox** — unified approvals across all departments.
+5. **Nivy Document Template Registry** — reusable document types, schemas, versions, owners and approval rules.
+6. **Nivy Report Registry** — KPI definitions, report definitions, schedules, audiences and delivery channels.
+7. **Nivy Skill Registry** — skill metadata, compatibility, version, source, license, security and test evidence.
+8. **Nivy Prompt Registry** — versioned prompts, variables, models, evaluations and owners.
+9. **Nivy Exception/Recovery Registry** — standardized retry/fallback/escalation behavior.
+10. **Nivy Automation Test Harness** — test fixtures, dry runs, simulated external systems and regression tests.
+11. **Nivy Cross-system Event Bus** — normalized events so one event can trigger many workflows.
+12. **Nivy Cost/Usage Ledger** — API/model/tool/workflow cost per task, employee, department and company.
+13. **Nivy Evidence/Audit Ledger** — immutable action/evidence/approval/result chain.
+14. **Nivy Automation Marketplace/Library UI** — browse → inspect → test → install → configure → monitor.
+15. **Continuous Discovery Agent** — periodically scans GitHub, marketplaces, skill directories, MCP/A2A registries and workflow libraries and proposes new reuse candidates.
+
+These are the **actual build/integration gaps** left after searching the reusable ecosystem. Do not create separate products for each; they should become shared Nivy infrastructure.
+
+---
+
+# 38. Updated master principle
+
+The library is now organized around:
+
+**DISCOVER EVERYTHING → MAP EVERY GRANULARITY → FIND EXISTING ASSET → QUALIFY → DEDUPLICATE → COMPOSE → ADAPT → INTEGRATE → TEST → MEASURE → REUSE → CONTINUOUSLY DISCOVER**
+
+And the target is explicitly:
+
+**ATOMIC ACTIONS + MICRO TASKS + TASKS + WORKFLOWS + PROCESSES + DEPARTMENT SYSTEMS + AI EMPLOYEES + AI DEPARTMENT HEADS + EXECUTIVES + CONTROL TOWER + DIGITAL TWIN**
+
+**Status: MICRO-AUTOMATION GAP EXPANSION COMPLETE; Nivy INTEGRATION GAPS IDENTIFIED.**
