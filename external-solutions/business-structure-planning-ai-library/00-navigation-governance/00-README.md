@@ -145,3 +145,5 @@ Latest build: **L10 Autonomous Company Discovery started**. The new Business Cre
 
 
 - [Business Builder & Autonomous Company Reuse Research — Wave 1](../03-solution-catalogs/43-business-builder-autonomous-company-reuse-research-wave-1-2026-09.md)
+
+- [Business Builder Reuse Research — Wave 2](../03-solution-catalogs/44-business-builder-reuse-research-wave-2-2026-09.md)
