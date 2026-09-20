@@ -107,6 +107,7 @@ The catalog is intentionally living and must continue to grow.
 - [Atomic & Micro Automation Reuse Catalog](../03-solution-catalogs/32-atomic-micro-automation-reuse-catalog-2026-09.md)
 - [Task Automation Reuse Catalog](../03-solution-catalogs/33-task-automation-reuse-catalog-2026-09.md)
 - [Workflow Reuse Catalog](../03-solution-catalogs/34-workflow-reuse-catalog-2026-09.md)
+- [Business Process & Value-Stream Reuse Catalog](../03-solution-catalogs/35-business-process-value-stream-reuse-catalog-2026-09.md)
 
 ### 04 — AI Technology / Agent Systems
 - [Memory / RAG / Context / Knowledge Systems](../04-ai-technology-agent-systems/15-agent-memory-rag-context-knowledge-systems-2026-09.md)
@@ -131,5 +132,5 @@ Every new library file must be added here **at the same time it is created**. Li
 ### Master-build navigation
 **L0 Atomic Actions → L1 Micro Tasks → L2 Task Automations → L3 Workflows → L4 Business Processes → L5 Department Systems → L6 Cross-Department → L7 AI Managers → L8 AI Executives → L9 Control Tower → L10 Autonomous Company**
 
-Latest build: **L3 Workflow Discovery started**. See [Task Automation Reuse Catalog](../03-solution-catalogs/33-task-automation-reuse-catalog-2026-09.md) and [Workflow Reuse Catalog](../03-solution-catalogs/34-workflow-reuse-catalog-2026-09.md).
+Latest build: **L4 Business Process / Value-Stream Discovery started**. See [Workflow Reuse Catalog](../03-solution-catalogs/34-workflow-reuse-catalog-2026-09.md) and [Business Process & Value-Stream Reuse Catalog](../03-solution-catalogs/35-business-process-value-stream-reuse-catalog-2026-09.md).
 
