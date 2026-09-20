@@ -109,6 +109,7 @@ The catalog is intentionally living and must continue to grow.
 - [Workflow Reuse Catalog](../03-solution-catalogs/34-workflow-reuse-catalog-2026-09.md)
 - [Business Process & Value-Stream Reuse Catalog](../03-solution-catalogs/35-business-process-value-stream-reuse-catalog-2026-09.md)
 - [Department System Reuse Catalog](../03-solution-catalogs/36-department-system-reuse-catalog-2026-09.md)
+- [Cross-Department System & Integration Reuse Catalog](../03-solution-catalogs/37-cross-department-system-integration-reuse-catalog-2026-09.md)
 
 ### 04 — AI Technology / Agent Systems
 - [Memory / RAG / Context / Knowledge Systems](../04-ai-technology-agent-systems/15-agent-memory-rag-context-knowledge-systems-2026-09.md)
@@ -133,5 +134,5 @@ Every new library file must be added here **at the same time it is created**. Li
 ### Master-build navigation
 **L0 Atomic Actions → L1 Micro Tasks → L2 Task Automations → L3 Workflows → L4 Business Processes → L5 Department Systems → L6 Cross-Department → L7 AI Managers → L8 AI Executives → L9 Control Tower → L10 Autonomous Company**
 
-Latest build: **L5 Department System Discovery started**. See [Business Process & Value-Stream Reuse Catalog](../03-solution-catalogs/35-business-process-value-stream-reuse-catalog-2026-09.md) and [Department System Reuse Catalog](../03-solution-catalogs/36-department-system-reuse-catalog-2026-09.md).
+Latest build: **L6 Cross-Department Discovery started**. See [Department System Reuse Catalog](../03-solution-catalogs/36-department-system-reuse-catalog-2026-09.md) and [Cross-Department System & Integration Reuse Catalog](../03-solution-catalogs/37-cross-department-system-integration-reuse-catalog-2026-09.md).
 
