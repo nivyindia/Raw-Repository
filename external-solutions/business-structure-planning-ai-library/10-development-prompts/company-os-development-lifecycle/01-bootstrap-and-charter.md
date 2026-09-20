@@ -32,3 +32,10 @@ RULES
 
 OUTPUT
 A bootstrapped repository that can be resumed by another agent without conversation history.
+
+
+## Autonomous Sequence Rule
+If the user supplies only a destination repository, first read this prompt library's README, then execute prompts 01→14 in dependency order. Do not ask the user to manually choose the next prompt unless a required decision/credential/authority is genuinely missing. Create all planning artifacts in their designated folders.
+
+## Storage Rule
+Every generated artifact must be stored immediately in the destination repository under its canonical logical folder. Never leave important output only in chat. Do not create random root files. Before creating a new file, search for an existing canonical destination and update it when appropriate.
