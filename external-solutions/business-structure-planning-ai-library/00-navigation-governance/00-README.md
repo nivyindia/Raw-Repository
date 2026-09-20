@@ -33,6 +33,7 @@
 - [Autonomous Executive, Department Heads, Control Towers & Self-Healing Operations](../03-solution-catalogs/28-autonomous-executive-department-heads-control-towers-self-healing-operations-2026-09.md)
 - [AI Department Heads, Workforce, RevOps, Finance, Security & Enterprise Control](../03-solution-catalogs/29-ai-department-heads-workforce-revops-finance-security-control-2026-09.md)
 - [Final Gap Discovery — Ad Allocation, Causal KPI, Capacity, Board, Procurement, CHRO & Digital Twin](../03-solution-catalogs/30-final-gap-discovery-ad-allocation-causal-kpi-capacity-board-procurement-chro-digital-twin-2026-09.md)
+- [Complete AI Reuse Universe — Agents, Generative AI, Skills, Prompts, Workflows, Dashboards, Reporting, Documents & Company Automation](../03-solution-catalogs/31-complete-ai-reuse-universe-agents-skills-prompts-workflows-dashboards-documents-2026-09.md)
 
 ## Core rule for the UI
 
