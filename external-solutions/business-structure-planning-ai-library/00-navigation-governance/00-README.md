@@ -157,3 +157,4 @@ Latest build: **L10 Autonomous Company Discovery started**. The new Business Cre
 - [Business Builder Reuse Research — Wave 3 Deep Qualification](../03-solution-catalogs/45-business-builder-reuse-research-wave-3-deep-qualification-2026-09.md)
 - [Exact Asset Extraction — Wave 4](../03-solution-catalogs/46-exact-asset-extraction-wave-4-2026-09.md)
 - [Exact Asset Qualification — Wave 5](../03-solution-catalogs/47-exact-asset-qualification-wave-5-2026-09.md)
+- [Runtime & Provenance Qualification — Wave 7](../03-solution-catalogs/48-runtime-dependency-qualification-wave-7-2026-09.md)
