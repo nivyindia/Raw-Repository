@@ -27,6 +27,7 @@
 - [Business Planning and AI Strategy Resource Catalog](../09-business-planning-strategy/01-business-planning-and-ai-strategy-resource-catalog.md)
 - [JARVIS, Voice, AI Creator, YouTube, Social Intelligence and Marketing Reuse Catalog](../03-solution-catalogs/23-jarvis-voice-creator-youtube-social-marketing-reuse-catalog-2026-09.md)
 - [Complete AI-Native Company Capability & Technology Universe](../03-solution-catalogs/24-complete-ai-company-capability-technology-universe-2026-09.md)
+- [Deep Qualification — Agent Company Reuse Candidates](../03-solution-catalogs/25-deep-qualification-agent-company-reuse-candidates-2026-09.md)
 
 ## Core rule for the UI
 
