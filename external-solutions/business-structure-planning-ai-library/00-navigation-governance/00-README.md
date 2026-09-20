@@ -85,6 +85,7 @@ The catalog is intentionally living and must continue to grow.
 ### 00 — Navigation & Governance
 - [Library README](./00-README.md)
 - [Master Business Automation List](./01-MASTER-BUSINESS-AUTOMATION-LIST-2026-09.md)
+- [Master Architecture Gap Tracker — Micro to Major](./04-MASTER-ARCHITECTURE-GAP-TRACKER-MICRO-TO-MAJOR-2026-09.md)
 
 ### 02 — Company / Department Models
 - [Agentic Company — Complete Department Catalog](../02-company-department-models/13-agentic-company-complete-department-catalog-2026-09.md)
@@ -114,6 +115,7 @@ The catalog is intentionally living and must continue to grow.
 - [Company AI Executive Reuse Catalog](../03-solution-catalogs/39-company-ai-executive-reuse-catalog-2026-09.md)
 - [Company Control Tower Reuse Catalog](../03-solution-catalogs/40-company-control-tower-reuse-catalog-2026-09.md)
 - [Autonomous Company Reuse Catalog](../03-solution-catalogs/41-autonomous-company-reuse-catalog-2026-09.md)
+- [AI Agents / Skills / Prompts / Generative AI Reuse Catalog](../03-solution-catalogs/42-ai-agent-skills-prompts-generative-ai-reuse-catalog-2026-09.md)
 - [Master Business Creation → Autonomy List](03-MASTER-BUSINESS-CREATION-TO-AUTONOMY-LIST-2026-09.md)
 
 ### 04 — AI Technology / Agent Systems
