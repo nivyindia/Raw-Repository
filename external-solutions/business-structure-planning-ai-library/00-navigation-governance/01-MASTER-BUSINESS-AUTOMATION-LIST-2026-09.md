@@ -751,8 +751,8 @@ Status values: **Not Started → Discovery → Cataloged → Qualified → Imple
 
 | Master layer | Scope | Progress |
 |---|---|---|
-| L0 | Atomic actions | Not Started |
-| L1 | Micro tasks | Not Started |
+| L0 | Atomic actions | Discovery |
+| L1 | Micro tasks | Discovery |
 | L2 | Task automations | Not Started |
 | L3 | Workflows | Not Started |
 | L4 | Business processes / value streams | Not Started |
@@ -812,3 +812,5 @@ And additionally verify:
 **Security → Privacy → Identity → Permissions → Cost → Reliability → Testing → Observability → Audit → Backup/Recovery → Versioning → Human Approval → Accessibility → Localization → Lifecycle/Retirement**
 
 **Status: MASTER AUTOMATION COVERAGE LIST EXPANDED.**
+
+**Latest build progress:** L0 Atomic Actions and L1 Micro Tasks have entered **Discovery**. See [Atomic & Micro Automation Reuse Catalog](../03-solution-catalogs/32-atomic-micro-automation-reuse-catalog-2026-09.md).
