@@ -135,6 +135,13 @@ The catalog is intentionally living and must continue to grow.
 ### 09 — Business Planning / Strategy
 - [Business Planning & AI Strategy Resource Catalog](../09-business-planning-strategy/01-business-planning-and-ai-strategy-resource-catalog.md)
 
+### 05 — Canonical Architecture Contracts
+- [AI Employee Contract](../05-architecture-contracts/01-ai-employee-contract.md)
+- [Skill Contract](../05-architecture-contracts/02-skill-contract.md)
+- [Signal → Action Contract](../05-architecture-contracts/03-signal-to-action-contract.md)
+- [Business Artifact Factory Contract](../05-architecture-contracts/04-artifact-factory-contract.md)
+- [Dynamic Context Assembly Contract](../05-architecture-contracts/05-dynamic-context-assembly-contract.md)
+
 ### Indexing rule
 Every new library file must be added here **at the same time it is created**. Link the library file itself; source/resource links belong inside that catalog. Do not replace a library-file link with a GitHub repository/source link.
 
