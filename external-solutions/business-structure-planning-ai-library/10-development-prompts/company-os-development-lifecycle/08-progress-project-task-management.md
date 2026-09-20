@@ -20,3 +20,7 @@ What is blocked?
 What is the next exact action?
 Which files/commits/evidence matter?
 How can another agent resume immediately?
+
+
+## Output Storage
+Maintain exactly one canonical current WORK-STATUS, PROJECTS, TASKS and PROGRESS record unless the repository architecture explicitly requires partitioning. Historical snapshots may be archived under a dated archive folder. Pending tasks must never exist only in chat.
