@@ -756,7 +756,7 @@ Status values: **Not Started → Discovery → Cataloged → Qualified → Imple
 | L2 | Task automations | Discovery |
 | L3 | Workflows | Discovery |
 | L4 | Business processes / value streams | Discovery |
-| L5 | Department systems | Not Started |
+| L5 | Department systems | Discovery |
 | L6 | Cross-department workflows | Not Started |
 | L7 | Department AI managers | Not Started |
 | L8 | Company AI executives | Not Started |
@@ -813,4 +813,4 @@ And additionally verify:
 
 **Status: MASTER AUTOMATION COVERAGE LIST EXPANDED.**
 
-**Latest build progress:** L0 Atomic Actions, L1 Micro Tasks, L2 Task Automations and L3 Workflows are in **Discovery**. See [Atomic & Micro Automation Reuse Catalog](../03-solution-catalogs/32-atomic-micro-automation-reuse-catalog-2026-09.md), [Task Automation Reuse Catalog](../03-solution-catalogs/33-task-automation-reuse-catalog-2026-09.md) and [Workflow Reuse Catalog](../03-solution-catalogs/34-workflow-reuse-catalog-2026-09.md). The [Library README](./00-README.md) is the master file-level index.
+**Latest build progress:** L0 Atomic Actions, L1 Micro Tasks, L2 Task Automations, L3 Workflows, L4 Business Processes and L5 Department Systems are in **Discovery**. See [Business Process & Value-Stream Reuse Catalog](../03-solution-catalogs/35-business-process-value-stream-reuse-catalog-2026-09.md) and [Department System Reuse Catalog](../03-solution-catalogs/36-department-system-reuse-catalog-2026-09.md). The [Library README](./00-README.md) is the master file-level index.
