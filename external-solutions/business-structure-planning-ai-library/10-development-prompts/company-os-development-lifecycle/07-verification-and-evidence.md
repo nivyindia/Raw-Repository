@@ -20,3 +20,7 @@ PASS / PARTIAL / FAIL / BLOCKED / NOT_TESTED
 Never convert NOT_TESTED into PASS.
 Every PASS must have evidence.
 If failed, create a defect task and link it to the original task.
+
+
+## Output Storage
+Store test reports, verification records, logs, screenshots/repro artifacts and verification metadata in the canonical evidence/test folders. Link each evidence record to task, commit and version. Do not scatter evidence across unrelated directories.
