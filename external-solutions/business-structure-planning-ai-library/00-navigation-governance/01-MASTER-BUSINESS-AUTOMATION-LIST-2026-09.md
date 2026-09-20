@@ -753,7 +753,7 @@ Status values: **Not Started → Discovery → Cataloged → Qualified → Imple
 |---|---|---|
 | L0 | Atomic actions | Discovery |
 | L1 | Micro tasks | Discovery |
-| L2 | Task automations | Not Started |
+| L2 | Task automations | Discovery |
 | L3 | Workflows | Not Started |
 | L4 | Business processes / value streams | Not Started |
 | L5 | Department systems | Not Started |
@@ -813,4 +813,4 @@ And additionally verify:
 
 **Status: MASTER AUTOMATION COVERAGE LIST EXPANDED.**
 
-**Latest build progress:** L0 Atomic Actions and L1 Micro Tasks have entered **Discovery**. See [Atomic & Micro Automation Reuse Catalog](../03-solution-catalogs/32-atomic-micro-automation-reuse-catalog-2026-09.md).
+**Latest build progress:** L0 Atomic Actions, L1 Micro Tasks and L2 Task Automations are in **Discovery**. See [Atomic & Micro Automation Reuse Catalog](../03-solution-catalogs/32-atomic-micro-automation-reuse-catalog-2026-09.md) and [Task Automation Reuse Catalog](../03-solution-catalogs/33-task-automation-reuse-catalog-2026-09.md). The [Library README](./00-README.md) is the master file-level index.
