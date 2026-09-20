@@ -161,3 +161,79 @@ Instagram/LinkedIn/TikTok autonomous publishing; social listening/sentiment; inf
 - Production Deep Research Agent: https://github.com/libattistella/deep-research-agent
 - CompanyOS: https://github.com/rojenwai/CompanyOS
 - AgentOS: https://github.com/SapienXai/AgentOS
+
+
+## 13. New discovery batch — social, UGC, podcast, sales and department agents
+
+| Resource | Category | What is reusable | License / status | Link |
+|---|---|---|---|---|
+| AI Social Agent / SamurAIGPT | Social agent | Listening, creator discovery, trend research, platform adaptation and multi-platform publishing; approval before publishing | MIT; several research/publishing surfaces are still blueprint, verify runtime | https://github.com/SamurAIGPT/open-ai-social-agent |
+| Mesh Pilot AI Social Agent | Social + ORM | Short-form video generation, captions/scripts, YouTube Shorts/Instagram/X/LinkedIn posting and reputation-response drafts with human approval | MIT | https://github.com/Meshpilot-AGI/ai-social-agent |
+| Social Agent AI / amanullahpy | Social automation | AI content, Twitter/Instagram/YouTube/TikTok publishing, analytics and weekly strategy optimization | MIT | https://github.com/amanullahpy/social-media-agent-ai |
+| LocoAgent | Browser social agent | Real browser automation, MCP, platform skills and social workflows | MIT | https://github.com/LocoreMind/locoagent |
+| Podcast Shorts Factory | Podcast → Shorts | 10 cooperating agents, transcription, clip selection, FFmpeg editing, captions, music/b-roll, QC and YouTube Shorts scheduling | Open source; verify current license | https://github.com/krakonjac300-pixel/podcast-shorts-factory |
+| Open AI UGC | UGC video studio | Self-hosted UGC ads, product/reference images, multiple video models, 9:16 ads, rebranding/customization | Open source; verify current license/model terms | https://github.com/siriokun/ugc |
+| Atlas Marketing Studio | AI ad studio | E-commerce UGC ads, reference-ad remakes, drama ads and short ad skits | Open source; powered by Atlas Cloud; verify service/model terms | https://github.com/AtlasCloudAI/atlas-marketing-studio |
+| Creative Ad Agent | Ad creative agent | Website research → hooks → diverse ad concepts → generated images; A/B-ready session model | Open source; verify license/API terms | https://github.com/DV0x/creative-ad-agent |
+| Pre-Sales Agent | Sales / proposal agent | RFP/brief → clarification → estimation → proposal draft, background processing, RAG from past estimates and Google Docs/Sheets output | Open source starter; verify dependencies/terms | https://github.com/Blazity/pre-sales-agent |
+| Comp AI CRM | Agentic CRM | Autonomous research queue, follow-ups, agent notes and CRM designed around persistent agent work | Open source; verify license | https://github.com/trycompai/crm |
+| AI-CRM / xragrawal | CRM enrichment | Notes/email/meeting transcript → structured deals/contacts/orgs → HITL review → MoU/pricing/proposal analysis | Open source; verify license | https://github.com/xragrawal/AI-CRM |
+| GLAW | Legal agent organization | Virtual law-firm org chart, skills/commands, gated matter pipeline, MCP/API intake and attorney-review workflow | Open source; legal output requires licensed review | https://github.com/rikitrader/glaw |
+| Open-source AI agents directory | Meta-library | Curated agents across finance, legal, HR, retail, coding and other departments | CC0 directory; linked projects have separate licenses | https://github.com/Damitoyinbo/open-source-ai-agents-directory |
+
+## 14. Updated end-to-end media factory
+
+**Research → Trend detection → Competitor analysis → Content strategy → Idea scoring → Script → Fact/brand review → Hook generation → Visual plan → UGC/avatar/video generation → Voice → Editing → Captions → Thumbnail/creative → Platform adaptation → Rights/policy check → Human approval → Publish → Social listening → Analytics → Strategy optimizer.**
+
+This can support:
+- YouTube long-form
+- YouTube Shorts
+- Instagram Reels
+- TikTok
+- LinkedIn video
+- X video
+- Facebook video
+- podcast-to-short-form
+- UGC advertisements
+- product demos
+- founder/executive content
+- AI influencer content
+- client content production
+
+## 15. Updated social intelligence factory
+
+**Brand/account setup → competitor set → social listening → creator discovery → trend discovery → audience research → content-gap analysis → competitor matrix → content recommendations → platform-specific drafts → approval → publishing → engagement/ORM → analytics → weekly strategy report.**
+
+Important distinction: some projects are complete runnable systems, while others expose agent instructions/blueprints that still require live platform credentials or provider infrastructure. Do not treat a repository's feature list as proof of live production connectivity.
+
+## 16. Department expansion map
+
+| Department | Reuse direction |
+|---|---|
+| Executive | JARVIS + research/reporting + company-agent control plane |
+| Strategy | Business-plan agents + research + KPI/BI |
+| Sales | Agentic CRM + pre-sales/RFP/proposal agents + lead research |
+| Marketing | Social agent + digital marketing agents + SEO + ad creative + content factory |
+| Content/Media | YouTube agents + podcast factory + UGC + ComfyUI + FFmpeg |
+| Customer Success | Social listening + ORM + support/voice agents |
+| Finance | Finance/accounting agents already in company-agent catalogs; continue dedicated discovery |
+| HR | HR/recruiting/onboarding agents; continue dedicated discovery |
+| Legal | GLAW + contract/legal-agent discovery; licensed human review required |
+| IT/Security | Cyber/IT/SOC agent discovery; continue dedicated discovery |
+| Operations | Workflow agents + ERP + company operating agents |
+| Analytics | Metabase/Superset + research/report agents |
+| Knowledge | RAG/memory/document systems + research outputs |
+| Governance | Approval gates + audit + RBAC/ABAC + agent registry/observability |
+
+## 17. Evidence notes for discovery batch
+
+- AI Social Agent covers listening, creator discovery, trend research and multi-platform publishing but explicitly marks several surfaces as blueprint/unverified; use it as a reusable architecture/skill source and verify live integrations before deployment. cite source: turn0search0
+- Mesh Pilot's open-source social agent uses a human approval gate before public posting and covers short-form content plus online-reputation workflows. cite source: turn0search1
+- Social Agent AI is self-hosted and describes content generation, multi-platform publishing, analytics and strategy optimization. cite source: turn0search2
+- Podcast Shorts Factory describes a ten-agent pipeline from transcription and clip selection through editing, QC, metadata and scheduled Shorts publishing. cite source: turn0search3
+- Open AI UGC provides a self-hostable UGC ad studio and supports multiple video-model backends; commercial use must be checked against both the application and underlying model/provider terms. cite source: turn0search6
+- Creative Ad Agent uses brand-site research, hook generation, image generation and multiple ad concepts. cite source: turn0search4
+- Pre-Sales Agent provides an open-source reference for RFP/brief intake, estimation, clarification and proposal generation with MCP-isolated tools and human-oriented safeguards. cite source: turn0search12
+- Comp AI CRM is designed around autonomous persistent CRM work rather than only request-response chat. citeturn0search8
+- GLAW demonstrates a department-style legal-agent organization with gated workflows and licensed-review positioning. citeturn0search7
+- The open-source agent directory provides a cross-department discovery starting point and explicitly warns that individual linked projects have their own licenses. citeturn0search13
