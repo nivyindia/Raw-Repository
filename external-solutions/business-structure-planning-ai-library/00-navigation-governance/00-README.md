@@ -114,6 +114,7 @@ The catalog is intentionally living and must continue to grow.
 - [Company AI Executive Reuse Catalog](../03-solution-catalogs/39-company-ai-executive-reuse-catalog-2026-09.md)
 - [Company Control Tower Reuse Catalog](../03-solution-catalogs/40-company-control-tower-reuse-catalog-2026-09.md)
 - [Autonomous Company Reuse Catalog](../03-solution-catalogs/41-autonomous-company-reuse-catalog-2026-09.md)
+- [Master Business Creation → Autonomy List](03-MASTER-BUSINESS-CREATION-TO-AUTONOMY-LIST-2026-09.md)
 
 ### 04 — AI Technology / Agent Systems
 - [Memory / RAG / Context / Knowledge Systems](../04-ai-technology-agent-systems/15-agent-memory-rag-context-knowledge-systems-2026-09.md)
@@ -138,5 +139,5 @@ Every new library file must be added here **at the same time it is created**. Li
 ### Master-build navigation
 **L0 Atomic Actions → L1 Micro Tasks → L2 Task Automations → L3 Workflows → L4 Business Processes → L5 Department Systems → L6 Cross-Department → L7 AI Managers → L8 AI Executives → L9 Control Tower → L10 Autonomous Company**
 
-Latest build: **L10 Autonomous Company Discovery started**. See [Company Control Tower Reuse Catalog](../03-solution-catalogs/40-company-control-tower-reuse-catalog-2026-09.md) and [Autonomous Company Reuse Catalog](../03-solution-catalogs/41-autonomous-company-reuse-catalog-2026-09.md).
+Latest build: **L10 Autonomous Company Discovery started**. The new Business Creation → Autonomy master scope now defines the end-to-end business-building factory that sits across L0–L10. See [Company Control Tower Reuse Catalog](../03-solution-catalogs/40-company-control-tower-reuse-catalog-2026-09.md) and [Autonomous Company Reuse Catalog](../03-solution-catalogs/41-autonomous-company-reuse-catalog-2026-09.md).
 
