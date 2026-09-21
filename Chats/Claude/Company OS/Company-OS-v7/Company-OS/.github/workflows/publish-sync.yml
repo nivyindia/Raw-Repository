@@ -1,0 +1,54 @@
+name: Publish-Tagged Documents Sync
+
+# Triggers when a merge to main touches a document. Detects publish: true tags
+# and syncs those specific documents to the external employee-facing space.
+#
+# ⚠️ SCAFFOLD — needs your actual publish target filled in before it will work:
+#   - If publishing to Notion: use a Notion API call (needs NOTION_API_KEY secret)
+#   - If publishing to a Wiki.js instance: use its REST API (needs WIKI_API_KEY secret)
+#   - If publishing to GitHub Pages: build step + actions/deploy-pages instead
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '01_AREAS/**/*.md'
+      - '03_RESOURCES/**/*.md'
+
+jobs:
+  find-publish-tagged:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Find documents changed in this push that are tagged publish:true
+        id: find
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- '01_AREAS/**/*.md' '03_RESOURCES/**/*.md' || true)
+          TO_PUBLISH=""
+          for file in $CHANGED; do
+            if grep -q "^publish: true" "$file" 2>/dev/null; then
+              status=$(grep -m1 "^Lifecycle Status:" "$file" | sed 's/Lifecycle Status:[[:space:]]*//')
+              if [[ "$status" == "Published" || "$status" == "Approved" ]]; then
+                TO_PUBLISH="$TO_PUBLISH $file"
+              else
+                echo "::warning file=$file::Tagged publish:true but Lifecycle Status is '$status', not Approved/Published — skipping sync."
+              fi
+            fi
+          done
+          echo "files=$TO_PUBLISH" >> "$GITHUB_OUTPUT"
+
+      - name: Sync to external published space
+        if: steps.find.outputs.files != ''
+        run: |
+          echo "The following documents need to be synced to the external published space:"
+          echo "${{ steps.find.outputs.files }}"
+          # TODO — replace this block with an actual API call, e.g.:
+          # for file in ${{ steps.find.outputs.files }}; do
+          #   curl -X POST "https://api.notion.com/v1/..." \
+          #     -H "Authorization: Bearer ${{ secrets.NOTION_API_KEY }}" \
+          #     --data-binary @"$file"
+          # done
+          echo "⚠️ Fill in the actual sync API call above before relying on this workflow."

@@ -1,0 +1,23 @@
+# CODEOWNERS — who must approve changes in which folder
+# Fill in actual GitHub usernames/teams before use. Syntax: path @owner
+
+01_AREAS/CEO/*                              @ceo-office
+01_AREAS/STR-Strategy/*                     @strategy-head
+01_AREAS/OPS-Operations/*                   @ops-head
+01_AREAS/FIN-Finance/*                      @cfo
+01_AREAS/HR/*                               @chro
+01_AREAS/TECH-Technology/*                  @cto
+01_AREAS/MKT-Marketing/*                    @cmo
+01_AREAS/SALES/*                            @sales-head
+01_AREAS/RND-Research-and-Development/*     @rnd-head
+01_AREAS/LEG-Legal-and-Compliance/*         @clo
+01_AREAS/RISK-Risk-and-Governance/*         @cro
+01_AREAS/DATA-Data-and-Innovation/*         @cdo
+01_AREAS/PMO/*                              @pmo-head
+01_AREAS/ADMIN/*                            @admin-lead
+01_AREAS/QA/*                               @qa-lead
+01_AREAS/CS-Customer-Success/*              @cs-lead
+
+02_PROJECTS/*                               @workspace-admin
+03_RESOURCES/*                              @workspace-admin
+03_RESOURCES/Company_Master_Standards/GOVERNANCE/*  @workspace-admin

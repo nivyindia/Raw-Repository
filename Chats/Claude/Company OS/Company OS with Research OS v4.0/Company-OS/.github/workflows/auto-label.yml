@@ -1,0 +1,46 @@
+name: Auto-Label PR by Department
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  auto-label:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect department(s) touched and apply labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            const base = `origin/${context.payload.pull_request.base.ref}`;
+            const changed = execSync(`git diff --name-only ${base}...HEAD`).toString().split('\n').filter(Boolean);
+
+            const deptMap = {
+              "CEO": "dept:ceo", "STR-Strategy": "dept:strategy", "OPS-Operations": "dept:operations",
+              "FIN-Finance": "dept:finance", "HR": "dept:hr", "TECH-Technology": "dept:technology",
+              "MKT-Marketing": "dept:marketing", "SALES": "dept:sales",
+              "RND-Research-and-Development": "dept:rnd", "LEG-Legal-and-Compliance": "dept:legal",
+              "RISK-Risk-and-Governance": "dept:risk", "DATA-Data-and-Innovation": "dept:data",
+              "PMO": "dept:pmo", "ADMIN": "dept:admin", "QA": "dept:qa", "CS-Customer-Success": "dept:cs"
+            };
+
+            const labels = new Set();
+            for (const file of changed) {
+              const match = file.match(/^01_AREAS\/([^/]+)\//);
+              if (match && deptMap[match[1]]) labels.add(deptMap[match[1]]);
+              if (file.startsWith('02_PROJECTS/')) labels.add('project');
+              if (file.startsWith('03_RESOURCES/')) labels.add('shared-resource');
+            }
+
+            if (labels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: Array.from(labels)
+              });
+            }

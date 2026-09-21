@@ -1,0 +1,16 @@
+{
+  "document_types": [
+    {"code": "POL", "name": "Policy", "description": "Company-wide rule or mandate; rarely changes"},
+    {"code": "SOP", "name": "Standard Operating Procedure", "description": "Step-by-step how we do X"},
+    {"code": "WI", "name": "Work Instruction", "description": "Narrower/more technical than an SOP — single-task detail"},
+    {"code": "TPL", "name": "Template", "description": "Reusable blank format to copy"},
+    {"code": "REP", "name": "Report", "description": "Periodic output — financial, performance, research"},
+    {"code": "REC", "name": "Record", "description": "Evidence/log of something that happened — approvals, filled checklists, meeting minutes"},
+    {"code": "KB", "name": "Knowledge Base / Reference", "description": "Explains a concept, glossary entry, FAQ"},
+    {"code": "PROJ-DOC", "name": "Project Document", "description": "Charter, plan, or status doc tied to a specific project"},
+    {"code": "STRAT", "name": "Strategy Document", "description": "Forward-looking plan, roadmap, vision doc"},
+    {"code": "FORM", "name": "Form / Checklist", "description": "Fillable structured input"},
+    {"code": "MEET", "name": "Meeting Notes", "description": "Notes/minutes from a specific meeting"},
+    {"code": "ARCH", "name": "Archived (status, not a fresh type)", "description": "A retired version of any type above — code and folder stay the same, only Lifecycle Status changes"}
+  ]
+}

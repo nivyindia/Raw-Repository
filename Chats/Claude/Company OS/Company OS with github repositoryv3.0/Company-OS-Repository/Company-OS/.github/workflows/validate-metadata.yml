@@ -1,0 +1,51 @@
+name: Validate Document Metadata
+
+# Runs on every Pull Request that touches a Markdown file in 01_AREAS, 02_PROJECTS, or 03_RESOURCES.
+# Fails the check if a document is missing a required metadata field from
+# GOVERNANCE/04-Classification-Naming-Rulebook.md's "Required Metadata Header".
+
+on:
+  pull_request:
+    paths:
+      - '01_AREAS/**/*.md'
+      - '02_PROJECTS/**/*.md'
+      - '03_RESOURCES/**/*.md'
+
+jobs:
+  validate-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required metadata fields
+        run: |
+          REQUIRED_FIELDS=("Code:" "Title:" "Department:" "Type:" "Version:" "Lifecycle Status:" "Owner")
+          FAILED=0
+
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- '01_AREAS/**/*.md' '02_PROJECTS/**/*.md' '03_RESOURCES/**/*.md' || true)
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "No relevant markdown files changed."
+            exit 0
+          fi
+
+          for file in $CHANGED_FILES; do
+            # Skip README.md and Glossary.md — these are navigation/reference pages, not classified documents
+            if [[ "$(basename "$file")" == "README.md" || "$(basename "$file")" == "Glossary.md" || "$(basename "$file")" == "FAQ.md" ]]; then
+              continue
+            fi
+            echo "Checking: $file"
+            for field in "${REQUIRED_FIELDS[@]}"; do
+              if ! grep -q "$field" "$file"; then
+                echo "::error file=$file::Missing required metadata field: $field (see GOVERNANCE/04-Classification-Naming-Rulebook.md)"
+                FAILED=1
+              fi
+            done
+          done
+
+          if [ "$FAILED" -eq 1 ]; then
+            echo "One or more documents are missing required metadata. See errors above."
+            exit 1
+          fi
+
+          echo "All changed documents have required metadata fields."
